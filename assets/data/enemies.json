@@ -1,0 +1,139 @@
+[
+  {
+    "id": "rat",
+    "name": "Dungeon Rat",
+    "health": 22,
+    "pattern": [
+      {
+        "name": "Gnaw",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 5,
+            "target": "enemy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "skeleton",
+    "name": "Skeleton Soldier",
+    "health": 36,
+    "pattern": [
+      {
+        "name": "Rusty blade",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 7,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "name": "Bone shield",
+        "effects": [
+          {
+            "kind": "block",
+            "amount": 8,
+            "target": "self"
+          }
+        ]
+      },
+      {
+        "name": "Lunge",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 10,
+            "target": "enemy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mage",
+    "name": "Cursed Mage",
+    "health": 30,
+    "pattern": [
+      {
+        "name": "Wither",
+        "effects": [
+          {
+            "kind": "status",
+            "amount": 2,
+            "target": "enemy",
+            "status": "weak"
+          },
+          {
+            "kind": "damage",
+            "amount": 4,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "name": "Cinder hex",
+        "effects": [
+          {
+            "kind": "status",
+            "amount": 2,
+            "target": "enemy",
+            "status": "burn"
+          },
+          {
+            "kind": "damage",
+            "amount": 6,
+            "target": "enemy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "warden",
+    "name": "Dungeon Warden",
+    "health": 80,
+    "boss": true,
+    "pattern": [
+      {
+        "name": "Crypt hammer",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 9,
+            "target": "enemy"
+          }
+        ]
+      },
+      {
+        "name": "Ancient armor",
+        "effects": [
+          {
+            "kind": "block",
+            "amount": 10,
+            "target": "self"
+          },
+          {
+            "kind": "status",
+            "amount": 2,
+            "target": "self",
+            "status": "strength"
+          }
+        ]
+      },
+      {
+        "name": "Judgment",
+        "effects": [
+          {
+            "kind": "damage",
+            "amount": 14,
+            "target": "enemy"
+          }
+        ]
+      }
+    ]
+  }
+]

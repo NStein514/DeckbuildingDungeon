@@ -1,0 +1,20 @@
+{
+  "maxHealth": 50,
+  "energy": 3,
+  "draw": 5,
+  "handLimit": 10,
+  "startingDeck": [
+    "strike",
+    "strike",
+    "strike",
+    "guard",
+    "guard",
+    "quick_slash",
+    "heavy_blow",
+    "mend",
+    "firebolt",
+    "frost_ward",
+    "spark",
+    "preparation"
+  ]
+}

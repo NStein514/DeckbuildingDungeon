@@ -1,0 +1,393 @@
+[
+  {
+    "id": "strike",
+    "name": "Strike",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 6 damage.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 6,
+        "target": "enemy"
+      }
+    ],
+    "art": "cards/strike"
+  },
+  {
+    "id": "guard",
+    "name": "Guard",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 5 block.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 5,
+        "target": "self"
+      }
+    ],
+    "art": "cards/guard"
+  },
+  {
+    "id": "quick_slash",
+    "name": "Quick Slash",
+    "cost": 0,
+    "type": "attack",
+    "description": "Deal 3 damage.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 3,
+        "target": "enemy"
+      }
+    ],
+    "art": "cards/quick_slash"
+  },
+  {
+    "id": "heavy_blow",
+    "name": "Heavy Blow",
+    "cost": 2,
+    "type": "attack",
+    "description": "Deal 13 damage.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 13,
+        "target": "enemy"
+      }
+    ],
+    "art": "cards/heavy_blow"
+  },
+  {
+    "id": "mend",
+    "name": "Mend",
+    "cost": 1,
+    "type": "skill",
+    "description": "Restore 5 health. Exhaust.",
+    "effects": [
+      {
+        "kind": "heal",
+        "amount": 5,
+        "target": "self"
+      }
+    ],
+    "art": "cards/mend",
+    "keywords": [
+      "exhaust"
+    ]
+  },
+  {
+    "id": "firebolt",
+    "name": "Firebolt",
+    "cost": 1,
+    "type": "spell",
+    "description": "Deal 5 damage. Apply 2 Burn.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 5,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "art": "cards/firebolt",
+    "tags": [
+      "fire"
+    ]
+  },
+  {
+    "id": "frost_ward",
+    "name": "Frost Ward",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 4 block. Apply 1 Chill.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 4,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "chill"
+      }
+    ],
+    "art": "cards/frost_ward",
+    "tags": [
+      "ice"
+    ]
+  },
+  {
+    "id": "spark",
+    "name": "Spark",
+    "cost": 0,
+    "type": "spell",
+    "description": "Deal 2 damage. Apply 1 Shock.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 2,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "shock"
+      }
+    ],
+    "art": "cards/spark",
+    "tags": [
+      "lightning"
+    ]
+  },
+  {
+    "id": "focus",
+    "name": "Focus",
+    "cost": 0,
+    "type": "skill",
+    "description": "Draw 1 card. Exhaust.",
+    "effects": [
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "art": "cards/focus",
+    "keywords": [
+      "exhaust"
+    ]
+  },
+  {
+    "id": "battle_cry",
+    "name": "Battle Cry",
+    "cost": 1,
+    "type": "skill",
+    "description": "Gain 1 Strength. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "self",
+        "status": "strength"
+      }
+    ],
+    "art": "cards/battle_cry",
+    "keywords": [
+      "exhaust"
+    ]
+  },
+  {
+    "id": "poison_edge",
+    "name": "Poison Edge",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 4 damage. Apply 3 Poison.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "art": "cards/poison_edge",
+    "tags": [
+      "poison"
+    ]
+  },
+  {
+    "id": "preparation",
+    "name": "Preparation",
+    "cost": 0,
+    "type": "skill",
+    "description": "Draw 2 cards, then choose 1 to discard. Exhaust.",
+    "effects": [
+      {
+        "kind": "draw",
+        "amount": 2,
+        "target": "self"
+      },
+      {
+        "kind": "discard",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "art": "cards/preparation",
+    "keywords": [
+      "exhaust"
+    ]
+  },
+  {
+    "id": "brace",
+    "name": "Brace",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 7 block. Retain.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 7,
+        "target": "self"
+      }
+    ],
+    "art": "cards/brace",
+    "keywords": [
+      "retain"
+    ],
+    "rarity": "uncommon"
+  },
+  {
+    "id": "expose",
+    "name": "Expose",
+    "cost": 1,
+    "type": "skill",
+    "description": "Apply 2 Vulnerable.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "vulnerable"
+      }
+    ],
+    "art": "cards/expose",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "enfeeble",
+    "name": "Enfeeble",
+    "cost": 1,
+    "type": "spell",
+    "description": "Apply 2 Weak.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "weak"
+      }
+    ],
+    "art": "cards/enfeeble",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "renewal",
+    "name": "Renewal",
+    "cost": 1,
+    "type": "skill",
+    "description": "Gain 3 Regeneration. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "self",
+        "status": "regeneration"
+      }
+    ],
+    "art": "cards/renewal",
+    "keywords": [
+      "exhaust"
+    ],
+    "rarity": "rare"
+  },
+  {
+    "id": "double_cut",
+    "name": "Double Cut",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 4 damage twice.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      },
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      }
+    ],
+    "art": "cards/double_cut",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "cinder_storm",
+    "name": "Cinder Storm",
+    "cost": 2,
+    "type": "spell",
+    "description": "Deal 8 damage. Apply 4 Burn.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 8,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "art": "cards/cinder_storm",
+    "tags": [
+      "fire"
+    ],
+    "rarity": "rare"
+  },
+  {
+    "id": "static_lance",
+    "name": "Static Lance",
+    "cost": 1,
+    "type": "spell",
+    "description": "Deal 7 damage. Lightning consumes Shock for bonus damage.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 7,
+        "target": "enemy"
+      }
+    ],
+    "art": "cards/static_lance",
+    "tags": [
+      "lightning"
+    ],
+    "rarity": "uncommon"
+  },
+  {
+    "id": "bulwark",
+    "name": "Bulwark",
+    "cost": 2,
+    "type": "defense",
+    "description": "Gain 14 block. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 14,
+        "target": "self"
+      }
+    ],
+    "art": "cards/bulwark",
+    "keywords": [
+      "exhaust"
+    ],
+    "rarity": "uncommon"
+  }
+]
