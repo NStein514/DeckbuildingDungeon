@@ -31,11 +31,17 @@ void main() {
     expect(CardPiles([], SeededRandom(0)).draw(5, 10), isEmpty);
   });
   test('duplicate instance IDs are rejected', () {
-    expect(() => CardPiles([deck.first, deck.first], SeededRandom(1)), throwsArgumentError);
+    expect(
+      () => CardPiles([deck.first, deck.first], SeededRandom(1)),
+      throwsArgumentError,
+    );
   });
   test('RNG continuation from saved state matches original', () {
     final rng = SeededRandom(42)..nextInt(100);
     final restored = SeededRandom(rng.state);
-    expect(List.generate(20, (_) => rng.nextInt(1000)), List.generate(20, (_) => restored.nextInt(1000)));
+    expect(
+      List.generate(20, (_) => rng.nextInt(1000)),
+      List.generate(20, (_) => restored.nextInt(1000)),
+    );
   });
 }

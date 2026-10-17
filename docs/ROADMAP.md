@@ -1,48 +1,35 @@
-# Development roadmap
+# Roadmap
 
-## Milestone 1 — source implemented, runtime validation blocked
+## Milestones 1 and 2 — implemented
 
-- [x] Flutter package, web host, theme, menus, and battle/result screens
-- [x] Typed models, JSON catalog, configurable starting resources
-- [x] Seeded pile operations, energy, targeting, attacks, defense, healing
-- [x] Status timing, visible predictable enemy intents, multi-enemy resolution
-- [x] Retain, exhaust, temporary cards, explicit Preparation discard
-- [x] Twenty cards, three regular enemies, one boss archetype
-- [x] Unit and widget test sources; production documentation
-- [x] Replaceable labeled art placeholders and silent audio interface
-- [ ] Download SDK and resolve dependencies; commit real lockfile
-- [ ] Run Dart formatter, Flutter analyzer, all tests, and web build
-- [ ] Browser smoke test of a full battle; inspect phone and desktop layouts
-- [ ] Generate native hosts; Android device and iOS simulator checks
+- Typed pure-Dart combat, deterministic piles, statuses, targeting, multiple enemies, outcomes.
+- Twenty cards, three regular enemies, Warden, responsive combat UI and event log.
+- Seeded six-floor branching dungeon with guaranteed boss reachability.
+- Three-card rewards, gold, deck growth, rest healing, per-instance upgrades and previews.
+- Four passive relics, treasure rooms, and deck sorting/filtering.
+- Versioned native/browser saves, Continue Run, serialized settings persistence.
+- Failed-save retry, duplicate-command protection, corrupt-save preservation.
+- Complete real-combat seeded-run test, persistence and widget tests.
+- Flutter dependency lockfile and Android/iOS/web hosts.
 
-A checked source item is not a claim of passing runtime acceptance. See VALIDATION.md.
+See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Gold spending, global discovery/unlocks and run statistics are not part of this implementation.
 
-## Milestone 2 — deckbuilding and dungeon progression
+## Milestone 3 — tactical combos and permanent fusion
 
-- Seeded acyclic branching map with guaranteed boss reachability
-- Distinct run controller and stable room IDs/completion states
-- Card rewards with once-only confirmation and gold
-- Deck inspection/filtering, upgrades and removal
-- Rest sites and initial passive relic hooks
-- Versioned saves and settings with atomic stable-boundary commits
-- Resume tests, RNG continuation, reward duplication prevention
-- Integrate death/victory into a complete short dungeon route
+1. Data-driven combo definitions and typed play history with explicit timing.
+2. Overload, Shield Bash, and Toxic Flurry with deterministic tests.
+3. Fusion recipes, two-distinct-instance validation, atomic deck transaction.
+4. Shrine room, outcome preview, once-only confirmation, and saved discovery.
+5. UI combo feedback and catalog entries without timing-dependent game logic.
 
-## Milestone 3 — combinations
+## Milestone 4 — complete act content
 
-- Data-driven sequence tracker and tactical combo rules
-- Atomic instance-level permanent fusion, preview and validation
-- Discovery state, collection, fusion event feedback
-- Comprehensive invalid-transaction and multi-hit tests
-
-## Milestone 4 — Ashen Crypt act
-
-Merchant, events, elite encounters, boss phases, run statistics, unlocks and reward balance. The current boss pattern is an encounter foundation, not a finished act.
+Merchant, gold spending, random events, elite encounters, boss phases, broader balance playtesting, cross-run statistics and unlocks.
 
 ## Milestone 5 — presentation and accessibility
 
-Approved illustrations and icons, event-specific draw/play/discard animation, particles, licensed audio, persistent accessibility settings, screen-reader navigation, large-text/device usability testing, profiling. Current feedback consists of real state updates, health interpolation, selected-card transitions, text feedback, and the event log; it is not the final animation suite.
+Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 
 ## Milestone 6 — expansion
 
-Additional regions, starting archetypes, challenge modifiers, richer recipes, legendary mechanics, and deeper meta-progression after the first act is stable.
+Additional acts and archetypes, challenge modifiers, legendary recipes and deeper meta-progression once the first act is stable.

@@ -2,106 +2,88 @@
 
 **Your deck. Your destiny.**
 
-A mobile-first, single-player roguelike deckbuilder set in the Ashen Crypt. Each card is part of your character: a weapon, a ward, a spell, or a tactical opportunity. Build toward a dungeon journey defined by meaningful choices and powerful card combinations.
+A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Development status
+## Current build: dungeon progression
 
-Milestone 1 source implementation: a standalone, seeded combat slice. Start an encounter, select cards, choose enemy targets, spend energy, block attacks, apply statuses, and fight to victory or defeat. Dungeon progression, rewards, fusion, and saved runs are later milestones.
+- Six-floor seeded dungeon with branching combat, rest, treasure, and boss rooms.
+- Twenty cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
+- Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
+- Four passive relics; every run starts with Iron Sigil.
+- New Run, Continue Run, deck inspection with type filtering and cost/rarity sorting, and victory/defeat results.
+- Versioned local run saves and persistent settings. An interrupted battle restarts from its entry checkpoint with the same health, deck, and seed.
+- Labeled temporary illustrations, silent audio, and reduced-motion preferences.
 
-**Validation is pending:** the development environment could not download the Flutter SDK because its artifact host was blocked. The source was syntax-parsed and the content data checked; dependency resolution, Dart formatting, Flutter analysis, tests, and launch have not yet run. See [validation notes](docs/VALIDATION.md).
+Fusion, merchants, events, metaprogression, final art, and production audio are future milestones. Gold is collected now; merchant spending arrives later. See [roadmap](docs/ROADMAP.md).
 
-## Included
+## Requirements and launch
 
-- Twenty data-driven cards; twelve unique instances in the starting deck.
-- Deterministic shuffling, draw/hand/discard/exhaust piles, retain and temporary-card rules.
-- Energy, targeted attacks, defense, healing, and eight status effects.
-- Three regular enemies, a boss archetype, and a two-enemy encounter.
-- Visible enemy intents, explicit discard choices, and a combat event chronicle.
-- Dark fantasy interface, responsive scrolling layouts, reduced motion, and accelerated feedback.
-- Card collection, session settings, silent audio abstraction, and replaceable temporary illustrations.
-- Domain and widget tests covering combat rules and the playable route.
-
-## Requirements
-
-- Stable Flutter (the environment retrieved framework tag **3.47.7**, whose SDK bootstrap remains unverified).
-- Dart 3.8 or newer, below 4.0; use the Dart SDK bundled with Flutter.
-- Chrome/Chromium for web development.
-- Android SDK and a compatible JDK for Android; macOS and Xcode for iOS.
-- No backend, account, or API keys.
-
-## Get started
+Developed and tested with Flutter **3.47.7** / Dart **3.13.5**. Dependencies are locked in `pubspec.lock`. No accounts, backend, credentials, or paid services are needed.
 
 ```sh
-flutter pub get
+flutter pub get --enforce-lockfile
 flutter run -d chrome
 ```
 
-For a headless development machine:
+For a headless machine:
 
 ```sh
 flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8080
 ```
 
-Choose an encounter and a seed, then **Enter the crypt**. Tap a card to inspect it. Tap a living enemy for targeted cards, or **Play card** for self-targeted cards. Preparation requires tapping a card to discard before continuing. End turn resolves enemy actions and draws your next hand. The combat log explains individual events.
+Choose **New run**, then a highlighted room. In combat, tap a card and an enemy, or use **Play card** for self-targeted cards. Preparation requires choosing a discard. After victory, continue to your reward and select one card or skip. Rest sites offer healing or an upgrade. The deck icon opens your full deck; long-press a relic for its effect.
 
-The battle is deliberately standalone: quitting or reloading loses it. Continue Run is not presented until persistence exists. Audio controls currently affect session preferences only; this build is silent.
+The practice encounter controls launch isolated battles that do not change your saved run. Starting another run requires confirming replacement of the existing save.
 
-## Native platforms
+## Saving
 
-The web host is included. Native host generation could not run in the current environment. On a machine with Flutter installed, generate the official Android/iOS hosts once:
+Progress saves on room entry, battle results, reward confirmation, rest, and treasure. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
+
+Native saves use a flushed temporary file and same-directory rename in the application support directory. Browser saves use a single local-storage replacement per document. Settings and run data use separate documents. Use one active game tab; browsers can clear local storage, and private-browsing storage may be temporary. A stable browser origin/port is necessary to resume the same save.
+
+## Platforms
+
+Web builds and automated tests run in the development environment. Android and iOS host projects are included, generated by Flutter. Native device builds remain unverified: Android requires its SDK/JDK and iOS requires macOS/Xcode and signing. Desktop native hosts are deferred; desktop browsers are supported by the web layout.
 
 ```sh
-bash tool/initialize_platforms.sh
-flutter pub get
 flutter devices
 flutter run -d <device-id>
-```
-
-The helper creates hosts in a temporary project and copies only `android/` and `ios/`; it refuses to replace existing hosts. It does not overwrite game code or this README. Native builds and device usability remain unverified. Desktop native hosts are deferred; desktop browsers can use the web build.
-
-## Quality checks and builds
-
-```sh
-dart format lib test
-flutter analyze
-flutter test
-flutter test --coverage
-flutter build web --no-web-resources-cdn
-# After generating native hosts:
 flutter build apk
-# On macOS with signing configured:
+# On macOS:
 flutter build ios
 ```
 
-`bash tool/validate.sh` runs dependency resolution, formatting, analysis, all tests, and the web build. Commit the generated `pubspec.lock` after the first successful resolution; no lockfile is fabricated in this revision.
+## Quality checks
 
-## Project organization
-
-```text
-lib/
-  app/                    App theme and session settings
-  assets/                 Logical illustration registry and placeholders
-  core/random/            Seeded random source
-  core/services/          Audio service boundary
-  game/models/            Typed cards, effects, actors, events, rules
-  game/cards/             Pile operations
-  game/data/              Catalog decoding and starting deck creation
-  game/combat/            Synchronous combat engine and snapshots
-  presentation/screens/   Menu, battle, results, collection, settings
-  presentation/widgets/   Reusable card presentation
-assets/data/              Card, enemy, and balance JSON
-web/                      Browser host
-test/                    Domain and widget tests
-tool/                    Native initialization and validation helpers
-docs/                    Design, architecture, roadmap, production specs
+```sh
+dart format --output=none --set-exit-if-changed lib test
+flutter analyze
+flutter test
+python3 tool/check_content.py
+flutter build web --no-web-resources-cdn
 ```
 
-## Roadmap
+`bash tool/validate.sh` resolves locked dependencies, checks formatting, analyzes, tests, and builds. See [validation evidence and limits](docs/VALIDATION.md).
 
-1. Foundations and playable combat — implemented in source, runtime validation pending.
-2. Seeded dungeon paths, rewards, deck upgrades, relics, and versioned local saves.
-3. Tactical combos and atomic permanent fusion with preview.
-4. Complete Ashen Crypt act, merchants, events, and progression.
-5. Production illustrations, audio, animation polish, and device profiling.
+## Organization
 
-Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and the [detailed roadmap](docs/ROADMAP.md).
+```text
+lib/app/                  Application, settings, transactional run controller
+lib/core/persistence/     Versioned repository and native/browser stores
+lib/core/random/          Seeded random source
+lib/core/services/        Audio interface
+lib/game/cards/           Piles and resolved upgrades
+lib/game/combat/          Pure Dart combat engine and event snapshots
+lib/game/dungeon/         Seeded connected rooms
+lib/game/progression/     Run checkpoint models and rules
+lib/game/relics/           Passive relic definitions
+lib/game/data/, models/   Data decoding and typed models
+lib/presentation/         Menus, map, rewards, deck, combat, results
+lib/assets/               Replaceable illustration registry
+assets/data/              Card, enemy, and balance JSON
+android/, ios/, web/      Platform hosts
+test/                    Domain, persistence, and widget tests
+docs/                    Design, architecture, roadmap, art specifications
+```
+
+Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: tactical combos and permanent fusion.

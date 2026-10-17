@@ -1,0 +1,314 @@
+import 'package:flutter/material.dart';
+import '../../app/run_controller.dart';
+import '../../app/settings.dart';
+import '../../game/data/game_catalog.dart';
+import '../../game/dungeon/dungeon.dart';
+import '../../game/progression/run_state.dart';
+import '../widgets/game_card.dart';
+import 'battle_screen.dart';
+import 'deck_screen.dart';
+
+class RunScreen extends StatelessWidget {
+  const RunScreen({
+    super.key,
+    required this.runs,
+    required this.catalog,
+    required this.settings,
+  });
+  final RunController runs;
+  final GameCatalog catalog;
+  final GameSettings settings;
+  @override
+  Widget build(BuildContext context) => ListenableBuilder(
+    listenable: runs,
+    builder: (context, child) {
+      final r = runs.state!;
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('The Ashen Crypt'),
+          actions: [
+            IconButton(
+              tooltip: 'Inspect deck',
+              icon: const Icon(Icons.style_outlined),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (_) => DeckScreen(catalog: catalog, deck: r.deck),
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 720),
+              child: ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  Wrap(
+                    spacing: 18,
+                    runSpacing: 8,
+                    children: [
+                      Text('${r.health} / ${catalog.rules.maxHealth} HP'),
+                      Text('${r.gold} gold'),
+                      Text('${r.deck.length} cards'),
+                      Text('Seed ${r.seed}'),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    children: r.relics
+                        .map(
+                          (x) => Tooltip(
+                            message: x.description,
+                            child: Chip(label: Text(x.title)),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                  if (runs.busy) const LinearProgressIndicator(),
+                  if (runs.error != null)
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Text(
+                        runs.error!,
+                        style: const TextStyle(color: Colors.orangeAccent),
+                      ),
+                    ),
+                  const SizedBox(height: 20),
+                  ...switch (r.phase) {
+                    RunPhase.map => _map(context, r),
+                    RunPhase.combat => [
+                      const Text(
+                        'An encounter awaits',
+                        style: TextStyle(fontSize: 26, fontFamily: 'serif'),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Resume from the entry checkpoint with the same health, deck, and seed.',
+                      ),
+                      const SizedBox(height: 18),
+                      FilledButton(
+                        onPressed: runs.busy ? null : () => _battle(context, r),
+                        child: const Text('Resume encounter'),
+                      ),
+                    ],
+                    RunPhase.reward => [
+                      const Text(
+                        'Spoils of battle',
+                        style: TextStyle(fontSize: 28, fontFamily: 'serif'),
+                      ),
+                      const Text(
+                        'Gold secured. Choose one card or skip; your choice is saved once.',
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 280,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: r.rewards.length,
+                          separatorBuilder: (_, i) => const SizedBox(width: 12),
+                          itemBuilder: (_, i) => GameCard(
+                            card: catalog.cards[r.rewards[i]]!,
+                            onTap: runs.busy
+                                ? null
+                                : () => runs.reward(r.rewards[i]),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: runs.busy ? null : () => runs.reward(null),
+                        child: const Text('Skip card reward'),
+                      ),
+                    ],
+                    RunPhase.rest => [
+                      const Icon(
+                        Icons.local_fire_department_outlined,
+                        size: 72,
+                        color: Color(0xffc8a96b),
+                      ),
+                      const Text(
+                        'A moment by the embers',
+                        style: TextStyle(fontSize: 28, fontFamily: 'serif'),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Choose one: recover 30% of maximum health, or permanently upgrade one card.',
+                      ),
+                      const SizedBox(height: 18),
+                      FilledButton(
+                        onPressed: runs.busy ? null : () => runs.rest(),
+                        child: Text(
+                          'Rest · heal up to ${(catalog.rules.maxHealth * .3).ceil()} HP',
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed:
+                            runs.busy || r.deck.every((c) => c.upgrade > 0)
+                            ? null
+                            : () => _upgrade(context, r),
+                        child: const Text('Upgrade a card'),
+                      ),
+                    ],
+                    RunPhase.treasure => [
+                      const Icon(
+                        Icons.auto_awesome,
+                        size: 72,
+                        color: Color(0xffc8a96b),
+                      ),
+                      const Text(
+                        'A forgotten reliquary',
+                        style: TextStyle(fontSize: 28, fontFamily: 'serif'),
+                      ),
+                      const Text(
+                        'Take 25 gold and a relic you do not own. Relics apply automatically in future battles.',
+                      ),
+                      const SizedBox(height: 20),
+                      FilledButton(
+                        onPressed: runs.busy ? null : () => runs.treasure(),
+                        child: const Text('Claim treasure'),
+                      ),
+                    ],
+                    RunPhase.victory || RunPhase.defeat => [
+                      Text(
+                        r.phase == RunPhase.victory
+                            ? 'The crypt is conquered.'
+                            : 'The journey ends.',
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'serif',
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        '${r.completed.length} rooms completed · ${r.discovered.length} cards discovered',
+                      ),
+                      const SizedBox(height: 20),
+                      FilledButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Return to camp'),
+                      ),
+                    ],
+                  },
+                  const SizedBox(height: 24),
+                  const Text(
+                    'Progress saves after room choices and rewards. Leaving a battle restarts that encounter.',
+                    style: TextStyle(fontSize: 11, color: Color(0xffaeb8c2)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+  List<Widget> _map(BuildContext context, RunState r) => [
+    const Text(
+      'Choose your path',
+      style: TextStyle(fontFamily: 'serif', fontSize: 30),
+    ),
+    const SizedBox(height: 8),
+    const Text(
+      'Each floor connects to both rooms on the next. Highlighted paths are reachable.',
+    ),
+    const SizedBox(height: 20),
+    for (var depth = 0; depth <= 5; depth++) ...[
+      Text(
+        depth == 5 ? 'THE WARDEN' : 'FLOOR ${depth + 1}',
+        style: const TextStyle(letterSpacing: 2, fontSize: 10),
+      ),
+      const SizedBox(height: 8),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final room in r.rooms.where((x) => x.depth == depth))
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 8,
+                    ),
+                  ),
+                  onPressed: !runs.busy && r.availableRooms.contains(room.id)
+                      ? () => _enter(context, room.id)
+                      : null,
+                  child: Column(
+                    children: [
+                      Icon(
+                        r.completed.contains(room.id)
+                            ? Icons.check_circle_outline
+                            : switch (room.type) {
+                                RoomType.combat => Icons.bolt,
+                                RoomType.rest =>
+                                  Icons.local_fire_department_outlined,
+                                RoomType.treasure => Icons.auto_awesome,
+                                RoomType.boss => Icons.shield_outlined,
+                              },
+                      ),
+                      const SizedBox(height: 8),
+                      Text(room.type.name.toUpperCase()),
+                      if (room.enemies.isNotEmpty)
+                        Text(
+                          room.enemies
+                              .map((id) => catalog.enemies[id]!.name)
+                              .join(' + '),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 10),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+      if (depth < 5)
+        const Padding(
+          padding: EdgeInsets.all(6),
+          child: Icon(Icons.call_split, size: 22, color: Color(0xff7c8b98)),
+        ),
+    ],
+  ];
+  Future<void> _enter(BuildContext context, String id) async {
+    if (await runs.enter(id) &&
+        context.mounted &&
+        runs.state!.phase == RunPhase.combat) {
+      await _battle(context, runs.state!);
+    }
+  }
+
+  Future<void> _battle(BuildContext context, RunState r) =>
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (_) => BattleScreen(
+            catalog: catalog,
+            enemyIds: r.room!.enemies,
+            settings: settings,
+            seed: r.battleSeed,
+            deck: r.deck,
+            initialHealth: r.health,
+            relics: r.relics.toSet(),
+            onComplete: (result) =>
+                runs.finish(result.outcome, result.player.health),
+          ),
+        ),
+      );
+  Future<void> _upgrade(BuildContext context, RunState r) async {
+    final id = await Navigator.push<String>(
+      context,
+      MaterialPageRoute<String>(
+        builder: (_) =>
+            DeckScreen(catalog: catalog, deck: r.deck, chooseUpgrade: true),
+      ),
+    );
+    if (id != null) await runs.rest(upgradeId: id);
+  }
+}

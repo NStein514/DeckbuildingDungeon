@@ -6,6 +6,7 @@ abstract interface class AudioService {
   void setVolumes({required double music, required double effects});
   void dispose();
 }
+
 class SilentAudioService implements AudioService {
   @override
   void handle(CombatEvent event) {}

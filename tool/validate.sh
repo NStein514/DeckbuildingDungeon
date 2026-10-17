@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-flutter pub get
-# Format first while bootstrapping; use --set-exit-if-changed in CI after formatting.
-dart format lib test
+flutter pub get --enforce-lockfile
+dart format --output=none --set-exit-if-changed lib test
 flutter analyze
 flutter test
+python3 tool/check_content.py
 flutter build web --no-web-resources-cdn

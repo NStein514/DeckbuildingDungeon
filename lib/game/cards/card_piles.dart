@@ -31,6 +31,8 @@ class CardPiles {
   void removeFromHand(CardInstance card, CardDefinition definition) {
     if (!hand.remove(card)) throw StateError('Card not in hand');
     if (definition.keywords.contains(Keyword.temporary)) return;
-    (definition.keywords.contains(Keyword.exhaust) ? exhaust : discard).add(card);
+    (definition.keywords.contains(Keyword.exhaust) ? exhaust : discard).add(
+      card,
+    );
   }
 }

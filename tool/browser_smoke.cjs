@@ -1,0 +1,44 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const path=require('node:path');
+const fs=require('node:fs');
+const output=path.join(require('node:os').tmpdir(),'deckbound-smoke');
+fs.mkdirSync(output,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE || '/usr/bin/chromium',headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader']});
+ const page=await browser.newPage({viewport:{width:390,height:844}});const errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(process.env.BASE_URL || 'http://127.0.0.1:8080');
+ await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
+ await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
+ await page.getByRole('button',{name:'New run',exact:true}).click();
+ await page.getByText('Choose your path',{exact:true}).waitFor();
+ await page.screenshot({path:path.join(output,'map.png')});
+
+ await page.getByRole('button',{name:'COMBAT Dungeon Rat',exact:true}).click();
+ await page.getByText('TURN 1',{exact:true}).waitFor();
+
+ await page.screenshot({path:path.join(output,'battle.png')});
+ await page.getByRole('button',{name:/^Strike\. Cost/}).first().click();
+ await page.getByRole('button',{name:/^Dungeon Rat\./}).click();
+ await page.waitForTimeout(300);
+ assert((await page.locator('body').ariaSnapshot()).includes('Dungeon Rat. 16 health'));
+ assert((await page.locator('body').ariaSnapshot()).includes('2 ENERGY'));
+ await page.getByRole('button',{name:'End turn',exact:true}).click();
+ await page.getByText('TURN 2',{exact:true}).waitFor();
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+ assert.equal(saved.run.phase,'combat');assert.equal(saved.run.health,50);
+ await page.reload();
+ await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
+ await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
+ await page.getByRole('button',{name:'Continue run',exact:true}).click();
+ await page.getByRole('button',{name:'Resume encounter',exact:true}).click();
+ await page.getByText('TURN 1',{exact:true}).waitFor();
+ assert((await page.locator('body').ariaSnapshot()).includes('50 / 50 HP'));
+ await page.setViewportSize({width:1280,height:900});
+ await page.waitForTimeout(300);
+ await page.screenshot({path:path.join(output,'desktop.png')});
+ assert.deepEqual(errors,[]);
+ console.log('PASS: new run, map, battle, actual Strike targeting/damage/energy, end turn, persisted entry, reload and continue.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

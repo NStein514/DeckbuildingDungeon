@@ -1,42 +1,37 @@
 # Architecture
 
-## Boundaries
+## Domain boundaries
 
-- `game/models`: enums and data objects for cards, effects, fighters, intent patterns, balance, and events. Definitions distinguish logical content IDs from instance IDs. Artwork, tags, rarity, keywords, and effect targeting are data fields. Instance upgrade level is reserved, not an implemented upgrade mechanic.
-- `game/data`: JSON decoding into the catalog; starting-deck instance creation. It has no asset-bundle or widget imports. The application loads strings before constructing it.
-- `game/cards`: mutable pile ownership and seeded shuffle/draw behavior.
-- `game/combat`: command validation, turn orchestration, central effect/status resolution, snapshots, and event ordering. This is a bounded combat aggregate, not a run/dungeon/UI controller.
-- `core/random`: explicit 32-bit state with deterministic Fisher–Yates shuffling. The same integer seed produces the same ordering on native and web. Its arithmetic stays within exact JS integer range.
-- `presentation`: card selection, target input, rendering, and event feedback. It issues commands, consumes snapshots, and never directly applies damage.
-- `assets`: stable logical identifier → image-path lookup with labeled fallback illustrations.
-- `core/services`: audio interface with a silent implementation.
+`game/models`, `game/cards`, and `game/combat` implement deterministic combat without Flutter imports. JSON definitions are distinct from card instances. `resolveCard` creates an upgraded definition used by both the engine and UI, so displayed wording and applied effects agree. The engine owns mutation and exposes detached snapshots; rules never depend on animation timing.
 
-## State decision
+`game/dungeon` generates a forward-only graph of ten rooms across six floors. Each room connects to all nodes on the following floor. IDs, depths, encounters, and connections are stable for a seed. Two rest/treasure choice floors and a single boss guarantee a complete path. The shared RNG state is carried into encounter seeds, rewards, and treasure selections.
 
-Use Flutter's built-in StatefulWidget and ChangeNotifier rather than Riverpod for this small, isolated slice. Battle state belongs to the pure Dart engine. Selection/message state belongs to the screen; session settings use ChangeNotifier. No global gameplay singleton or service locator is necessary. Reconsider provider-based dependency injection when run persistence spans screens.
+`game/progression` owns run checkpoints and pure transitions. Each transition validates prerequisites, copies the checkpoint, and returns a new state. No UI mutates the published run. The state contains seed/RNG state, map, visited path, current phase, entry seed, health, gold, deck identities/upgrades, pending rewards, next instance ID, relics, and run-scoped discoveries.
 
-Definition collections loaded from JSON are unmodifiable. Engine internals mutate synchronously under command processing; snapshots copy fighters/status maps and expose unmodifiable lists. Snapshot fighters are detached copies, so presentation cannot mutate the engine. This avoids speculative persistent data structures while keeping command ownership explicit.
+`game/relics` defines four typed passive effects. Combat hooks apply starting block, extra opening draw, first-fire Burn, and increased player Poison. Enemy effects do not inherit player relics. Relic activation flows through the same effect/event processing as cards.
 
-## Data flow
+## Application and transactions
 
-Asset strings → GameCatalog → CombatEngine → validated command → ordered effects → outcome check → CombatSnapshot + CombatEvent → UI and audio service.
+`RunController` uses ChangeNotifier and serializes commands by rejecting input while a save is pending. It computes the candidate state, awaits durable-store replacement, then publishes the candidate. Failure leaves both the previous in-memory checkpoint and the existing destination save in place. UI shows an error and permits retry. State snapshots returned by the controller are copies.
 
-The engine retains the most recent 200 events for inspection, with monotonically increasing IDs. This is a UI/debug history, not a complete replay archive. A future replay recorder must persist the seed, content version, and commands separately. The UI consumes newly emitted events for feedback, not timers for rules. Health interpolation and card selection animate after resolution. Log entries expose draw, discard, status, healing, damage, and defeat details; bespoke movement/particles are deferred.
+A battle is constructed from the saved encounter entry checkpoint. On a terminal result, the battle screen saves the run outcome automatically. It blocks result navigation until that save succeeds, with a retry action on failure. Gold and the three sampled reward IDs are written together. Choosing/skipping the reward is a separate validated transaction. Repeated commands at the wrong phase are rejected.
 
-## Rendering decision
+Returning from or reloading an unfinished battle reconstructs that battle from its entry checkpoint. This is deliberately not a mid-combat save or replay system. Completed battles cannot be replayed after their result checkpoint is saved. A process exit before a successful result save may restart the encounter, but cannot duplicate already committed rewards.
 
-Flutter alone is appropriate for static tactical layouts. Flame would add a second rendering lifecycle without an immediate benefit. Add it only if future particles, arena effects, or map rendering justify it. Frames, gradients, and icons are interface treatments; final illustration work is a separate asset pipeline.
+## Persistence
 
-## Persistence and navigation
+Run saves are envelopes with schema version 1 and content version 1. Loading validates field types, resource bounds, card IDs/upgrades, unique instance identities, the generated map against its seed, the completed path, phase-specific data, and reward structure. Unsupported or corrupt saves are preserved and surfaced; new-run replacement is disabled until a valid load. There is no automatic migration or destructive repair.
 
-No durable saves yet. Returning to camp or closing the application abandons the battle. No Continue Run button implies a nonexistent save. Settings are session-only and clearly labeled. Milestone 2 should add versioned save DTOs, a repository abstraction, atomic file replacement on native, transactional browser storage, and stable boundary commits with reward IDs. Save RNG state, deck instance IDs, current node, health, resources, collection, settings, and content version. Mid-combat continuation remains deferred.
+Native: `path_provider` locates app support; writes flush a same-directory `.tmp` file and rename it over the destination. Abandoned temporary writes are ignored. This targets Android/iOS file semantics; native app builds still need device verification. Browser: `package:web` performs one synchronous localStorage replacement. Quota/security errors propagate to the controller. Saves are origin-specific; one active game tab is supported. Multi-tab conflict resolution is not implemented.
 
-## Platform and build boundaries
+Settings use a separate versioned document and a serialized write queue to prevent older slider writes overwriting newer settings. Invalid settings remain untouched and the UI explains its session-only fallback. Audio remains silent. Run discoveries and completed-room counts are local to the current journey; cross-run unlocks/statistics are later work.
 
-Web host files are present. `tool/initialize_platforms.sh` creates native hosts using the installed official Flutter generator in a temporary directory, then copies only missing Android/iOS hosts. Its execution remains blocked by SDK download access in the current environment. No app source or documentation is overwritten by that helper. Native signing and platform SDK installation are external prerequisites.
+## Presentation and dependencies
 
-## Extension seams
+Flutter's built-in state tools are sufficient: local widget state handles selection, ChangeNotifier handles settings/run transactions. Riverpod and Flame add no required capability yet. Gameplay is independent of widget state, frames, and clocks. The event log retains 200 events with increasing sequence IDs, suitable for UI/debug feedback, not a full replay archive.
 
-New simple cards compose existing typed effects in JSON. New effect kinds require engine implementation and tests. Dungeon generation, rewards, relic triggers, and fusion transactions belong in separate pure Dart modules when implemented. Combo resolution should receive a typed play history and emit ordinary effects/events. Fusion must validate both distinct source instances and recipe compatibility before producing a new deck in one transaction.
+Art IDs map to replaceable images through an asset registry. Placeholder icons are labeled temporary. Flutter renders frames, numbers, descriptions, and effects. New cards can compose existing typed effects; new effect types require rule tests.
 
-No backend, online authentication, paid API, or runtime artwork service is required.
+## Future seams
+
+Add tactical combos as a separate sequence-rule resolver emitting ordinary effects/events. Permanent fusion must validate two distinct owned instances and a recipe before creating one new deck transaction. Merchants and events should be room transitions using the same controller/save boundary. Content/schema changes need explicit version handling, especially if map generation or RNG algorithms change.

@@ -4,7 +4,7 @@
 
 Your deck is your character. Tactical clarity, build creativity, short responsive turns, replayable paths, and a cohesive dark fantasy identity guide the project. The long-term loop is explore → fight → earn rewards → reshape the deck → descend → confront the boss.
 
-Milestone 1 implements the fight in isolation. The menu is an encounter harness, not a dungeon map. Victory and defeat are real engine outcomes; rewards, persistence, and progression are intentionally absent.
+Milestones 1 and 2 implement combat and a compact dungeon journey. The menu offers saved runs and separate practice battles. Victory, defeat, rewards, deck progression, and stable-boundary saves are functional.
 
 ## Combat economy
 
@@ -55,4 +55,16 @@ Dungeon Rat teaches basic attacks. Skeleton alternates attacks and defense. Curs
 
 ## Future systems
 
-Milestone 2 adds branching dungeon nodes, one-of-three rewards, gold, rest, upgrades, relics, and stable-boundary saves. Milestone 3 adds sequence history with structured combo rules and atomic two-instance fusion. Neither is represented as working UI today. Fusion recipes and relic interactions will be data-driven additions, not card-name checks in widgets.
+Milestone 3 adds sequence history with structured combo rules and atomic two-instance fusion. Fusion recipes will be structured data; current relics are typed combat hooks. Merchant spending, events, and richer boss phases follow in the complete-act milestone.
+
+## Milestone 2: implemented dungeon loop
+
+New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure choice, a combat floor (including a possible multi-enemy fight), another rest/treasure choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
+
+Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold currently accumulates for future merchants; it has no spending flow yet.
+
+Rest restores 30% of maximum HP, capped at maximum, OR upgrades one unupgraded card. Upgrades preserve the instance ID, add 2 to damage/block/heal effects and 1 to status/draw effects, leave discard and energy cost unchanged, and retain keywords. Only one upgrade is permitted; previews use the same resolved definition as combat.
+
+Treasure grants 25 gold and one unowned relic. If all relics are owned, it grants gold only. Iron Sigil grants 4 opening block; Quickdraw Charm adds one opening draw; Ember Heart adds 2 Burn on the first Fire play per combat; Venom Fang adds 1 stack to player Poison applications. Passive effects are reset appropriately for each new encounter.
+
+The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Meta-progression, fusion, events, merchant spending, and boss phase changes are not implemented in this milestone.
