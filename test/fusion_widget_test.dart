@@ -19,9 +19,12 @@ void main() {
   }
 
   Future<void> tap(WidgetTester t, String label) async {
-    await t.ensureVisible(find.text(label).last);
+    final target = label == 'Dungeon Rat'
+        ? find.text(label).first
+        : find.text(label).last;
+    await t.ensureVisible(target);
     await t.pumpAndSettle();
-    await t.tap(find.text(label).last);
+    await t.tap(target);
     await t.pumpAndSettle();
   }
 
@@ -102,7 +105,7 @@ void main() {
       await tap(t, 'Continue run');
       await tap(t, 'Resume encounter');
       expect(find.text('27 / 27 HP  ·  0 block'), findsOneWidget);
-      expect(find.textContaining('6 damage'), findsOneWidget);
+      expect(find.text('Gnaw  ·  6 damage'), findsOneWidget);
       expect(t.takeException(), isNull);
     },
   );

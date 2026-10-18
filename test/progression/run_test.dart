@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:deckbound/core/random/seeded_random.dart';
 import 'package:deckbound/game/dungeon/dungeon.dart';
+import 'package:deckbound/game/dungeon/difficulty.dart';
 import 'package:deckbound/game/progression/run_rules.dart';
 import 'package:deckbound/game/progression/run_state.dart';
 import 'package:deckbound/game/combat/combat_engine.dart';
@@ -199,6 +200,10 @@ void main() {
         step++
       ) {
         switch (r.phase) {
+          case RunPhase.merchant:
+            r = rules.leaveMerchant(r);
+          case RunPhase.event:
+            r = rules.resolveEvent(r, accept: false);
           case RunPhase.shrine:
             r = rules.skipShrine(r);
           case RunPhase.map:
@@ -217,7 +222,13 @@ void main() {
               cards: catalog.cards,
               deck: r.deck,
               enemies: r.room!.enemies
-                  .map((id) => catalog.enemies[id]!)
+                  .map(
+                    (id) => scaleEnemy(
+                      catalog.enemies[id]!,
+                      r.descent,
+                      modifier: r.room!.modifier,
+                    ),
+                  )
                   .toList(),
               initialHealth: r.health,
               seed: r.battleSeed,

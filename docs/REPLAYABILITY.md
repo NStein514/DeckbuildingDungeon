@@ -19,12 +19,14 @@ A proposed future resource is **embers**: opportunities to shape the deck compet
 - Deterministic next-map generation, rising enemy HP/damage/block, continuous floor numbering, bounded active-map storage.
 - Three tactical combos, three permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
 - Continue/reload at stable checkpoints, including after a boss and on later descents.
+- Seeded regular encounters and ambush variants, with visible Hardy/Fierce risk modifiers and bonus gold.
+- A merchant with cards, recovery, and removal competing for gold; two optional health/gold bargains.
 
 The current four-enemy catalog and fixed floor roles will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.
 
 ## Next playable milestone
 
-Add seeded encounter pools and small, readable floor modifiers that change decisions: an armored patrol, a poison-resistant chamber, or a room with fewer safe recovery choices. Pair this with merchants, card removal and events so accumulated gold matters. Expand two or three viable build archetypes before adding many superficial card variants. Keep difficulty previews consistent with actual rules.
+The first encounter pools, risk modifiers, merchants, removal and resource events are implemented. Expand elite/boss behavior and two or three viable build archetypes, then assess the gold economy over repeated descents. More modifiers should change tactics, not only enemy numbers. Keep difficulty previews consistent with actual rules.
 
 Introduce cross-run deepest-floor records and a recipe journal. Unlock different starting choices, recipes, relics and challenge rules instead of permanently increasing all stats. This preserves meaningful early-floor decisions on repeat runs. Save profile progress separately from the active journey, with version handling and failed-write tests.
 

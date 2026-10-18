@@ -73,12 +73,23 @@ New runs use a fresh seed unless the player enters one. Repeating a seed reprodu
 
 ## Milestone 2: implemented dungeon loop
 
-New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure choice, a combat floor (including a possible multi-enemy fight), another rest/treasure/shrine choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
+New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure/event choice, a combat floor (including a possible multi-enemy fight), another rest/treasure/shrine/merchant choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
 
-Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold currently accumulates for future merchants; it has no spending flow yet.
+Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold funds merchant purchases and event bargains. Modified encounters grant 10 additional gold.
 
 Rest restores 30% of maximum HP, capped at maximum, OR upgrades one unupgraded card. Upgrades preserve the instance ID, add 2 to damage/block/heal effects and 1 to status/draw effects, leave discard and energy cost unchanged, and retain keywords. Only one upgrade is permitted; previews use the same resolved definition as combat.
 
 Treasure grants 25 gold and one unowned relic. If all relics are owned, it grants gold only. Iron Sigil grants 4 opening block; Quickdraw Charm adds one opening draw; Ember Heart adds 2 Burn on the first Fire play per combat; Venom Fang adds 1 stack to player Poison applications. Passive effects are reset appropriately for each new encounter.
 
-The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Cross-run meta-progression, events, merchant spending, and boss phase changes remain future work.
+The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Cross-run meta-progression and boss phase changes remain future work.
+
+
+## Risk and resources (Milestone 4A)
+
+New descents contain 13 room nodes but still visit six rooms. Introductory rats and bosses retain normal stats. Floor two offers an unmodified single enemy versus a Hardy or Fierce single enemy. Floor four offers a modified single enemy versus a seeded rat/mage or rat/skeleton ambush. Single enemies are sampled from the three regular definitions. Hardy adds 25% HP after descent scaling, rounded up; Fierce adds 2 per direct damage effect after scaling, leaving status stacks unchanged. Both grant 10 bonus gold. Maps and combat display the modifier before actions.
+
+The floor-five merchant competes with free rest, treasure, and fusion. Stock consists of three distinct seeded cards, excluding fusion and curse cards. Prices are 40 common, 60 uncommon, 90 rare, 120 legendary. Each offer can be purchased once per visit. Healing costs 30 gold for up to 15 HP, once; full-health characters cannot buy it. Removal costs 40 gold for one exact instance, once; a confirmation previews the card and the deck must retain at least five cards. Purchases leave the shop open; leaving completes it permanently for this descent. Removing a discovered card does not erase its discovery.
+
+The floor-three event is one seeded bargain: the hungry altar trades 8 HP for 35 gold (requires at least 9 HP); the wandering healer trades 20 gold for up to 12 HP (unavailable at full health). Either can be declined for free. A resolved event cannot be repeated. Each bargain describes its exact cost before acceptance.
+
+Prices and modifier balance are provisional. No passive hunger or ember depletion has been added. Cross-run progression, more enemy/boss content, and human long-run balance testing remain the next priorities.

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'collection_screen.dart';
 import '../../game/dungeon/difficulty.dart';
+import '../../game/dungeon/dungeon.dart';
 import '../../app/settings.dart';
 import '../../assets/asset_registry.dart';
 import '../../core/services/audio_service.dart';
@@ -21,6 +22,7 @@ class BattleScreen extends StatefulWidget {
     required this.seed,
     this.deck,
     this.descent = 1,
+    this.modifier = EncounterModifier.none,
     this.discovered = const [],
     this.initialHealth,
     this.relics = const {},
@@ -30,6 +32,7 @@ class BattleScreen extends StatefulWidget {
   final List<String> enemyIds;
   final GameSettings settings;
   final int seed, descent;
+  final EncounterModifier modifier;
   final List<String> discovered;
   final List<CardInstance>? deck;
   final int? initialHealth;
@@ -56,7 +59,13 @@ class _BattleScreenState extends State<BattleScreen> {
       cards: widget.catalog.cards,
       deck: widget.deck ?? widget.catalog.createDeck(),
       enemies: widget.enemyIds
-          .map((id) => scaleEnemy(widget.catalog.enemies[id]!, widget.descent))
+          .map(
+            (id) => scaleEnemy(
+              widget.catalog.enemies[id]!,
+              widget.descent,
+              modifier: widget.modifier,
+            ),
+          )
           .toList(),
       rules: widget.catalog.rules,
       seed: widget.seed,
@@ -184,6 +193,13 @@ class _BattleScreenState extends State<BattleScreen> {
                 final content = Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    if (widget.modifier != EncounterModifier.none)
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          '${widget.modifier.title}: ${widget.modifier.description}',
+                        ),
+                      ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,

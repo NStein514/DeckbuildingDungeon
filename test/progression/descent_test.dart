@@ -87,7 +87,7 @@ void main() {
           await repo.save(r);
           r = (await repo.load())!;
         }
-        expect(r.rooms, hasLength(11));
+        expect(r.rooms, hasLength(13));
         expect(r.completed, hasLength(6));
       }
       expect(r.descent, 101);

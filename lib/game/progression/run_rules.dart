@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import '../fusion/fusion.dart';
+import '../economy/economy.dart';
 import '../../core/random/seeded_random.dart';
 import '../data/game_catalog.dart';
 import '../dungeon/dungeon.dart';
@@ -58,6 +59,8 @@ class RunRules {
     r.phase = switch (r.room!.type) {
       RoomType.combat || RoomType.boss => RunPhase.combat,
       RoomType.rest => RunPhase.rest,
+      RoomType.merchant => RunPhase.merchant,
+      RoomType.event => RunPhase.event,
       RoomType.shrine => RunPhase.shrine,
       RoomType.treasure => RunPhase.treasure,
     };
@@ -84,7 +87,10 @@ class RunRules {
       return r;
     }
     final rng = SeededRandom(r.rngState);
-    r.gold += 15 + rng.nextInt(11);
+    r.gold +=
+        15 +
+        rng.nextInt(11) +
+        (r.room!.modifier == EncounterModifier.none ? 0 : 10);
     final pool =
         catalog.cards.values
             .where(
@@ -165,6 +171,75 @@ class RunRules {
   RunState skipShrine(RunState old) {
     if (old.phase != RunPhase.shrine) throw StateError('No active shrine.');
     final r = old.copy();
+    _complete(r);
+    return r;
+  }
+
+  RunState buyCard(RunState old, String id) {
+    if (old.phase != RunPhase.merchant ||
+        !Merchant.stock(catalog, old.battleSeed).contains(id) ||
+        old.deck.length >= 1000) {
+      throw StateError('Card unavailable.');
+    }
+    final r = _purchase(old, 'card:$id', Merchant.price(catalog.cards[id]!));
+    r.deck.add(CardInstance('card-${r.nextCardId++}', id));
+    if (!r.discovered.contains(id)) r.discovered.add(id);
+    return r;
+  }
+
+  RunState merchantHeal(RunState old) {
+    if (old.health >= catalog.rules.maxHealth) {
+      throw StateError('Already at full health.');
+    }
+    final r = _purchase(old, 'heal', Merchant.healingPrice);
+    r.health = math.min(
+      catalog.rules.maxHealth,
+      r.health + Merchant.healingAmount,
+    );
+    return r;
+  }
+
+  RunState removeCard(RunState old, String instanceId) {
+    if (old.deck.length <= Merchant.minimumDeck ||
+        !old.deck.any((c) => c.id == instanceId)) {
+      throw StateError('Choose an owned card; keep at least five cards.');
+    }
+    final r = _purchase(old, 'remove', Merchant.removalPrice);
+    r.deck.removeWhere((c) => c.id == instanceId);
+    return r;
+  }
+
+  RunState _purchase(RunState old, String token, int price) {
+    if (old.phase != RunPhase.merchant ||
+        old.purchases.contains(token) ||
+        old.gold < price) {
+      throw StateError('Purchase unavailable or not enough gold.');
+    }
+    final r = old.copy()..gold -= price;
+    r.purchases.add(token);
+    return r;
+  }
+
+  RunState leaveMerchant(RunState old) {
+    if (old.phase != RunPhase.merchant) throw StateError('No active merchant.');
+    final r = old.copy()..purchases.clear();
+    _complete(r);
+    return r;
+  }
+
+  RunState resolveEvent(RunState old, {required bool accept}) {
+    if (old.phase != RunPhase.event) throw StateError('No active event.');
+    final r = old.copy();
+    if (accept) {
+      final event = JourneyEvent.fromSeed(old.battleSeed);
+      if (r.health + event.health <= 0 ||
+          r.gold + event.gold < 0 ||
+          (event.health > 0 && r.health == catalog.rules.maxHealth)) {
+        throw StateError('You cannot afford this bargain.');
+      }
+      r.health = math.min(catalog.rules.maxHealth, r.health + event.health);
+      r.gold += event.gold;
+    }
     _complete(r);
     return r;
   }

@@ -3,6 +3,7 @@ import '../random/seeded_random.dart';
 import '../../game/data/game_catalog.dart';
 import '../../game/dungeon/dungeon.dart';
 import '../../game/progression/run_state.dart';
+import '../../game/economy/economy.dart';
 import 'save_store.dart';
 
 class RunRepository {
@@ -14,8 +15,7 @@ class RunRepository {
     if (text == null) return null;
     try {
       final j = jsonDecode(text) as Map<String, dynamic>;
-      if (j['version'] != 1 ||
-          (j['contentVersion'] != 1 && j['contentVersion'] != 2)) {
+      if (j['version'] != 1 || ![1, 2, 3].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported save version; save preserved.',
         );
@@ -33,7 +33,7 @@ class RunRepository {
   Future<void> save(RunState r) async {
     validate(r);
     await store.write(
-      jsonEncode({'version': 1, 'contentVersion': 2, 'run': r.toJson()}),
+      jsonEncode({'version': 1, 'contentVersion': 3, 'run': r.toJson()}),
     );
   }
 
@@ -78,7 +78,7 @@ class RunRepository {
                 : parts[0] == 'card' && id >= 12 && id < r.nextCardId),
       );
     }
-    check(r.mapVersion == 1 || r.mapVersion == 2);
+    check([1, 2, 3].contains(r.mapVersion));
     check(r.descent >= 1 && r.mapSeed >= 0 && r.mapSeed <= 0xffffffff);
     check(r.descent != 1 || r.mapSeed == r.seed);
     check(r.mapVersion != 1 || r.descent == 1);
@@ -134,6 +134,21 @@ class RunRepository {
         r.phase == RunPhase.defeat) {
       check(r.room!.enemies.isNotEmpty);
     }
+    if (r.phase == RunPhase.merchant) {
+      check(r.room!.type == RoomType.merchant);
+      final tokens = {
+        'heal',
+        'remove',
+        ...Merchant.stock(catalog, r.battleSeed).map((id) => 'card:$id'),
+      };
+      check(
+        r.purchases.toSet().length == r.purchases.length &&
+            r.purchases.every(tokens.contains),
+      );
+    } else {
+      check(r.purchases.isEmpty);
+    }
+    if (r.phase == RunPhase.event) check(r.room!.type == RoomType.event);
     if (r.phase == RunPhase.shrine) check(r.room!.type == RoomType.shrine);
     if (r.phase == RunPhase.rest) check(r.room!.type == RoomType.rest);
     if (r.phase == RunPhase.treasure) check(r.room!.type == RoomType.treasure);

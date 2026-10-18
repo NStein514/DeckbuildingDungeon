@@ -20,8 +20,8 @@ void main() {
   }
 
   Future<void> tap(WidgetTester t, String label) async {
-    await t.ensureVisible(find.text(label));
-    await t.tap(find.text(label));
+    await t.ensureVisible(find.text(label).first);
+    await t.tap(find.text(label).first);
     await t.pumpAndSettle();
   }
 

@@ -10,10 +10,11 @@ class DeckScreen extends StatefulWidget {
     required this.catalog,
     required this.deck,
     this.chooseUpgrade = false,
+    this.chooseRemoval = false,
   });
   final GameCatalog catalog;
   final List<CardInstance> deck;
-  final bool chooseUpgrade;
+  final bool chooseUpgrade, chooseRemoval;
   @override
   State<DeckScreen> createState() => _DeckScreenState();
 }
@@ -45,6 +46,8 @@ class _DeckScreenState extends State<DeckScreen> {
         title: Text(
           widget.chooseUpgrade
               ? 'Choose a card to upgrade'
+              : widget.chooseRemoval
+              ? 'Choose a card to remove'
               : 'Your deck · ${widget.deck.length}',
         ),
       ),
@@ -82,10 +85,14 @@ class _DeckScreenState extends State<DeckScreen> {
               ],
             ),
           ),
-          if (widget.chooseUpgrade)
-            const Padding(
+          if (widget.chooseUpgrade || widget.chooseRemoval)
+            Padding(
               padding: EdgeInsets.all(12),
-              child: Text('Tap to preview. Each card can be upgraded once.'),
+              child: Text(
+                widget.chooseRemoval
+                    ? 'Tap to preview removal. Cost: 40 gold.'
+                    : 'Tap to preview. Each card can be upgraded once.',
+              ),
             ),
           Expanded(
             child: cards.isEmpty
@@ -105,7 +112,7 @@ class _DeckScreenState extends State<DeckScreen> {
                         widget.catalog.cards[cards[i].definitionId]!,
                         cards[i],
                       ),
-                      onTap: widget.chooseUpgrade
+                      onTap: widget.chooseUpgrade || widget.chooseRemoval
                           ? () => _preview(cards[i])
                           : null,
                     ),
@@ -119,12 +126,20 @@ class _DeckScreenState extends State<DeckScreen> {
   Future<void> _preview(CardInstance card) async {
     final upgraded = resolveCard(
       widget.catalog.cards[card.definitionId]!,
-      CardInstance(card.id, card.definitionId, upgrade: 1),
+      CardInstance(
+        card.id,
+        card.definitionId,
+        upgrade: widget.chooseRemoval ? card.upgrade : 1,
+      ),
     );
     final ok = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Upgrade preview'),
+        title: Text(
+          widget.chooseRemoval
+              ? 'Remove this card for 40 gold?'
+              : 'Upgrade preview',
+        ),
         content: SizedBox(
           height: 280,
           width: 170,
@@ -137,7 +152,7 @@ class _DeckScreenState extends State<DeckScreen> {
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Upgrade'),
+            child: Text(widget.chooseRemoval ? 'Remove card' : 'Upgrade'),
           ),
         ],
       ),

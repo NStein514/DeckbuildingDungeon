@@ -1,0 +1,47 @@
+import '../../core/random/seeded_random.dart';
+import '../data/game_catalog.dart';
+import '../models/models.dart';
+
+class Merchant {
+  static const healingPrice = 30, healingAmount = 15, removalPrice = 40;
+  static const minimumDeck = 5;
+  static int price(CardDefinition card) => switch (card.rarity) {
+    Rarity.common => 40,
+    Rarity.uncommon => 60,
+    Rarity.rare => 90,
+    Rarity.legendary => 120,
+  };
+  static List<String> stock(GameCatalog catalog, int seed) {
+    final pool =
+        catalog.cards.values
+            .where(
+              (c) => c.type != CardType.curse && !c.tags.contains('fusion'),
+            )
+            .map((c) => c.id)
+            .toList()
+          ..sort();
+    SeededRandom(seed).shuffle(pool);
+    return List.unmodifiable(pool.take(3));
+  }
+}
+
+enum JourneyEvent {
+  bloodAltar(
+    'The hungry altar',
+    'Offer 8 HP to receive 35 gold. You must survive the offering.',
+    -8,
+    35,
+  ),
+  wanderingHealer(
+    'The wandering healer',
+    'Pay 20 gold to restore up to 12 HP.',
+    12,
+    -20,
+  );
+
+  const JourneyEvent(this.title, this.description, this.health, this.gold);
+  final String title, description;
+  final int health, gold;
+  static JourneyEvent fromSeed(int seed) =>
+      values[SeededRandom(seed).nextInt(1000000) < 500000 ? 0 : 1];
+}

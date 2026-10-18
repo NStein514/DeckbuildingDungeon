@@ -8,6 +8,7 @@ import '../widgets/game_card.dart';
 import 'battle_screen.dart';
 import 'deck_screen.dart';
 import 'fusion_panel.dart';
+import 'economy_panel.dart';
 import 'collection_screen.dart';
 
 class RunScreen extends StatelessWidget {
@@ -172,6 +173,14 @@ class RunScreen extends StatelessWidget {
                         child: const Text('Upgrade a card'),
                       ),
                     ],
+                    RunPhase.merchant || RunPhase.event => [
+                      EconomyPanel(
+                        key: ValueKey('${r.descent}-${r.currentRoom}'),
+                        runs: runs,
+                        catalog: catalog,
+                        run: r,
+                      ),
+                    ],
                     RunPhase.shrine => [
                       FusionPanel(
                         key: ValueKey('shrine-${r.descent}-${r.currentRoom}'),
@@ -266,54 +275,72 @@ class RunScreen extends StatelessWidget {
         style: const TextStyle(letterSpacing: 2, fontSize: 10),
       ),
       const SizedBox(height: 8),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final room in r.rooms.where((x) => x.depth == depth))
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 18,
-                      horizontal: 8,
-                    ),
-                  ),
-                  onPressed: !runs.busy && r.availableRooms.contains(room.id)
-                      ? () => _enter(context, room.id)
-                      : null,
-                  child: Column(
-                    children: [
-                      Icon(
-                        r.completed.contains(room.id)
-                            ? Icons.check_circle_outline
-                            : switch (room.type) {
-                                RoomType.combat => Icons.bolt,
-                                RoomType.rest =>
-                                  Icons.local_fire_department_outlined,
-                                RoomType.treasure => Icons.auto_awesome,
-                                RoomType.shrine => Icons.auto_fix_high,
-                                RoomType.boss => Icons.shield_outlined,
-                              },
+      for (
+        var start = 0;
+        start < r.rooms.where((x) => x.depth == depth).length;
+        start += 2
+      )
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final room
+                in r.rooms.where((x) => x.depth == depth).skip(start).take(2))
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 18,
+                        horizontal: 8,
                       ),
-                      const SizedBox(height: 8),
-                      Text(room.type.name.toUpperCase()),
-                      if (room.enemies.isNotEmpty)
-                        Text(
-                          room.enemies
-                              .map((id) => catalog.enemies[id]!.name)
-                              .join(' + '),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10),
+                    ),
+                    onPressed: !runs.busy && r.availableRooms.contains(room.id)
+                        ? () => _enter(context, room.id)
+                        : null,
+                    child: Column(
+                      children: [
+                        Icon(
+                          r.completed.contains(room.id)
+                              ? Icons.check_circle_outline
+                              : switch (room.type) {
+                                  RoomType.combat => Icons.bolt,
+                                  RoomType.rest =>
+                                    Icons.local_fire_department_outlined,
+                                  RoomType.treasure => Icons.auto_awesome,
+                                  RoomType.shrine => Icons.auto_fix_high,
+                                  RoomType.merchant =>
+                                    Icons.storefront_outlined,
+                                  RoomType.event => Icons.explore_outlined,
+                                  RoomType.boss => Icons.shield_outlined,
+                                },
                         ),
-                    ],
+                        const SizedBox(height: 8),
+                        Text(room.type.name.toUpperCase()),
+                        if (room.modifier != EncounterModifier.none)
+                          Text(
+                            room.modifier.description,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.orangeAccent,
+                            ),
+                          ),
+                        if (room.enemies.isNotEmpty)
+                          Text(
+                            room.enemies
+                                .map((id) => catalog.enemies[id]!.name)
+                                .join(' + '),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        ),
       if (depth < 5)
         const Padding(
           padding: EdgeInsets.all(6),
@@ -339,6 +366,7 @@ class RunScreen extends StatelessWidget {
             settings: settings,
             seed: r.battleSeed,
             descent: r.descent,
+            modifier: r.room!.modifier,
             discovered: r.discovered,
             deck: r.deck,
             initialHealth: r.health,

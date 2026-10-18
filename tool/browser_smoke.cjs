@@ -16,7 +16,7 @@ fs.mkdirSync(output,{recursive:true});
  await page.getByText('Choose your path',{exact:true}).waitFor();
  await page.screenshot({path:path.join(output,'map.png')});
 
- await page.getByRole('button',{name:'COMBAT Dungeon Rat',exact:true}).click();
+ await page.getByRole('button',{name:'COMBAT Dungeon Rat',exact:true}).first().click();
  await page.getByText('TURN 1',{exact:true}).waitFor();
 
  await page.screenshot({path:path.join(output,'battle.png')});
@@ -73,10 +73,38 @@ fs.mkdirSync(output,{recursive:true});
   assert.equal(deeper.run.descent,2);assert.equal(deeper.run.health,23);
   assert(deeper.run.deck.some(c=>c.definitionId==='flaming_strike'));
   await page.screenshot({path:path.join(output,'deeper-map.png')});
-  await page.getByRole('button',{name:'COMBAT Dungeon Rat',exact:true}).click();
+  await page.getByRole('button',{name:'COMBAT Dungeon Rat',exact:true}).first().click();
   await page.getByText('TURN 1',{exact:true}).waitFor();
   assert((await page.locator('body').ariaSnapshot()).includes('Dungeon Rat. 27 health'));
   assert((await page.locator('body').ariaSnapshot()).includes('6 damage'));
+  if (fixtures.merchant) {
+   await restore(fixtures.merchant);
+   const buy=page.getByRole('button',{name:/^Buy ·/}).first();
+   const price=Number((await buy.ariaSnapshot()).match(/(\d+) gold/)[1]);
+   await buy.click();
+   await page.getByRole('button',{name:'Sold',exact:true}).waitFor();
+   let merchant=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+   assert.equal(merchant.run.gold,200-price);assert.equal(merchant.run.deck.length,13);
+   await restore(merchant);
+   await page.getByRole('button',{name:'Heal up to 15 HP · 30 gold',exact:true}).click();
+   await page.getByRole('button',{name:'Healing purchased',exact:true}).waitFor();
+   await page.getByRole('button',{name:'Remove a card · 40 gold',exact:true}).click();
+   await page.getByRole('button',{name:/\. Cost/}).first().click();
+   await page.getByRole('button',{name:'Remove card',exact:true}).click();
+   await page.getByRole('button',{name:'Card removal purchased',exact:true}).waitFor();
+   merchant=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+   assert.equal(merchant.run.gold,200-price-70);assert.equal(merchant.run.deck.length,12);
+   await page.screenshot({path:path.join(output,'merchant.png')});
+   await page.getByRole('button',{name:'Leave merchant',exact:true}).click();
+   await page.getByText('Choose your path',{exact:true}).waitFor();
+   await restore(fixtures.event);
+   await page.screenshot({path:path.join(output,'event.png')});
+   await page.getByRole('button',{name:/^(Offer 8 HP|Pay 20 gold)/}).click();
+   await page.getByText('Choose your path',{exact:true}).waitFor();
+   const event=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+   assert(event.run.completed.includes('room-2-2'));assert.notEqual(event.run.gold,100);
+   console.log('PASS: merchant card purchase, sold stock reload, healing, removal, wallet totals, leaving and event resolution.');
+  }
   console.log('PASS: fusion preview, cancellation, atomic confirmation/discovery, deeper descent, build carryover and scaled enemy.');
  }
  assert.deepEqual(errors,[]);

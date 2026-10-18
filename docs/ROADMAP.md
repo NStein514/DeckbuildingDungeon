@@ -12,7 +12,7 @@
 - Complete real-combat seeded-run test, persistence and widget tests.
 - Flutter dependency lockfile and Android/iOS/web hosts.
 
-See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Gold spending, global discovery/unlocks and run statistics are not part of this implementation.
+See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Global discovery/unlocks and run statistics remain outstanding.
 
 ## Milestone 3 — implemented: tactical combos, fusion, and descent foundation
 
@@ -23,12 +23,22 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 5. UI combo feedback and catalog entries without timing-dependent game logic.
 6. Repeatable post-boss descents with stronger enemies, persistent builds, fresh seeds, and compatible legacy saves.
 
-## Milestone 4 — replayability and meaningful survival choices
+## Milestone 4A — implemented: risk and resources
+
+- Seeded regular encounter pools and two ambush compositions.
+- Visible Hardy (+25% HP) and Fierce (+2 per damage effect) room modifiers; +10 gold on victory.
+- An optional event choice on floor 3 and a merchant option on floor 5 of each new descent.
+- Three seeded card offers; once-only healing and exact-instance removal, with confirmation.
+- Hungry altar and wandering healer events with explicit costs, survival checks, and free refusal.
+- Atomic spending, stock persistence, failed-save retry, duplicate-command rejection, and content-version-1/2 compatibility.
+- Phone UI tests and unchanged six-room route length, with maps wrapping to two columns.
+
+## Milestone 4B — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 
-1. Encounter pools and seeded floor modifiers; varied elites and boss patterns with clear previews.
-2. Merchant spending, deck removal, and resource events that create competing uses for gold.
+1. Varied elite and boss patterns with clear previews, plus broader biome/event pools.
+2. Balance prices and resource income across repeated descents; add more meaningful merchant/event options.
 3. Prototype an ember resource tied to forging and sanctuary choices; assess whether it creates interesting decisions before making it a mandatory survival meter.
 4. More fusion paths and relic tradeoffs, with viable damage, defense, and status builds.
 5. Cross-run discovery journal and deepest-floor statistics; unlock options rather than permanent stat inflation.
