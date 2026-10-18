@@ -56,16 +56,26 @@ class RunRules {
     final rng = SeededRandom(r.rngState);
     r.battleSeed = rng.nextInt(0x100000000);
     r.rngState = rng.state;
-    r.phase = switch (r.room!.type) {
-      RoomType.combat || RoomType.boss => RunPhase.combat,
-      RoomType.rest => RunPhase.rest,
-      RoomType.merchant => RunPhase.merchant,
-      RoomType.event => RunPhase.event,
-      RoomType.shrine => RunPhase.shrine,
-      RoomType.treasure => RunPhase.treasure,
-    };
+    r.phase = r.mapVersion >= 4 ? RunPhase.reveal : _roomPhase(r.room!.type);
     return r;
   }
+
+  RunState continueRoom(RunState old) {
+    if (old.phase != RunPhase.reveal) {
+      throw StateError('No revealed path awaits entry.');
+    }
+    final r = old.copy()..phase = _roomPhase(old.room!.type);
+    return r;
+  }
+
+  RunPhase _roomPhase(RoomType type) => switch (type) {
+    RoomType.combat || RoomType.boss => RunPhase.combat,
+    RoomType.rest => RunPhase.rest,
+    RoomType.merchant => RunPhase.merchant,
+    RoomType.event => RunPhase.event,
+    RoomType.shrine => RunPhase.shrine,
+    RoomType.treasure => RunPhase.treasure,
+  };
 
   RunState finishCombat(RunState old, Outcome outcome, int health) {
     if (old.phase != RunPhase.combat ||

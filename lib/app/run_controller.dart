@@ -124,6 +124,7 @@ class RunController extends ChangeNotifier {
   Future<bool> start(int seed) =>
       _commit(() => rules.start(seed), replacing: true);
   Future<bool> descend() => _commit(() => rules.descend(_state!));
+  Future<bool> continueRoom() => _commit(() => rules.continueRoom(_state!));
   Future<bool> enter(String id) => _commit(() => rules.enter(_state!, id));
   Future<bool> finish(Outcome outcome, int hp) =>
       _commit(() => rules.finishCombat(_state!, outcome, hp));

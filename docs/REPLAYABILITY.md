@@ -39,3 +39,7 @@ Cross-run deepest-floor records and the recipe journal are now implemented. Next
 - There are viable recovery and deck-management choices, without an effortless infinite sustain loop.
 - Continued descents do not grow map history indefinitely or duplicate rewards after reload.
 - Tests cover reproducibility, difficulty application, profile persistence and resource invariants; playtests assess tension, variety and run duration. Simulated victories test progression, not balance.
+
+## Unknown dungeon cards
+
+New maps conceal each unexplored path behind a face-down card. Choosing commits the path before revealing its contents, preserving the existing six-floor battle/room rhythm. Interior lane contents shuffle each descent; the final floor remains signposted as a boss. Reloading retains the chosen reveal. This adds uncertainty without replacing tactical combat, fusion builds or the journey journal. Future clues or scouting should introduce deliberate resource decisions; this milestone does not allow free peeking.

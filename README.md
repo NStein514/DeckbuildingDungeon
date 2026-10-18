@@ -46,7 +46,9 @@ The practice encounter controls launch isolated battles that do not change your 
 
 ## Saving
 
-Progress saves on room entry, battle results, reward confirmation, rest, treasure, fusion, merchant purchases, event choices, and descent. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
+New journeys present face-down dungeon cards. Flip one to commit your path and reveal its room, then continue into the encounter or opportunity. Hidden room positions shuffle each descent; unchosen cards stay unknown. Reveals persist across reloads, and reduced-motion settings skip the flip animation. Existing journeys keep their original face-up map until the next descent.
+
+Progress saves on card reveal, room entry, battle results, reward confirmation, rest, treasure, fusion, merchant purchases, event choices, and descent. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
 
 Native saves use a flushed temporary file and same-directory rename in the application support directory. Browser saves use a single local-storage replacement per document. Settings, active run, and the journey journal use separate documents. Use one active game tab; browsers can clear local storage, and private-browsing storage may be temporary. A stable browser origin/port is necessary to resume the same save.
 

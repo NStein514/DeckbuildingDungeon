@@ -30,7 +30,7 @@ void main() {
       final store = MemorySaveStore(),
           repo = RunRepository(MemorySaveStore(), catalog);
       final reward = rules.finishCombat(
-        rules.enter(rules.start(514), 'room-0-0'),
+        enterRoom(rules, rules.start(514), 'room-0-0'),
         Outcome.victory,
         40,
       );
@@ -82,6 +82,7 @@ void main() {
     await c.load();
     await c.start(514);
     await c.enter('room-0-0');
+    await c.continueRoom();
     await c.finish(Outcome.victory, 40);
     final id = c.state!.rewards.first;
     store.gate = Completer<void>();
@@ -113,7 +114,7 @@ void main() {
       await repo.save(run);
       await File('${file.path}.tmp').writeAsString('{partial');
       expect((await repo.load())!.toJson(), run.toJson());
-      await repo.save(rules.enter(run, 'room-0-0'));
+      await repo.save(enterRoom(rules, run, 'room-0-0'));
       expect((await repo.load())!.phase, RunPhase.combat);
       expect(await File('${file.path}.tmp').exists(), isFalse);
     },

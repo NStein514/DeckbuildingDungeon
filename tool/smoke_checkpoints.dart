@@ -25,22 +25,41 @@ Future<void> main(List<String> args) async {
       (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
     );
     if (depth == 2) {
-      await repo.save(rules.enter(r, 'room-2-2')..gold = 100);
+      await repo.save(
+        enterRoom(
+          rules,
+          r,
+          r.rooms.firstWhere((room) => room.type == RoomType.event).id,
+        )..gold = 100,
+      );
       checkpoints['event'] = jsonDecode(store.contents!);
     }
-    r = rules.enter(r, room.id);
+    r = enterRoom(rules, r, room.id);
     r = r.phase == RunPhase.rest
         ? rules.rest(r)
         : rules.reward(rules.finishCombat(r, Outcome.victory, 40), null);
   }
-  await repo.save(rules.enter(r, 'room-4-3')..gold = 200);
+  await repo.save(
+    enterRoom(
+      rules,
+      r,
+      r.rooms.firstWhere((room) => room.type == RoomType.merchant).id,
+    )..gold = 200,
+  );
   checkpoints['merchant'] = jsonDecode(store.contents!);
-  r = rules.enter(r, 'room-4-2');
+  r = enterRoom(
+    rules,
+    r,
+    r.rooms.firstWhere((room) => room.type == RoomType.shrine).id,
+  );
   await repo.save(r);
   checkpoints['shrine'] = jsonDecode(store.contents!);
   r = rules.fuse(r, 'starter-0', 'starter-8');
-  r = rules.finishCombat(rules.enter(r, 'room-5-0'), Outcome.victory, 23);
+  r = rules.finishCombat(enterRoom(rules, r, 'room-5-0'), Outcome.victory, 23);
   await repo.save(r);
   checkpoints['victory'] = jsonDecode(store.contents!);
   File(args.single).writeAsStringSync(jsonEncode(checkpoints));
 }
+
+RunState enterRoom(RunRules rules, RunState run, String id) =>
+    rules.continueRoom(rules.enter(run, id));

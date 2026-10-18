@@ -35,7 +35,7 @@ void main() {
       phone(t);
       final catalog = loadCatalog(), store = MemorySaveStore();
       final repo = RunRepository(store, catalog), rules = RunRules(catalog);
-      final r = reachRoom(rules, 'room-4-3')..gold = 300;
+      final r = reachRoom(rules, RoomType.merchant)..gold = 300;
       await repo.save(r);
       final id = Merchant.stock(catalog, r.battleSeed).first;
       final price = Merchant.price(catalog.cards[id]!);
@@ -78,7 +78,7 @@ void main() {
     phone(t);
     final catalog = loadCatalog(), store = FailingStore();
     final repo = RunRepository(store, catalog),
-        r = reachRoom(RunRules(catalog), 'room-4-3')..gold = 100;
+        r = reachRoom(RunRules(catalog), RoomType.merchant)..gold = 100;
     await repo.save(r);
     await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
     await t.pumpAndSettle();
@@ -98,7 +98,7 @@ void main() {
     phone(t);
     final catalog = loadCatalog(), store = MemorySaveStore();
     final repo = RunRepository(store, catalog),
-        r = reachRoom(RunRules(catalog), 'room-2-2')..gold = 100;
+        r = reachRoom(RunRules(catalog), RoomType.event)..gold = 100;
     final event = JourneyEvent.fromSeed(r.battleSeed);
     await repo.save(r);
     await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
@@ -123,7 +123,7 @@ void main() {
     await t.pumpAndSettle();
     await tap(t, 'Continue run');
     expect(find.text('Choose your path'), findsOneWidget);
-    expect((await repo.load())!.completed, contains('room-2-2'));
+    expect((await repo.load())!.completed, contains(r.currentRoom));
   });
   testWidgets(
     'saved modifier appears in battle and changes actual enemy health',
@@ -131,9 +131,9 @@ void main() {
       phone(t);
       final catalog = loadCatalog(), store = MemorySaveStore();
       final repo = RunRepository(store, catalog), rules = RunRules(catalog);
-      var r = reachRoom(rules, 'room-1-1');
+      var r = reachRoom(rules, RoomType.combat);
       for (var seed = 0; r.room!.modifier != EncounterModifier.hardy; seed++) {
-        r = reachRoom(rules, 'room-1-1', seed: seed);
+        r = reachRoom(rules, RoomType.combat, seed: seed);
       }
       await repo.save(r);
       final enemy = scaleEnemy(

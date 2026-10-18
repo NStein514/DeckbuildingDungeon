@@ -92,7 +92,8 @@ void main() {
       await tap(t, 'Descend deeper');
       expect(find.text('FLOOR 7'), findsOneWidget);
       expect((await repo.load())!.descent, 2);
-      await tap(t, 'Dungeon Rat');
+      await tap(t, 'Unexplored path 1 · floor 7');
+      await tap(t, 'Enter encounter');
       expect(find.text('27 / 27 HP  ·  0 block'), findsOneWidget);
       await t.pumpWidget(
         DeckboundApp(

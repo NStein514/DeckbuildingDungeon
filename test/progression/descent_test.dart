@@ -12,7 +12,11 @@ import '../fusion/fusion_test.dart' show shrine;
 import '../persistence/save_test.dart' show FailingStore;
 
 RunState won(RunRules rules) => rules.finishCombat(
-  rules.enter(rules.fuse(shrine(rules), 'starter-0', 'starter-8'), 'room-5-0'),
+  enterRoom(
+    rules,
+    rules.fuse(shrine(rules), 'starter-0', 'starter-8'),
+    'room-5-0',
+  ),
   Outcome.victory,
   23,
 );
@@ -77,6 +81,9 @@ void main() {
         while (r.phase != RunPhase.victory) {
           r = switch (r.phase) {
             RunPhase.map => rules.enter(r, r.availableRooms.first),
+            RunPhase.reveal => rules.continueRoom(r),
+            RunPhase.merchant => rules.leaveMerchant(r),
+            RunPhase.event => rules.resolveEvent(r, accept: false),
             RunPhase.combat => rules.finishCombat(r, Outcome.victory, 23),
             RunPhase.reward => rules.reward(r, null),
             RunPhase.rest => rules.rest(r),

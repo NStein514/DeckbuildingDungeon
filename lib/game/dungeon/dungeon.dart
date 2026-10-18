@@ -53,14 +53,14 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 3}) {
-    if (version != 1 && version != 2 && version != 3) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 4}) {
+    if (version < 1 || version > 4) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [
       1,
       2,
-      version == 3 ? 3 : 2,
+      version >= 3 ? 3 : 2,
       2,
       version == 1
           ? 2
@@ -73,9 +73,9 @@ class DungeonGenerator {
     for (var depth = 0; depth < widths.length; depth++) {
       final restLane = rng.nextInt(1000000) < 500000 ? 0 : 1;
       for (var lane = 0; lane < widths[depth]; lane++) {
-        final type = version == 3 && depth == 2 && lane == 2
+        final type = version >= 3 && depth == 2 && lane == 2
             ? RoomType.event
-            : version == 3 && depth == 4 && lane == 3
+            : version >= 3 && depth == 4 && lane == 3
             ? RoomType.merchant
             : depth == 4 && lane == 2
             ? RoomType.shrine
@@ -94,7 +94,7 @@ class DungeonGenerator {
             ? ['rat', 'mage']
             : [rng.nextInt(1000000) < 500000 ? 'skeleton' : 'mage'];
         var modifier = EncounterModifier.none;
-        if (version == 3 && type == RoomType.combat && depth > 0) {
+        if (version >= 3 && type == RoomType.combat && depth > 0) {
           if (depth == 3 && lane == 1) {
             enemies = rng.nextInt(1000000) < 500000
                 ? ['rat', 'mage']
@@ -126,6 +126,30 @@ class DungeonGenerator {
             modifier: modifier,
           ),
         );
+      }
+    }
+    if (version >= 4) {
+      // Shuffle contents, not identities or edges. Lane positions reveal no
+      // room type, while old generator versions retain their exact RNG order.
+      for (var depth = 1; depth < 5; depth++) {
+        final indices = [
+          for (var i = 0; i < rooms.length; i++)
+            if (rooms[i].depth == depth) i,
+        ];
+        final contents = indices.map((i) => rooms[i]).toList();
+        rng.shuffle(contents);
+        for (var i = 0; i < indices.length; i++) {
+          final slot = rooms[indices[i]], content = contents[i];
+          rooms[indices[i]] = DungeonRoom(
+            slot.id,
+            slot.depth,
+            slot.lane,
+            content.type,
+            slot.next,
+            content.enemies,
+            modifier: content.modifier,
+          );
+        }
       }
     }
     return rooms;

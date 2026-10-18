@@ -14,24 +14,29 @@ import 'package:deckbound/game/progression/run_state.dart';
 import '../test_catalog.dart';
 import '../persistence/save_test.dart' show FailingStore;
 
-RunState reachRoom(RunRules rules, String id, {int seed = 514}) {
+RunState reachRoom(RunRules rules, RoomType type, {int seed = 514}) {
   var r = rules.start(seed);
-  final target = r.rooms.firstWhere((room) => room.id == id);
+  final target = r.rooms.firstWhere(
+    (room) =>
+        room.type == type &&
+        (type != RoomType.combat ||
+            (room.depth == 1 && room.modifier != EncounterModifier.none)),
+  );
   for (var depth = 0; depth < target.depth; depth++) {
     final room = r.rooms.firstWhere(
       (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
     );
-    r = rules.enter(r, room.id);
+    r = enterRoom(rules, r, room.id);
     r = r.phase == RunPhase.rest
         ? rules.rest(r)
         : rules.reward(rules.finishCombat(r, Outcome.victory, 30), null);
   }
-  return rules.enter(r, id);
+  return enterRoom(rules, r, target.id);
 }
 
 void main() {
   final catalog = loadCatalog(), rules = RunRules(loadCatalog());
-  RunState shop() => reachRoom(rules, 'room-4-3')..gold = 300;
+  RunState shop() => reachRoom(rules, RoomType.merchant)..gold = 300;
   test(
     'three stable distinct non-fusion offers across reload; purchase once',
     () async {
@@ -103,7 +108,7 @@ void main() {
   test('events preview deterministic costs, are optional and resolve once', () {
     final types = <JourneyEvent>{};
     for (var seed = 0; seed < 50; seed++) {
-      final r = reachRoom(rules, 'room-2-2', seed: seed)..gold = 100;
+      final r = reachRoom(rules, RoomType.event, seed: seed)..gold = 100;
       final event = JourneyEvent.fromSeed(r.battleSeed);
       types.add(event);
       final accepted = rules.resolveEvent(r, accept: true);
@@ -158,7 +163,7 @@ void main() {
     () async {
       final store = FailingStore(),
           repo = RunRepository(FailingStore(), catalog);
-      await repo.save(reachRoom(rules, 'room-2-2')..gold = 100);
+      await repo.save(reachRoom(rules, RoomType.event)..gold = 100);
       store.contents = (repo.store as FailingStore).contents;
       final runs = RunController(RunRepository(store, catalog));
       await runs.load();
@@ -260,13 +265,22 @@ void main() {
     expect(rat.health, 22);
     final r = rules.reward(
       rules.finishCombat(
-        rules.enter(rules.start(514), 'room-0-0'),
+        enterRoom(rules, rules.start(514), 'room-0-0'),
         Outcome.victory,
         30,
       ),
       null,
     );
-    final encounter = rules.enter(r, 'room-1-1');
+    final encounter = enterRoom(
+      rules,
+      r,
+      r.rooms
+          .firstWhere(
+            (room) =>
+                room.depth == 1 && room.modifier != EncounterModifier.none,
+          )
+          .id,
+    );
     final result = rules.finishCombat(encounter, Outcome.victory, 30);
     expect(result.gold - encounter.gold, inInclusiveRange(25, 35));
   });

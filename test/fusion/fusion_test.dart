@@ -19,12 +19,16 @@ RunState shrine(RunRules rules) {
     final room = r.rooms.firstWhere(
       (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
     );
-    r = rules.enter(r, room.id);
+    r = enterRoom(rules, r, room.id);
     r = r.phase == RunPhase.rest
         ? rules.rest(r)
         : rules.reward(rules.finishCombat(r, Outcome.victory, 40), null);
   }
-  return rules.enter(r, 'room-4-2');
+  return enterRoom(
+    rules,
+    r,
+    r.rooms.firstWhere((room) => room.type == RoomType.shrine).id,
+  );
 }
 
 void main() {
@@ -164,7 +168,7 @@ void main() {
           true,
         );
         final reward = rules.finishCombat(
-          rules.enter(r, 'room-0-0'),
+          enterRoom(rules, r, 'room-0-0'),
           Outcome.victory,
           40,
         );

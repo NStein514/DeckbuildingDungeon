@@ -41,7 +41,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Existing-run import, idempotent recovery after interrupted writes, and practice-battle exclusion.
 - Failed journal writes leave the run playable and prevent replacement until reconciliation; invalid/future profiles are preserved.
 
-## Milestone 4C — remaining replayability and survival choices
+## Milestone 4C — implemented: unknown dungeon cards
+
+- Face-down path cards conceal room types, enemies and modifiers, including accessibility labels.
+- Choosing a card commits and saves the path, then flips it before explicit room entry.
+- Seeded lane shuffling prevents fixed merchant/event/shrine positions from spoiling choices.
+- Reloads and failed-save retries preserve the reveal and encounter seed; duplicate inputs cannot scout alternatives.
+- Reduced-motion and fast-animation settings apply; legacy maps keep their original entry flow until the next descent.
+
+## Milestone 4D — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

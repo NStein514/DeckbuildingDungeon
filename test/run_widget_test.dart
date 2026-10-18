@@ -34,7 +34,33 @@ void main() {
     await t.pumpAndSettle();
     await tap(t, 'New run');
     expect(find.text('Choose your path'), findsOneWidget);
-    await tap(t, 'Dungeon Rat');
+    expect(find.text('Dungeon Rat'), findsNothing);
+    expect(find.textContaining('MERCHANT'), findsNothing);
+    final semantics = t.ensureSemantics();
+    expect(
+      find.bySemanticsLabel(RegExp('Dungeon Rat|Hardy|Fierce')),
+      findsNothing,
+    );
+    semantics.dispose();
+    await tap(t, 'Unexplored path 1 · floor 1');
+    expect(find.text('The path is revealed'), findsOneWidget);
+    final revealed = (await RunRepository(store, catalog).load())!;
+    expect(revealed.phase.name, 'reveal');
+    await t.pumpWidget(
+      DeckboundApp(
+        key: const ValueKey('reveal-reload'),
+        catalog: catalog,
+        saveStore: store,
+      ),
+    );
+    await t.pumpAndSettle();
+    await tap(t, 'Continue run');
+    expect(find.text('The path is revealed'), findsOneWidget);
+    expect(
+      (await RunRepository(store, catalog).load())!.toJson(),
+      revealed.toJson(),
+    );
+    await tap(t, 'Enter encounter');
     expect(find.text('50 / 50 HP  ·  4 block'), findsOneWidget);
     await tap(t, 'End turn');
     expect(find.text('49 / 50 HP  ·  0 block'), findsOneWidget);
@@ -58,7 +84,7 @@ void main() {
     final catalog = loadCatalog(), store = MemorySaveStore();
     final rules = RunRules(catalog), repo = RunRepository(store, catalog);
     final r = rules.finishCombat(
-      rules.enter(rules.start(514), 'room-0-0'),
+      enterRoom(rules, rules.start(514), 'room-0-0'),
       Outcome.victory,
       42,
     );
@@ -82,7 +108,7 @@ void main() {
     final rules = RunRules(catalog), repo = RunRepository(store, catalog);
     var r = rules.reward(
       rules.finishCombat(
-        rules.enter(rules.start(514), 'room-0-0'),
+        enterRoom(rules, rules.start(514), 'room-0-0'),
         Outcome.victory,
         42,
       ),
@@ -90,13 +116,14 @@ void main() {
     );
     r = rules.reward(
       rules.finishCombat(
-        rules.enter(r, r.availableRooms.first),
+        enterRoom(rules, r, r.availableRooms.first),
         Outcome.victory,
         30,
       ),
       null,
     );
-    r = rules.enter(
+    r = enterRoom(
+      rules,
       r,
       r.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
     );

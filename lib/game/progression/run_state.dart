@@ -4,6 +4,7 @@ import '../relics/relic.dart';
 
 enum RunPhase {
   map,
+  reveal,
   combat,
   reward,
   rest,
@@ -24,7 +25,7 @@ class RunState {
     required this.deck,
     required this.health,
     this.gold = 0,
-    this.mapVersion = 3,
+    this.mapVersion = 4,
     this.descent = 1,
     int? mapSeed,
     this.phase = RunPhase.map,

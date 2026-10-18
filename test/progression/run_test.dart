@@ -16,13 +16,13 @@ import '../test_catalog.dart';
 void main() {
   final catalog = loadCatalog(), rules = RunRules(loadCatalog());
   RunState reward() => rules.finishCombat(
-    rules.enter(rules.start(514), 'room-0-0'),
+    enterRoom(rules, rules.start(514), 'room-0-0'),
     Outcome.victory,
     40,
   );
   RunState floorThree() {
     var r = rules.reward(reward(), null);
-    r = rules.enter(r, r.availableRooms.first);
+    r = enterRoom(rules, r, r.availableRooms.first);
     return rules.reward(rules.finishCombat(r, Outcome.victory, 30), null);
   }
 
@@ -71,9 +71,9 @@ void main() {
   });
   test('room entry rejects unconnected rooms and repeated entry', () {
     final r = rules.start(1);
-    expect(() => rules.enter(r, 'room-5-0'), throwsStateError);
-    final entered = rules.enter(r, 'room-0-0');
-    expect(() => rules.enter(entered, 'room-0-0'), throwsStateError);
+    expect(() => enterRoom(rules, r, 'room-5-0'), throwsStateError);
+    final entered = enterRoom(rules, r, 'room-0-0');
+    expect(() => enterRoom(rules, entered, 'room-0-0'), throwsStateError);
     expect(r.currentRoom, isNull);
   });
   test('three unique rewards, once-only gold and reward confirmation', () {
@@ -95,7 +95,8 @@ void main() {
   });
   test('rest healing is capped and cannot be claimed twice', () {
     final map = floorThree();
-    final r = rules.enter(
+    final r = enterRoom(
+      rules,
       map,
       map.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
     );
@@ -107,7 +108,8 @@ void main() {
   });
   test('upgrade affects one instance, validates and preserves source', () {
     final map = floorThree();
-    final r = rules.enter(
+    final r = enterRoom(
+      rules,
       map,
       map.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
     );
@@ -119,7 +121,8 @@ void main() {
   });
   test('treasure grants a distinct relic and gold once', () {
     final map = floorThree();
-    final r = rules.enter(
+    final r = enterRoom(
+      rules,
       map,
       map.rooms
           .firstWhere((x) => x.depth == 2 && x.type == RoomType.treasure)
@@ -133,7 +136,7 @@ void main() {
   test(
     'defeat stops progression and inconsistent battle results are rejected',
     () {
-      final r = rules.enter(rules.start(1), 'room-0-0');
+      final r = enterRoom(rules, rules.start(1), 'room-0-0');
       final dead = rules.finishCombat(r, Outcome.defeat, 0);
       expect(dead.phase, RunPhase.defeat);
       expect(dead.availableRooms, isEmpty);
@@ -200,6 +203,8 @@ void main() {
         step++
       ) {
         switch (r.phase) {
+          case RunPhase.reveal:
+            r = rules.continueRoom(r);
           case RunPhase.merchant:
             r = rules.leaveMerchant(r);
           case RunPhase.event:
@@ -210,7 +215,8 @@ void main() {
             final options = r.rooms
                 .where((x) => r.availableRooms.contains(x.id))
                 .toList();
-            r = rules.enter(
+            r = enterRoom(
+              rules,
               r,
               (options.where((x) => x.type == RoomType.rest).firstOrNull ??
                       options.first)

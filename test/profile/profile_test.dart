@@ -31,7 +31,7 @@ void main() {
       expect(p.relics, contains('ironSigil'));
       final next = rules.descend(victory);
       expect(p.include(next).deepestFloor, 6);
-      final entered = rules.enter(next, 'room-0-0');
+      final entered = enterRoom(rules, next, 'room-0-0');
       expect(p.include(entered).deepestFloor, 7);
       expect(p.include(entered).bestRooms, 6);
       expect(p.include(entered).bestBosses, 1);
@@ -94,8 +94,8 @@ void main() {
       await c.start(514);
       profile.fail = true;
       expect(await c.enter('room-0-0'), true);
-      expect(c.state!.phase, RunPhase.combat);
-      expect((await c.repository.load())!.phase, RunPhase.combat);
+      expect(c.state!.phase, RunPhase.reveal);
+      expect((await c.repository.load())!.phase, RunPhase.reveal);
       expect(c.error, isNull);
       expect(c.profileError, isNotNull);
       expect(c.profile!.deepestFloor, 0);

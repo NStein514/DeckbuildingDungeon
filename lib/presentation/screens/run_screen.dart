@@ -5,6 +5,8 @@ import '../../game/data/game_catalog.dart';
 import '../../game/dungeon/dungeon.dart';
 import '../../game/progression/run_state.dart';
 import '../widgets/game_card.dart';
+import '../widgets/dungeon_card.dart';
+import '../../game/dungeon/difficulty.dart';
 import 'battle_screen.dart';
 import 'deck_screen.dart';
 import 'fusion_panel.dart';
@@ -113,6 +115,73 @@ class RunScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   ...switch (r.phase) {
                     RunPhase.map => _map(context, r),
+                    RunPhase.reveal => [
+                      const Text(
+                        'The path is revealed',
+                        style: TextStyle(fontSize: 28, fontFamily: 'serif'),
+                      ),
+                      const SizedBox(height: 16),
+                      DungeonCard(
+                        key: ValueKey('reveal-${r.descent}-${r.currentRoom}'),
+                        label: 'Chosen path',
+                        flip: true,
+                        reducedMotion: settings.reducedMotion,
+                        fast: settings.fastAnimations,
+                        front: Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff1b2630),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: const Color(0xffd5b87a)),
+                          ),
+                          child: Column(
+                            children: [
+                              const Icon(
+                                Icons.auto_awesome,
+                                size: 48,
+                                color: Color(0xffd5b87a),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                r.room!.type.name.toUpperCase(),
+                                style: const TextStyle(fontSize: 24),
+                              ),
+                              for (final id in r.room!.enemies) ...[
+                                const SizedBox(height: 8),
+                                Text(
+                                  '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                                ),
+                              ],
+                              if (r.room!.modifier != EncounterModifier.none)
+                                Text(
+                                  r.room!.modifier.description,
+                                  textAlign: TextAlign.center,
+                                ),
+                              const SizedBox(height: 16),
+                              Text(
+                                _roomDescription(r.room!.type),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'This path is yours. The reveal is saved; returning to camp keeps the same card.',
+                      ),
+                      const SizedBox(height: 16),
+                      FilledButton(
+                        onPressed: runs.busy
+                            ? null
+                            : () => _continueRoom(context),
+                        child: Text(
+                          r.room!.enemies.isNotEmpty
+                              ? 'Enter encounter'
+                              : 'Continue to room',
+                        ),
+                      ),
+                    ],
                     RunPhase.combat => [
                       const Text(
                         'An encounter awaits',
@@ -276,14 +345,16 @@ class RunScreen extends StatelessWidget {
       style: TextStyle(fontFamily: 'serif', fontSize: 30),
     ),
     const SizedBox(height: 8),
-    const Text(
-      'Each floor connects to every room on the next. Highlighted paths are reachable.',
+    Text(
+      r.mapVersion >= 4
+          ? 'Choose one face-down card on the next floor. Flipping commits your path; other cards stay unknown.'
+          : 'Each floor connects to every room on the next. Highlighted paths are reachable.',
     ),
     const SizedBox(height: 20),
     for (var depth = 0; depth <= 5; depth++) ...[
       Text(
         depth == 5
-            ? 'FLOOR ${r.descent * 6} · THE WARDEN'
+            ? 'FLOOR ${r.descent * 6} · BOSS'
             : 'FLOOR ${(r.descent - 1) * 6 + depth + 1}',
         style: const TextStyle(letterSpacing: 2, fontSize: 10),
       ),
@@ -301,55 +372,66 @@ class RunScreen extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(4),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18,
-                        horizontal: 8,
-                      ),
-                    ),
-                    onPressed: !runs.busy && r.availableRooms.contains(room.id)
-                        ? () => _enter(context, room.id)
-                        : null,
-                    child: Column(
-                      children: [
-                        Icon(
-                          r.completed.contains(room.id)
-                              ? Icons.check_circle_outline
-                              : switch (room.type) {
-                                  RoomType.combat => Icons.bolt,
-                                  RoomType.rest =>
-                                    Icons.local_fire_department_outlined,
-                                  RoomType.treasure => Icons.auto_awesome,
-                                  RoomType.shrine => Icons.auto_fix_high,
-                                  RoomType.merchant =>
-                                    Icons.storefront_outlined,
-                                  RoomType.event => Icons.explore_outlined,
-                                  RoomType.boss => Icons.shield_outlined,
-                                },
-                        ),
-                        const SizedBox(height: 8),
-                        Text(room.type.name.toUpperCase()),
-                        if (room.modifier != EncounterModifier.none)
-                          Text(
-                            room.modifier.description,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              color: Colors.orangeAccent,
+                  child: r.mapVersion >= 4 && !r.completed.contains(room.id)
+                      ? DungeonCard(
+                          label:
+                              'Unexplored path ${room.lane + 1} · floor ${(r.descent - 1) * 6 + room.depth + 1}',
+                          onTap:
+                              !runs.busy && r.availableRooms.contains(room.id)
+                              ? () => _enter(context, room.id)
+                              : null,
+                        )
+                      : OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 18,
+                              horizontal: 8,
                             ),
                           ),
-                        if (room.enemies.isNotEmpty)
-                          Text(
-                            room.enemies
-                                .map((id) => catalog.enemies[id]!.name)
-                                .join(' + '),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 10),
+                          onPressed:
+                              !runs.busy && r.availableRooms.contains(room.id)
+                              ? () => _enter(context, room.id)
+                              : null,
+                          child: Column(
+                            children: [
+                              Icon(
+                                r.completed.contains(room.id)
+                                    ? Icons.check_circle_outline
+                                    : switch (room.type) {
+                                        RoomType.combat => Icons.bolt,
+                                        RoomType.rest =>
+                                          Icons.local_fire_department_outlined,
+                                        RoomType.treasure => Icons.auto_awesome,
+                                        RoomType.shrine => Icons.auto_fix_high,
+                                        RoomType.merchant =>
+                                          Icons.storefront_outlined,
+                                        RoomType.event =>
+                                          Icons.explore_outlined,
+                                        RoomType.boss => Icons.shield_outlined,
+                                      },
+                              ),
+                              const SizedBox(height: 8),
+                              Text(room.type.name.toUpperCase()),
+                              if (room.modifier != EncounterModifier.none)
+                                Text(
+                                  room.modifier.description,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.orangeAccent,
+                                  ),
+                                ),
+                              if (room.enemies.isNotEmpty)
+                                Text(
+                                  room.enemies
+                                      .map((id) => catalog.enemies[id]!.name)
+                                      .join(' + '),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                            ],
                           ),
-                      ],
-                    ),
-                  ),
+                        ),
                 ),
               ),
           ],
@@ -361,6 +443,25 @@ class RunScreen extends StatelessWidget {
         ),
     ],
   ];
+  String _roomDescription(RoomType type) => switch (type) {
+    RoomType.combat => 'Defeat the encounter to earn gold and a card choice.',
+    RoomType.boss => 'Defeat the guardian to open the next descent.',
+    RoomType.rest => 'Recover health or upgrade one card.',
+    RoomType.treasure => 'Claim gold and an unowned relic.',
+    RoomType.shrine => 'Combine two compatible cards, or leave safely.',
+    RoomType.merchant =>
+      'Spend gold on cards, healing or removal, or leave safely.',
+    RoomType.event => 'Consider a health-and-gold bargain. You can decline it.',
+  };
+
+  Future<void> _continueRoom(BuildContext context) async {
+    if (await runs.continueRoom() &&
+        context.mounted &&
+        runs.state!.phase == RunPhase.combat) {
+      await _battle(context, runs.state!);
+    }
+  }
+
   Future<void> _enter(BuildContext context, String id) async {
     if (await runs.enter(id) &&
         context.mounted &&
