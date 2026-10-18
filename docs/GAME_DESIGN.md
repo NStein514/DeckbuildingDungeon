@@ -81,7 +81,7 @@ Rest restores 30% of maximum HP, capped at maximum, OR upgrades one unupgraded c
 
 Treasure grants 25 gold and one unowned relic. If all relics are owned, it grants gold only. Iron Sigil grants 4 opening block; Quickdraw Charm adds one opening draw; Ember Heart adds 2 Burn on the first Fire play per combat; Venom Fang adds 1 stack to player Poison applications. Passive effects are reset appropriately for each new encounter.
 
-The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Cross-run meta-progression and boss phase changes remain future work.
+The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Starting-build unlocks and boss phase changes remain future work.
 
 
 ## Risk and resources (Milestone 4A)
@@ -92,4 +92,11 @@ The floor-five merchant competes with free rest, treasure, and fusion. Stock con
 
 The floor-three event is one seeded bargain: the hungry altar trades 8 HP for 35 gold (requires at least 9 HP); the wandering healer trades 20 gold for up to 12 HP (unavailable at full health). Either can be declined for free. A resolved event cannot be repeated. Each bargain describes its exact cost before acceptance.
 
-Prices and modifier balance are provisional. No passive hunger or ember depletion has been added. Cross-run progression, more enemy/boss content, and human long-run balance testing remain the next priorities.
+Prices and modifier balance are provisional. No passive hunger or ember depletion has been added. Starting-build unlocks, more enemy/boss content, and human long-run balance testing remain the next priorities.
+
+
+## Journey journal (Milestone 4B)
+
+Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the three fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
+
+Personal records are the deepest floor actually entered, most rooms cleared in a single journey, and most bosses defeated in a single journey. Descending after a boss does not count the next floor until its first room is entered. Reloading cannot inflate these values. A separate journal save lets the active run be replaced while preserving discoveries and records. No lifetime win/defeat totals, character-stat increases, or unlocked starting builds are claimed in this milestone.

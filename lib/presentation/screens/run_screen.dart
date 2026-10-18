@@ -9,6 +9,8 @@ import 'battle_screen.dart';
 import 'deck_screen.dart';
 import 'fusion_panel.dart';
 import 'economy_panel.dart';
+import 'journal_screen.dart';
+import '../widgets/journal_notice.dart';
 import 'collection_screen.dart';
 
 class RunScreen extends StatelessWidget {
@@ -30,6 +32,16 @@ class RunScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('The Ashen Crypt'),
           actions: [
+            IconButton(
+              tooltip: 'Journey journal',
+              icon: const Icon(Icons.emoji_events_outlined),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (_) => JournalScreen(runs: runs, catalog: catalog),
+                ),
+              ),
+            ),
             IconButton(
               tooltip: 'Combos and fusions',
               icon: const Icon(Icons.auto_stories_outlined),
@@ -88,6 +100,7 @@ class RunScreen extends StatelessWidget {
                         )
                         .toList(),
                   ),
+                  JournalNotice(runs: runs),
                   if (runs.busy) const LinearProgressIndicator(),
                   if (runs.error != null)
                     Padding(

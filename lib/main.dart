@@ -19,6 +19,7 @@ Future<void> main() async {
         catalog: GameCatalog.decode(data[0], data[1], data[2]),
         saveStore: await createSaveStore(),
         settingsStore: await createSaveStore(name: 'settings'),
+        profileStore: await createSaveStore(name: 'profile'),
       ),
     );
   } catch (error, stack) {

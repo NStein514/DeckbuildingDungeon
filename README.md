@@ -4,7 +4,7 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: risk and resources
+## Current build: journey journal and personal records
 
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-three cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
@@ -15,10 +15,11 @@ A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Cry
 - Merchants sell cards, healing, and permanent card removal; optional events trade health against gold.
 - Four passive relics; every run starts with Iron Sigil.
 - New Run, Continue Run, deck inspection with type filtering and cost/rarity sorting, and victory/defeat results.
+- A persistent journey journal tracks discovered cards, fusion recipes, relics, and personal bests across new runs.
 - Versioned local run saves and persistent settings. An interrupted battle restarts from its entry checkpoint with the same health, deck, and seed.
 - Labeled temporary illustrations, silent audio, and reduced-motion preferences.
 
-Biome variety, deeper build progression, cross-run records, final art, and production audio remain future work. See [roadmap](docs/ROADMAP.md).
+Biome variety, deeper build progression, starting-build unlocks, final art, and production audio remain future work. See [roadmap](docs/ROADMAP.md).
 
 ## Requirements and launch
 
@@ -47,7 +48,11 @@ The practice encounter controls launch isolated battles that do not change your 
 
 Progress saves on room entry, battle results, reward confirmation, rest, treasure, fusion, merchant purchases, event choices, and descent. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
 
-Native saves use a flushed temporary file and same-directory rename in the application support directory. Browser saves use a single local-storage replacement per document. Settings and run data use separate documents. Use one active game tab; browsers can clear local storage, and private-browsing storage may be temporary. A stable browser origin/port is necessary to resume the same save.
+Native saves use a flushed temporary file and same-directory rename in the application support directory. Browser saves use a single local-storage replacement per document. Settings, active run, and the journey journal use separate documents. Use one active game tab; browsers can clear local storage, and private-browsing storage may be temporary. A stable browser origin/port is necessary to resume the same save.
+
+The **Journey journal** button at camp and trophy icon on the map show your deepest floor entered, most rooms cleared and most bosses defeated in one journey, plus discoveries across journeys. These records survive replacing the active run; practice battles do not count. Existing saves contribute their current journey when first loaded. Earlier overwritten journeys cannot be reconstructed.
+
+A pending journal write shows a retry button. Your run remains playable, but starting a replacement run waits until its records are saved. Invalid journal data is preserved. Records are local to this installation/browser origin, without account sync or stat bonuses.
 
 ## Platforms
 
@@ -94,4 +99,4 @@ test/                    Domain, persistence, and widget tests
 docs/                    Design, architecture, roadmap, art specifications
 ```
 
-Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: cross-run records and discovery, broader builds, and long-run balance. See [replayability direction](docs/REPLAYABILITY.md).
+Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: broader build choices, elite/boss variety, and long-run balance. See [replayability direction](docs/REPLAYABILITY.md).

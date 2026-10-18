@@ -4,6 +4,7 @@ import '../presentation/screens/menu_screen.dart';
 import 'settings.dart';
 import 'run_controller.dart';
 import '../core/persistence/run_repository.dart';
+import '../core/persistence/profile_repository.dart';
 import '../core/persistence/save_store.dart';
 
 class DeckboundApp extends StatefulWidget {
@@ -12,9 +13,10 @@ class DeckboundApp extends StatefulWidget {
     required this.catalog,
     this.saveStore,
     this.settingsStore,
+    this.profileStore,
   });
   final GameCatalog catalog;
-  final SaveStore? saveStore, settingsStore;
+  final SaveStore? saveStore, settingsStore, profileStore;
   @override
   State<DeckboundApp> createState() => _DeckboundAppState();
 }
@@ -29,6 +31,10 @@ class _DeckboundAppState extends State<DeckboundApp> {
     settings.load();
     runs = RunController(
       RunRepository(widget.saveStore ?? MemorySaveStore(), widget.catalog),
+      profileRepository: ProfileRepository(
+        widget.profileStore ?? MemorySaveStore(),
+        widget.catalog,
+      ),
     );
     runs.load();
   }

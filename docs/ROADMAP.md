@@ -12,7 +12,7 @@
 - Complete real-combat seeded-run test, persistence and widget tests.
 - Flutter dependency lockfile and Android/iOS/web hosts.
 
-See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Global discovery/unlocks and run statistics remain outstanding.
+See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Starting-build unlocks and lifetime totals remain outstanding; discovery and best-run records are implemented below.
 
 ## Milestone 3 — implemented: tactical combos, fusion, and descent foundation
 
@@ -33,7 +33,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Atomic spending, stock persistence, failed-save retry, duplicate-command rejection, and content-version-1/2 compatibility.
 - Phone UI tests and unchanged six-room route length, with maps wrapping to two columns.
 
-## Milestone 4B — remaining replayability and survival choices
+## Milestone 4B — implemented: journal and personal records
+
+- A separate versioned profile retains card, fusion and relic discovery across journeys.
+- Personal bests: deepest floor entered, most rooms cleared and most bosses defeated in one journey.
+- Camp and map journal UI with discovery filtering and card inspection.
+- Existing-run import, idempotent recovery after interrupted writes, and practice-battle exclusion.
+- Failed journal writes leave the run playable and prevent replacement until reconciliation; invalid/future profiles are preserved.
+
+## Milestone 4C — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 
@@ -41,7 +49,7 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 2. Balance prices and resource income across repeated descents; add more meaningful merchant/event options.
 3. Prototype an ember resource tied to forging and sanctuary choices; assess whether it creates interesting decisions before making it a mandatory survival meter.
 4. More fusion paths and relic tradeoffs, with viable damage, defense, and status builds.
-5. Cross-run discovery journal and deepest-floor statistics; unlock options rather than permanent stat inflation.
+5. Starting-build and challenge unlocks based on the journal; unlock options rather than permanent stat inflation.
 6. Balance repeated descents with automated simulation plus human playtesting; verify multiple builds can progress and increasing difficulty does not create unavoidable losses too early.
 
 ## Milestone 5 — presentation and accessibility

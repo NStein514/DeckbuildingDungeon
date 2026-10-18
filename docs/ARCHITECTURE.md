@@ -24,7 +24,7 @@ Run saves are envelopes with schema version 1 and content version 3. Content ver
 
 Native: `path_provider` locates app support; writes flush a same-directory `.tmp` file and rename it over the destination. Abandoned temporary writes are ignored. This targets Android/iOS file semantics; native app builds still need device verification. Browser: `package:web` performs one synchronous localStorage replacement. Quota/security errors propagate to the controller. Saves are origin-specific; one active game tab is supported. Multi-tab conflict resolution is not implemented.
 
-Settings use a separate versioned document and a serialized write queue to prevent older slider writes overwriting newer settings. Invalid settings remain untouched and the UI explains its session-only fallback. Audio remains silent. Run discoveries and completed-room counts are local to the current journey; cross-run unlocks/statistics are later work.
+Settings use a separate versioned document and a serialized write queue to prevent older slider writes overwriting newer settings. Invalid settings remain untouched and the UI explains its session-only fallback. Audio remains silent. Run discoveries and completed-room counts are local to the current journey; starting-build unlocks and lifetime totals are later work.
 
 ## Presentation and dependencies
 
@@ -44,4 +44,10 @@ Art IDs map to replaceable images through an asset registry. Placeholder icons a
 
 Events derive their offer from the saved room entry seed. Accept validates health/gold and writes both costs and benefits with room completion; declining completes the room without resource changes. No event rerolls on reload. Future stock/catalog or RNG changes require content-version handling.
 
-Future survival resources should use the same controller/save boundary. Global statistics and discovery across separate journeys need a separate profile document. Content/schema changes require explicit version handling.
+Future survival resources should use the same controller/save boundary. `profile_repository` stores a separate profile envelope (schema/content version 1), using the same flushed-file or browser replacement stores. Native uses `deckbound-profile.json`; browser uses `deckbound.profile.v1`. Run content version stays 3.
+
+`PlayerProfile` is immutable. Discoveries merge by set union; records merge by maximum. Deepest floor counts entered rooms, not an unvisited next descent; bosses defeated derive from completed descents plus an active victory checkpoint. These are per-journey bests, not cumulative totals. Reconciliation is idempotent and uses bounded catalog sets and three numbers, without storing every journey.
+
+`RunController` loads the profile separately even when the run is corrupt. For each gameplay transition it first saves/publishes the run checkpoint, then attempts to update the journal. Profile failure returns success for the already-saved gameplay action, preventing duplicate rewards or costs; a separate warning offers retry. Load/retry reconciles the profile from the current run. Run discovery and depth records are monotonic within a journey, so later checkpoints retain pending information. Before replacing a journey the controller must successfully reconcile its journal. Corrupt/future profiles remain untouched and block new-run replacement while allowing the existing run to continue. Multi-tab/multi-device merges are not supported.
+
+Practice battles have no run-controller completion callback, so they never contribute records. Existing current runs are imported on first profile load; earlier overwritten runs cannot be recovered. No account sync, unlocks, or permanent combat bonuses are introduced. Content/schema changes require explicit version handling.

@@ -5,6 +5,8 @@ import '../../game/data/game_catalog.dart';
 import '../widgets/game_card.dart';
 import 'battle_screen.dart';
 import 'run_screen.dart';
+import 'journal_screen.dart';
+import '../widgets/journal_notice.dart';
 import '../../app/run_controller.dart';
 import '../../game/progression/run_state.dart';
 
@@ -93,6 +95,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         widget.runs.error!,
                         style: const TextStyle(color: Colors.orangeAccent),
                       ),
+                    JournalNotice(runs: widget.runs),
                     if (!widget.runs.loaded)
                       TextButton(
                         onPressed: widget.runs.busy ? null : widget.runs.load,
@@ -105,7 +108,10 @@ class _MenuScreenState extends State<MenuScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                        onPressed: widget.runs.busy || !widget.runs.loaded
+                        onPressed:
+                            widget.runs.busy ||
+                                !widget.runs.loaded ||
+                                widget.runs.profileError != null
                             ? null
                             : _newRun,
                         child: const Text('New run'),
@@ -179,6 +185,18 @@ class _MenuScreenState extends State<MenuScreen> {
                       spacing: 16,
                       children: [
                         TextButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (_) => JournalScreen(
+                                runs: widget.runs,
+                                catalog: widget.catalog,
+                              ),
+                            ),
+                          ),
+                          child: const Text('Journey journal'),
+                        ),
+                        TextButton(
                           onPressed: _collection,
                           child: const Text('Collection'),
                         ),
@@ -231,7 +249,7 @@ class _MenuScreenState extends State<MenuScreen> {
         builder: (context) => AlertDialog(
           title: const Text('Begin a new journey?'),
           content: const Text(
-            'This replaces your saved run. Your current journey will be lost.',
+            'This replaces your saved run. Your current journey will be lost. Your journal and personal records are kept.',
           ),
           actions: [
             TextButton(

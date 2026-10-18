@@ -105,6 +105,24 @@ fs.mkdirSync(output,{recursive:true});
    assert(event.run.completed.includes('room-2-2'));assert.notEqual(event.run.gold,100);
    console.log('PASS: merchant card purchase, sold stock reload, healing, removal, wallet totals, leaving and event resolution.');
   }
+  const journal=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.profile.v1')));
+  assert(journal.profile.deepestFloor>=7);
+  assert(journal.profile.cards.includes('flaming_strike'));
+  await page.reload();
+  await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
+  await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
+  await page.getByRole('button',{name:'New run',exact:true}).click();
+  await page.getByRole('button',{name:'New journey',exact:true}).click();
+  await page.getByText('Choose your path',{exact:true}).waitFor();
+  assert.deepEqual((await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.profile.v1')))).profile,journal.profile);
+  await page.reload();
+  await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
+  await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
+  await page.getByRole('button',{name:'Journey journal',exact:true}).click();
+  await page.getByText('Personal records',{exact:true}).waitFor();
+  await page.getByText('Fusion discoveries · 1 / 3',{exact:true}).waitFor();
+  await page.screenshot({path:path.join(output,'journal.png')});
+  console.log('PASS: persistent journal records and fusion discoveries survive new journey and page reload.');
   console.log('PASS: fusion preview, cancellation, atomic confirmation/discovery, deeper descent, build carryover and scaled enemy.');
  }
  assert.deepEqual(errors,[]);
