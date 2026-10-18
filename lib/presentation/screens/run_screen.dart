@@ -7,6 +7,8 @@ import '../../game/progression/run_state.dart';
 import '../widgets/game_card.dart';
 import 'battle_screen.dart';
 import 'deck_screen.dart';
+import 'fusion_panel.dart';
+import 'collection_screen.dart';
 
 class RunScreen extends StatelessWidget {
   const RunScreen({
@@ -28,6 +30,19 @@ class RunScreen extends StatelessWidget {
           title: const Text('The Ashen Crypt'),
           actions: [
             IconButton(
+              tooltip: 'Combos and fusions',
+              icon: const Icon(Icons.auto_stories_outlined),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (_) => CollectionScreen(
+                    catalog: catalog,
+                    discovered: r.discovered,
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
               tooltip: 'Inspect deck',
               icon: const Icon(Icons.style_outlined),
               onPressed: () => Navigator.push(
@@ -44,6 +59,7 @@ class RunScreen extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 720),
               child: ListView(
+                key: ValueKey('${r.descent}-${r.phase.name}'),
                 padding: const EdgeInsets.all(20),
                 children: [
                   Wrap(
@@ -54,6 +70,9 @@ class RunScreen extends StatelessWidget {
                       Text('${r.gold} gold'),
                       Text('${r.deck.length} cards'),
                       Text('Seed ${r.seed}'),
+                      Text(
+                        'Descent ${r.descent} · ${r.clearedRooms} rooms cleared',
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -153,6 +172,15 @@ class RunScreen extends StatelessWidget {
                         child: const Text('Upgrade a card'),
                       ),
                     ],
+                    RunPhase.shrine => [
+                      FusionPanel(
+                        key: ValueKey('shrine-${r.descent}-${r.currentRoom}'),
+                        runs: runs,
+                        catalog: catalog,
+                        run: r,
+                        reducedMotion: settings.reducedMotion,
+                      ),
+                    ],
                     RunPhase.treasure => [
                       const Icon(
                         Icons.auto_awesome,
@@ -175,7 +203,7 @@ class RunScreen extends StatelessWidget {
                     RunPhase.victory || RunPhase.defeat => [
                       Text(
                         r.phase == RunPhase.victory
-                            ? 'The crypt is conquered.'
+                            ? 'The Warden falls. The depths await.'
                             : 'The journey ends.',
                         style: const TextStyle(
                           fontSize: 30,
@@ -184,11 +212,25 @@ class RunScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        '${r.completed.length} rooms completed · ${r.discovered.length} cards discovered',
+                        '${r.clearedRooms} rooms completed · ${r.discovered.length} cards discovered',
                       ),
                       const SizedBox(height: 20),
+                      if (r.phase == RunPhase.victory) ...[
+                        Text(
+                          'Descend with your current health, deck, gold and relics. '
+                          'Descent ${r.descent + 1}: enemies have +${20 * r.descent}% base health and +${10 * r.descent}% base damage/block.',
+                        ),
+                        const SizedBox(height: 12),
+                        FilledButton(
+                          onPressed: runs.busy ? null : runs.descend,
+                          child: const Text('Descend deeper'),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
                       FilledButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: runs.busy
+                            ? null
+                            : () => Navigator.pop(context),
                         child: const Text('Return to camp'),
                       ),
                     ],
@@ -213,12 +255,14 @@ class RunScreen extends StatelessWidget {
     ),
     const SizedBox(height: 8),
     const Text(
-      'Each floor connects to both rooms on the next. Highlighted paths are reachable.',
+      'Each floor connects to every room on the next. Highlighted paths are reachable.',
     ),
     const SizedBox(height: 20),
     for (var depth = 0; depth <= 5; depth++) ...[
       Text(
-        depth == 5 ? 'THE WARDEN' : 'FLOOR ${depth + 1}',
+        depth == 5
+            ? 'FLOOR ${r.descent * 6} · THE WARDEN'
+            : 'FLOOR ${(r.descent - 1) * 6 + depth + 1}',
         style: const TextStyle(letterSpacing: 2, fontSize: 10),
       ),
       const SizedBox(height: 8),
@@ -249,6 +293,7 @@ class RunScreen extends StatelessWidget {
                                 RoomType.rest =>
                                   Icons.local_fire_department_outlined,
                                 RoomType.treasure => Icons.auto_awesome,
+                                RoomType.shrine => Icons.auto_fix_high,
                                 RoomType.boss => Icons.shield_outlined,
                               },
                       ),
@@ -293,6 +338,8 @@ class RunScreen extends StatelessWidget {
             enemyIds: r.room!.enemies,
             settings: settings,
             seed: r.battleSeed,
+            descent: r.descent,
+            discovered: r.discovered,
             deck: r.deck,
             initialHealth: r.health,
             relics: r.relics.toSet(),

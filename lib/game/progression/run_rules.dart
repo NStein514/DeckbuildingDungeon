@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import '../fusion/fusion.dart';
 import '../../core/random/seeded_random.dart';
 import '../data/game_catalog.dart';
 import '../dungeon/dungeon.dart';
@@ -23,6 +24,29 @@ class RunRules {
     );
   }
 
+  RunState descend(RunState old) {
+    if (old.phase != RunPhase.victory) {
+      throw StateError('Defeat the boss first.');
+    }
+    final rng = SeededRandom(old.rngState);
+    final mapSeed = rng.nextInt(0x100000000);
+    final mapRng = SeededRandom(mapSeed);
+    final r = old.copy();
+    return RunState(
+      seed: r.seed,
+      mapSeed: mapSeed,
+      descent: r.descent + 1,
+      rooms: DungeonGenerator.generate(mapRng),
+      rngState: mapRng.state,
+      deck: r.deck,
+      health: r.health,
+      gold: r.gold,
+      relics: r.relics,
+      discovered: r.discovered,
+      nextCardId: r.nextCardId,
+    );
+  }
+
   RunState enter(RunState old, String id) {
     if (!old.availableRooms.contains(id)) {
       throw StateError('Choose a connected room.');
@@ -34,6 +58,7 @@ class RunRules {
     r.phase = switch (r.room!.type) {
       RoomType.combat || RoomType.boss => RunPhase.combat,
       RoomType.rest => RunPhase.rest,
+      RoomType.shrine => RunPhase.shrine,
       RoomType.treasure => RunPhase.treasure,
     };
     return r;
@@ -62,7 +87,9 @@ class RunRules {
     r.gold += 15 + rng.nextInt(11);
     final pool =
         catalog.cards.values
-            .where((c) => c.type != CardType.curse)
+            .where(
+              (c) => c.type != CardType.curse && !c.tags.contains('fusion'),
+            )
             .map((c) => c.id)
             .toList()
           ..sort();
@@ -115,6 +142,29 @@ class RunRules {
     if (pool.isNotEmpty) r.relics.add(pool[rng.nextInt(pool.length)]);
     r.gold += 25;
     r.rngState = rng.state;
+    _complete(r);
+    return r;
+  }
+
+  RunState fuse(RunState old, String firstId, String secondId) {
+    if (old.phase != RunPhase.shrine) throw StateError('No active shrine.');
+    final a = old.deck.where((c) => c.id == firstId).firstOrNull;
+    final b = old.deck.where((c) => c.id == secondId).firstOrNull;
+    if (a == null || b == null) throw StateError('Choose two owned cards.');
+    final recipe = fusionRecipes.where((r) => r.matches(a, b)).firstOrNull;
+    if (recipe == null) throw StateError('These cards cannot be fused.');
+    final r = old.copy();
+    r.deck.removeWhere((c) => c.id == firstId || c.id == secondId);
+    // Fusion creates a base card; source upgrades are consumed.
+    r.deck.add(CardInstance('card-${r.nextCardId++}', recipe.result));
+    if (!r.discovered.contains(recipe.result)) r.discovered.add(recipe.result);
+    _complete(r);
+    return r;
+  }
+
+  RunState skipShrine(RunState old) {
+    if (old.phase != RunPhase.shrine) throw StateError('No active shrine.');
+    final r = old.copy();
     _complete(r);
     return r;
   }

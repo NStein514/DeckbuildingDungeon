@@ -32,6 +32,7 @@ enum EventKind {
   defeat,
   turn,
   result,
+  combo,
 }
 
 class Effect {

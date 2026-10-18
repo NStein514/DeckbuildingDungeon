@@ -4,17 +4,19 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: dungeon progression
+## Current build: fusion and deeper descents
 
-- Six-floor seeded dungeon with branching combat, rest, treasure, and boss rooms.
-- Twenty cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
+- Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, and bosses.
+- Twenty-three cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
+- Three consecutive-play combos and three permanent fusion recipes with previews and saved discoveries.
+- After each boss, descend again with your build intact and stronger enemies; floor numbers keep advancing.
 - Four passive relics; every run starts with Iron Sigil.
 - New Run, Continue Run, deck inspection with type filtering and cost/rarity sorting, and victory/defeat results.
 - Versioned local run saves and persistent settings. An interrupted battle restarts from its entry checkpoint with the same health, deck, and seed.
 - Labeled temporary illustrations, silent audio, and reduced-motion preferences.
 
-Fusion, merchants, events, metaprogression, final art, and production audio are future milestones. Gold is collected now; merchant spending arrives later. See [roadmap](docs/ROADMAP.md).
+Merchants, events, biome variety, metaprogression, final art, and production audio are future milestones. Gold is collected now; merchant spending arrives later. See [roadmap](docs/ROADMAP.md).
 
 ## Requirements and launch
 
@@ -33,11 +35,13 @@ flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8080
 
 Choose **New run**, then a highlighted room. In combat, tap a card and an enemy, or use **Play card** for self-targeted cards. Preparation requires choosing a discard. After victory, continue to your reward and select one card or skip. Rest sites offer healing or an upgrade. The deck icon opens your full deck; long-press a relic for its effect.
 
+Leave the seed blank for a fresh run, or enter a seed to replay the same decisions. After the boss, **Descend deeper** keeps your current health and build; returning to camp preserves the option to continue later. Each descent adds 20% of base enemy HP and 10% of base damage/block, rounded up. This is a repeatable-loop foundation, not yet a balanced endless content pool.
+
 The practice encounter controls launch isolated battles that do not change your saved run. Starting another run requires confirming replacement of the existing save.
 
 ## Saving
 
-Progress saves on room entry, battle results, reward confirmation, rest, and treasure. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
+Progress saves on room entry, battle results, reward confirmation, rest, treasure, fusion, and descent. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
 
 Native saves use a flushed temporary file and same-directory rename in the application support directory. Browser saves use a single local-storage replacement per document. Settings and run data use separate documents. Use one active game tab; browsers can clear local storage, and private-browsing storage may be temporary. A stable browser origin/port is necessary to resume the same save.
 
@@ -86,4 +90,4 @@ test/                    Domain, persistence, and widget tests
 docs/                    Design, architecture, roadmap, art specifications
 ```
 
-Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: tactical combos and permanent fusion.
+Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: encounter variety and a meaningful long-run resource economy. See [replayability direction](docs/REPLAYABILITY.md).

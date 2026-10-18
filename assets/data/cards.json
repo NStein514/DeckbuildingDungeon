@@ -389,5 +389,88 @@
       "exhaust"
     ],
     "rarity": "uncommon"
+  },
+  {
+    "id": "flaming_strike",
+    "name": "Flaming Strike",
+    "type": "attack",
+    "cost": 1,
+    "description": "Deal 8 damage. Apply 3 Burn.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 8,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "tags": [
+      "fire",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/flaming_strike"
+  },
+  {
+    "id": "glacial_barrier",
+    "name": "Glacial Barrier",
+    "type": "defense",
+    "cost": 1,
+    "description": "Gain 9 block. Apply 1 Chill.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 9,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "chill"
+      }
+    ],
+    "tags": [
+      "ice",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/glacial_barrier"
+  },
+  {
+    "id": "venom_flurry",
+    "name": "Venom Flurry",
+    "type": "attack",
+    "cost": 1,
+    "description": "Deal 3 damage twice. Apply 3 Poison.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 3,
+        "target": "enemy"
+      },
+      {
+        "kind": "damage",
+        "amount": 3,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "tags": [
+      "poison",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/venom_flurry"
   }
 ]

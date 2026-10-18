@@ -4,7 +4,7 @@
 
 Your deck is your character. Tactical clarity, build creativity, short responsive turns, replayable paths, and a cohesive dark fantasy identity guide the project. The long-term loop is explore → fight → earn rewards → reshape the deck → descend → confront the boss.
 
-Milestones 1 and 2 implement combat and a compact dungeon journey. The menu offers saved runs and separate practice battles. Victory, defeat, rewards, deck progression, and stable-boundary saves are functional.
+Milestones 1–3 implement combat, fusion, and repeatable dungeon descents. The menu offers saved runs and separate practice battles. Victory, defeat, rewards, deck progression, and stable-boundary saves are functional.
 
 ## Combat economy
 
@@ -53,13 +53,27 @@ Burn and Poison deliberately share timing in this milestone; their identities ca
 
 Dungeon Rat teaches basic attacks. Skeleton alternates attacks and defense. Cursed Mage applies Weak and Burn. Dungeon Warden escalates through repeatable Strength buffs and heavy attacks; phase transitions are deferred. The ambush pits a rat and skeleton together. All patterns are predictable; the seed changes card order, not enemy intent randomness.
 
-## Future systems
+## Tactical combos and permanent fusion
 
-Milestone 3 adds sequence history with structured combo rules and atomic two-instance fusion. Fusion recipes will be structured data; current relics are typed combat hooks. Merchant spending, events, and richer boss phases follow in the complete-act milestone.
+Play the pair consecutively in the same turn. Invalid commands do not break the sequence; another successful play does. After base and relic effects, if the target survives:
+
+- Firebolt → Spark on the same enemy: consume 2 Burn and deal 6 blockable bonus damage.
+- Guard → Heavy Blow: deal bonus damage equal to current player block, retaining that block.
+- Poison Edge → Quick Slash on the same enemy: apply 3 extra Poison, modified by Venom Fang.
+
+Bonus damage ignores Strength, Weak, Vulnerable and Shock. Combos never redirect after a target dies. Feedback appears in the action message and combat chronicle, with a guide accessible from combat and the map.
+
+At a shrine, select two distinct owned instances in either recipe order. Preview and confirm one fusion, or leave. Strike + Firebolt produces Flaming Strike (1 energy, 8 damage, 3 Burn); Guard + Frost Ward produces Glacial Barrier (1 energy, 9 block, 1 Chill); Quick Slash + Poison Edge produces Venom Flurry (1 energy, two 3-damage hits, 3 Poison). Source upgrades are consumed; results are unupgraded and can later be upgraded normally. Only fusion grants these cards. Discoveries persist for this journey.
+
+## Repeatable descent foundation
+
+A boss victory offers a new six-floor descent without discarding health, cards, upgrades, relics, gold, or discoveries. The new map and encounters use deterministic RNG continuation; floors keep numbering upward. Every further descent adds 20% of authored enemy HP and 10% of authored damage/block, rounded up. Status stacks are unchanged. There is no authored final descent. Returning to camp preserves the victory checkpoint so the player can continue later.
+
+New runs use a fresh seed unless the player enters one. Repeating a seed reproduces the same sequence given the same choices. The current encounter pool is small and higher-floor balance is provisional; procedural continuation alone does not establish lasting replay value. REPLAYABILITY.md defines the next work.
 
 ## Milestone 2: implemented dungeon loop
 
-New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure choice, a combat floor (including a possible multi-enemy fight), another rest/treasure choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
+New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure choice, a combat floor (including a possible multi-enemy fight), another rest/treasure/shrine choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
 
 Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold currently accumulates for future merchants; it has no spending flow yet.
 
@@ -67,4 +81,4 @@ Rest restores 30% of maximum HP, capped at maximum, OR upgrades one unupgraded c
 
 Treasure grants 25 gold and one unowned relic. If all relics are owned, it grants gold only. Iron Sigil grants 4 opening block; Quickdraw Charm adds one opening draw; Ember Heart adds 2 Burn on the first Fire play per combat; Venom Fang adds 1 stack to player Poison applications. Passive effects are reset appropriately for each new encounter.
 
-The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Meta-progression, fusion, events, merchant spending, and boss phase changes are not implemented in this milestone.
+The run carries health, deck, upgrades, relics, gold, discoveries, room completion, and RNG state. Saves occur at stable boundaries. Restarting mid-combat recreates the entry encounter. Settings persist separately; final audio and art remain pending. Cross-run meta-progression, events, merchant spending, and boss phase changes remain future work.

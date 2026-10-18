@@ -4,7 +4,7 @@
 
 `game/models`, `game/cards`, and `game/combat` implement deterministic combat without Flutter imports. JSON definitions are distinct from card instances. `resolveCard` creates an upgraded definition used by both the engine and UI, so displayed wording and applied effects agree. The engine owns mutation and exposes detached snapshots; rules never depend on animation timing.
 
-`game/dungeon` generates a forward-only graph of ten rooms across six floors. Each room connects to all nodes on the following floor. IDs, depths, encounters, and connections are stable for a seed. Two rest/treasure choice floors and a single boss guarantee a complete path. The shared RNG state is carried into encounter seeds, rewards, and treasure selections.
+`game/dungeon` generates a forward-only graph of eleven rooms across six floors (ten for legacy maps). Each room connects to all nodes on the following floor. IDs, depths, encounters, and connections are stable for a seed. Two choice floors and a single boss guarantee a complete path. New maps add a shrine alongside rest/treasure on floor five. Each cleared boss offers another descent. The root seed stays fixed; each descent has its own map seed and deterministic RNG continuation. Only the active map/path is stored; total cleared rooms derives from the descent count. The shared RNG state is carried into encounter seeds, rewards, and treasure selections.
 
 `game/progression` owns run checkpoints and pure transitions. Each transition validates prerequisites, copies the checkpoint, and returns a new state. No UI mutates the published run. The state contains seed/RNG state, map, visited path, current phase, entry seed, health, gold, deck identities/upgrades, pending rewards, next instance ID, relics, and run-scoped discoveries.
 
@@ -20,7 +20,7 @@ Returning from or reloading an unfinished battle reconstructs that battle from i
 
 ## Persistence
 
-Run saves are envelopes with schema version 1 and content version 1. Loading validates field types, resource bounds, card IDs/upgrades, unique instance identities, the generated map against its seed, the completed path, phase-specific data, and reward structure. Unsupported or corrupt saves are preserved and surfaced; new-run replacement is disabled until a valid load. There is no automatic migration or destructive repair.
+Run saves are envelopes with schema version 1 and content version 2. Content version 1 remains readable: absent mapVersion defaults to 1, mapSeed to seed, and descent to 1. Old maps are validated with their original generator; their next descent uses map version 2. New saves are intentionally unreadable by the older content-version-1 app. Loading validates field types, resource bounds, card IDs/upgrades, unique instance identities, the generated map against its map seed and generator version, the completed path, phase-specific data, and reward structure. Unsupported or corrupt saves are preserved and surfaced; new-run replacement is disabled until a valid load. There is no automatic migration or destructive repair.
 
 Native: `path_provider` locates app support; writes flush a same-directory `.tmp` file and rename it over the destination. Abandoned temporary writes are ignored. This targets Android/iOS file semantics; native app builds still need device verification. Browser: `package:web` performs one synchronous localStorage replacement. Quota/security errors propagate to the controller. Saves are origin-specific; one active game tab is supported. Multi-tab conflict resolution is not implemented.
 
@@ -32,6 +32,12 @@ Flutter's built-in state tools are sufficient: local widget state handles select
 
 Art IDs map to replaceable images through an asset registry. Placeholder icons are labeled temporary. Flutter renders frames, numbers, descriptions, and effects. New cards can compose existing typed effects; new effect types require rule tests.
 
-## Future seams
+## Combos, fusion, and difficulty
 
-Add tactical combos as a separate sequence-rule resolver emitting ordinary effects/events. Permanent fusion must validate two distinct owned instances and a recipe before creating one new deck transaction. Merchants and events should be room transitions using the same controller/save boundary. Content/schema changes need explicit version handling, especially if map generation or RNG algorithms change.
+`game/combos` contains typed, structured definitions and successful-play records. The engine resolves base card effects, relic effects, then a matching combo on a surviving target. Consecutive pairs must belong to the same turn; elemental pairs require the same target. Rejected commands do not enter history. History resets at turn start. Bonus damage is ordinary blockable damage, without attack or lightning modifiers; bonus Poison uses the existing status/relic resolver. Events drive feedback; frames do not govern rules.
+
+`game/fusion` holds unordered two-source recipes. The run rule validates two distinct owned instances and an active shrine, removes those instances, creates a new base result, records discovery, and completes the shrine in a single copied-state transaction. Source upgrades are consumed. Failure to persist leaves sources intact. Fusion-only cards are excluded from battle rewards. The UI preserves its selections across loading/error rebuilds and supports preview, cancellation, and retry.
+
+`game/dungeon/difficulty.dart` derives encounter definitions from the saved descent. It scales authored health by +20% and damage/block by +10% per completed descent, rounded up, preserving status amounts and original definitions. Battle construction and intent previews share these definitions, including after reload. Practice battles stay at descent 1.
+
+Merchants, events, and future survival resources should use the same controller/save boundary. Global statistics and discovery across separate journeys need a separate profile document. Content/schema changes require explicit version handling.

@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import '../combos/combo.dart';
 import '../../core/random/seeded_random.dart';
 import '../cards/card_piles.dart';
 import '../cards/upgrades.dart';
@@ -17,7 +18,9 @@ class CombatSnapshot {
       turn = engine._turn,
       pendingDiscard = engine._pendingDiscard,
       outcome = engine._outcome,
-      events = List.unmodifiable(engine._events);
+      events = List.unmodifiable(engine._events),
+      plays = List.unmodifiable(engine._plays);
+  final List<CardPlay> plays;
   final Fighter player;
   final List<Fighter> enemies;
   final List<CardInstance> hand;
@@ -80,6 +83,7 @@ class CombatEngine {
   final Fighter _player;
   final List<Fighter> _enemies;
   final List<CombatEvent> _events = [];
+  final List<CardPlay> _plays = [];
   int _energy = 0, _turn = 0, _pendingDiscard = 0, _sequence = 0;
   Outcome _outcome = Outcome.active;
   CombatSnapshot get state => CombatSnapshot(this);
@@ -139,6 +143,41 @@ class CombatEngine {
         );
       }
     }
+    final play = CardPlay(instance.id, card.id, _turn, target?.id);
+    if (_outcome == Outcome.active && target != null && target.alive) {
+      for (final combo in comboLibrary) {
+        if (!combo.matches(_plays.lastOrNull, play, target)) continue;
+        if (combo.consumeBurn > 0) {
+          final remaining = target.stacks(Status.burn) - combo.consumeBurn;
+          if (remaining == 0) {
+            target.statuses.remove(Status.burn);
+          } else {
+            target.statuses[Status.burn] = remaining;
+          }
+        }
+        final amount = combo.bonus == ComboBonus.blockDamage
+            ? _player.block
+            : combo.amount;
+        _resolve(
+          Effect(
+            combo.bonus == ComboBonus.poison
+                ? EffectKind.status
+                : EffectKind.damage,
+            amount,
+            status: combo.bonus == ComboBonus.poison ? Status.poison : null,
+          ),
+          _player,
+          target,
+        );
+        _emit(
+          EventKind.combo,
+          '${combo.name}! ${combo.description}',
+          actor: _player.id,
+        );
+        _checkOutcome();
+      }
+    }
+    _plays.add(play);
     if (!card.keywords.contains(Keyword.temporary)) {
       (card.keywords.contains(Keyword.exhaust)
               ? _piles.exhaust
@@ -203,6 +242,7 @@ class CombatEngine {
 
   void _beginPlayerTurn() {
     _turn++;
+    _plays.clear();
     _startPhase(_player);
     _checkOutcome();
     if (_outcome != Outcome.active) return;

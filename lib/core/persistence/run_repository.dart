@@ -14,7 +14,8 @@ class RunRepository {
     if (text == null) return null;
     try {
       final j = jsonDecode(text) as Map<String, dynamic>;
-      if (j['version'] != 1 || j['contentVersion'] != 1) {
+      if (j['version'] != 1 ||
+          (j['contentVersion'] != 1 && j['contentVersion'] != 2)) {
         throw const FormatException(
           'Unsupported save version; save preserved.',
         );
@@ -32,7 +33,7 @@ class RunRepository {
   Future<void> save(RunState r) async {
     validate(r);
     await store.write(
-      jsonEncode({'version': 1, 'contentVersion': 1, 'run': r.toJson()}),
+      jsonEncode({'version': 1, 'contentVersion': 2, 'run': r.toJson()}),
     );
   }
 
@@ -77,7 +78,14 @@ class RunRepository {
                 : parts[0] == 'card' && id >= 12 && id < r.nextCardId),
       );
     }
-    final expected = DungeonGenerator.generate(SeededRandom(r.seed));
+    check(r.mapVersion == 1 || r.mapVersion == 2);
+    check(r.descent >= 1 && r.mapSeed >= 0 && r.mapSeed <= 0xffffffff);
+    check(r.descent != 1 || r.mapSeed == r.seed);
+    check(r.mapVersion != 1 || r.descent == 1);
+    final expected = DungeonGenerator.generate(
+      SeededRandom(r.mapSeed),
+      version: r.mapVersion,
+    );
     check(
       jsonEncode(r.rooms.map((x) => x.toJson()).toList()) ==
           jsonEncode(expected.map((x) => x.toJson()).toList()),
@@ -126,6 +134,7 @@ class RunRepository {
         r.phase == RunPhase.defeat) {
       check(r.room!.enemies.isNotEmpty);
     }
+    if (r.phase == RunPhase.shrine) check(r.room!.type == RoomType.shrine);
     if (r.phase == RunPhase.rest) check(r.room!.type == RoomType.rest);
     if (r.phase == RunPhase.treasure) check(r.room!.type == RoomType.treasure);
     if (r.phase == RunPhase.victory) check(r.room!.type == RoomType.boss);

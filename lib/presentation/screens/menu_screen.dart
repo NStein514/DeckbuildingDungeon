@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import '../../app/settings.dart';
 import '../../game/data/game_catalog.dart';
 import '../widgets/game_card.dart';
@@ -23,7 +24,7 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   String encounter = 'rat';
-  final seed = TextEditingController(text: '514');
+  final seed = TextEditingController();
   String? seedError;
   @override
   void dispose() {
@@ -116,10 +117,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         child: OutlinedButton(
                           onPressed: widget.runs.busy ? null : _openRun,
                           child: Text(
-                            [
-                                  RunPhase.victory,
-                                  RunPhase.defeat,
-                                ].contains(widget.runs.state!.phase)
+                            [RunPhase.defeat].contains(widget.runs.state!.phase)
                                 ? 'Last journey'
                                 : 'Continue run',
                           ),
@@ -159,7 +157,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Run / battle seed',
-                        helperText: 'Same seed, same dungeon and card order.',
+                        helperText:
+                            'Blank: a fresh run. Enter a seed to replay; practice defaults to 514.',
                         errorText: seedError,
                       ),
                     ),
@@ -191,7 +190,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'MILESTONE 2 · THE ASHEN CRYPT\nTemporary art • Runs save at room boundaries',
+                      'FUSE YOUR DECK · DESCEND DEEPER\nTemporary art • Runs save at room boundaries',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 10,
@@ -218,7 +217,9 @@ class _MenuScreenState extends State<MenuScreen> {
     ),
   );
   Future<void> _newRun() async {
-    final value = int.tryParse(seed.text);
+    final value = seed.text.trim().isEmpty
+        ? Random().nextInt(0x100000000)
+        : int.tryParse(seed.text.trim());
     if (value == null || value < 0 || value > 0xffffffff) {
       setState(() => seedError = 'Use an integer from 0 to 4294967295.');
       return;
@@ -250,7 +251,9 @@ class _MenuScreenState extends State<MenuScreen> {
   }
 
   void _start() {
-    final value = int.tryParse(seed.text);
+    final value = seed.text.trim().isEmpty
+        ? 514
+        : int.tryParse(seed.text.trim());
     if (value == null || value < 0 || value > 0xffffffff) {
       setState(() => seedError = 'Use an integer from 0 to 4294967295.');
       return;

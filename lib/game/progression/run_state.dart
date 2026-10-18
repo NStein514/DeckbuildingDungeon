@@ -2,7 +2,7 @@ import '../models/models.dart';
 import '../dungeon/dungeon.dart';
 import '../relics/relic.dart';
 
-enum RunPhase { map, combat, reward, rest, treasure, victory, defeat }
+enum RunPhase { map, combat, reward, rest, treasure, shrine, victory, defeat }
 
 /// Rules mutate detached copies; the controller only publishes saved states.
 class RunState {
@@ -13,6 +13,9 @@ class RunState {
     required this.deck,
     required this.health,
     this.gold = 0,
+    this.mapVersion = 2,
+    this.descent = 1,
+    int? mapSeed,
     this.phase = RunPhase.map,
     this.currentRoom,
     this.battleSeed = 0,
@@ -21,12 +24,14 @@ class RunState {
     List<String>? rewards,
     List<Relic>? relics,
     List<String>? discovered,
-  }) : completed = completed ?? [],
+  }) : mapSeed = mapSeed ?? seed,
+       completed = completed ?? [],
        rewards = rewards ?? [],
        relics = relics ?? [],
        discovered =
            discovered ?? deck.map((c) => c.definitionId).toSet().toList();
-  final int seed;
+  final int seed, mapVersion, descent, mapSeed;
+  int get clearedRooms => (descent - 1) * 6 + completed.length;
   int rngState, health, gold, battleSeed, nextCardId;
   RunPhase phase;
   String? currentRoom;
@@ -41,6 +46,9 @@ class RunState {
   RunState copy() => RunState.fromJson(toJson());
   Map<String, dynamic> toJson() => {
     'seed': seed,
+    'mapVersion': mapVersion,
+    'mapSeed': mapSeed,
+    'descent': descent,
     'rngState': rngState,
     'health': health,
     'gold': gold,
@@ -65,6 +73,9 @@ class RunState {
   };
   factory RunState.fromJson(Map<String, dynamic> j) => RunState(
     seed: j['seed'] as int,
+    mapVersion: j['mapVersion'] as int? ?? 1,
+    mapSeed: j['mapSeed'] as int? ?? j['seed'] as int,
+    descent: j['descent'] as int? ?? 1,
     rngState: j['rngState'] as int,
     health: j['health'] as int,
     gold: j['gold'] as int,

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'collection_screen.dart';
+import '../../game/dungeon/difficulty.dart';
 import '../../app/settings.dart';
 import '../../assets/asset_registry.dart';
 import '../../core/services/audio_service.dart';
@@ -18,6 +20,8 @@ class BattleScreen extends StatefulWidget {
     required this.settings,
     required this.seed,
     this.deck,
+    this.descent = 1,
+    this.discovered = const [],
     this.initialHealth,
     this.relics = const {},
     this.onComplete,
@@ -25,7 +29,8 @@ class BattleScreen extends StatefulWidget {
   final GameCatalog catalog;
   final List<String> enemyIds;
   final GameSettings settings;
-  final int seed;
+  final int seed, descent;
+  final List<String> discovered;
   final List<CardInstance>? deck;
   final int? initialHealth;
   final Set<Relic> relics;
@@ -51,7 +56,7 @@ class _BattleScreenState extends State<BattleScreen> {
       cards: widget.catalog.cards,
       deck: widget.deck ?? widget.catalog.createDeck(),
       enemies: widget.enemyIds
-          .map((id) => widget.catalog.enemies[id]!)
+          .map((id) => scaleEnemy(widget.catalog.enemies[id]!, widget.descent))
           .toList(),
       rules: widget.catalog.rules,
       seed: widget.seed,
@@ -86,6 +91,8 @@ class _BattleScreenState extends State<BattleScreen> {
           .toList();
       message = state.pendingDiscard > 0
           ? 'Preparation: select ${state.pendingDiscard} card to discard.'
+          : events.any((e) => e.kind == EventKind.combo)
+          ? events.lastWhere((e) => e.kind == EventKind.combo).message
           : feedback.isNotEmpty
           ? feedback.last.message
           : 'Choose your next action.';
@@ -146,6 +153,19 @@ class _BattleScreenState extends State<BattleScreen> {
           style: TextStyle(fontSize: 14, letterSpacing: 2),
         ),
         actions: [
+          IconButton(
+            tooltip: 'Combo guide',
+            icon: const Icon(Icons.auto_stories_outlined),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => CollectionScreen(
+                  catalog: widget.catalog,
+                  discovered: widget.discovered,
+                ),
+              ),
+            ),
+          ),
           IconButton(
             tooltip: 'Combat log',
             onPressed: _showLog,

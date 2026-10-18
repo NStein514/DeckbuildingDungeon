@@ -48,3 +48,9 @@ All final illustration production uses the approved illustration production work
 | `promotion/key_art` | Promotional key art | 2560×1440 | 16:9 | No | `assets/images/promotion/key_art.webp` | Planned; not implemented |
 
 Before each content expansion, add exact enemy, room, event, relic, and card variants here. No future asset is assumed to exist. UI text, costs, descriptions, card frames, and status numbers are rendered by Flutter.
+
+## Fusion placeholders
+
+- `cards/flaming_strike`: sword wreathed in fire.
+- `cards/glacial_barrier`: shield of layered ice.
+- `cards/venom_flurry`: paired blades trailing venom.

@@ -1,6 +1,6 @@
 import '../../core/random/seeded_random.dart';
 
-enum RoomType { combat, rest, treasure, boss }
+enum RoomType { combat, rest, treasure, shrine, boss }
 
 class DungeonRoom {
   DungeonRoom(
@@ -35,13 +35,18 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng) {
-    const widths = [1, 2, 2, 2, 2, 1];
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 2}) {
+    if (version != 1 && version != 2) {
+      throw ArgumentError("Unknown map version");
+    }
+    final widths = [1, 2, 2, 2, version == 1 ? 2 : 3, 1];
     final rooms = <DungeonRoom>[];
     for (var depth = 0; depth < widths.length; depth++) {
       final restLane = rng.nextInt(1000000) < 500000 ? 0 : 1;
       for (var lane = 0; lane < widths[depth]; lane++) {
-        final type = depth == 5
+        final type = depth == 4 && lane == 2
+            ? RoomType.shrine
+            : depth == 5
             ? RoomType.boss
             : depth == 2 || depth == 4
             ? (lane == restLane ? RoomType.rest : RoomType.treasure)

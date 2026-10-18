@@ -199,6 +199,8 @@ void main() {
         step++
       ) {
         switch (r.phase) {
+          case RunPhase.shrine:
+            r = rules.skipShrine(r);
           case RunPhase.map:
             final options = r.rooms
                 .where((x) => r.availableRooms.contains(x.id))
