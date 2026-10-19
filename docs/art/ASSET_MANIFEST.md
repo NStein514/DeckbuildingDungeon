@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses the approved illustration production workflow. The two new guardians, Strike, Ember Forge and Memory Well include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
+All final illustration production uses the approved illustration production workflow. The two new guardians, Strike, Stormguard, Cinder Maul, Ember Forge and Memory Well include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -58,3 +58,5 @@ Before each content expansion, add exact enemy, room, event, relic, and card var
 Generated guardian illustrations: `enemies/broodmother` (Crypt Broodmother) and `enemies/sentinel` (Ember Sentinel). Imported transparent PNGs at `assets/images/enemies/broodmother.png` and `assets/images/enemies/sentinel.png`; displayed in reveal cards and battle portraits. Generated with Image Generator on 2026-10-19 and reviewed for palette, silhouette and absence of text. User art review remains welcome.
 
 Event illustrations: `events/emberForge` → `assets/images/events/ember_forge.png`; `events/memoryWell` → `assets/images/events/memory_well.png`. Generated with Image Generator alongside Strike. Source outputs are retained outside the runtime bundle; imported PNGs use logical registry IDs. The Well background was corrected with Image Generator before import. These images use existing card/reveal motion; no new sprite animation is claimed.
+
+Fusion expansion illustrations: `cards/stormguard` → `assets/images/cards/stormguard.png`; `cards/cinder_maul` → `assets/images/cards/cinder_maul.png`. Produced with Image Generator for the expanded recipe set.

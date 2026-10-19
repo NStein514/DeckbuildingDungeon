@@ -108,3 +108,5 @@ New journeys and descents can end with the Dungeon Warden, Crypt Broodmother or 
 New-map events now include the Ember Forge (trade 6 HP for a chosen upgrade) and Memory Well (pay 25 gold to remove a chosen card). Both offer previews and a free safe exit. Generated artwork illustrates these events and the Strike card.
 
 Unplayed cards now stay in hand between turns (up to ten cards); played cards still cycle through discard or exhaust. Each encounter draws a fresh hand from your persistent journey deck. New maps shuffle the interior floor order as well as card positions, and dungeon cards have a small stable tilt. Opening encounters and final bosses remain at the ends; use a new run or the next descent to see the new layouts.
+
+Fusion shrines now offer five recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.

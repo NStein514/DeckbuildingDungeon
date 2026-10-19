@@ -73,7 +73,14 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - New high-bit random sampling avoids repetitive low-bit shuffle patterns; legacy layouts remain loadable.
 - Small deterministic card tilts preserve click targets and concealment without consuming gameplay RNG.
 
-## Milestone 4G — remaining replayability and survival choices
+## Milestone 4G — implemented: expanded fusion builds
+
+- Guard + Spark creates Stormguard: block, a lightning hit and Shock setup.
+- Heavy Blow + Firebolt creates Cinder Maul: a two-energy heavy hit with Burn.
+- Shrine shortcuts list craftable recipes and prefer unupgraded duplicate sources, with preview and confirmation.
+- Generated card illustrations, journal discovery, upgrade support, and fusion-only acquisition.
+
+## Milestone 4H — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

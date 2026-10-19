@@ -189,3 +189,7 @@ Future card, selected UI and animation artwork should use Image Generator. Anima
 ## Deck-changing events and Strike
 
 Image Generator prompts: Ember Forge — basalt anvil with worn bronze funerary rings, a blank blade under a floating ember, charcoal crypt and orange glow. Memory Well — bronze-ringed basalt well, lavender mist, a blank parchment dissolving over still water, opaque shadowy crypt background. Strike — chipped iron arming sword with bronze crossguard and dark leather grip, diagonal slash with restrained silver motion arc and sparks, quiet crypt backdrop. All use 4:3 painterly dark fantasy, warm key/cool rim, readable centered silhouettes, and no typography, card frames or UI. The Well received an Image Generator edit to replace the unwanted checkerboard background with opaque crypt stone and mist.
+
+## Expanded fusions
+
+Image Generator: Stormguard — battered iron shield with bronze rim and funerary motifs, pale lavender lightning halo, charcoal crypt, painterly brush texture, warm key/cool rim, 4:3 composition, no typography/frame/UI. Cinder Maul — square basalt hammer with bronze bands and leather haft, diagonal strike with ember trail, same palette and composition constraints. Imported source PNGs unchanged; existing card/preview animations use these illustrations.

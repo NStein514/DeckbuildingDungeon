@@ -97,7 +97,7 @@ Prices and modifier balance are provisional. No passive hunger or ember depletio
 
 ## Journey journal (Milestone 4B)
 
-Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the three fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
+Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the five fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
 
 Personal records are the deepest floor actually entered, most rooms cleared in a single journey, and most bosses defeated in a single journey. Descending after a boss does not count the next floor until its first room is entered. Reloading cannot inflate these values. A separate journal save lets the active run be replaced while preserving discoveries and records. No lifetime win/defeat totals, character-stat increases, or unlocked starting builds are claimed in this milestone.
 
@@ -114,3 +114,7 @@ New maps can reveal the Ember Forge (6 HP for one unupgraded card upgrade; at le
 Map version 7 shuffles the four interior floor bands and their lane contents using high-bit rejection-sampled random indices. Every route still visits two interior combat floors and two opportunity floors; each opportunity floor retains a rest option. The opening Rat and final guardian stay at the ends. Identical seeds replay identically and saves never reroll. Existing versions 1–6 keep their layout until the next descent. Small deterministic tilts (at most 1.5 degrees) are cosmetic only.
 
 Unplayed permanent cards persist between turns. Each turn draws up to five more cards, bounded by the ten-card hand limit. Played cards discard or exhaust normally. Each encounter starts with fresh piles drawn from the current journey deck, including earned/fused cards and upgrades; exhaustion is encounter-local. Hand contents do not carry between encounters.
+
+## Expanded fusion builds
+
+Guard + Spark → Stormguard (1 energy): gain 6 block, deal 2 lightning damage, then apply 2 Shock. The damage consumes existing Shock before the new stacks are applied; its defense-card damage does not gain attack-only Strength bonuses. An upgrade grants 8 block, 4 damage and 3 Shock. Heavy Blow + Firebolt → Cinder Maul (2 energy): deal 15 attack damage and apply 4 Burn; upgraded, 17 damage and 5 Burn. Fire tagging triggers Ember Heart as normal. Both results are shrine-only, consume two exact source cards and their upgrades, and begin unupgraded. These recipes compete for Guard/Firebolt sources with existing fusions. Balance remains provisional.

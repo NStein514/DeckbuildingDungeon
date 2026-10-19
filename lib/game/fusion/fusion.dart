@@ -13,4 +13,6 @@ const fusionRecipes = [
   FusionRecipe('strike', 'firebolt', 'flaming_strike'),
   FusionRecipe('guard', 'frost_ward', 'glacial_barrier'),
   FusionRecipe('quick_slash', 'poison_edge', 'venom_flurry'),
+  FusionRecipe('guard', 'spark', 'stormguard'),
+  FusionRecipe('heavy_blow', 'firebolt', 'cinder_maul'),
 ];

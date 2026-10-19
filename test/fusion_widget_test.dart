@@ -22,6 +22,9 @@ void main() {
     final target = label == 'Dungeon Rat'
         ? find.text(label).first
         : find.text(label).last;
+    if (find.text(label).evaluate().isEmpty) {
+      await t.scrollUntilVisible(find.text(label), 250);
+    }
     await t.ensureVisible(target);
     await t.pumpAndSettle();
     await t.tap(target);
@@ -38,13 +41,23 @@ void main() {
       await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
       await t.pumpAndSettle();
       await tap(t, 'Continue run');
+      await t.scrollUntilVisible(
+        find.byType(DropdownButtonFormField<String>).first.hitTestable(),
+        250,
+      );
+      await t.pumpAndSettle();
       await t.tap(find.byType(DropdownButtonFormField<String>).first);
       await t.pumpAndSettle();
       await tap(t, 'Strike · copy 1');
+      await t.scrollUntilVisible(
+        find.byType(DropdownButtonFormField<String>).last.hitTestable(),
+        250,
+      );
+      await t.pumpAndSettle();
       await t.tap(find.byType(DropdownButtonFormField<String>).last);
       await t.pumpAndSettle();
       await tap(t, 'Firebolt');
-      expect(find.text('Flaming Strike'), findsOneWidget);
+      expect(find.text('Flaming Strike'), findsWidgets);
       await tap(t, 'Fuse cards');
       await tap(t, 'Cancel');
       expect((await repo.load())!.deck, hasLength(12));

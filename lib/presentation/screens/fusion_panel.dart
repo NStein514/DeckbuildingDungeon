@@ -36,6 +36,23 @@ class _FusionPanelState extends State<FusionPanel> {
         : '$name · copy ${copies.indexWhere((x) => x.id == c.id) + 1}';
   }
 
+  String catalogName(FusionRecipe recipe) =>
+      widget.catalog.cards[recipe.result]!.name;
+
+  List<CardInstance>? sources(FusionRecipe recipe) {
+    final deck = List<CardInstance>.of(widget.run.deck)
+      ..sort((a, b) {
+        final upgrade = a.upgrade.compareTo(b.upgrade);
+        return upgrade != 0 ? upgrade : a.id.compareTo(b.id);
+      });
+    final a = deck.where((c) => c.definitionId == recipe.first).firstOrNull;
+    if (a == null) return null;
+    final b = deck
+        .where((c) => c.id != a.id && c.definitionId == recipe.second)
+        .firstOrNull;
+    return b == null ? null : [a, b];
+  }
+
   @override
   Widget build(BuildContext context) {
     final a = widget.run.deck.where((c) => c.id == first).firstOrNull;
@@ -57,10 +74,38 @@ class _FusionPanelState extends State<FusionPanel> {
           'Combine two cards permanently. One fusion per shrine. Source upgrades are consumed; the result starts unupgraded.',
         ),
         const SizedBox(height: 16),
+        const Text('Available recipes'),
+        const Text(
+          'Select a recipe to preview its sources and result. Unupgraded copies are selected first.',
+        ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final recipe in fusionRecipes)
+              if (sources(recipe) != null)
+                ActionChip(
+                  label: Text(catalogName(recipe)),
+                  onPressed: disabled
+                      ? null
+                      : () {
+                          final pair = sources(recipe)!;
+                          setState(() {
+                            first = pair[0].id;
+                            second = pair[1].id;
+                          });
+                        },
+                ),
+          ],
+        ),
+        const SizedBox(height: 16),
         for (final isFirst in [true, false])
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: DropdownButtonFormField<String>(
+              key: ValueKey(
+                '${isFirst ? 'first' : 'second'}-${isFirst ? first : second}',
+              ),
               initialValue: isFirst ? first : second,
               isExpanded: true,
               decoration: InputDecoration(

@@ -472,5 +472,62 @@
     ],
     "rarity": "rare",
     "art": "cards/venom_flurry"
+  },
+  {
+    "id": "stormguard",
+    "name": "Stormguard",
+    "type": "defense",
+    "cost": 1,
+    "description": "Gain 6 block. Deal 2 damage. Apply 2 Shock.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 6,
+        "target": "self"
+      },
+      {
+        "kind": "damage",
+        "amount": 2,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "shock"
+      }
+    ],
+    "tags": [
+      "lightning",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/stormguard"
+  },
+  {
+    "id": "cinder_maul",
+    "name": "Cinder Maul",
+    "type": "attack",
+    "cost": 2,
+    "description": "Deal 15 damage. Apply 4 Burn.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 15,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "tags": [
+      "fire",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/cinder_maul"
   }
 ]

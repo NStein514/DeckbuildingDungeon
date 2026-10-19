@@ -64,6 +64,22 @@ fs.mkdirSync(output,{recursive:true});
    await page.getByRole('button',{name:'Continue run',exact:true}).click();
   }
   await page.setViewportSize({width:390,height:844});
+  for (const [name,id] of [['Stormguard','stormguard'],['Cinder Maul','cinder_maul']]) {
+   await restore(fixtures.shrine);
+   await page.mouse.move(195,450); await page.mouse.wheel(0,450);
+   await page.getByRole('checkbox',{name,exact:true}).click();
+   await page.mouse.wheel(0,650);
+   await page.getByRole('button',{name:'Fuse cards',exact:true}).waitFor();
+   await page.waitForTimeout(350);
+   await page.screenshot({path:path.join(output,id+'-preview.png')});
+   await page.getByRole('button',{name:'Fuse cards',exact:true}).click();
+   await page.getByRole('button',{name:'Confirm fusion',exact:true}).click();
+   await page.getByText('Choose your path',{exact:true}).waitFor();
+   const result=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+   assert.equal(result.run.deck.length,11);assert.equal(result.run.deck.at(-1).definitionId,id);
+   assert(result.run.discovered.includes(id));
+  }
+  console.log('PASS: both expanded fusion shortcuts preview, confirm and persist their new cards.');
   for (const key of ['forge','well']) {
    await restore(fixtures[key]);
    const forge=key==='forge';
@@ -94,10 +110,9 @@ fs.mkdirSync(output,{recursive:true});
   await page.getByText('TURN 1',{exact:true}).waitFor();
   await page.screenshot({path:path.join(output,'guardian-battle.png')});
   await restore(fixtures.shrine);
-  await page.getByRole('button',{name:'First card',exact:true}).click();
-  await page.getByRole('menuitem',{name:'Strike · copy 1',exact:true}).click();
-  await page.getByRole('button',{name:'Second card',exact:true}).click();
-  await page.getByRole('menuitem',{name:'Firebolt',exact:true}).click();
+  await page.mouse.move(195,450); await page.mouse.wheel(0,400);
+  await page.getByRole('checkbox',{name:'Flaming Strike',exact:true}).click();
+  await page.mouse.wheel(0,600);
   await page.getByRole('group',{name:/RESULT Flaming Strike\. Cost 1/}).waitFor();
   await page.waitForTimeout(300);
   await page.screenshot({path:path.join(output,'fusion-preview.png')});
@@ -165,7 +180,7 @@ fs.mkdirSync(output,{recursive:true});
   await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
   await page.getByRole('button',{name:'Journey journal',exact:true}).click();
   await page.getByText('Personal records',{exact:true}).waitFor();
-  await page.getByText('Fusion discoveries · 1 / 3',{exact:true}).waitFor();
+  await page.getByText('Fusion discoveries · 3 / 5',{exact:true}).waitFor();
   await page.screenshot({path:path.join(output,'journal.png')});
   console.log('PASS: persistent journal records and fusion discoveries survive new journey and page reload.');
   console.log('PASS: fusion preview, cancellation, atomic confirmation/discovery, deeper descent, build carryover and scaled enemy.');
