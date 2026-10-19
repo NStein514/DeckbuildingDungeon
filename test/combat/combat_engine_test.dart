@@ -92,7 +92,7 @@ void main() {
       expect(e.state.hand, isEmpty);
     },
   );
-  test('unplayed exhaust card discards normally', () {
+  test('unplayed exhaust card stays in hand without exhausting', () {
     final e = battle(['mend']);
     e.endTurn();
     expect(e.state.exhaust, 0);

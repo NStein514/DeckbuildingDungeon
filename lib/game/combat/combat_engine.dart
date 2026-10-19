@@ -204,7 +204,7 @@ class CombatEngine {
     if (_outcome != Outcome.active) return 'This battle has ended.';
     if (_pendingDiscard > 0) return 'Choose a card to discard first.';
     for (final card in List<CardInstance>.of(_piles.hand)) {
-      if (!cards[card.definitionId]!.keywords.contains(Keyword.retain)) {
+      if (cards[card.definitionId]!.keywords.contains(Keyword.temporary)) {
         _discard(card);
       }
     }

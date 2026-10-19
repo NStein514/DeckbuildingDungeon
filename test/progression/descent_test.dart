@@ -14,7 +14,11 @@ import '../persistence/save_test.dart' show FailingStore;
 RunState won(RunRules rules) => rules.finishCombat(
   enterRoom(
     rules,
-    rules.fuse(shrine(rules), 'starter-0', 'starter-8'),
+    advanceToDepth(
+      rules,
+      rules.fuse(shrine(rules), 'starter-0', 'starter-8'),
+      5,
+    ),
     'room-5-0',
   ),
   Outcome.victory,

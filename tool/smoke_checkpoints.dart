@@ -20,26 +20,7 @@ Future<void> main(List<String> args) async {
   final rules = RunRules(catalog), store = MemorySaveStore();
   final repo = RunRepository(store, catalog);
   final checkpoints = <String, dynamic>{};
-  var r = rules.start(514);
-  for (var depth = 0; depth < 4; depth++) {
-    final room = r.rooms.firstWhere(
-      (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
-    );
-    if (depth == 2) {
-      await repo.save(
-        enterRoom(
-          rules,
-          r,
-          r.rooms.firstWhere((room) => room.type == RoomType.event).id,
-        )..gold = 100,
-      );
-      checkpoints['event'] = jsonDecode(store.contents!);
-    }
-    r = enterRoom(rules, r, room.id);
-    r = r.phase == RunPhase.rest
-        ? rules.rest(r)
-        : rules.reward(rules.finishCombat(r, Outcome.victory, 40), null);
-  }
+  var r = beforeType(rules, RoomType.shrine);
   await repo.save(
     enterRoom(
       rules,
@@ -55,7 +36,7 @@ Future<void> main(List<String> args) async {
   );
   await repo.save(r);
   checkpoints['shrine'] = jsonDecode(store.contents!);
-  r = rules.fuse(r, 'starter-0', 'starter-8');
+  r = advanceToDepth(rules, rules.fuse(r, 'starter-0', 'starter-8'), 5);
   final reveal = rules.enter(r, 'room-5-0');
   await repo.save(reveal);
   checkpoints['guardian'] = jsonDecode(store.contents!);
@@ -68,17 +49,7 @@ Future<void> main(List<String> args) async {
     'well': JourneyEvent.memoryWell,
   }.entries) {
     for (var seed = 0; seed < 1000; seed++) {
-      var candidate = rules.start(seed);
-      for (var depth = 0; depth < 2; depth++) {
-        candidate = rules.reward(
-          rules.finishCombat(
-            enterRoom(rules, candidate, candidate.availableRooms.first),
-            Outcome.victory,
-            40,
-          ),
-          null,
-        );
-      }
+      var candidate = beforeType(rules, RoomType.event, seed: seed);
       candidate = enterRoom(
         rules,
         candidate,
@@ -103,3 +74,45 @@ Future<void> main(List<String> args) async {
 
 RunState enterRoom(RunRules rules, RunState run, String id) =>
     rules.continueRoom(rules.enter(run, id));
+
+RunState completeRoom(RunRules rules, RunState r, {int health = 40}) =>
+    switch (r.phase) {
+      RunPhase.combat =>
+        r.room!.type == RoomType.boss
+            ? rules.finishCombat(r, Outcome.victory, health)
+            : rules.reward(
+                rules.finishCombat(r, Outcome.victory, health),
+                null,
+              ),
+      RunPhase.rest => rules.rest(r),
+      RunPhase.treasure => rules.treasure(r),
+      RunPhase.shrine => rules.skipShrine(r),
+      RunPhase.merchant => rules.leaveMerchant(r),
+      RunPhase.event => rules.resolveEvent(r, accept: false),
+      _ => throw StateError('Expected an entered room'),
+    };
+
+RunState advanceToDepth(
+  RunRules rules,
+  RunState r,
+  int depth, {
+  int health = 40,
+}) {
+  while (r.completed.length < depth) {
+    final choices = r.rooms.where((room) => r.availableRooms.contains(room.id));
+    final room =
+        choices.where((room) => room.type == RoomType.rest).firstOrNull ??
+        choices.first;
+    r = completeRoom(rules, enterRoom(rules, r, room.id), health: health);
+  }
+  return r;
+}
+
+RunState beforeType(RunRules rules, RoomType type, {int seed = 514}) {
+  final r = rules.start(seed);
+  return advanceToDepth(
+    rules,
+    r,
+    r.rooms.firstWhere((room) => room.type == type).depth,
+  );
+}

@@ -86,3 +86,9 @@ All 126 tests pass with clean formatting/static analysis and content checks. New
 Image Generator produced the Forge, Memory Well and Strike art. The Well received a corrective generation pass to remove an unwanted checkerboard background. Imports retain their source PNGs and use existing asset registry entries and card presentation; new sprite animation is not included.
 
 The release web build and Chromium smoke checks passed, including both new event transactions and the existing merchant, combat, guardian, fusion, journal and descent flows. Screenshots confirmed readable event artwork and controls at 390×844 and the generated Strike image in the combat hand. Mobile-native compilation/device testing remains outside this validation.
+
+## Milestone 4F validation
+
+All 132 tests pass with clean analysis, formatting and content checks. New tests cover permanent-card hand carryover, five-card draws bounded by the hand cap, played-card recycling without duplicating retained instances, persistent earned cards/upgrades and encounter-local exhaustion, all 24 interior floor orders across 1,000 seeds, stable legacy version-6 checkpoints, and bounded deterministic visual tilts. The complete real-combat run and 100-descent persistence simulation still pass. Hand retention changes combat balance and needs human playtesting; simulation does not establish endless-run survivability.
+
+Release web build and Chromium smoke checks passed. The browser asserts a nine-card hand after playing one of five opening cards and ending the turn, and exercises tilted hidden-card selection, encounters, event transactions, merchants, fusion, journal persistence and deeper descent. Phone screenshots were reviewed for readable counters, subtle card rotation and unclipped card targets. Existing saves retain their original map layout; new layouts begin with a new run or descent.

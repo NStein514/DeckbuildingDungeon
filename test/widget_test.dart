@@ -53,7 +53,7 @@ void main() {
       await tester.tap(find.text('Dungeon Rat'));
       await tester.pumpAndSettle();
       expect(find.text('16 / 22 HP  ·  0 block'), findsOneWidget);
-      expect(find.text('YOUR HAND · 4'), findsOneWidget);
+      expect(find.text('YOUR HAND · 4 / 10'), findsOneWidget);
       expect(find.text('2'), findsOneWidget);
     },
   );

@@ -40,13 +40,13 @@ Choose **New run**, then a highlighted room. In combat, tap a card and an enemy,
 
 Leave the seed blank for a fresh run, or enter a seed to replay the same decisions. After the boss, **Descend deeper** keeps your current health and build; returning to camp preserves the option to continue later. Each descent adds 20% of base enemy HP and 10% of base damage/block, rounded up. This is a repeatable-loop foundation, not yet a balanced endless content pool.
 
-New maps offer an event on floor 3 and a merchant on floor 5 of each descent. Merchant stock is fixed for that visit; each card and service is sold once. Compare purchases with healing, removal, and the shrine on the same floor before choosing your route.
+New maps shuffle two combat floors and two opportunity floors between the opening encounter and final boss. Opportunity cards include rest, treasure, events, a merchant and a shrine. Merchant stock is fixed for that visit; each card and service is sold once.
 
 The practice encounter controls launch isolated battles that do not change your saved run. Starting another run requires confirming replacement of the existing save.
 
 ## Saving
 
-New journeys present face-down dungeon cards. Flip one to commit your path and reveal its room, then continue into the encounter or opportunity. Hidden room positions shuffle each descent; unchosen cards stay unknown. Reveals persist across reloads, and reduced-motion settings skip the flip animation. Existing journeys keep their original face-up map until the next descent.
+New journeys present face-down dungeon cards. Flip one to commit your path and reveal its room, then continue into the encounter or opportunity. Hidden room positions shuffle each descent; unchosen cards stay unknown. Reveals persist across reloads, and reduced-motion settings skip the flip animation. Existing journeys keep their original map version and layout until the next descent.
 
 Progress saves on card reveal, room entry, battle results, reward confirmation, rest, treasure, fusion, merchant purchases, event choices, and descent. Reloading during combat restarts the encounter, rather than restoring a partially played turn. Results remain retryable if a save fails. An invalid or newer-version run save is preserved and reported instead of silently replaced.
 
@@ -106,3 +106,5 @@ Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), a
 New journeys and descents can end with the Dungeon Warden, Crypt Broodmother or Ember Sentinel. Reveal the boss card to inspect its repeating battle plan before entry. The two new guardians feature generated illustrations. Existing saved maps retain their original guardian.
 
 New-map events now include the Ember Forge (trade 6 HP for a chosen upgrade) and Memory Well (pay 25 gold to remove a chosen card). Both offer previews and a free safe exit. Generated artwork illustrates these events and the Strike card.
+
+Unplayed cards now stay in hand between turns (up to ten cards); played cards still cycle through discard or exhaust. Each encounter draws a fresh hand from your persistent journey deck. New maps shuffle the interior floor order as well as card positions, and dungeon cards have a small stable tilt. Opening encounters and final bosses remain at the ends; use a new run or the next descent to see the new layouts.

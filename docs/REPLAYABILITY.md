@@ -42,4 +42,4 @@ Cross-run deepest-floor records and the recipe journal are now implemented. Next
 
 ## Unknown dungeon cards
 
-New maps conceal each unexplored path behind a face-down card. Choosing commits the path before revealing its contents, preserving the existing six-floor battle/room rhythm. Interior lane contents shuffle each descent; the final floor remains signposted as a boss. Reloading retains the chosen reveal. This adds uncertainty without replacing tactical combat, fusion builds or the journey journal. Future clues or scouting should introduce deliberate resource decisions; this milestone does not allow free peeking.
+New maps conceal each unexplored path behind a face-down card. Choosing commits the path before revealing its contents, preserving the existing six-floor battle/room rhythm. Interior floor bands and their lane contents shuffle each descent; the final floor remains signposted as a boss. Reloading retains the chosen reveal. This adds uncertainty without replacing tactical combat, fusion builds or the journey journal. Future clues or scouting should introduce deliberate resource decisions; this milestone does not allow free peeking.

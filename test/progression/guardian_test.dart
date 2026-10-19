@@ -55,7 +55,7 @@ void main() {
       expect(loaded.toJson(), json);
       await repo.save(loaded);
       expect((await repo.load())!.toJson(), json);
-      final modern = DungeonGenerator.generate(SeededRandom(514));
+      final modern = DungeonGenerator.generate(SeededRandom(514), version: 5);
       expect(
         modern.take(12).map((r) => r.toJson()),
         rooms.take(12).map((r) => r.toJson()),
@@ -105,7 +105,7 @@ void main() {
     t.view.devicePixelRatio = 1;
     addTearDown(t.view.resetPhysicalSize);
     addTearDown(t.view.resetDevicePixelRatio);
-    final run = rules.skipShrine(shrine(rules));
+    final run = advanceToDepth(rules, rules.skipShrine(shrine(rules)), 5);
     final boss = catalog.enemies[run.rooms.last.enemies.single]!;
     final store = MemorySaveStore(),
         repo = RunRepository(MemorySaveStore(), catalog);

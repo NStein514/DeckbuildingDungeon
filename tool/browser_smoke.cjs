@@ -41,6 +41,7 @@ fs.mkdirSync(output,{recursive:true});
  assert((await page.locator('body').ariaSnapshot()).includes('2 ENERGY'));
  await page.getByRole('button',{name:'End turn',exact:true}).click();
  await page.getByText('TURN 2',{exact:true}).waitFor();
+ assert((await page.locator('body').ariaSnapshot()).includes('YOUR HAND · 9 / 10'));
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
  assert.equal(saved.run.phase,'combat');assert.equal(saved.run.health,50);
  await page.reload();

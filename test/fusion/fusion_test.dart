@@ -14,16 +14,7 @@ import '../test_catalog.dart';
 import '../persistence/save_test.dart' show FailingStore;
 
 RunState shrine(RunRules rules) {
-  var r = rules.start(514);
-  for (var depth = 0; depth < 4; depth++) {
-    final room = r.rooms.firstWhere(
-      (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
-    );
-    r = enterRoom(rules, r, room.id);
-    r = r.phase == RunPhase.rest
-        ? rules.rest(r)
-        : rules.reward(rules.finishCombat(r, Outcome.victory, 40), null);
-  }
+  final r = beforeType(rules, RoomType.shrine);
   return enterRoom(
     rules,
     r,
@@ -58,7 +49,7 @@ void main() {
           expect(fused.nextCardId, 13);
           expect(fused.discovered, contains(recipe.result));
           expect(fused.phase, RunPhase.map);
-          expect(fused.availableRooms, ['room-5-0']);
+          expect(fused.availableRooms, r.room!.next);
           expect(jsonEncode(r.toJson()), before);
           expect(
             () => rules.fuse(fused, 'starter-0', 'starter-1'),
@@ -163,8 +154,19 @@ void main() {
         expect(r.rooms.where((r) => r.type == RoomType.shrine), hasLength(1));
         expect(
           r.rooms
-              .where((r) => r.depth == 3)
-              .every((r) => r.next.contains('room-4-2')),
+              .where(
+                (room) =>
+                    room.depth ==
+                    r.rooms
+                            .firstWhere((room) => room.type == RoomType.shrine)
+                            .depth -
+                        1,
+              )
+              .every(
+                (room) => room.next.contains(
+                  r.rooms.firstWhere((room) => room.type == RoomType.shrine).id,
+                ),
+              ),
           true,
         );
         final reward = rules.finishCombat(

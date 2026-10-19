@@ -65,7 +65,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Seeded four-event pool for new maps; existing maps retain their original offers.
 - Image Generator artwork for the two events and the Strike card.
 
-## Milestone 4F — remaining replayability and survival choices
+## Milestone 4F — implemented: hand continuity and dungeon layout variety
+
+- Unplayed permanent cards carry between turns, with five draws bounded by the ten-card hand limit.
+- Fresh encounter hands use the persistent journey deck; upgrades and earned cards remain intact.
+- Interior floor bands and lane contents shuffle, preserving two combat and two opportunity floors.
+- New high-bit random sampling avoids repetitive low-bit shuffle patterns; legacy layouts remain loadable.
+- Small deterministic card tilts preserve click targets and concealment without consuming gameplay RNG.
+
+## Milestone 4G — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

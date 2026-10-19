@@ -53,8 +53,8 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 6}) {
-    if (version < 1 || version > 6) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 7}) {
+    if (version < 1 || version > 7) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [
@@ -167,6 +167,39 @@ class DungeonGenerator {
         slot.next,
         [guardian],
       );
+    }
+    if (version >= 7) {
+      final middle = [
+        for (var depth = 1; depth < 5; depth++)
+          rooms.where((r) => r.depth == depth).toList(),
+      ];
+      rng.shuffleFair(middle);
+      for (final band in middle) {
+        rng.shuffleFair(band);
+      }
+      final bands = [
+        [rooms.first],
+        ...middle,
+        [rooms.last],
+      ];
+      return [
+        for (var depth = 0; depth < bands.length; depth++)
+          for (var lane = 0; lane < bands[depth].length; lane++)
+            DungeonRoom(
+              'room-$depth-$lane',
+              depth,
+              lane,
+              bands[depth][lane].type,
+              depth == 5
+                  ? []
+                  : [
+                      for (var i = 0; i < bands[depth + 1].length; i++)
+                        'room-${depth + 1}-$i',
+                    ],
+              bands[depth][lane].enemies,
+              modifier: bands[depth][lane].modifier,
+            ),
+      ];
     }
     return rooms;
   }

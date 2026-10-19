@@ -81,3 +81,14 @@ class DungeonCard extends StatelessWidget {
     );
   }
 }
+
+/// Cosmetic only: no gameplay RNG consumption, stable across rebuilds/reloads.
+double dungeonCardTilt(int mapSeed, String roomId) {
+  var hash = mapSeed & 0x7fffffff;
+  for (final unit in roomId.codeUnits) {
+    hash = (hash * 31 + unit) & 0x7fffffff;
+  }
+  // Mix adjacent lane IDs before choosing an angle of at most 1.5 degrees.
+  hash = ((hash ^ (hash >>> 13)) * 127) & 0x7fffffff;
+  return ((hash % 2001) - 1000) / 1000 * (math.pi / 120);
+}

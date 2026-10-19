@@ -20,12 +20,6 @@ void main() {
     Outcome.victory,
     40,
   );
-  RunState floorThree() {
-    var r = rules.reward(reward(), null);
-    r = enterRoom(rules, r, r.availableRooms.first);
-    return rules.reward(rules.finishCombat(r, Outcome.victory, 30), null);
-  }
-
   CombatEngine battle(List<CardInstance> deck, Set<Relic> relics) =>
       CombatEngine(
         cards: catalog.cards,
@@ -94,12 +88,13 @@ void main() {
     expect(rules.reward(r, null).deck, hasLength(12));
   });
   test('rest healing is capped and cannot be claimed twice', () {
-    final map = floorThree();
+    final map = beforeType(rules, RoomType.rest);
     final r = enterRoom(
       rules,
       map,
-      map.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
+      map.rooms.firstWhere((x) => x.type == RoomType.rest).id,
     );
+    r.health = 30;
     final healed = rules.rest(r);
     expect(healed.health, 45);
     expect(() => rules.rest(healed), throwsStateError);
@@ -107,11 +102,11 @@ void main() {
     expect(rules.rest(r).health, 50);
   });
   test('upgrade affects one instance, validates and preserves source', () {
-    final map = floorThree();
+    final map = beforeType(rules, RoomType.rest);
     final r = enterRoom(
       rules,
       map,
-      map.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
+      map.rooms.firstWhere((x) => x.type == RoomType.rest).id,
     );
     final upgraded = rules.rest(r, upgradeId: r.deck.first.id);
     expect(upgraded.deck.where((c) => c.upgrade == 1), hasLength(1));
@@ -120,13 +115,11 @@ void main() {
     expect(() => rules.rest(r, upgradeId: 'missing'), throwsStateError);
   });
   test('treasure grants a distinct relic and gold once', () {
-    final map = floorThree();
+    final map = beforeType(rules, RoomType.rest);
     final r = enterRoom(
       rules,
       map,
-      map.rooms
-          .firstWhere((x) => x.depth == 2 && x.type == RoomType.treasure)
-          .id,
+      map.rooms.firstWhere((x) => x.type == RoomType.treasure).id,
     );
     final taken = rules.treasure(r);
     expect(taken.relics.toSet(), hasLength(2));
@@ -167,8 +160,11 @@ void main() {
       Relic.quickdrawCharm,
     });
     expect(e.state.hand, hasLength(6));
+    for (var i = 0; i < 2; i++) {
+      e.play(e.state.hand.first.id, targetId: 'enemy-0');
+    }
     e.endTurn();
-    expect(e.state.hand, hasLength(5));
+    expect(e.state.hand, hasLength(9));
   });
   test('Ember Heart triggers only on first fire play', () {
     final e = battle(

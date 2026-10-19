@@ -8,11 +8,11 @@ Milestones 1–3 implement combat, fusion, and repeatable dungeon descents. The 
 
 ## Combat economy
 
-Balance lives in `assets/data/balance.json`: 50 maximum HP, 3 energy each turn, 5 draws each turn, hand limit 10. A retained card does not reduce the next turn's five draws; the hand cap still applies. The starting deck is Strike ×3, Guard ×2, Quick Slash, Heavy Blow, Mend, Firebolt, Frost Ward, Spark, and Preparation. Duplicates have separate instance IDs.
+Balance lives in `assets/data/balance.json`: 50 maximum HP, 3 energy each turn, 5 draws each turn, hand limit 10. An unplayed permanent card stays in hand and does not reduce the next turn's five draws; the hand cap still applies. The starting deck is Strike ×3, Guard ×2, Quick Slash, Heavy Blow, Mend, Firebolt, Frost Ward, Spark, and Preparation. Duplicates have separate instance IDs.
 
 Cards pay their cost only after validation. Targeted cards require a living enemy; self effects apply to their source. Defense and healing on mixed cards such as Frost Ward still require a valid enemy target for the full transaction. Curse cards cannot be played. A selected card may be inspected even if unaffordable.
 
-Played cards leave the hand before their effects, then enter discard. An in-flight card cannot draw itself. Retain prevents end-turn discard; Exhaust removes a card only when played; Temporary removes a card on play or discard. Exhausted and temporary cards cannot recycle. Empty draw piles reshuffle discards using the seeded random source. Empty piles and full hands are valid states.
+Played cards leave the hand before their effects, then enter discard. An in-flight card cannot draw itself. All unplayed permanent cards stay in hand at turn end (the legacy Retain keyword is redundant); Exhaust removes a card only when played; Temporary removes a card on play, explicit discard, or turn end. Exhausted and temporary cards cannot recycle. Empty draw piles reshuffle discards using the seeded random source. Empty piles and full hands are valid states.
 
 Mend, Focus, Battle Cry, and Preparation exhaust in this slice, avoiding unlimited healing, strength, and zero-cost draw loops in very small decks. Preparation draws first, then requires an explicit discard choice, bounded by the available hand. It blocks playing cards and ending the turn until resolved.
 
@@ -23,7 +23,7 @@ Mend, Focus, Battle Cry, and Preparation exhaust in this slice, avoiding unlimit
 3. If alive, heal Regeneration. Reduce each ticking status by one.
 4. On player turns, replenish energy and draw five, bounded by the hand limit.
 5. Resolve each card's ordered effects, checking terminal outcomes after each effect.
-6. End player turn: discard non-retained cards, expire player action-duration effects.
+6. End player turn: remove unplayed Temporary cards, keep other cards in hand, and expire player action-duration effects.
 7. Each living enemy takes its start phase, then its visible action, then duration expiration.
 8. Only if combat remains active, begin the next player turn.
 
@@ -73,7 +73,7 @@ New runs use a fresh seed unless the player enters one. Repeating a seed reprodu
 
 ## Milestone 2: implemented dungeon loop
 
-New Run creates six floors: an introductory rat, a branching combat floor, a rest/treasure/event choice, a combat floor (including a possible multi-enemy fight), another rest/treasure/shrine/merchant choice, and the Warden. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
+New Run creates six floors: an introductory rat, four shuffled interior floors (two combat bands and two opportunity bands), and a seeded guardian. Opportunity bands offer rest/treasure/event or rest/treasure/shrine/merchant cards. All next-floor nodes are connected and a boss route always exists. Each run starts with Iron Sigil. Practice encounters remain available separately.
 
 Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold funds merchant purchases and event bargains. Modified encounters grant 10 additional gold.
 
@@ -86,11 +86,11 @@ The run carries health, deck, upgrades, relics, gold, discoveries, room completi
 
 ## Risk and resources (Milestone 4A)
 
-New descents contain 13 room nodes but still visit six rooms. Introductory rats and bosses retain normal stats. Floor two offers an unmodified single enemy versus a Hardy or Fierce single enemy. Floor four offers a modified single enemy versus a seeded rat/mage or rat/skeleton ambush. Single enemies are sampled from the three regular definitions. Hardy adds 25% HP after descent scaling, rounded up; Fierce adds 2 per direct damage effect after scaling, leaving status stacks unchanged. Both grant 10 bonus gold. Maps and combat display the modifier before actions.
+New descents contain 13 room nodes but still visit six rooms. Introductory rats and bosses retain normal stats. One combat band offers an unmodified single enemy versus a Hardy or Fierce single enemy. The other offers a modified single enemy versus a seeded rat/mage or rat/skeleton ambush. Version-7 maps randomize their depths. Single enemies are sampled from the three regular definitions. Hardy adds 25% HP after descent scaling, rounded up; Fierce adds 2 per direct damage effect after scaling, leaving status stacks unchanged. Both grant 10 bonus gold. Maps and combat display the modifier before actions.
 
-The floor-five merchant competes with free rest, treasure, and fusion. Stock consists of three distinct seeded cards, excluding fusion and curse cards. Prices are 40 common, 60 uncommon, 90 rare, 120 legendary. Each offer can be purchased once per visit. Healing costs 30 gold for up to 15 HP, once; full-health characters cannot buy it. Removal costs 40 gold for one exact instance, once; a confirmation previews the card and the deck must retain at least five cards. Purchases leave the shop open; leaving completes it permanently for this descent. Removing a discovered card does not erase its discovery.
+The merchant competes with free rest, treasure, and fusion. Stock consists of three distinct seeded cards, excluding fusion and curse cards. Prices are 40 common, 60 uncommon, 90 rare, 120 legendary. Each offer can be purchased once per visit. Healing costs 30 gold for up to 15 HP, once; full-health characters cannot buy it. Removal costs 40 gold for one exact instance, once; a confirmation previews the card and the deck must retain at least five cards. Purchases leave the shop open; leaving completes it permanently for this descent. Removing a discovered card does not erase its discovery.
 
-The floor-three event is one seeded bargain: the hungry altar trades 8 HP for 35 gold (requires at least 9 HP); the wandering healer trades 20 gold for up to 12 HP (unavailable at full health). Either can be declined for free. A resolved event cannot be repeated. Each bargain describes its exact cost before acceptance.
+The event is one seeded bargain: the hungry altar trades 8 HP for 35 gold (requires at least 9 HP); the wandering healer trades 20 gold for up to 12 HP (unavailable at full health). Either can be declined for free. A resolved event cannot be repeated. Each bargain describes its exact cost before acceptance.
 
 Prices and modifier balance are provisional. No passive hunger or ember depletion has been added. Starting-build unlocks, more enemy/boss content, and human long-run balance testing remain the next priorities.
 
@@ -108,3 +108,9 @@ Version-5 maps select one of three guardians from the saved map seed. Repeats ac
 ## Deck-changing event bargains
 
 New maps can reveal the Ember Forge (6 HP for one unupgraded card upgrade; at least 7 HP required) or Memory Well (25 gold for removing a chosen card; at least six cards before removal). Existing altar/healer events remain in the pool. Each event offers a free safe exit. Costs are confirmed with the selected card preview, and only a successfully saved choice completes the room. Repeat descents create fresh offers; balance is provisional.
+
+## Shuffled floor order and hand carryover
+
+Map version 7 shuffles the four interior floor bands and their lane contents using high-bit rejection-sampled random indices. Every route still visits two interior combat floors and two opportunity floors; each opportunity floor retains a rest option. The opening Rat and final guardian stay at the ends. Identical seeds replay identically and saves never reroll. Existing versions 1–6 keep their layout until the next descent. Small deterministic tilts (at most 1.5 degrees) are cosmetic only.
+
+Unplayed permanent cards persist between turns. Each turn draws up to five more cards, bounded by the ten-card hand limit. Played cards discard or exhaust normally. Each encounter starts with fresh piles drawn from the current journey deck, including earned/fused cards and upgrades; exhaustion is encounter-local. Hand contents do not carry between encounters.

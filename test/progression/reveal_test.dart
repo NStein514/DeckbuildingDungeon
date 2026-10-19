@@ -56,16 +56,7 @@ void main() {
           );
           expect(() => rules.continueRoom(entered), throwsStateError);
         }
-        final room = r.rooms.firstWhere(
-          (x) =>
-              x.depth == depth &&
-              (depth != 2 && depth != 4 || x.type == RoomType.rest),
-        );
-        final entered = rules.continueRoom(rules.enter(r, room.id));
-        r = entered.phase == RunPhase.rest
-            ? rules.rest(entered)
-            : rules.finishCombat(entered, Outcome.victory, 40);
-        if (r.phase == RunPhase.reward) r = rules.reward(r, null);
+        r = advanceToDepth(rules, r, depth + 1);
       }
       expect(seen, RoomType.values.toSet());
     },

@@ -106,26 +106,11 @@ void main() {
     phone(t);
     final catalog = loadCatalog(), store = MemorySaveStore();
     final rules = RunRules(catalog), repo = RunRepository(store, catalog);
-    var r = rules.reward(
-      rules.finishCombat(
-        enterRoom(rules, rules.start(514), 'room-0-0'),
-        Outcome.victory,
-        42,
-      ),
-      null,
-    );
-    r = rules.reward(
-      rules.finishCombat(
-        enterRoom(rules, r, r.availableRooms.first),
-        Outcome.victory,
-        30,
-      ),
-      null,
-    );
+    var r = beforeType(rules, RoomType.rest);
     r = enterRoom(
       rules,
       r,
-      r.rooms.firstWhere((x) => x.depth == 2 && x.type == RoomType.rest).id,
+      r.rooms.firstWhere((x) => x.type == RoomType.rest).id,
     );
     await repo.save(r);
     await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
@@ -141,7 +126,7 @@ void main() {
       (await repo.load())!.deck.where((c) => c.upgrade == 1),
       hasLength(1),
     );
-    expect((await repo.load())!.health, 30);
+    expect((await repo.load())!.health, r.health);
   });
   testWidgets(
     'failed battle-result save stays retryable until persistence succeeds',

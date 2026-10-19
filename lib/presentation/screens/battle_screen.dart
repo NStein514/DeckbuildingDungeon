@@ -267,14 +267,14 @@ class _BattleScreenState extends State<BattleScreen> {
                         runSpacing: 6,
                         children: [
                           Text(
-                            'YOUR HAND · ${state.hand.length}',
+                            'YOUR HAND · ${state.hand.length} / ${widget.catalog.rules.handLimit}',
                             style: const TextStyle(
                               fontSize: 11,
                               letterSpacing: 1.4,
                             ),
                           ),
                           Text(
-                            'Draw ${state.draw}  /  Discard ${state.discard}  /  Exhaust ${state.exhaust}',
+                            'Unplayed cards stay · Draw ${state.draw} / Discard ${state.discard} / Exhaust ${state.exhaust}',
                             style: const TextStyle(
                               fontSize: 10,
                               color: Color(0xffaab3bd),

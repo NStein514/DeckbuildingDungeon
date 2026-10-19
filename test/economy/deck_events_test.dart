@@ -1,3 +1,4 @@
+import 'package:deckbound/game/dungeon/dungeon.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -87,8 +88,13 @@ void main() {
     },
   );
   test('version 5 event checkpoint keeps its original offer', () async {
-    final r = reachEvent(rules, JourneyEvent.memoryWell).toJson()
-      ..['mapVersion'] = 5;
+    final legacy = startVersion(rules, 514, 5);
+    final room = legacy.rooms.firstWhere((r) => r.type == RoomType.event);
+    final r = enterRoom(
+      rules,
+      advanceToDepth(rules, legacy, room.depth),
+      room.id,
+    ).toJson();
     final store = MemorySaveStore()
       ..contents = jsonEncode({'version': 1, 'contentVersion': 5, 'run': r});
     final repo = RunRepository(store, catalog);

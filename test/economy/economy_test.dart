@@ -19,18 +19,9 @@ RunState reachRoom(RunRules rules, RoomType type, {int seed = 514}) {
   final target = r.rooms.firstWhere(
     (room) =>
         room.type == type &&
-        (type != RoomType.combat ||
-            (room.depth == 1 && room.modifier != EncounterModifier.none)),
+        (type != RoomType.combat || (room.modifier != EncounterModifier.none)),
   );
-  for (var depth = 0; depth < target.depth; depth++) {
-    final room = r.rooms.firstWhere(
-      (x) => x.depth == depth && (depth != 2 || x.type == RoomType.rest),
-    );
-    r = enterRoom(rules, r, room.id);
-    r = r.phase == RunPhase.rest
-        ? rules.rest(r)
-        : rules.reward(rules.finishCombat(r, Outcome.victory, 30), null);
-  }
+  r = advanceToDepth(rules, r, target.depth, health: 30);
   return enterRoom(rules, r, target.id);
 }
 
@@ -119,7 +110,9 @@ void main() {
   test('events preview deterministic costs, are optional and resolve once', () {
     final types = <JourneyEvent>{};
     for (var seed = 0; seed < 50; seed++) {
-      final r = reachRoom(rules, RoomType.event, seed: seed)..gold = 100;
+      final r = reachRoom(rules, RoomType.event, seed: seed)
+        ..gold = 100
+        ..health = 30;
       final event = JourneyEvent.fromSeed(
         r.battleSeed,
         mapVersion: r.mapVersion,
@@ -246,7 +239,11 @@ void main() {
         expect(r.rooms.last.modifier, EncounterModifier.none);
         expect(
           r.rooms.where(
-            (r) => r.depth == 1 && r.modifier == EncounterModifier.none,
+            (r) =>
+                r.depth > 0 &&
+                r.type == RoomType.combat &&
+                r.enemies.length == 1 &&
+                r.modifier == EncounterModifier.none,
           ),
           hasLength(1),
         );
@@ -281,24 +278,7 @@ void main() {
       8,
     );
     expect(rat.health, 22);
-    final r = rules.reward(
-      rules.finishCombat(
-        enterRoom(rules, rules.start(514), 'room-0-0'),
-        Outcome.victory,
-        30,
-      ),
-      null,
-    );
-    final encounter = enterRoom(
-      rules,
-      r,
-      r.rooms
-          .firstWhere(
-            (room) =>
-                room.depth == 1 && room.modifier != EncounterModifier.none,
-          )
-          .id,
-    );
+    final encounter = reachRoom(rules, RoomType.combat);
     final result = rules.finishCombat(encounter, Outcome.victory, 30);
     expect(result.gold - encounter.gold, inInclusiveRange(25, 35));
   });
