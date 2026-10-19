@@ -1,6 +1,6 @@
 # Internal art direction — Deckbound
 
-All final game illustrations must be created with the approved illustration production workflow. Current icons are explicitly labeled temporary interface placeholders, not final illustration substitutes. No unrelated stock imagery or unapproved production sources. Gameplay never waits for final art.
+Use Image Generator for card artwork, selected UI artwork, enemy illustrations, and artwork used in animations, as requested by the user. Use the Image Generator skill when available; otherwise use its image generation tool directly. Generate visual frames/assets with it and implement animation timing, compositing and reduced-motion behavior in Flutter. Current icons are explicitly labeled temporary interface placeholders, not final illustration substitutes. No unrelated stock imagery or unapproved production sources. Gameplay never waits for final art.
 
 ## Visual language
 

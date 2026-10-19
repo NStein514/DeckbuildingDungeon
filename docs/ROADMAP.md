@@ -49,11 +49,19 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Reloads and failed-save retries preserve the reveal and encounter seed; duplicate inputs cannot scout alternatives.
 - Reduced-motion and fast-animation settings apply; legacy maps keep their original entry flow until the next descent.
 
-## Milestone 4D — remaining replayability and survival choices
+## Milestone 4D — implemented: guardian variety
+
+- Seeded boss selection between the Dungeon Warden, Crypt Broodmother and Ember Sentinel.
+- Distinct poison/multi-hit and defensive/burn attack cycles with normal descent scaling.
+- Expandable battle-plan previews after reveal, using the same scaled definitions as combat.
+- Compatible legacy saves retain their Warden; new journeys and descents use the expanded pool.
+- Image Generator illustrations for both new guardians in reveal cards and battles.
+
+## Milestone 4E — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 
-1. Varied elite and boss patterns with clear previews, plus broader biome/event pools.
+1. Varied elite patterns and broader biome/event pools; further guardian tuning through playtesting.
 2. Balance prices and resource income across repeated descents; add more meaningful merchant/event options.
 3. Prototype an ember resource tied to forging and sanctuary choices; assess whether it creates interesting decisions before making it a mandatory survival meter.
 4. More fusion paths and relic tradeoffs, with viable damage, defense, and status builds.

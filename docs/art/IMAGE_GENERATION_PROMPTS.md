@@ -175,3 +175,13 @@ Eight separately spaced readable bronze icons: sword, crowned sword, chest, flam
 ## promotion/key_art
 
 A cloaked traveler facing the distant Dungeon Warden across a ruined crypt, a fan of floating rune cards in the foreground, quiet space for separate title typesetting. Target 2560×1440, aspect ratio 16:9. Use a softly resolved atmospheric crypt background, quieter than the focal subject. Export for `assets/images/promotion/key_art.webp`. Later milestone.
+
+## Guardian expansion — generated 2026-10-19
+
+Tool: Image Generator. Transparent square outputs, imported unchanged as PNGs. Runtime logical IDs: `enemies/broodmother`, `enemies/sentinel`.
+
+Crypt Broodmother: painterly dark-fantasy arachnid guardian, low-slung weathered basalt carapace with aged bronze funerary rings, segmented legs and curved ivory fangs with olive venom droplets; warm torch key and subtle cool rim, isolated complete silhouette, no text or frame. Preserve this carapace, rings and fang shape in future animation poses.
+
+Ember Sentinel: painterly dark-fantasy humanoid construct, charcoal basalt funerary armor, broad bronze shoulder rings, narrow amber eye slit, chest furnace behind a bronze grille, heavy stone fists; warm ember light and cool rim, isolated full figure, no text or frame. Preserve the mask, furnace grille and shoulder rings in future poses.
+
+Future card, selected UI and animation artwork should use Image Generator. Animation runtime behavior remains implemented in Flutter with reduced-motion support; these two imports are static portraits, not sprite sheets.

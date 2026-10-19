@@ -55,7 +55,10 @@ Future<void> main(List<String> args) async {
   await repo.save(r);
   checkpoints['shrine'] = jsonDecode(store.contents!);
   r = rules.fuse(r, 'starter-0', 'starter-8');
-  r = rules.finishCombat(enterRoom(rules, r, 'room-5-0'), Outcome.victory, 23);
+  final reveal = rules.enter(r, 'room-5-0');
+  await repo.save(reveal);
+  checkpoints['guardian'] = jsonDecode(store.contents!);
+  r = rules.finishCombat(rules.continueRoom(reveal), Outcome.victory, 23);
   await repo.save(r);
   checkpoints['victory'] = jsonDecode(store.contents!);
   File(args.single).writeAsStringSync(jsonEncode(checkpoints));

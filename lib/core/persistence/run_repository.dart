@@ -15,7 +15,7 @@ class RunRepository {
     if (text == null) return null;
     try {
       final j = jsonDecode(text) as Map<String, dynamic>;
-      if (j['version'] != 1 || ![1, 2, 3, 4].contains(j['contentVersion'])) {
+      if (j['version'] != 1 || ![1, 2, 3, 4, 5].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported save version; save preserved.',
         );
@@ -33,7 +33,7 @@ class RunRepository {
   Future<void> save(RunState r) async {
     validate(r);
     await store.write(
-      jsonEncode({'version': 1, 'contentVersion': 4, 'run': r.toJson()}),
+      jsonEncode({'version': 1, 'contentVersion': 5, 'run': r.toJson()}),
     );
   }
 
@@ -78,7 +78,7 @@ class RunRepository {
                 : parts[0] == 'card' && id >= 12 && id < r.nextCardId),
       );
     }
-    check([1, 2, 3, 4].contains(r.mapVersion));
+    check([1, 2, 3, 4, 5].contains(r.mapVersion));
     check(r.descent >= 1 && r.mapSeed >= 0 && r.mapSeed <= 0xffffffff);
     check(r.descent != 1 || r.mapSeed == r.seed);
     check(r.mapVersion != 1 || r.descent == 1);

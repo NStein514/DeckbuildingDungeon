@@ -70,3 +70,11 @@ Run saves intentionally resume at encounter entry, not mid-turn. Browser storage
 All 112 tests pass, along with formatting, static analysis, content checks and the release web build. Reveal tests exercise every room type, deterministic lane diversity across 100 seeds, committed-path rejection, unchanged encounter RNG on entry, save/reload, failed-write retry, overlapping commands and content-version-3 compatibility. The 100-descent checkpoint simulation now includes reveals and shuffled merchant/event paths. Phone widget checks verify hidden names/semantics and reveal restoration before combat.
 
 Chromium smoke checks passed at 390×844, including hidden card selection, persisted reveal across page reload, explicit encounter entry, combat targeting, journal persistence, fusion, descent, merchants and events. The reveal screenshot was visually checked for phone layout. This does not establish long-term balance: hiding safe rooms changes planning and needs human playtesting.
+
+## Milestone 4D validation
+
+All 118 tests pass, alongside formatting, static analysis, content checks (23 cards and 6 enemies), and the release web build. New checks cover seeded selection of all three guardians over 200 maps, unchanged version-4 maps and RNG continuation, actual poison/burn/block/multi-hit attack cycles, scaled battle-plan text, hidden previews, and reveal persistence before battle entry. The existing real-combat run and 100-descent checkpoint simulation also pass. Guardian balance remains provisional pending human playtesting.
+
+Both new guardian illustrations were generated with Image Generator and imported unchanged as transparent PNG assets. The enemy renderer fits complete silhouettes within their portrait slots. Static illustrations are included in this milestone; animated sprite sequences are future work.
+
+Chromium phone smoke checks passed for guardian reveal, expanded battle plan, encounter entry, and the existing combat, merchant, event, fusion, journal and descent flows. Reveal/plan and battle screenshots were visually checked at 390×844 with the generated Sentinel illustration present. The browser test targets the preview's accessibility group and explicitly scrolls the expanded panel.

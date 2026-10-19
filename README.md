@@ -102,3 +102,5 @@ docs/                    Design, architecture, roadmap, art specifications
 ```
 
 Read [game design](docs/GAME_DESIGN.md), [architecture](docs/ARCHITECTURE.md), and [roadmap](docs/ROADMAP.md). Next: broader build choices, elite/boss variety, and long-run balance. See [replayability direction](docs/REPLAYABILITY.md).
+
+New journeys and descents can end with the Dungeon Warden, Crypt Broodmother or Ember Sentinel. Reveal the boss card to inspect its repeating battle plan before entry. The two new guardians feature generated illustrations. Existing saved maps retain their original guardian.

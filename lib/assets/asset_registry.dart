@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 /// Logical identifiers remain stable when approved illustrations are imported.
 class AssetRegistry {
-  static const Map<String, String> illustrations = {};
+  static const Map<String, String> illustrations = {
+    'enemies/broodmother': 'assets/images/enemies/broodmother.png',
+    'enemies/sentinel': 'assets/images/enemies/sentinel.png',
+  };
 }
 
 class GameIllustration extends StatelessWidget {
@@ -24,7 +27,8 @@ class GameIllustration extends StatelessWidget {
       return Image.asset(
         path,
         height: height,
-        fit: BoxFit.cover,
+        fit: id.startsWith('enemies/') ? BoxFit.contain : BoxFit.cover,
+        excludeFromSemantics: true,
         errorBuilder: (_, error, stack) => _placeholder(),
       );
     }

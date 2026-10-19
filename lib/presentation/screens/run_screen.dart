@@ -1,3 +1,5 @@
+import '../../assets/asset_registry.dart';
+import '../widgets/guardian_plan.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
 import '../../app/settings.dart';
@@ -147,6 +149,13 @@ class RunScreen extends StatelessWidget {
                                 style: const TextStyle(fontSize: 24),
                               ),
                               for (final id in r.room!.enemies) ...[
+                                if (AssetRegistry.illustrations.containsKey(
+                                  'enemies/$id',
+                                ))
+                                  GameIllustration(
+                                    id: 'enemies/$id',
+                                    height: 150,
+                                  ),
                                 const SizedBox(height: 8),
                                 Text(
                                   '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
@@ -167,6 +176,15 @@ class RunScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
+                      if (r.room!.type == RoomType.boss)
+                        for (final id in r.room!.enemies)
+                          GuardianPlan(
+                            enemy: scaleEnemy(
+                              catalog.enemies[id]!,
+                              r.descent,
+                              modifier: r.room!.modifier,
+                            ),
+                          ),
                       const Text(
                         'This path is yours. The reveal is saved; returning to camp keeps the same card.',
                       ),

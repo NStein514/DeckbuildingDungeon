@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses the approved illustration production workflow. No final images are included. Current card/enemy logical IDs resolve to labeled TEMP ART components; other rows are planned. Sizes are production targets, not runtime layout sizes.
+All final illustration production uses the approved illustration production workflow. The two new guardians include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -54,3 +54,5 @@ Before each content expansion, add exact enemy, room, event, relic, and card var
 - `cards/flaming_strike`: sword wreathed in fire.
 - `cards/glacial_barrier`: shield of layered ice.
 - `cards/venom_flurry`: paired blades trailing venom.
+
+Generated guardian illustrations: `enemies/broodmother` (Crypt Broodmother) and `enemies/sentinel` (Ember Sentinel). Imported transparent PNGs at `assets/images/enemies/broodmother.png` and `assets/images/enemies/sentinel.png`; displayed in reveal cards and battle portraits. Generated with Image Generator on 2026-10-19 and reviewed for palette, silhouette and absence of text. User art review remains welcome.

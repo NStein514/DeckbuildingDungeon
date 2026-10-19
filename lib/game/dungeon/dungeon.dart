@@ -53,8 +53,8 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 4}) {
-    if (version < 1 || version > 4) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 5}) {
+    if (version < 1 || version > 5) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [
@@ -151,6 +151,22 @@ class DungeonGenerator {
           );
         }
       }
+    }
+    if (version >= 5) {
+      final slot = rooms.last;
+      final guardian = const [
+        'warden',
+        'broodmother',
+        'sentinel',
+      ][rng.nextInt(1000000) % 3];
+      rooms[rooms.length - 1] = DungeonRoom(
+        slot.id,
+        slot.depth,
+        slot.lane,
+        slot.type,
+        slot.next,
+        [guardian],
+      );
     }
     return rooms;
   }

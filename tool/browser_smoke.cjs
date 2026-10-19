@@ -63,6 +63,18 @@ fs.mkdirSync(output,{recursive:true});
    await page.getByRole('button',{name:'Continue run',exact:true}).click();
   }
   await page.setViewportSize({width:390,height:844});
+  await restore(fixtures.guardian);
+  await page.getByText('The path is revealed',{exact:true}).waitFor();
+  await page.getByText(/ · battle plan$/).click();
+  await page.waitForTimeout(600);
+  await page.mouse.move(195,450);
+  await page.mouse.wheel(0,450);
+  await page.getByRole('group',{name:/^Repeats in this order/}).waitFor();
+  await page.screenshot({path:path.join(output,'guardian-plan.png')});
+  await page.mouse.wheel(0,500);
+  await page.getByRole('button',{name:'Enter encounter',exact:true}).click();
+  await page.getByText('TURN 1',{exact:true}).waitFor();
+  await page.screenshot({path:path.join(output,'guardian-battle.png')});
   await restore(fixtures.shrine);
   await page.getByRole('button',{name:'First card',exact:true}).click();
   await page.getByRole('menuitem',{name:'Strike · copy 1',exact:true}).click();
