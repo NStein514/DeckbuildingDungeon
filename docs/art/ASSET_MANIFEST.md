@@ -1,10 +1,10 @@
 # Internal asset manifest
 
-All final illustration production uses the approved illustration production workflow. The two new guardians include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
+All final illustration production uses the approved illustration production workflow. The two new guardians, Strike, Ember Forge and Memory Well include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `cards/strike` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/strike.webp` | Placeholder component |
+| `cards/strike` | Card illustration | 1448×1086 | 4:3 | No | `assets/images/cards/strike.png` | Image Generator illustration |
 | `cards/guard` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/guard.webp` | Placeholder component |
 | `cards/quick_slash` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/quick_slash.webp` | Placeholder component |
 | `cards/heavy_blow` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/heavy_blow.webp` | Placeholder component |
@@ -56,3 +56,5 @@ Before each content expansion, add exact enemy, room, event, relic, and card var
 - `cards/venom_flurry`: paired blades trailing venom.
 
 Generated guardian illustrations: `enemies/broodmother` (Crypt Broodmother) and `enemies/sentinel` (Ember Sentinel). Imported transparent PNGs at `assets/images/enemies/broodmother.png` and `assets/images/enemies/sentinel.png`; displayed in reveal cards and battle portraits. Generated with Image Generator on 2026-10-19 and reviewed for palette, silhouette and absence of text. User art review remains welcome.
+
+Event illustrations: `events/emberForge` → `assets/images/events/ember_forge.png`; `events/memoryWell` → `assets/images/events/memory_well.png`. Generated with Image Generator alongside Strike. Source outputs are retained outside the runtime bundle; imported PNGs use logical registry IDs. The Well background was corrected with Image Generator before import. These images use existing card/reveal motion; no new sprite animation is claimed.

@@ -1,6 +1,7 @@
 // Generates valid deterministic checkpoints for an isolated browser smoke profile.
 import 'dart:convert';
 import 'dart:io';
+import 'package:deckbound/game/economy/economy.dart';
 import 'package:deckbound/core/persistence/run_repository.dart';
 import 'package:deckbound/core/persistence/save_store.dart';
 import 'package:deckbound/game/data/game_catalog.dart';
@@ -61,6 +62,42 @@ Future<void> main(List<String> args) async {
   r = rules.finishCombat(rules.continueRoom(reveal), Outcome.victory, 23);
   await repo.save(r);
   checkpoints['victory'] = jsonDecode(store.contents!);
+  for (final entry in {
+    'event': JourneyEvent.bloodAltar,
+    'forge': JourneyEvent.emberForge,
+    'well': JourneyEvent.memoryWell,
+  }.entries) {
+    for (var seed = 0; seed < 1000; seed++) {
+      var candidate = rules.start(seed);
+      for (var depth = 0; depth < 2; depth++) {
+        candidate = rules.reward(
+          rules.finishCombat(
+            enterRoom(rules, candidate, candidate.availableRooms.first),
+            Outcome.victory,
+            40,
+          ),
+          null,
+        );
+      }
+      candidate = enterRoom(
+        rules,
+        candidate,
+        candidate.rooms.firstWhere((room) => room.type == RoomType.event).id,
+      )..gold = 100;
+      if (JourneyEvent.fromSeed(
+            candidate.battleSeed,
+            mapVersion: candidate.mapVersion,
+          ) ==
+          entry.value) {
+        await repo.save(candidate);
+        checkpoints[entry.key] = jsonDecode(store.contents!);
+        break;
+      }
+    }
+    if (!checkpoints.containsKey(entry.key)) {
+      throw StateError('Missing event checkpoint');
+    }
+  }
   File(args.single).writeAsStringSync(jsonEncode(checkpoints));
 }
 

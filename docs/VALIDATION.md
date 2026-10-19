@@ -78,3 +78,11 @@ All 118 tests pass, alongside formatting, static analysis, content checks (23 ca
 Both new guardian illustrations were generated with Image Generator and imported unchanged as transparent PNG assets. The enemy renderer fits complete silhouettes within their portrait slots. Static illustrations are included in this milestone; animated sprite sequences are future work.
 
 Chromium phone smoke checks passed for guardian reveal, expanded battle plan, encounter entry, and the existing combat, merchant, event, fusion, journal and descent flows. Reveal/plan and battle screenshots were visually checked at 390×844 with the generated Sentinel illustration present. The browser test targets the preview's accessibility group and explicitly scrolls the expanded panel.
+
+## Milestone 4E validation
+
+All 126 tests pass with clean formatting/static analysis and content checks. New coverage verifies exact duplicate-instance upgrades/removals, survivable Forge costs, the Well's five-card minimum, full-health removal, exhausted upgrade choices, version-5 event preservation, atomic save failure/retry, concurrent command rejection, explicit cost previews, cancellation and saved UI results. Existing combat and 100-descent persistence checks remain passing. Event costs are provisional pending human playtesting.
+
+Image Generator produced the Forge, Memory Well and Strike art. The Well received a corrective generation pass to remove an unwanted checkerboard background. Imports retain their source PNGs and use existing asset registry entries and card presentation; new sprite animation is not included.
+
+The release web build and Chromium smoke checks passed, including both new event transactions and the existing merchant, combat, guardian, fusion, journal and descent flows. Screenshots confirmed readable event artwork and controls at 390×844 and the generated Strike image in the combat hand. Mobile-native compilation/device testing remains outside this validation.

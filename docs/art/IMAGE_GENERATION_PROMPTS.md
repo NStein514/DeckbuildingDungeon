@@ -185,3 +185,7 @@ Crypt Broodmother: painterly dark-fantasy arachnid guardian, low-slung weathered
 Ember Sentinel: painterly dark-fantasy humanoid construct, charcoal basalt funerary armor, broad bronze shoulder rings, narrow amber eye slit, chest furnace behind a bronze grille, heavy stone fists; warm ember light and cool rim, isolated full figure, no text or frame. Preserve the mask, furnace grille and shoulder rings in future poses.
 
 Future card, selected UI and animation artwork should use Image Generator. Animation runtime behavior remains implemented in Flutter with reduced-motion support; these two imports are static portraits, not sprite sheets.
+
+## Deck-changing events and Strike
+
+Image Generator prompts: Ember Forge — basalt anvil with worn bronze funerary rings, a blank blade under a floating ember, charcoal crypt and orange glow. Memory Well — bronze-ringed basalt well, lavender mist, a blank parchment dissolving over still water, opaque shadowy crypt background. Strike — chipped iron arming sword with bronze crossguard and dark leather grip, diagonal slash with restrained silver motion arc and sparks, quiet crypt backdrop. All use 4:3 painterly dark fantasy, warm key/cool rim, readable centered silhouettes, and no typography, card frames or UI. The Well received an Image Generator edit to replace the unwanted checkerboard background with opaque crypt stone and mist.

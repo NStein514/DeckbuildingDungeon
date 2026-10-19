@@ -1,3 +1,4 @@
+import '../../assets/asset_registry.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
 import '../../game/data/game_catalog.dart';
@@ -19,15 +20,23 @@ class EconomyPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (run.phase == RunPhase.event) {
-      final event = JourneyEvent.fromSeed(run.battleSeed);
-      final canAccept =
-          run.health + event.health > 0 &&
-          run.gold + event.gold >= 0 &&
-          (event.health < 0 || run.health < catalog.rules.maxHealth);
+      final event = JourneyEvent.fromSeed(
+        run.battleSeed,
+        mapVersion: run.mapVersion,
+      );
+      final canAccept = event.canAccept(
+        run.health,
+        run.gold,
+        catalog.rules.maxHealth,
+        run.deck,
+      );
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Icon(Icons.explore_outlined, size: 64),
+          if (event.choosesCard)
+            GameIllustration(id: 'events/${event.name}', height: 160)
+          else
+            const Icon(Icons.explore_outlined, size: 64),
           Text(
             event.title,
             style: const TextStyle(fontSize: 28, fontFamily: 'serif'),
@@ -38,16 +47,32 @@ class EconomyPanel extends StatelessWidget {
           FilledButton(
             onPressed: runs.busy || !canAccept
                 ? null
-                : () => runs.resolveEvent(true),
-            child: Text(
-              event == JourneyEvent.bloodAltar
-                  ? 'Offer 8 HP · gain 35 gold'
-                  : 'Pay 20 gold · heal up to 12 HP',
-            ),
+                : () async {
+                    if (!event.choosesCard) {
+                      await runs.resolveEvent(true);
+                      return;
+                    }
+                    final id = await Navigator.push<String>(
+                      context,
+                      MaterialPageRoute<String>(
+                        builder: (_) => DeckScreen(
+                          catalog: catalog,
+                          deck: run.deck,
+                          chooseUpgrade: event == JourneyEvent.emberForge,
+                          chooseRemoval: event == JourneyEvent.memoryWell,
+                          confirmationTitle: event == JourneyEvent.emberForge
+                              ? 'Upgrade this card for 6 HP?'
+                              : 'Remove this card for 25 gold?',
+                        ),
+                      ),
+                    );
+                    if (id != null) await runs.resolveEvent(true, cardId: id);
+                  },
+            child: Text(event.actionLabel),
           ),
           if (!canAccept)
             const Text(
-              'You cannot afford this bargain, or your health is already full.',
+              'This bargain needs sufficient health or gold, and an eligible card or missing health.',
             ),
           TextButton(
             onPressed: runs.busy ? null : () => runs.resolveEvent(false),

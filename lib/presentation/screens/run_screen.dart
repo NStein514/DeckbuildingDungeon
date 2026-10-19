@@ -469,7 +469,8 @@ class RunScreen extends StatelessWidget {
     RoomType.shrine => 'Combine two compatible cards, or leave safely.',
     RoomType.merchant =>
       'Spend gold on cards, healing or removal, or leave safely.',
-    RoomType.event => 'Consider a health-and-gold bargain. You can decline it.',
+    RoomType.event =>
+      'Discover a bargain for resources or your deck. You can decline it.',
   };
 
   Future<void> _continueRoom(BuildContext context) async {

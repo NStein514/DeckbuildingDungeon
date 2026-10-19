@@ -104,3 +104,7 @@ Personal records are the deepest floor actually entered, most rooms cleared in a
 ## Guardian variety
 
 Version-5 maps select one of three guardians from the saved map seed. Repeats across descents are possible. The Warden remains unchanged. The Crypt Broodmother has 74 base HP: Venom bite (6 damage, 2 poison), Coil (9 block), Twin fangs (two 6-damage hits). The Ember Sentinel has 86 base HP: Bank the furnace (8 block), Scorch (8 damage, 2 burn), Furnace strike (15 damage). Cycles repeat and use standard descent scaling. The boss reveal offers an optional full-cycle preview before entry without exposing unopened cards. Boss rewards and descent rules remain unchanged. These starting values require human balance feedback.
+
+## Deck-changing event bargains
+
+New maps can reveal the Ember Forge (6 HP for one unupgraded card upgrade; at least 7 HP required) or Memory Well (25 gold for removing a chosen card; at least six cards before removal). Existing altar/healer events remain in the pool. Each event offers a free safe exit. Costs are confirmed with the selected card preview, and only a successfully saved choice completes the room. Repeat descents create fresh offers; balance is provisional.

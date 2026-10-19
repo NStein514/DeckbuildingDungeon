@@ -57,7 +57,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Compatible legacy saves retain their Warden; new journeys and descents use the expanded pool.
 - Image Generator illustrations for both new guardians in reveal cards and battles.
 
-## Milestone 4E — remaining replayability and survival choices
+## Milestone 4E — implemented: deck-changing events
+
+- Ember Forge trades 6 HP for an exact-instance card upgrade; the offering must be survivable.
+- Memory Well trades 25 gold for an exact-instance removal, keeping at least five cards.
+- Costed card previews, cancellation, safe exits, durable results and duplicate-command rejection.
+- Seeded four-event pool for new maps; existing maps retain their original offers.
+- Image Generator artwork for the two events and the Strike card.
+
+## Milestone 4F — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

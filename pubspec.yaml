@@ -19,3 +19,5 @@ flutter:
   assets:
     - assets/data/
     - assets/images/enemies/
+    - assets/images/cards/
+    - assets/images/events/

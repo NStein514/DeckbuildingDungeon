@@ -63,6 +63,23 @@ fs.mkdirSync(output,{recursive:true});
    await page.getByRole('button',{name:'Continue run',exact:true}).click();
   }
   await page.setViewportSize({width:390,height:844});
+  for (const key of ['forge','well']) {
+   await restore(fixtures[key]);
+   const forge=key==='forge';
+   await page.getByRole('button',{name:forge?'Offer 6 HP · choose an upgrade':'Pay 25 gold · choose a card to remove',exact:true}).waitFor();
+   await page.waitForTimeout(350);
+   await page.screenshot({path:path.join(output,key+'-event.png')});
+   await page.getByRole('button',{name:forge?'Offer 6 HP · choose an upgrade':'Pay 25 gold · choose a card to remove',exact:true}).click();
+   await page.getByRole('button',{name:/\. Cost/}).first().click();
+   await page.getByRole('button',{name:forge?'Upgrade':'Remove card',exact:true}).click();
+   await page.getByText('Choose your path',{exact:true}).waitFor();
+   const result=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+   assert.equal(result.run.health,fixtures[key].run.health-(forge?6:0));
+   assert.equal(result.run.gold,100-(forge?0:25));
+   if(forge) assert.equal(result.run.deck.filter(c=>c.upgrade===1).length,1);
+   else assert.equal(result.run.deck.length,11);
+  }
+  console.log('PASS: forge upgrade and memory well removal persist exact costs and deck changes.');
   await restore(fixtures.guardian);
   await page.getByText('The path is revealed',{exact:true}).waitFor();
   await page.getByText(/ · battle plan$/).click();

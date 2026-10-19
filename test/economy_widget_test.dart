@@ -10,7 +10,7 @@ import 'package:deckbound/game/progression/run_rules.dart';
 import 'package:deckbound/game/progression/run_state.dart';
 import 'package:deckbound/presentation/widgets/game_card.dart';
 import 'test_catalog.dart';
-import 'economy/economy_test.dart' show reachRoom;
+import 'economy/economy_test.dart' show reachRoom, reachEvent;
 import 'persistence/save_test.dart' show FailingStore;
 
 void main() {
@@ -98,8 +98,8 @@ void main() {
     phone(t);
     final catalog = loadCatalog(), store = MemorySaveStore();
     final repo = RunRepository(store, catalog),
-        r = reachRoom(RunRules(catalog), RoomType.event)..gold = 100;
-    final event = JourneyEvent.fromSeed(r.battleSeed);
+        r = reachEvent(RunRules(catalog), JourneyEvent.bloodAltar)..gold = 100;
+    final event = JourneyEvent.fromSeed(r.battleSeed, mapVersion: r.mapVersion);
     await repo.save(r);
     await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
     await t.pumpAndSettle();

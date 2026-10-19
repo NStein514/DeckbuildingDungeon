@@ -11,10 +11,12 @@ class DeckScreen extends StatefulWidget {
     required this.deck,
     this.chooseUpgrade = false,
     this.chooseRemoval = false,
+    this.confirmationTitle,
   });
   final GameCatalog catalog;
   final List<CardInstance> deck;
   final bool chooseUpgrade, chooseRemoval;
+  final String? confirmationTitle;
   @override
   State<DeckScreen> createState() => _DeckScreenState();
 }
@@ -136,9 +138,10 @@ class _DeckScreenState extends State<DeckScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(
-          widget.chooseRemoval
-              ? 'Remove this card for 40 gold?'
-              : 'Upgrade preview',
+          widget.confirmationTitle ??
+              (widget.chooseRemoval
+                  ? 'Remove this card for 40 gold?'
+                  : 'Upgrade preview'),
         ),
         content: SizedBox(
           height: 280,

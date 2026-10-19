@@ -34,6 +34,17 @@ RunState reachRoom(RunRules rules, RoomType type, {int seed = 514}) {
   return enterRoom(rules, r, target.id);
 }
 
+RunState reachEvent(RunRules rules, JourneyEvent event) {
+  for (var seed = 0; seed < 1000; seed++) {
+    final r = reachRoom(rules, RoomType.event, seed: seed);
+    if (JourneyEvent.fromSeed(r.battleSeed, mapVersion: r.mapVersion) ==
+        event) {
+      return r;
+    }
+  }
+  throw StateError('Event not found');
+}
+
 void main() {
   final catalog = loadCatalog(), rules = RunRules(loadCatalog());
   RunState shop() => reachRoom(rules, RoomType.merchant)..gold = 300;
@@ -109,9 +120,16 @@ void main() {
     final types = <JourneyEvent>{};
     for (var seed = 0; seed < 50; seed++) {
       final r = reachRoom(rules, RoomType.event, seed: seed)..gold = 100;
-      final event = JourneyEvent.fromSeed(r.battleSeed);
+      final event = JourneyEvent.fromSeed(
+        r.battleSeed,
+        mapVersion: r.mapVersion,
+      );
       types.add(event);
-      final accepted = rules.resolveEvent(r, accept: true);
+      final accepted = rules.resolveEvent(
+        r,
+        accept: true,
+        cardId: event.choosesCard ? r.deck.first.id : null,
+      );
       expect(accepted.gold, r.gold + event.gold);
       expect(accepted.health, r.health + event.health);
       expect(accepted.phase, RunPhase.map);
@@ -122,8 +140,8 @@ void main() {
       final skipped = rules.resolveEvent(r, accept: false);
       expect(skipped.gold, r.gold);
       expect(skipped.health, r.health);
-      if (event == JourneyEvent.bloodAltar) {
-        r.health = 8;
+      if (event.health < 0) {
+        r.health = -event.health;
       } else {
         r.gold = 19;
       }
@@ -163,7 +181,7 @@ void main() {
     () async {
       final store = FailingStore(),
           repo = RunRepository(FailingStore(), catalog);
-      await repo.save(reachRoom(rules, RoomType.event)..gold = 100);
+      await repo.save(reachEvent(rules, JourneyEvent.bloodAltar)..gold = 100);
       store.contents = (repo.store as FailingStore).contents;
       final runs = RunController(RunRepository(store, catalog));
       await runs.load();

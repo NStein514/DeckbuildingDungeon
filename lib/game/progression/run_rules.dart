@@ -237,15 +237,29 @@ class RunRules {
     return r;
   }
 
-  RunState resolveEvent(RunState old, {required bool accept}) {
+  RunState resolveEvent(RunState old, {required bool accept, String? cardId}) {
     if (old.phase != RunPhase.event) throw StateError('No active event.');
     final r = old.copy();
     if (accept) {
-      final event = JourneyEvent.fromSeed(old.battleSeed);
-      if (r.health + event.health <= 0 ||
-          r.gold + event.gold < 0 ||
-          (event.health > 0 && r.health == catalog.rules.maxHealth)) {
-        throw StateError('You cannot afford this bargain.');
+      final event = JourneyEvent.fromSeed(
+        old.battleSeed,
+        mapVersion: old.mapVersion,
+      );
+      if (!event.canAccept(r.health, r.gold, catalog.rules.maxHealth, r.deck)) {
+        throw StateError('You cannot accept this bargain.');
+      }
+      if (event.choosesCard) {
+        final index = r.deck.indexWhere((c) => c.id == cardId);
+        if (index < 0) throw StateError('Choose a card from your deck.');
+        final card = r.deck[index];
+        if (event == JourneyEvent.emberForge) {
+          if (card.upgrade != 0) throw StateError('Choose an unupgraded card.');
+          r.deck[index] = CardInstance(card.id, card.definitionId, upgrade: 1);
+        } else {
+          r.deck.removeAt(index);
+        }
+      } else if (cardId != null) {
+        throw StateError('This event does not accept a card.');
       }
       r.health = math.min(catalog.rules.maxHealth, r.health + event.health);
       r.gold += event.gold;
