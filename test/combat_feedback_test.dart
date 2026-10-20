@@ -7,6 +7,7 @@ import 'package:deckbound/presentation/effects/combat_cue.dart';
 import 'package:deckbound/presentation/effects/combat_feedback.dart';
 import 'package:deckbound/presentation/screens/battle_screen.dart';
 import 'test_catalog.dart';
+import 'package:deckbound/presentation/effects/combat_motion.dart';
 
 void main() {
   final catalog = loadCatalog();
@@ -150,7 +151,7 @@ void main() {
           find.byKey(const ValueKey('combat-feedback-label')),
           findsOneWidget,
         );
-        if (reduced) expect(find.byType(Image), findsNothing);
+        if (reduced) expect(find.byType(CombatMotion), findsNothing);
         await t.tap(find.text('Act'));
         expect(taps, 1);
         await t.pumpWidget(view(2));

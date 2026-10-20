@@ -61,6 +61,8 @@ Event illustrations: `events/emberForge` → `assets/images/events/ember_forge.p
 
 Fusion expansion illustrations: `cards/stormguard` → `assets/images/cards/stormguard.png`; `cards/cinder_maul` → `assets/images/cards/cinder_maul.png`. Produced with Image Generator for the expanded recipe set.
 
-Combat feedback atlas: `effects/combatAtlas` → `assets/images/effects/combat_atlas.png`. Image Generator produced a 1536×1024 RGBA atlas on 2026-10-20: top row slash/shield/fire, bottom row lightning/poison/healing. Alpha channel verified; source retained in the generated-images workspace. Six cells are cropped at runtime; the healing rune also supplies a lavender-tinted arcane/support effect. Flutter animates brief scale, rotation, drift and opacity, with text kept out of the artwork. Reduced motion replaces the artwork with static labels.
+Combat feedback atlas: `effects/combatAtlas` → `assets/images/effects/combat_atlas.png`. Image Generator produced a 1536×1024 RGBA atlas on 2026-10-20: top row slash/shield/fire, bottom row lightning/poison/healing. Alpha channel verified; source retained in the generated-images workspace. Fire and healing cells now supply moving particle detail. Flutter draws distinct paths, emission sequences and trajectories for each effect, with text kept out of the artwork. Reduced motion replaces the artwork with static labels.
 
 `enemies/duelist` → `assets/images/enemies/duelist.png`: Ash Duelist, generated with Image Generator on 2026-10-20. Transparent full-body swordsman with bronze blade and buckler; displayed with contain-fit in reveals and combat, using the existing quick attack/block/status effects.
+
+`relics/lastEmber` → `assets/images/relics/last_ember.png`: Image Generator transparent bronze lantern pendant, burning coal and charred ribbon. Reviewed for silhouette and transparent background; shown in inventory and journal. Source: `exec-5ca6eacd-612b-483c-b135-87e577784410.png`.

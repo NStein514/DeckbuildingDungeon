@@ -155,7 +155,9 @@ class RunRules {
       throw StateError('Treasure already claimed.');
     }
     final r = old.copy(), rng = SeededRandom(old.rngState);
-    final pool = Relic.values.where((x) => !r.relics.contains(x)).toList();
+    final pool = Relic.treasurePool(
+      r.mapVersion,
+    ).where((x) => !r.relics.contains(x)).toList();
     if (pool.isNotEmpty) r.relics.add(pool[rng.nextInt(pool.length)]);
     r.gold += 25;
     r.rngState = rng.state;

@@ -573,6 +573,17 @@ class _BattleScreenState extends State<BattleScreen> {
                   color: Color(0xfff0cb81),
                 ),
               ),
+              if (state.turn == 1 &&
+                  widget.relics.any(
+                    (r) => r.grantsOpeningEnergy(
+                      widget.initialHealth ?? widget.catalog.rules.maxHealth,
+                      widget.catalog.rules.maxHealth,
+                    ),
+                  ))
+                const Text(
+                  '+1 Last Ember',
+                  style: TextStyle(fontSize: 9, color: Color(0xfff0cb81)),
+                ),
               const Text(
                 'ENERGY',
                 style: TextStyle(fontSize: 9, letterSpacing: 1.4),

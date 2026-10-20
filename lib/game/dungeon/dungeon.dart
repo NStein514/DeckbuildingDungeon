@@ -53,8 +53,8 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 8}) {
-    if (version < 1 || version > 8) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 9}) {
+    if (version < 1 || version > 9) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [

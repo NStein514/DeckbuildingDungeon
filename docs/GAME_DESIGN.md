@@ -125,7 +125,7 @@ Wanderer uses the original starter deck. Stormweaver replaces Heavy Blow and one
 
 ## Quick combat feedback
 
-Physical attacks produce a slash; fire, lightning and poison use their own bursts. Block gains and fully absorbed hits show shield ripples. Healing has rising motes, while buffs, card draw, discard and other support plays receive arcane feedback. Damage numbers show actual HP lost plus any absorbed amount. Status applications and periodic damage retain their element; combos get a short additional cue. The effects overlap rather than making players wait through a sequence. Normal feedback lasts 0.42 seconds, fast feedback 0.18 seconds, and reduced motion uses static labels. A killing blow displays its final impact before the result screen while the result save proceeds immediately.
+Physical attacks produce a slash; fire, lightning and poison use their own bursts. Block gains and fully absorbed hits show shield ripples. Healing has rising motes, while buffs, card draw, discard and other support plays receive arcane feedback. Damage numbers show actual HP lost plus any absorbed amount. Status applications and periodic damage retain their element; combos get a short additional cue. The effects overlap rather than making players wait through a sequence. Normal feedback lasts 0.48 seconds, fast feedback 0.24 seconds, and reduced motion uses static labels. A killing blow displays its final impact before the result screen while the result save proceeds immediately.
 
 ## Ash Duelist
 
@@ -134,3 +134,7 @@ A 34-HP regular enemy available solo or beside a Rat. Its repeating cycle is Mea
 ## Merchant upgrade service
 
 Each merchant visit offers one card upgrade for 50 gold, competing with healing, removal and new cards. Choose any owned unupgraded card, including fusion results, inspect its upgraded effects and confirm the cost. The exact copy is upgraded; deck size and instance identity stay unchanged. Canceling spends nothing. The service cannot be bought twice during the visit, including after reload. Pricing is provisional pending repeated-descent playtesting.
+
+Last Ember grants one additional energy on the first turn when starting combat at half maximum health or less (rounded down). It stacks with other opening relics, never retriggers within an encounter, and remains owned between encounters. New maps use the five-relic treasure pool; maps through version 8 retain the original four.
+
+Combat effects use distinct motion: a traveling slash with sparks; a shield outline that forms facets and ripples; a fire projectile with rising embers; changing lightning branches; floating bubbles that burst into poison droplets; inward healing spirals and a rising cross; rotating support-card outlines and orbiting motes. Effects do not change combat timing or RNG.

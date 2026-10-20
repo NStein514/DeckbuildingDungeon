@@ -201,3 +201,7 @@ Image Generator: a transparent 3-column × 2-row dark-fantasy VFX atlas with six
 ## Ash Duelist — 2026-10-20
 
 Image Generator: full-body undead crypt swordsman, scorched layered cloth and weathered basalt/bronze light armor, long curved bronze sword and battered buckler, hood with dim ember eyes, asymmetrical dueling stance. Painterly charcoal/bronze/ember palette with warm torch light and cool rim. Transparent background, complete weapon and feet within canvas, no words/UI. Source `exec-85dcaafd-328e-47a2-a3e4-1dc2436037d7.png`; imported unchanged.
+
+## Last Ember relic
+
+Image Generator art direction: a small aged-bronze lantern pendant containing a last glowing ember, with a charred ribbon, painterly dark-fantasy rendering, warm ember light, readable silhouette, transparent background and no lettering. Original output retained as `exec-5ca6eacd-612b-483c-b135-87e577784410.png`.

@@ -99,7 +99,18 @@ class RunScreen extends StatelessWidget {
                         .map(
                           (x) => Tooltip(
                             message: x.description,
-                            child: Chip(label: Text(x.title)),
+                            child: Chip(
+                              avatar: x.name == 'lastEmber'
+                                  ? const SizedBox(
+                                      width: 24,
+                                      child: GameIllustration(
+                                        id: 'relics/lastEmber',
+                                        height: 24,
+                                      ),
+                                    )
+                                  : null,
+                              label: Text(x.title),
+                            ),
                           ),
                         )
                         .toList(),

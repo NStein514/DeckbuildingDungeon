@@ -1,14 +1,15 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'combat_cue.dart';
+import 'combat_motion.dart';
 
 Duration combatFeedbackDuration({required bool reduced, required bool fast}) =>
     Duration(
       milliseconds: reduced
           ? 180
           : fast
-          ? 180
-          : 420,
+          ? 240
+          : 480,
     );
 
 /// Local, non-interactive bursts remain anchored while the battle scrolls.
@@ -66,6 +67,8 @@ class _CombatFeedbackState extends State<CombatFeedback>
     final cues = widget.cues.length > 3
         ? widget.cues.sublist(widget.cues.length - 3)
         : widget.cues;
+    final visuals = cues.map((c) => c.visual).toSet();
+    if (visuals.length > 1) visuals.remove(CombatVisual.arcane);
     return RepaintBoundary(
       child: Stack(
         clipBehavior: Clip.hardEdge,
@@ -82,36 +85,15 @@ class _CombatFeedbackState extends State<CombatFeedback>
                         return const SizedBox.shrink();
                       }
                       final t = controller.value;
-                      final fade = widget.reducedMotion
-                          ? 1.0
-                          : (1 - t).clamp(0.0, 1.0);
                       return Stack(
                         alignment: Alignment.center,
                         children: [
                           if (!widget.reducedMotion)
-                            for (var i = 0; i < cues.length; i++)
-                              Opacity(
-                                opacity: fade,
-                                child: Transform.translate(
-                                  offset: Offset(
-                                    (i - (cues.length - 1) / 2) * 36,
-                                    cues[i].visual == CombatVisual.healing
-                                        ? -20 * t
-                                        : 0,
-                                  ),
-                                  child: Transform.rotate(
-                                    angle: cues[i].visual == CombatVisual.slash
-                                        ? -.25 + t * .5
-                                        : 0,
-                                    child: Transform.scale(
-                                      scale:
-                                          .65 +
-                                          Curves.easeOut.transform(t) * .65,
-                                      child: _EffectSprite(
-                                        visual: cues[i].visual,
-                                      ),
-                                    ),
-                                  ),
+                            for (final visual in visuals)
+                              Positioned.fill(
+                                child: CombatMotion(
+                                  visual: visual,
+                                  progress: t,
                                 ),
                               ),
                           Align(
@@ -154,39 +136,6 @@ class _CombatFeedbackState extends State<CombatFeedback>
               ),
             ),
         ],
-      ),
-    );
-  }
-}
-
-/// Six generated atlas cells. Arcane reuses the healing rune tinted lavender.
-class _EffectSprite extends StatelessWidget {
-  const _EffectSprite({required this.visual});
-  final CombatVisual visual;
-  @override
-  Widget build(BuildContext context) {
-    final cell = visual == CombatVisual.arcane ? 5 : visual.index;
-    return SizedBox.square(
-      dimension: 136,
-      child: ClipRect(
-        child: OverflowBox(
-          alignment: Alignment((cell % 3) - 1.0, cell < 3 ? -1 : 1),
-          maxWidth: 408,
-          minWidth: 408,
-          maxHeight: 272,
-          minHeight: 272,
-          child: Image.asset(
-            'assets/images/effects/combat_atlas.png',
-            width: 408,
-            height: 272,
-            fit: BoxFit.fill,
-            color: visual == CombatVisual.arcane
-                ? const Color(0xffbba3de)
-                : null,
-            colorBlendMode: BlendMode.modulate,
-            errorBuilder: (_, _, _) => const SizedBox.shrink(),
-          ),
-        ),
       ),
     );
   }

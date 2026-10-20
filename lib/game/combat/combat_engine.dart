@@ -252,6 +252,18 @@ class CombatEngine {
     _checkOutcome();
     if (_outcome != Outcome.active) return;
     _energy = rules.energy;
+    if (_turn == 1 &&
+        _relics.any(
+          (r) => r.grantsOpeningEnergy(_player.health, rules.maxHealth),
+        )) {
+      _energy++;
+      _emit(
+        EventKind.status,
+        'Last Ember awakens: +1 opening energy.',
+        actor: _player.id,
+        amount: 1,
+      );
+    }
     _emit(EventKind.turn, 'Turn $_turn • your move.');
     _draw(
       rules.draw +

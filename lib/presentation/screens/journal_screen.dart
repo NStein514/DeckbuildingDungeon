@@ -4,6 +4,7 @@ import '../../game/data/game_catalog.dart';
 import '../../game/fusion/fusion.dart';
 import '../../game/relics/relic.dart';
 import '../widgets/game_card.dart';
+import '../../assets/asset_registry.dart';
 import '../widgets/journal_notice.dart';
 
 class JournalScreen extends StatefulWidget {
@@ -86,11 +87,19 @@ class _JournalScreenState extends State<JournalScreen> {
                   ),
                   for (final relic in Relic.values)
                     ListTile(
-                      leading: Icon(
-                        profile.relics.contains(relic.name)
-                            ? Icons.check_circle_outline
-                            : Icons.search,
-                      ),
+                      leading: relic == Relic.lastEmber
+                          ? const SizedBox(
+                              width: 48,
+                              child: GameIllustration(
+                                id: 'relics/lastEmber',
+                                height: 48,
+                              ),
+                            )
+                          : Icon(
+                              profile.relics.contains(relic.name)
+                                  ? Icons.check_circle_outline
+                                  : Icons.search,
+                            ),
                       title: Text(relic.title),
                       subtitle: Text(
                         '${profile.relics.contains(relic.name) ? 'Discovered' : 'Not yet discovered'} · ${relic.description}',

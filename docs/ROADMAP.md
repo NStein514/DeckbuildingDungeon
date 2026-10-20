@@ -103,7 +103,13 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Atomic gold/deck/service persistence, failed-save retry and duplicate-input protection.
 - Available in existing merchant checkpoints; map generation remains version 8.
 
-## Milestone 4K — remaining replayability and survival choices
+## Milestone 4K — implemented: Last Ember
+
+- New treasure relic grants +1 opening energy when entering combat at half health or less.
+- Generated lantern artwork appears in the run inventory and journal.
+- Map version 9 expands treasure; earlier maps preserve their original relic pool.
+
+## Milestone 4L — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 
@@ -121,7 +127,13 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 - Actual damage/block/heal feedback, bounded concurrent effects and nonblocking input.
 - Brief killing-hit presentation, immediate state/save resolution, reduced-motion and fast modes.
 
-## Milestone 5B — remaining presentation and accessibility
+## Milestone 5B — implemented: distinct combat motion
+
+- Sweeping slash trails, traced shield facets, flying fire and embers, branching lightning, rising poison bubbles, spiraling healing motes and orbiting support cards.
+- Each effect changes shape and particle positions over its lifetime; generated fire/healing texture details accompany procedural motion.
+- Nonblocking 480 ms effects, 240 ms fast mode and static reduced-motion labels.
+
+## Milestone 5C — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 
