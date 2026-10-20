@@ -12,7 +12,7 @@
 - Complete real-combat seeded-run test, persistence and widget tests.
 - Flutter dependency lockfile and Android/iOS/web hosts.
 
-See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Starting-build unlocks and lifetime totals remain outstanding; discovery and best-run records are implemented below.
+See VALIDATION.md for current checks and platform limits. An interrupted encounter restarts at its entry checkpoint; this is not mid-turn persistence. Native device testing remains outstanding. Lifetime totals remain outstanding; discovery and best-run records are implemented below.
 
 ## Milestone 3 — implemented: tactical combos, fusion, and descent foundation
 
@@ -80,7 +80,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Shrine shortcuts list craftable recipes and prefer unupgraded duplicate sources, with preview and confirmation.
 - Generated card illustrations, journal discovery, upgrade support, and fusion-only acquisition.
 
-## Milestone 4H — remaining replayability and survival choices
+## Milestone 4H — implemented: journal-based starting builds
+
+- Wanderer preserves the original balanced starter deck.
+- Discovering any fusion unlocks Stormweaver, trading Heavy Blow and one Strike for Static Lance and Spark.
+- Defeating a guardian unlocks Venomblade, trading Heavy Blow and Firebolt for Poison Edge and Quick Slash.
+- Camp shows requirements, selection and inspectable decks, including locked previews.
+- Unlocks derive from existing journal records; no permanent stat inflation or new save schema.
+
+## Milestone 4I — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 
@@ -88,7 +96,7 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 2. Balance prices and resource income across repeated descents; add more meaningful merchant/event options.
 3. Prototype an ember resource tied to forging and sanctuary choices; assess whether it creates interesting decisions before making it a mandatory survival meter.
 4. More fusion paths and relic tradeoffs, with viable damage, defense, and status builds.
-5. Starting-build and challenge unlocks based on the journal; unlock options rather than permanent stat inflation.
+5. Further starting-build and challenge unlocks based on the journal; unlock options rather than permanent stat inflation.
 6. Balance repeated descents with automated simulation plus human playtesting; verify multiple builds can progress and increasing difficulty does not create unavoidable losses too early.
 
 ## Milestone 5 — presentation and accessibility

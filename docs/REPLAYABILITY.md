@@ -17,19 +17,19 @@ A proposed future resource is **embers**: opportunities to shape the deck compet
 - Fresh run seeds by default, with explicit seeds for reproducible routes and challenges.
 - Six-floor segments with a boss and a choice to descend again, keeping the current build and health.
 - Deterministic next-map generation, rising enemy HP/damage/block, continuous floor numbering, bounded active-map storage.
-- Three tactical combos, three permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
+- Three tactical combos, five permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
 - Continue/reload at stable checkpoints, including after a boss and on later descents.
 - Seeded regular encounters and ambush variants, with visible Hardy/Fierce risk modifiers and bonus gold.
-- A merchant with cards, recovery, and removal competing for gold; two optional health/gold bargains.
+- A merchant with cards, recovery, and removal competing for gold; four optional resource/deck events.
 - A cross-run discovery journal for cards/fusions/relics and personal bests for floors, rooms and bosses.
 
-The current four-enemy catalog and fixed floor roles will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.
+The current six-enemy catalog and limited room pools will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.
 
 ## Next playable milestone
 
 The first encounter pools, risk modifiers, merchants, removal and resource events are implemented. Expand elite/boss behavior and two or three viable build archetypes, then assess the gold economy over repeated descents. More modifiers should change tactics, not only enemy numbers. Keep difficulty previews consistent with actual rules.
 
-Cross-run deepest-floor records and the recipe journal are now implemented. Next, unlock different starting choices, recipes, relics and challenge rules instead of permanently increasing all stats. This preserves meaningful early-floor decisions on repeat runs. The profile is already saved separately from the active journey, with version handling and failed-write tests.
+Cross-run deepest-floor records and the recipe journal are now implemented. Journal-based starting choices now unlock Stormweaver after a fusion discovery and Venomblade after a guardian victory. Further recipes, relics and challenge rules should also offer choices instead of permanently increasing all stats. This preserves meaningful early-floor decisions on repeat runs. The profile is already saved separately from the active journey, with version handling and failed-write tests.
 
 ## Acceptance criteria for replayability work
 

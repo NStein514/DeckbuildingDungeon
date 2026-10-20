@@ -6,6 +6,7 @@ import '../core/persistence/run_repository.dart';
 import '../game/models/models.dart';
 import '../game/progression/run_rules.dart';
 import '../game/progression/run_state.dart';
+import '../game/progression/starting_build.dart';
 
 class RunController extends ChangeNotifier {
   RunController(this.repository, {this.profileRepository})
@@ -121,8 +122,15 @@ class RunController extends ChangeNotifier {
     }
   }
 
-  Future<bool> start(int seed) =>
-      _commit(() => rules.start(seed), replacing: true);
+  Future<bool> start(
+    int seed, {
+    StartingBuild build = StartingBuild.wanderer,
+  }) => _commit(() {
+    if (!build.unlocked(_profile)) {
+      throw StateError('This starting build is still locked in your journal.');
+    }
+    return rules.start(seed, build: build);
+  }, replacing: true);
   Future<bool> descend() => _commit(() => rules.descend(_state!));
   Future<bool> continueRoom() => _commit(() => rules.continueRoom(_state!));
   Future<bool> enter(String id) => _commit(() => rules.enter(_state!, id));

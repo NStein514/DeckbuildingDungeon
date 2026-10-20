@@ -9,7 +9,7 @@ A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Cry
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-three cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
-- Three consecutive-play combos and three permanent fusion recipes with previews and saved discoveries.
+- Three consecutive-play combos and five permanent fusion recipes with previews and saved discoveries.
 - After each boss, descend again with your build intact and stronger enemies; floor numbers keep advancing.
 - Seeded encounter variations with visible Hardy/Fierce modifiers and bonus gold.
 - Merchants sell cards, healing, and permanent card removal; optional events trade health against gold.
@@ -19,7 +19,7 @@ A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Cry
 - Versioned local run saves and persistent settings. An interrupted battle restarts from its entry checkpoint with the same health, deck, and seed.
 - Labeled temporary illustrations, silent audio, and reduced-motion preferences.
 
-Biome variety, deeper build progression, starting-build unlocks, final art, and production audio remain future work. See [roadmap](docs/ROADMAP.md).
+Biome variety, deeper build progression, additional starting builds, final art, and production audio remain future work. See [roadmap](docs/ROADMAP.md).
 
 ## Requirements and launch
 
@@ -110,3 +110,5 @@ New-map events now include the Ember Forge (trade 6 HP for a chosen upgrade) and
 Unplayed cards now stay in hand between turns (up to ten cards); played cards still cycle through discard or exhaust. Each encounter draws a fresh hand from your persistent journey deck. New maps shuffle the interior floor order as well as card positions, and dungeon cards have a small stable tilt. Opening encounters and final bosses remain at the ends; use a new run or the next descent to see the new layouts.
 
 Fusion shrines now offer five recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
+
+Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all three decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.

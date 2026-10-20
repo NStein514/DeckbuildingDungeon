@@ -7,11 +7,12 @@ import '../dungeon/dungeon.dart';
 import '../models/models.dart';
 import '../relics/relic.dart';
 import 'run_state.dart';
+import 'starting_build.dart';
 
 class RunRules {
   RunRules(this.catalog);
   final GameCatalog catalog;
-  RunState start(int seed) {
+  RunState start(int seed, {StartingBuild build = StartingBuild.wanderer}) {
     if (seed < 0 || seed > 0xffffffff) throw ArgumentError('Invalid seed');
     final rng = SeededRandom(seed);
     final rooms = DungeonGenerator.generate(rng);
@@ -19,7 +20,7 @@ class RunRules {
       seed: seed,
       rngState: rng.state,
       rooms: rooms,
-      deck: catalog.createDeck(),
+      deck: build.deck(catalog),
       health: catalog.rules.maxHealth,
       relics: [Relic.ironSigil],
     );

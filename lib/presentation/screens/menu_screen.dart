@@ -4,6 +4,8 @@ import '../../app/settings.dart';
 import '../../game/data/game_catalog.dart';
 import '../widgets/game_card.dart';
 import 'battle_screen.dart';
+import 'deck_screen.dart';
+import '../../game/progression/starting_build.dart';
 import 'run_screen.dart';
 import 'journal_screen.dart';
 import '../widgets/journal_notice.dart';
@@ -26,6 +28,7 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   String encounter = 'rat';
+  StartingBuild startingBuild = StartingBuild.wanderer;
   final seed = TextEditingController();
   String? seedError;
   @override
@@ -116,6 +119,48 @@ class _MenuScreenState extends State<MenuScreen> {
                             : _newRun,
                         child: const Text('New run'),
                       ),
+                    ),
+                    ExpansionTile(
+                      title: Text('Starting build · ${startingBuild.title}'),
+                      children: [
+                        const Text(
+                          '12 cards · 50 HP · Iron Sigil. No permanent stat bonuses.',
+                        ),
+                        for (final build in StartingBuild.values)
+                          ListTile(
+                            title: Text(
+                              '${build.title}${build == startingBuild ? " · selected" : ""}',
+                            ),
+                            subtitle: Text(
+                              '${build.unlocked(widget.runs.profile) ? "" : "Locked · "}${build.description}',
+                            ),
+                            leading: Icon(
+                              build == startingBuild
+                                  ? Icons.check_circle
+                                  : Icons.circle_outlined,
+                            ),
+                            onTap:
+                                widget.runs.busy ||
+                                    !widget.runs.loaded ||
+                                    widget.runs.profileError != null ||
+                                    !build.unlocked(widget.runs.profile)
+                                ? null
+                                : () => setState(() => startingBuild = build),
+                            trailing: IconButton(
+                              tooltip: 'Inspect ${build.title} deck',
+                              icon: const Icon(Icons.style),
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (_) => DeckScreen(
+                                    catalog: widget.catalog,
+                                    deck: build.deck(widget.catalog),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                     if (widget.runs.state != null)
                       SizedBox(
@@ -265,7 +310,9 @@ class _MenuScreenState extends State<MenuScreen> {
       );
       if (ok != true || !mounted) return;
     }
-    if (await widget.runs.start(value) && mounted) _openRun();
+    if (await widget.runs.start(value, build: startingBuild) && mounted) {
+      _openRun();
+    }
   }
 
   void _start() {

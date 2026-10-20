@@ -118,3 +118,7 @@ Unplayed permanent cards persist between turns. Each turn draws up to five more 
 ## Expanded fusion builds
 
 Guard + Spark → Stormguard (1 energy): gain 6 block, deal 2 lightning damage, then apply 2 Shock. The damage consumes existing Shock before the new stacks are applied; its defense-card damage does not gain attack-only Strength bonuses. An upgrade grants 8 block, 4 damage and 3 Shock. Heavy Blow + Firebolt → Cinder Maul (2 energy): deal 15 attack damage and apply 4 Burn; upgraded, 17 damage and 5 Burn. Fire tagging triggers Ember Heart as normal. Both results are shrine-only, consume two exact source cards and their upgrades, and begin unupgraded. These recipes compete for Guard/Firebolt sources with existing fusions. Balance remains provisional.
+
+## Starting builds
+
+Wanderer uses the original starter deck. Stormweaver replaces Heavy Blow and one Strike with Static Lance and Spark, emphasizing Shock and lightning at the expense of direct heavy damage. Venomblade replaces Heavy Blow and Firebolt with Poison Edge and Quick Slash, emphasizing poison and repeated cheap attacks while giving up fire fusion sources. All retain 12 unupgraded cards, 50 HP, zero gold and Iron Sigil. Any journal fusion discovery unlocks Stormweaver; one recorded guardian victory unlocks Venomblade. Locked decks can be inspected at camp. These are provisional sidegrades, not proven equally balanced builds. Practice continues to use Wanderer.

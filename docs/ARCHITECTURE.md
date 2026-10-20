@@ -24,7 +24,7 @@ Run saves are envelopes with schema version 1 and content version 8. Content ver
 
 Native: `path_provider` locates app support; writes flush a same-directory `.tmp` file and rename it over the destination. Abandoned temporary writes are ignored. This targets Android/iOS file semantics; native app builds still need device verification. Browser: `package:web` performs one synchronous localStorage replacement. Quota/security errors propagate to the controller. Saves are origin-specific; one active game tab is supported. Multi-tab conflict resolution is not implemented.
 
-Settings use a separate versioned document and a serialized write queue to prevent older slider writes overwriting newer settings. Invalid settings remain untouched and the UI explains its session-only fallback. Audio remains silent. Run discoveries and completed-room counts are local to the current journey; starting-build unlocks and lifetime totals are later work.
+Settings use a separate versioned document and a serialized write queue to prevent older slider writes overwriting newer settings. Invalid settings remain untouched and the UI explains its session-only fallback. Audio remains silent. Run discoveries and completed-room counts are local to the current journey; lifetime totals are later work. Starting-build unlocks derive from the separate journal.
 
 ## Presentation and dependencies
 
@@ -61,3 +61,5 @@ Map version 6 retains version-5 room generation and RNG consumption, but selects
 Version 7 adds floor-band and lane shuffles after legacy room generation, rebuilding slot IDs and forward edges. The original LCG methods remain for compatibility; nextFairInt samples upper 24 bits with rejection, avoiding low-bit alternation in the new map shuffles. Cosmetic tilts hash mapSeed and room ID without consuming gameplay RNG. Turn-end keeps unplayed permanent instances; new encounters still reconstruct fresh piles from RunState.deck.
 
 Content version 8 adds Stormguard and Cinder Maul to the card catalog and fusion recipes; map generation stays at version 7. Available-recipe shortcuts select exact source instances (lowest upgrade first, then stable instance ID) without mutating the run. The existing confirmation/save boundary remains authoritative. New fusion tags keep the results out of merchant stock and regular rewards.
+
+StartingBuild defines starter-deck substitutions and derives unlock eligibility from PlayerProfile. RunController checks eligibility inside the replacement transaction after journal reconciliation. RunRules constructs the chosen deck without consuming RNG; the saved deck is authoritative, so no build ID or save-version migration is required. Camp selection is session-local and applies only to New run; Continue and practice preserve their existing behavior.
