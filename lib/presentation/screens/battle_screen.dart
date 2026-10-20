@@ -12,6 +12,8 @@ import '../../game/models/models.dart';
 import '../../game/cards/upgrades.dart';
 import '../../game/relics/relic.dart';
 import '../widgets/game_card.dart';
+import '../effects/combat_cue.dart';
+import '../effects/combat_feedback.dart';
 
 class BattleScreen extends StatefulWidget {
   const BattleScreen({
@@ -50,6 +52,34 @@ class _BattleScreenState extends State<BattleScreen> {
   int lastEvent = -1;
   bool savingResult = false, resultSaved = false;
   String? saveError;
+  List<CombatCue> cues = const [];
+  Timer? resultTimer;
+  bool holdResult = false, effectsPrecached = false;
+  bool get reducedEffects =>
+      widget.settings.reducedMotion || MediaQuery.disableAnimationsOf(context);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!effectsPrecached) {
+      effectsPrecached = true;
+      unawaited(
+        precacheImage(
+          const AssetImage('assets/images/effects/combat_atlas.png'),
+          context,
+          onError: (_, _) {},
+        ),
+      );
+    }
+  }
+
+  Widget _feedback(String actorId, Widget child) => CombatFeedback(
+    key: ValueKey('feedback-$actorId'),
+    cues: cues.where((cue) => cue.actorId == actorId).toList(),
+    reducedMotion: reducedEffects,
+    fastAnimations: widget.settings.fastAnimations,
+    child: child,
+  );
   CardDefinition definitionFor(CardInstance card) =>
       resolveCard(widget.catalog.cards[card.definitionId]!, card);
   @override
@@ -77,6 +107,7 @@ class _BattleScreenState extends State<BattleScreen> {
 
   @override
   void dispose() {
+    resultTimer?.cancel();
     audio.dispose();
     super.dispose();
   }
@@ -95,6 +126,20 @@ class _BattleScreenState extends State<BattleScreen> {
         return;
       }
       selected = null;
+      cues = combatCues(events, widget.catalog.cards);
+      if (state.outcome != Outcome.active && cues.isNotEmpty) {
+        holdResult = true;
+        resultTimer?.cancel();
+        resultTimer = Timer(
+          combatFeedbackDuration(
+            reduced: reducedEffects,
+            fast: widget.settings.fastAnimations,
+          ),
+          () {
+            if (mounted) setState(() => holdResult = false);
+          },
+        );
+      }
       final feedback = events
           .where((e) => e.kind != EventKind.draw && e.kind != EventKind.discard)
           .toList();
@@ -134,6 +179,7 @@ class _BattleScreenState extends State<BattleScreen> {
   }
 
   void select(CardInstance card) {
+    if (engine.state.outcome != Outcome.active) return;
     if (engine.state.pendingDiscard > 0) {
       command(() => engine.discardCard(card.id));
       return;
@@ -152,7 +198,7 @@ class _BattleScreenState extends State<BattleScreen> {
   @override
   Widget build(BuildContext context) {
     final state = engine.state;
-    if (state.outcome != Outcome.active) return _result(state);
+    if (state.outcome != Outcome.active && !holdResult) return _result(state);
     final selection = state.hand.where((c) => c.id == selected).firstOrNull;
     final definition = selection == null ? null : definitionFor(selection);
     return Scaffold(
@@ -341,7 +387,9 @@ class _BattleScreenState extends State<BattleScreen> {
                             ),
                           const SizedBox(width: 12),
                           OutlinedButton(
-                            onPressed: state.pendingDiscard == 0
+                            onPressed:
+                                state.pendingDiscard == 0 &&
+                                    state.outcome == Outcome.active
                                 ? () => command(engine.endTurn)
                                 : null,
                             child: const Text('End turn'),
@@ -374,79 +422,84 @@ class _BattleScreenState extends State<BattleScreen> {
         )
         .join(' · ');
     final targetable =
+        engine.state.outcome == Outcome.active &&
         enemy.alive &&
         selectedCard != null &&
         selectedCard.needsTarget &&
         selectedCard.cost <= engine.state.energy;
-    return Semantics(
-      button: targetable,
-      excludeSemantics: true,
-      onTap: targetable
-          ? () => command(() => engine.play(selected!, targetId: enemy.id))
-          : null,
-      label:
-          '${enemy.name}. ${enemy.health} health. ${enemy.block} block. ${enemy.alive ? 'Intent $intent' : 'Defeated'}. ${enemy.statuses.entries.map((s) => '${s.key.name} ${s.value}').join(', ')}',
-      child: Material(
-        color: const Color(0xff1a222b),
-        borderRadius: BorderRadius.circular(16),
-        child: InkWell(
+    return _feedback(
+      enemy.id,
+      Semantics(
+        button: targetable,
+        excludeSemantics: true,
+        onTap: targetable
+            ? () => command(() => engine.play(selected!, targetId: enemy.id))
+            : null,
+        label:
+            '${enemy.name}. ${enemy.health} health. ${enemy.block} block. ${enemy.alive ? 'Intent $intent' : 'Defeated'}. ${enemy.statuses.entries.map((s) => '${s.key.name} ${s.value}').join(', ')}',
+        child: Material(
+          color: const Color(0xff1a222b),
           borderRadius: BorderRadius.circular(16),
-          onTap: targetable
-              ? () => command(() => engine.play(selected!, targetId: enemy.id))
-              : null,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: targetable
-                    ? const Color(0xffe9be70)
-                    : const Color(0xff35404b),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16),
+            onTap: targetable
+                ? () =>
+                      command(() => engine.play(selected!, targetId: enemy.id))
+                : null,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: targetable
+                      ? const Color(0xffe9be70)
+                      : const Color(0xff35404b),
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    enemy.alive ? '${action.name}  ·  $intent' : 'DEFEATED',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Color(0xffe7aa93),
-                      fontSize: 11,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      enemy.alive ? '${action.name}  ·  $intent' : 'DEFEATED',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Color(0xffe7aa93),
+                        fontSize: 11,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: GameIllustration(
-                    id: 'enemies/${widget.enemyIds[int.parse(enemy.id.split('-').last)]}',
-                    icon: enemy.alive
-                        ? Icons.local_fire_department_outlined
-                        : Icons.blur_on,
-                    height: 100,
-                    color: enemy.alive
-                        ? const Color(0xffbda07d)
-                        : Colors.blueGrey,
+                  Expanded(
+                    child: GameIllustration(
+                      id: 'enemies/${widget.enemyIds[int.parse(enemy.id.split('-').last)]}',
+                      icon: enemy.alive
+                          ? Icons.local_fire_department_outlined
+                          : Icons.blur_on,
+                      height: 100,
+                      color: enemy.alive
+                          ? const Color(0xffbda07d)
+                          : Colors.blueGrey,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Text(
-                        enemy.name,
-                        style: const TextStyle(
-                          fontFamily: 'serif',
-                          fontSize: 19,
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Text(
+                          enemy.name,
+                          style: const TextStyle(
+                            fontFamily: 'serif',
+                            fontSize: 19,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 7),
-                      _health(enemy),
-                      const SizedBox(height: 4),
-                      _statuses(enemy),
-                    ],
+                        const SizedBox(height: 7),
+                        _health(enemy),
+                        const SizedBox(height: 4),
+                        _statuses(enemy),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -483,47 +536,50 @@ class _BattleScreenState extends State<BattleScreen> {
     style: const TextStyle(fontSize: 10, color: Color(0xffaebbc5)),
     textAlign: TextAlign.center,
   );
-  Widget _player(CombatSnapshot state) => Container(
-    padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(
-      color: const Color(0xff1b2630),
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: const Color(0xff36434e)),
-    ),
-    child: Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget _player(CombatSnapshot state) => _feedback(
+    'player',
+    Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xff1b2630),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xff36434e)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'THE WAYFARER',
+                  style: TextStyle(fontSize: 11, letterSpacing: 2),
+                ),
+                const SizedBox(height: 8),
+                _health(state.player),
+                _statuses(state.player),
+              ],
+            ),
+          ),
+          const SizedBox(width: 18),
+          Column(
             children: [
-              const Text(
-                'THE WAYFARER',
-                style: TextStyle(fontSize: 11, letterSpacing: 2),
+              Text(
+                '${state.energy}',
+                style: const TextStyle(
+                  fontFamily: 'serif',
+                  fontSize: 30,
+                  color: Color(0xfff0cb81),
+                ),
               ),
-              const SizedBox(height: 8),
-              _health(state.player),
-              _statuses(state.player),
+              const Text(
+                'ENERGY',
+                style: TextStyle(fontSize: 9, letterSpacing: 1.4),
+              ),
             ],
           ),
-        ),
-        const SizedBox(width: 18),
-        Column(
-          children: [
-            Text(
-              '${state.energy}',
-              style: const TextStyle(
-                fontFamily: 'serif',
-                fontSize: 30,
-                color: Color(0xfff0cb81),
-              ),
-            ),
-            const Text(
-              'ENERGY',
-              style: TextStyle(fontSize: 9, letterSpacing: 1.4),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     ),
   );
 

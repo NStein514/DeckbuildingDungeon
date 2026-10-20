@@ -193,3 +193,7 @@ Image Generator prompts: Ember Forge — basalt anvil with worn bronze funerary 
 ## Expanded fusions
 
 Image Generator: Stormguard — battered iron shield with bronze rim and funerary motifs, pale lavender lightning halo, charcoal crypt, painterly brush texture, warm key/cool rim, 4:3 composition, no typography/frame/UI. Cinder Maul — square basalt hammer with bronze bands and leather haft, diagonal strike with ember trail, same palette and composition constraints. Imported source PNGs unchanged; existing card/preview animations use these illustrations.
+
+## Combat feedback atlas — 2026-10-20
+
+Image Generator: a transparent 3-column × 2-row dark-fantasy VFX atlas with six isolated painterly cells: bronze crescent slash, cyan hollow shield ripple, orange-red fire impact, lavender lightning branches, olive poison spiral, mint-gold healing glow. Each effect centered in its cell with transparent margin, no text, UI, characters or background. Source: `exec-7fffec01-c9ac-4e41-873f-e98c1d28190b.png`. Imported unchanged as RGBA; runtime crops and composites the cells into short effects rather than playing cutscenes.

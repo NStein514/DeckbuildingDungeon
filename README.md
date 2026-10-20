@@ -112,3 +112,5 @@ Unplayed cards now stay in hand between turns (up to ten cards); played cards st
 Fusion shrines now offer five recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
 
 Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all three decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
+
+Combat now has brief generated-art effects for attacks, shields, elemental magic, healing and support plays. Effects last 0.42 seconds (0.18 seconds in fast mode), allow immediate input, and switch to static labels with reduced motion.

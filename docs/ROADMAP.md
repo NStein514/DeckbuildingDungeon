@@ -99,7 +99,14 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 5. Further starting-build and challenge unlocks based on the journal; unlock options rather than permanent stat inflation.
 6. Balance repeated descents with automated simulation plus human playtesting; verify multiple builds can progress and increasing difficulty does not create unavoidable losses too early.
 
-## Milestone 5 — presentation and accessibility
+## Milestone 5A — implemented: quick combat feedback
+
+- Generated slash, shield, fire, lightning, poison and healing effect atlas.
+- Event-driven, target-anchored bursts for card plays, enemy effects, statuses, support and combos.
+- Actual damage/block/heal feedback, bounded concurrent effects and nonblocking input.
+- Brief killing-hit presentation, immediate state/save resolution, reduced-motion and fast modes.
+
+## Milestone 5B — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 

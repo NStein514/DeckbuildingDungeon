@@ -122,3 +122,7 @@ Guard + Spark → Stormguard (1 energy): gain 6 block, deal 2 lightning damage, 
 ## Starting builds
 
 Wanderer uses the original starter deck. Stormweaver replaces Heavy Blow and one Strike with Static Lance and Spark, emphasizing Shock and lightning at the expense of direct heavy damage. Venomblade replaces Heavy Blow and Firebolt with Poison Edge and Quick Slash, emphasizing poison and repeated cheap attacks while giving up fire fusion sources. All retain 12 unupgraded cards, 50 HP, zero gold and Iron Sigil. Any journal fusion discovery unlocks Stormweaver; one recorded guardian victory unlocks Venomblade. Locked decks can be inspected at camp. These are provisional sidegrades, not proven equally balanced builds. Practice continues to use Wanderer.
+
+## Quick combat feedback
+
+Physical attacks produce a slash; fire, lightning and poison use their own bursts. Block gains and fully absorbed hits show shield ripples. Healing has rising motes, while buffs, card draw, discard and other support plays receive arcane feedback. Damage numbers show actual HP lost plus any absorbed amount. Status applications and periodic damage retain their element; combos get a short additional cue. The effects overlap rather than making players wait through a sequence. Normal feedback lasts 0.42 seconds, fast feedback 0.18 seconds, and reduced motion uses static labels. A killing blow displays its final impact before the result screen while the result save proceeds immediately.

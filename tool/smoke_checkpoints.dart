@@ -20,6 +20,12 @@ Future<void> main(List<String> args) async {
   final rules = RunRules(catalog), store = MemorySaveStore();
   final repo = RunRepository(store, catalog);
   final checkpoints = <String, dynamic>{};
+  final effects = enterRoom(rules, rules.start(514), 'room-0-0')..health = 35;
+  effects.deck
+    ..clear()
+    ..add(const CardInstance('starter-0', 'strike'));
+  await repo.save(effects);
+  checkpoints['effects'] = jsonDecode(store.contents!);
   var r = beforeType(rules, RoomType.shrine);
   await repo.save(
     enterRoom(

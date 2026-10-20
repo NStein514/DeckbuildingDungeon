@@ -179,12 +179,17 @@ class CombatEvent {
     this.message, {
     this.actorId,
     this.amount = 0,
+    this.cardId,
+    this.status,
+    this.blocked = 0,
   });
   final int sequence;
   final EventKind kind;
   final String message;
   final String? actorId;
-  final int amount;
+  final int amount, blocked;
+  final String? cardId;
+  final Status? status;
 }
 
 class CombatRules {

@@ -118,7 +118,12 @@ class CombatEngine {
     _energy -= card.cost;
     // In flight cards cannot be drawn again by their own draw effects.
     _piles.hand.remove(instance);
-    _emit(EventKind.play, 'Played ${card.name}.', actor: _player.id);
+    _emit(
+      EventKind.play,
+      'Played ${card.name}.',
+      actor: _player.id,
+      cardId: card.id,
+    );
     for (final effect in card.effects) {
       if (_outcome != Outcome.active) break;
       _resolve(
@@ -320,6 +325,7 @@ class CombatEngine {
           '${target.name}: +$amount ${status.name}.',
           actor: target.id,
           amount: amount,
+          status: status,
         );
     }
   }
@@ -334,7 +340,12 @@ class CombatEngine {
     return amount;
   }
 
-  void _damage(Fighter target, int amount, {bool bypassBlock = false}) {
+  void _damage(
+    Fighter target,
+    int amount, {
+    bool bypassBlock = false,
+    Status? status,
+  }) {
     final absorbed = bypassBlock ? 0 : math.min(target.block, amount);
     target.block -= absorbed;
     final lost = math.min(target.health, amount - absorbed);
@@ -344,6 +355,8 @@ class CombatEngine {
       '${target.name} takes $lost damage${absorbed > 0 ? ' ($absorbed blocked)' : ''}.',
       actor: target.id,
       amount: lost,
+      blocked: absorbed,
+      status: status,
     );
     if (!target.alive) {
       _emit(EventKind.defeat, '${target.name} falls.', actor: target.id);
@@ -366,7 +379,7 @@ class CombatEngine {
     for (final status in [Status.burn, Status.poison]) {
       final stacks = actor.stacks(status);
       if (stacks > 0 && actor.alive) {
-        _damage(actor, stacks, bypassBlock: true);
+        _damage(actor, stacks, bypassBlock: true, status: status);
         _reduce(actor, status);
       }
     }
@@ -410,9 +423,26 @@ class CombatEngine {
     }
   }
 
-  void _emit(EventKind kind, String message, {String? actor, int amount = 0}) {
+  void _emit(
+    EventKind kind,
+    String message, {
+    String? actor,
+    int amount = 0,
+    String? cardId,
+    Status? status,
+    int blocked = 0,
+  }) {
     _events.add(
-      CombatEvent(_sequence++, kind, message, actorId: actor, amount: amount),
+      CombatEvent(
+        _sequence++,
+        kind,
+        message,
+        actorId: actor,
+        amount: amount,
+        cardId: cardId,
+        status: status,
+        blocked: blocked,
+      ),
     );
     if (_events.length > 200) _events.removeAt(0);
   }
