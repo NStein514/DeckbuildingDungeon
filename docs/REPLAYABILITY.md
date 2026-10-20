@@ -20,7 +20,7 @@ A proposed future resource is **embers**: opportunities to shape the deck compet
 - Three tactical combos, five permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
 - Continue/reload at stable checkpoints, including after a boss and on later descents.
 - Seeded regular encounters and ambush variants, with visible Hardy/Fierce risk modifiers and bonus gold.
-- A merchant with cards, recovery, and removal competing for gold; four optional resource/deck events.
+- A merchant with cards, recovery, removal and upgrades competing for gold; four optional resource/deck events.
 - A cross-run discovery journal for cards/fusions/relics and personal bests for floors, rooms and bosses.
 
 The current seven-enemy catalog and limited room pools will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.

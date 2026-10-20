@@ -5,6 +5,7 @@ import '../models/models.dart';
 class Merchant {
   static const healingPrice = 30, healingAmount = 15, removalPrice = 40;
   static const minimumDeck = 5;
+  static const upgradePrice = 50;
   static int price(CardDefinition card) => switch (card.rarity) {
     Rarity.common => 40,
     Rarity.uncommon => 60,

@@ -144,6 +144,8 @@ class RunController extends ChangeNotifier {
   Future<bool> skipShrine() => _commit(() => rules.skipShrine(_state!));
   Future<bool> buyCard(String id) => _commit(() => rules.buyCard(_state!, id));
   Future<bool> merchantHeal() => _commit(() => rules.merchantHeal(_state!));
+  Future<bool> merchantUpgrade(String id) =>
+      _commit(() => rules.merchantUpgrade(_state!, id));
   Future<bool> removeCard(String id) =>
       _commit(() => rules.removeCard(_state!, id));
   Future<bool> leaveMerchant() => _commit(() => rules.leaveMerchant(_state!));

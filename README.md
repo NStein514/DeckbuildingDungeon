@@ -116,3 +116,5 @@ Camp now offers journal-unlocked starting builds: Stormweaver after any fusion d
 Combat now has brief generated-art effects for attacks, shields, elemental magic, healing and support plays. Effects last 0.42 seconds (0.18 seconds in fast mode), allow immediate input, and switch to static labels with reduced motion.
 
 New dungeon maps can encounter the Ash Duelist alone or in an ambush. Survive its heavy lunge, then exploit its brief Vulnerable opening. Every revealed enemy now offers an expandable battle plan. Existing layouts stay intact until the next descent; the Duelist is also available in practice.
+
+Merchants now offer one card upgrade per visit for 50 gold. Preview the upgraded card before confirming; cancellation is free, and purchased upgrades persist through encounters and descents.

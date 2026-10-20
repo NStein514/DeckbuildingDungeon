@@ -167,6 +167,36 @@ class EconomyPanel extends StatelessWidget {
                 : 'Remove a card · 40 gold',
           ),
         ),
+        OutlinedButton(
+          onPressed:
+              runs.busy ||
+                  run.purchases.contains('upgrade') ||
+                  run.gold < Merchant.upgradePrice ||
+                  !run.deck.any((c) => c.upgrade == 0)
+              ? null
+              : () async {
+                  final id = await Navigator.push<String>(
+                    context,
+                    MaterialPageRoute<String>(
+                      builder: (_) => DeckScreen(
+                        catalog: catalog,
+                        deck: run.deck,
+                        chooseUpgrade: true,
+                        confirmationTitle: 'Upgrade this card for 50 gold?',
+                      ),
+                    ),
+                  );
+                  if (id != null) await runs.merchantUpgrade(id);
+                },
+          child: Text(
+            run.purchases.contains('upgrade')
+                ? 'Card upgrade purchased'
+                : 'Upgrade a card · 50 gold',
+          ),
+        ),
+        const Text(
+          'One upgrade per merchant visit. Upgraded cards stay in your journey deck.',
+        ),
         const Text(
           'Keep at least five cards after merchant removal. Card removal is permanent for this journey.',
         ),

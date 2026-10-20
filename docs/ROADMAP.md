@@ -96,7 +96,14 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Battle-plan previews for every revealed combatant, without exposing hidden paths.
 - Exact version-7 layout/RNG compatibility; existing journeys expand their pool on the next descent.
 
-## Milestone 4J — remaining replayability and survival choices
+## Milestone 4J — implemented: merchant card upgrades
+
+- Spend 50 gold to upgrade one exact card instance per merchant visit.
+- Upgrade preview and explicit cost confirmation, with free cancellation.
+- Atomic gold/deck/service persistence, failed-save retry and duplicate-input protection.
+- Available in existing merchant checkpoints; map generation remains version 8.
+
+## Milestone 4K — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

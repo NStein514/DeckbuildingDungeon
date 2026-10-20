@@ -210,6 +210,17 @@ class RunRules {
     return r;
   }
 
+  RunState merchantUpgrade(RunState old, String instanceId) {
+    final index = old.deck.indexWhere(
+      (c) => c.id == instanceId && c.upgrade == 0,
+    );
+    if (index < 0) throw StateError('Choose an owned, unupgraded card.');
+    final r = _purchase(old, 'upgrade', Merchant.upgradePrice);
+    final card = r.deck[index];
+    r.deck[index] = CardInstance(card.id, card.definitionId, upgrade: 1);
+    return r;
+  }
+
   RunState removeCard(RunState old, String instanceId) {
     if (old.deck.length <= Merchant.minimumDeck ||
         !old.deck.any((c) => c.id == instanceId)) {

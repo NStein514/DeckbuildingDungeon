@@ -130,3 +130,7 @@ Physical attacks produce a slash; fire, lightning and poison use their own burst
 ## Ash Duelist
 
 A 34-HP regular enemy available solo or beside a Rat. Its repeating cycle is Measured guard (7 block), Ash feint (4 damage and 1 Weak on the player), then Reckless lunge (11 damage and 2 Vulnerable on itself). Enemy end-phase expiry immediately reduces that Vulnerable to 1, leaving one player turn to exploit the opening before it guards again. Normal descent, Hardy and Fierce scaling apply. Battle plans show authored/scaled applications; live status counters show remaining stacks. This encounter is provisional pending human balance testing, especially Fierce ambushes.
+
+## Merchant upgrade service
+
+Each merchant visit offers one card upgrade for 50 gold, competing with healing, removal and new cards. Choose any owned unupgraded card, including fusion results, inspect its upgraded effects and confirm the cost. The exact copy is upgraded; deck size and instance identity stay unchanged. Canceling spends nothing. The service cannot be bought twice during the visit, including after reload. Pricing is provisional pending repeated-descent playtesting.
