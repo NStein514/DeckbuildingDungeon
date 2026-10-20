@@ -20,6 +20,35 @@ Future<void> main(List<String> args) async {
   final rules = RunRules(catalog), store = MemorySaveStore();
   final repo = RunRepository(store, catalog);
   final checkpoints = <String, dynamic>{};
+  for (final modifier in [
+    EncounterModifier.rallying,
+    EncounterModifier.mending,
+  ]) {
+    for (var seed = 0; seed < 1000; seed++) {
+      var run = rules.start(seed);
+      final room = run.rooms
+          .where(
+            (room) =>
+                room.modifier == modifier &&
+                room.enemies.length == 1 &&
+                room.enemies.single == 'rat',
+          )
+          .firstOrNull;
+      if (room == null) continue;
+      run = advanceToDepth(rules, run, room.depth);
+      run = rules.enter(run, room.id);
+      run.deck
+        ..clear()
+        ..add(const CardInstance('starter-0', 'strike'));
+      await repo.save(run);
+      checkpoints[modifier.name] = jsonDecode(store.contents!);
+      break;
+    }
+    if (!checkpoints.containsKey(modifier.name)) {
+      throw StateError('Missing modifier fixture');
+    }
+  }
+
   final effects = enterRoom(rules, rules.start(514), 'room-0-0')..health = 35;
   effects.deck
     ..clear()

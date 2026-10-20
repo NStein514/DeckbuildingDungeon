@@ -20,7 +20,7 @@ void main() {
       final repo = RunRepository(MemorySaveStore(), catalog);
       for (var seed = 0; seed < 200; seed++) {
         final r = rules.start(seed);
-        expect(r.mapVersion, 9);
+        expect(r.mapVersion, 10);
         expect(r.rooms, hasLength(13));
         expect(r.rooms.first.enemies, ['rat']);
         expect(r.rooms.last.type, RoomType.boss);
@@ -68,7 +68,7 @@ void main() {
       r = enterRoom(rules, r, 'room-5-0');
       r = rules.finishCombat(r, Outcome.victory, 30);
       r = rules.descend(r);
-      expect(r.mapVersion, 9);
+      expect(r.mapVersion, 10);
       await repo.save(r);
       expect((await repo.load())!.toJson(), r.toJson());
     },

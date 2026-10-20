@@ -11,7 +11,8 @@ fs.mkdirSync(output,{recursive:true});
  await page.goto(process.env.BASE_URL || 'http://127.0.0.1:8080');
  await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
  await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
- await page.getByRole('textbox').fill('514');
+ // Version-10 seed 5 opens with Strike, used by the targeting assertion below.
+ await page.getByRole('textbox').fill('5');
  await page.getByRole('button',{name:'New run',exact:true}).click();
  await page.getByText('Choose your path',{exact:true}).waitFor();
  await page.screenshot({path:path.join(output,'map.png')});

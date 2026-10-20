@@ -120,3 +120,5 @@ New dungeon maps can encounter the Ash Duelist alone or in an ambush. Survive it
 Merchants now offer one card upgrade per visit for 50 gold. Preview the upgraded card before confirming; cancellation is free, and purchased upgrades persist through encounters and descents.
 
 Last Ember is a new treasure relic: enter combat at half health or less for +1 energy on the opening turn. Earlier saved maps retain their original treasure pool.
+
+New dungeons also feature **Rallying** enemies that gain Strength after acting and **Mending** enemies that heal after acting. Check the revealed battle plan and current intent; defeating either earns the usual 10 extra gold for a risky encounter. Existing saved maps remain unchanged until the next descent.

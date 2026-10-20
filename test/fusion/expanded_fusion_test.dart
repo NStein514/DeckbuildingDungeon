@@ -114,7 +114,7 @@ void main() {
         expect(await c.fuse(pair[0], pair[1]), true);
         expect((await c.repository.load())!.deck.last.definitionId, pair[2]);
         expect((await profile.load()).cards, contains(pair[2]));
-        expect(jsonDecode(store.contents!)['contentVersion'], 11);
+        expect(jsonDecode(store.contents!)['contentVersion'], 12);
         await c.start(12);
         expect(c.profile!.cards, contains(pair[2]));
         c.dispose();

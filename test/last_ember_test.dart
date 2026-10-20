@@ -96,7 +96,7 @@ void main() {
       final run = (await repo.load())!;
       run.relics.add(Relic.lastEmber);
       await repo.save(run);
-      expect(jsonDecode(store.contents!)['contentVersion'], 11);
+      expect(jsonDecode(store.contents!)['contentVersion'], 12);
       expect((await repo.load())!.relics, contains(Relic.lastEmber));
       final journal = MemorySaveStore()
         ..contents = jsonEncode({

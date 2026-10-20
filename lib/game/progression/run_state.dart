@@ -25,7 +25,7 @@ class RunState {
     required this.deck,
     required this.health,
     this.gold = 0,
-    this.mapVersion = 9,
+    this.mapVersion = 10,
     this.descent = 1,
     int? mapSeed,
     this.phase = RunPhase.map,

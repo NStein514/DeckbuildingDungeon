@@ -8,6 +8,14 @@ enum EncounterModifier {
   fierce(
     'Fierce',
     'Each enemy damage effect deals 2 extra damage. Victory grants 10 extra gold.',
+  ),
+  rallying(
+    'Rallying',
+    'After each action, enemies gain 1 Strength for the rest of combat. Victory grants 10 extra gold.',
+  ),
+  mending(
+    'Mending',
+    'After each action, enemies recover 3 health, up to their maximum. Victory grants 10 extra gold.',
   );
 
   const EncounterModifier(this.title, this.description);
@@ -53,8 +61,8 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 9}) {
-    if (version < 1 || version > 9) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 10}) {
+    if (version < 1 || version > 10) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [
@@ -208,7 +216,7 @@ class DungeonGenerator {
         ...middle,
         [rooms.last],
       ];
-      return [
+      final generated = [
         for (var depth = 0; depth < bands.length; depth++)
           for (var lane = 0; lane < bands[depth].length; lane++)
             DungeonRoom(
@@ -226,6 +234,30 @@ class DungeonGenerator {
               modifier: bands[depth][lane].modifier,
             ),
       ];
+      if (version >= 10) {
+        // Only reroll existing risk slots, after layout generation. Old maps
+        // retain their exact contents and RNG continuation.
+        for (var i = 0; i < generated.length; i++) {
+          final room = generated[i];
+          if (room.modifier == EncounterModifier.none) continue;
+          final modifier = const [
+            EncounterModifier.hardy,
+            EncounterModifier.fierce,
+            EncounterModifier.rallying,
+            EncounterModifier.mending,
+          ][rng.nextFairInt(4)];
+          generated[i] = DungeonRoom(
+            room.id,
+            room.depth,
+            room.lane,
+            room.type,
+            room.next,
+            room.enemies,
+            modifier: modifier,
+          );
+        }
+      }
+      return generated;
     }
     return rooms;
   }

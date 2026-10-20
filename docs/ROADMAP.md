@@ -109,7 +109,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Generated lantern artwork appears in the run inventory and journal.
 - Map version 9 expands treasure; earlier maps preserve their original relic pool.
 
-## Milestone 4L — remaining replayability and survival choices
+## Milestone 4L — implemented: tactical encounter modifiers
+
+- Rallying enemies gain 1 Strength after each action, increasing later attacks.
+- Mending enemies recover 3 health after each action, capped at their maximum.
+- New map version 10 samples both alongside Hardy and Fierce in existing risk slots, keeping the opening encounter and guardians unmodified.
+- Revealed plans and live intents describe self effects; the existing +10 gold victory bonus applies.
+- Earlier maps preserve their exact contents and RNG until the next descent.
+
+## Milestone 4M — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

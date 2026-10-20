@@ -33,6 +33,15 @@ EnemyDefinition scaleEnemy(
               target: effect.target,
               status: effect.status,
             ),
+          if (modifier == EncounterModifier.rallying)
+            const Effect(
+              EffectKind.status,
+              1,
+              target: Target.self,
+              status: Status.strength,
+            ),
+          if (modifier == EncounterModifier.mending)
+            const Effect(EffectKind.heal, 3, target: Target.self),
         ]),
     ],
     boss: enemy.boss,

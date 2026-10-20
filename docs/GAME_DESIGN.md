@@ -138,3 +138,9 @@ Each merchant visit offers one card upgrade for 50 gold, competing with healing,
 Last Ember grants one additional energy on the first turn when starting combat at half maximum health or less (rounded down). It stacks with other opening relics, never retriggers within an encounter, and remains owned between encounters. New maps use the five-relic treasure pool; maps through version 8 retain the original four.
 
 Combat effects use distinct motion: a traveling slash with sparks; a shield outline that forms facets and ripples; a fire projectile with rising embers; changing lightning branches; floating bubbles that burst into poison droplets; inward healing spirals and a rising cross; rotating support-card outlines and orbiting motes. Effects do not change combat timing or RNG.
+
+### Tactical encounters
+
+New dungeons can reveal Rallying or Mending enemies in the same risk slots used by Hardy and Fierce. Rallying adds 1 Strength after each completed action, including defensive actions; each point increases subsequent damage effects. It applies once per action, including multi-hit actions, and resets with the encounter. Mending restores 3 HP after each action, never above maximum and never reviving a defeated enemy. Both bonuses remain fixed across descents; authored HP and damage/block still scale normally. Their victory reward includes the existing 10 bonus gold.
+
+Rallying encourages ending or controlling fights before pressure accumulates. Mending rewards focused damage instead of spreading damage across targets. The opening encounter and guardians remain unmodified. Hidden cards conceal the modifier until path commitment; revealed battle plans and live intents show the added effects. Combat entry reloads reset temporary Strength and enemy health like other encounter state.
