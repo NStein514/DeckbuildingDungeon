@@ -118,6 +118,7 @@ void main() {
         await t.scrollUntilVisible(find.text(label), 250);
       }
       await t.ensureVisible(find.text(label).first);
+      await t.pumpAndSettle();
       await t.tap(find.text(label).first);
       await t.pumpAndSettle();
     }

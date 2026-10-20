@@ -416,7 +416,8 @@ class _BattleScreenState extends State<BattleScreen> {
             EffectKind.damage =>
               '${engine.predictedDamage(enemy.id, effect.amount)} damage',
             EffectKind.block => '${effect.amount} block',
-            EffectKind.status => '${effect.amount} ${effect.status!.name}',
+            EffectKind.status =>
+              '${effect.amount} ${effect.status!.name} on ${effect.target == Target.self ? 'itself' : 'you'}',
             _ => '${effect.amount} ${effect.kind.name}',
           },
         )

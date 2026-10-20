@@ -197,3 +197,7 @@ Image Generator: Stormguard — battered iron shield with bronze rim and funerar
 ## Combat feedback atlas — 2026-10-20
 
 Image Generator: a transparent 3-column × 2-row dark-fantasy VFX atlas with six isolated painterly cells: bronze crescent slash, cyan hollow shield ripple, orange-red fire impact, lavender lightning branches, olive poison spiral, mint-gold healing glow. Each effect centered in its cell with transparent margin, no text, UI, characters or background. Source: `exec-7fffec01-c9ac-4e41-873f-e98c1d28190b.png`. Imported unchanged as RGBA; runtime crops and composites the cells into short effects rather than playing cutscenes.
+
+## Ash Duelist — 2026-10-20
+
+Image Generator: full-body undead crypt swordsman, scorched layered cloth and weathered basalt/bronze light armor, long curved bronze sword and battered buckler, hood with dim ember eyes, asymmetrical dueling stance. Painterly charcoal/bronze/ember palette with warm torch light and cool rim. Transparent background, complete weapon and feet within canvas, no words/UI. Source `exec-85dcaafd-328e-47a2-a3e4-1dc2436037d7.png`; imported unchanged.

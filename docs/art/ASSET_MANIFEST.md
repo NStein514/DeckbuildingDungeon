@@ -62,3 +62,5 @@ Event illustrations: `events/emberForge` → `assets/images/events/ember_forge.p
 Fusion expansion illustrations: `cards/stormguard` → `assets/images/cards/stormguard.png`; `cards/cinder_maul` → `assets/images/cards/cinder_maul.png`. Produced with Image Generator for the expanded recipe set.
 
 Combat feedback atlas: `effects/combatAtlas` → `assets/images/effects/combat_atlas.png`. Image Generator produced a 1536×1024 RGBA atlas on 2026-10-20: top row slash/shield/fire, bottom row lightning/poison/healing. Alpha channel verified; source retained in the generated-images workspace. Six cells are cropped at runtime; the healing rune also supplies a lavender-tinted arcane/support effect. Flutter animates brief scale, rotation, drift and opacity, with text kept out of the artwork. Reduced motion replaces the artwork with static labels.
+
+`enemies/duelist` → `assets/images/enemies/duelist.png`: Ash Duelist, generated with Image Generator on 2026-10-20. Transparent full-body swordsman with bronze blade and buckler; displayed with contain-fit in reveals and combat, using the existing quick attack/block/status effects.

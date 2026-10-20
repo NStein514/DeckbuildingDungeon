@@ -176,7 +176,7 @@ class RunScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      if (r.room!.type == RoomType.boss)
+                      if (r.room!.enemies.isNotEmpty)
                         for (final id in r.room!.enemies)
                           GuardianPlan(
                             enemy: scaleEnemy(

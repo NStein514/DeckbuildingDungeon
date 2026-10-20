@@ -64,6 +64,24 @@ fs.mkdirSync(output,{recursive:true});
    await page.getByRole('button',{name:'Continue run',exact:true}).click();
   }
   await page.setViewportSize({width:390,height:844});
+  await restore(fixtures.duelist);
+  await page.getByText('Ash Duelist · battle plan',{exact:true}).click();
+  await page.waitForTimeout(350);
+  await page.mouse.move(195,450); await page.mouse.wheel(0,400);
+  await page.getByRole('group',{name:/^Repeats in this order/}).waitFor();
+  assert((await page.locator('body').ariaSnapshot()).includes('2 vulnerable on itself'));
+  await page.waitForTimeout(300);
+  await page.screenshot({path:path.join(output,'duelist-plan.png')});
+  await page.getByRole('button',{name:'Enter encounter',exact:true}).click();
+  await page.getByText('TURN 1',{exact:true}).waitFor();
+  for (const turn of [2,3,4]) {
+   await page.getByRole('button',{name:'End turn',exact:true}).click();
+   await page.getByText('TURN '+turn,{exact:true}).waitFor();
+   await page.waitForTimeout(450);
+  }
+  assert((await page.locator('body').ariaSnapshot()).includes('vulnerable 1'));
+  await page.screenshot({path:path.join(output,'duelist-battle.png')});
+  console.log('PASS: duelist plan, guarded opening, weakening strike and exposed lunge.');
   for (const [name,id] of [['Stormguard','stormguard'],['Cinder Maul','cinder_maul']]) {
    await restore(fixtures.shrine);
    await page.mouse.move(195,450); await page.mouse.wheel(0,450);

@@ -35,7 +35,9 @@ void main() {
       phone(t);
       final catalog = loadCatalog(), store = MemorySaveStore();
       final repo = RunRepository(store, catalog), rules = RunRules(catalog);
-      final r = reachRoom(rules, RoomType.merchant)..gold = 300;
+      final r = reachRoom(rules, RoomType.merchant)
+        ..gold = 300
+        ..health = 30;
       await repo.save(r);
       final id = Merchant.stock(catalog, r.battleSeed).first;
       final price = Merchant.price(catalog.cards[id]!);
@@ -78,7 +80,9 @@ void main() {
     phone(t);
     final catalog = loadCatalog(), store = FailingStore();
     final repo = RunRepository(store, catalog),
-        r = reachRoom(RunRules(catalog), RoomType.merchant)..gold = 100;
+        r = reachRoom(RunRules(catalog), RoomType.merchant)
+          ..gold = 100
+          ..health = 30;
     await repo.save(r);
     await t.pumpWidget(DeckboundApp(catalog: catalog, saveStore: store));
     await t.pumpAndSettle();

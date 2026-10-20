@@ -29,10 +29,12 @@ Future<void> main(List<String> args) async {
   var r = beforeType(rules, RoomType.shrine);
   await repo.save(
     enterRoom(
-      rules,
-      r,
-      r.rooms.firstWhere((room) => room.type == RoomType.merchant).id,
-    )..gold = 200,
+        rules,
+        r,
+        r.rooms.firstWhere((room) => room.type == RoomType.merchant).id,
+      )
+      ..gold = 200
+      ..health = 30,
   );
   checkpoints['merchant'] = jsonDecode(store.contents!);
   r = enterRoom(
@@ -75,6 +77,23 @@ Future<void> main(List<String> args) async {
       throw StateError('Missing event checkpoint');
     }
   }
+  for (var seed = 0; seed < 200; seed++) {
+    final start = rules.start(seed);
+    final room = start.rooms
+        .where(
+          (r) =>
+              r.enemies.length == 1 &&
+              r.enemies.single == 'duelist' &&
+              r.modifier == EncounterModifier.none,
+        )
+        .firstOrNull;
+    if (room == null) continue;
+    final before = advanceToDepth(rules, start, room.depth);
+    await repo.save(rules.enter(before, room.id));
+    checkpoints['duelist'] = jsonDecode(store.contents!);
+    break;
+  }
+  if (!checkpoints.containsKey('duelist')) throw StateError('Missing duelist');
   File(args.single).writeAsStringSync(jsonEncode(checkpoints));
 }
 

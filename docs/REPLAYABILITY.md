@@ -23,7 +23,7 @@ A proposed future resource is **embers**: opportunities to shape the deck compet
 - A merchant with cards, recovery, and removal competing for gold; four optional resource/deck events.
 - A cross-run discovery journal for cards/fusions/relics and personal bests for floors, rooms and bosses.
 
-The current six-enemy catalog and limited room pools will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.
+The current seven-enemy catalog and limited room pools will repeat. Linear stat scaling supplies increasing pressure, not enough variety by itself. There is no claim of balanced infinite play or an unlimited variety of generated content.
 
 ## Next playable milestone
 
@@ -43,3 +43,5 @@ Cross-run deepest-floor records and the recipe journal are now implemented. Jour
 ## Unknown dungeon cards
 
 New maps conceal each unexplored path behind a face-down card. Choosing commits the path before revealing its contents, preserving the existing six-floor battle/room rhythm. Interior floor bands and their lane contents shuffle each descent; the final floor remains signposted as a boss. Reloading retains the chosen reveal. This adds uncertainty without replacing tactical combat, fusion builds or the journey journal. Future clues or scouting should introduce deliberate resource decisions; this milestone does not allow free peeking.
+
+The Ash Duelist adds a guarded/weakening/heavy-attack cycle to regular and ambush pools. Its lunge exposes itself to a stronger counterattack on the next player turn, rewarding defense followed by saved burst damage. Revealed regular enemies now expose expandable battle plans alongside guardians. Existing version-7 maps remain intact until descent.

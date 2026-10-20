@@ -34,7 +34,7 @@ void main() {
       expect(catalog.cards.length, 25);
       expect(catalog.createDeck(), hasLength(12));
       expect(catalog.createDeck().map((c) => c.id).toSet(), hasLength(12));
-      expect(catalog.enemies.length, 6);
+      expect(catalog.enemies.length, 7);
     },
   );
   test('default battle draws five, starts with three energy and fifty HP', () {

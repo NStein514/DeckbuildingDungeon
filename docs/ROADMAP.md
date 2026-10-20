@@ -88,7 +88,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Camp shows requirements, selection and inspectable decks, including locked previews.
 - Unlocks derive from existing journal records; no permanent stat inflation or new save schema.
 
-## Milestone 4I — remaining replayability and survival choices
+## Milestone 4I — implemented: tactical regular enemy variety
+
+- Ash Duelist joins solo and ambush encounter pools in new map version 8.
+- Guard, weakening strike and heavy lunge cycle; the lunge exposes a one-turn counterattack window.
+- Image Generator enemy illustration, existing combat feedback and readable self-targeted status intent.
+- Battle-plan previews for every revealed combatant, without exposing hidden paths.
+- Exact version-7 layout/RNG compatibility; existing journeys expand their pool on the next descent.
+
+## Milestone 4J — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

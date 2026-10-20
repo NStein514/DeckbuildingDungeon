@@ -114,3 +114,5 @@ Fusion shrines now offer five recipes, including **Guard + Spark → Stormguard*
 Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all three decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
 
 Combat now has brief generated-art effects for attacks, shields, elemental magic, healing and support plays. Effects last 0.42 seconds (0.18 seconds in fast mode), allow immediate input, and switch to static labels with reduced motion.
+
+New dungeon maps can encounter the Ash Duelist alone or in an ambush. Survive its heavy lunge, then exploit its brief Vulnerable opening. Every revealed enemy now offers an expandable battle plan. Existing layouts stay intact until the next descent; the Duelist is also available in practice.

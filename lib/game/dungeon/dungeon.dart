@@ -53,8 +53,8 @@ class DungeonRoom {
 }
 
 class DungeonGenerator {
-  static List<DungeonRoom> generate(SeededRandom rng, {int version = 7}) {
-    if (version < 1 || version > 7) {
+  static List<DungeonRoom> generate(SeededRandom rng, {int version = 8}) {
+    if (version < 1 || version > 8) {
       throw ArgumentError("Unknown map version");
     }
     final widths = [
@@ -167,6 +167,32 @@ class DungeonGenerator {
         slot.next,
         [guardian],
       );
+    }
+    if (version >= 8) {
+      // Expand only new maps; old checkpoints retain their exact RNG stream.
+      for (var i = 0; i < rooms.length; i++) {
+        final room = rooms[i];
+        if (room.type != RoomType.combat || room.depth == 0) continue;
+        final enemies = room.enemies.length > 1
+            ? [
+                'rat',
+                const ['skeleton', 'mage', 'duelist'][rng.nextFairInt(3)],
+              ]
+            : [
+                const ['rat', 'skeleton', 'mage', 'duelist'][rng.nextFairInt(
+                  4,
+                )],
+              ];
+        rooms[i] = DungeonRoom(
+          room.id,
+          room.depth,
+          room.lane,
+          room.type,
+          room.next,
+          enemies,
+          modifier: room.modifier,
+        );
+      }
     }
     if (version >= 7) {
       final middle = [
