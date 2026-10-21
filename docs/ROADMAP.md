@@ -141,7 +141,14 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 - Each effect changes shape and particle positions over its lifetime; generated fire/healing texture details accompany procedural motion.
 - Nonblocking 480 ms effects, 240 ms fast mode and static reduced-motion labels.
 
-## Milestone 5C — remaining presentation and accessibility
+## Milestone 5C — implemented: painted combat animation sequences
+
+- Seven Image Generator sprite sheets, eight distinct poses each, reference the existing Cinder Maul and Stormguard artwork.
+- Textured steel, bronze/crystal defense, fire/smoke, lightning, liquid venom, golden healing leaves and violet arcane wisps replace procedural outlines.
+- Fixed-size, registered frame playback with short cross-dissolves, soft cell edges and bounded shared texture decoding.
+- Existing duration, immediate input, result persistence and reduced-motion behavior remain intact.
+
+## Milestone 5D — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 

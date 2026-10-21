@@ -14,6 +14,7 @@ import '../../game/relics/relic.dart';
 import '../widgets/game_card.dart';
 import '../effects/combat_cue.dart';
 import '../effects/combat_feedback.dart';
+import '../effects/combat_motion.dart';
 
 class BattleScreen extends StatefulWidget {
   const BattleScreen({
@@ -61,15 +62,9 @@ class _BattleScreenState extends State<BattleScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!effectsPrecached) {
+    if (!effectsPrecached && !reducedEffects) {
       effectsPrecached = true;
-      unawaited(
-        precacheImage(
-          const AssetImage('assets/images/effects/combat_atlas.png'),
-          context,
-          onError: (_, _) {},
-        ),
-      );
+      unawaited(CombatMotionAssets.warm());
     }
   }
 

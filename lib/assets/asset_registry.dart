@@ -5,6 +5,13 @@ class AssetRegistry {
   static const Map<String, String> illustrations = {
     'relics/lastEmber': 'assets/images/relics/last_ember.png',
     'enemies/duelist': 'assets/images/enemies/duelist.png',
+    'effects/slashSequence': 'assets/images/effects/slash_sequence.png',
+    'effects/shieldSequence': 'assets/images/effects/shield_sequence.png',
+    'effects/fireSequence': 'assets/images/effects/fire_sequence.png',
+    'effects/poisonSequence': 'assets/images/effects/poison_sequence.png',
+    'effects/lightningSequence': 'assets/images/effects/lightning_sequence.png',
+    'effects/healingSequence': 'assets/images/effects/healing_sequence.png',
+    'effects/arcaneSequence': 'assets/images/effects/arcane_sequence.png',
     'effects/combatAtlas': 'assets/images/effects/combat_atlas.png',
     'cards/stormguard': 'assets/images/cards/stormguard.png',
     'cards/cinder_maul': 'assets/images/cards/cinder_maul.png',

@@ -205,3 +205,15 @@ Image Generator: full-body undead crypt swordsman, scorched layered cloth and we
 ## Last Ember relic
 
 Image Generator art direction: a small aged-bronze lantern pendant containing a last glowing ember, with a charred ribbon, painterly dark-fantasy rendering, warm ember light, readable silhouette, transparent background and no lettering. Original output retained as `exec-5ca6eacd-612b-483c-b135-87e577784410.png`.
+
+## Painted combat sequence production
+
+These seven sheets were generated with Image Generator using the Cinder Maul and Stormguard illustrations as material/style references and transparent backgrounds. Shared direction: exactly eight consecutive poses in a uniform 4-column × 2-row sheet, fixed camera/registration/scale, transparent cell padding, no text/grid/scenery/characters; rich painted brush texture, volumetric light, grounded dark-fantasy palette and readable silhouettes. Each pose changes silhouette and internal structure rather than resizing the same image.
+
+- Slash: blade glint → leading streak → steel crescent → cutting arc/impact → fragmented trailing arc → breaking streak → falling bronze sparks → ash.
+- Shield: bronze/crystal fragments → partial circular shield → closed ward → impact/cracks → ripples/chips → breaking ward → drifting shards → dust.
+- Fire: approaching streak → curling projectile → compressed fireball → flame bloom → unfurling tongues → burning wisps → smoke/embers → cinders.
+- Lightning: charge → branching leader → contact → erupting forks → secondary branches → disconnected arcs → sparks → violet ash.
+- Poison: descending drop → elongating drop → crown splash → bursting crown → separated tendrils → olive mist → droplets/mist → vapor.
+- Healing: perimeter motes → inward leafy wisps → coiling wisps → luminous seed bloom → unfurling petals → spiraling leaves → dust → gold motes; no medical cross.
+- Arcane: bronze flecks/vapor → gathering smoke → inward parchment wisps → smoky violet knot → unraveling ribbons → separated wisps → haze → last motes; no vector card outlines.

@@ -61,8 +61,24 @@ Event illustrations: `events/emberForge` → `assets/images/events/ember_forge.p
 
 Fusion expansion illustrations: `cards/stormguard` → `assets/images/cards/stormguard.png`; `cards/cinder_maul` → `assets/images/cards/cinder_maul.png`. Produced with Image Generator for the expanded recipe set.
 
-Combat feedback atlas: `effects/combatAtlas` → `assets/images/effects/combat_atlas.png`. Image Generator produced a 1536×1024 RGBA atlas on 2026-10-20: top row slash/shield/fire, bottom row lightning/poison/healing. Alpha channel verified; source retained in the generated-images workspace. Fire and healing cells now supply moving particle detail. Flutter draws distinct paths, emission sequences and trajectories for each effect, with text kept out of the artwork. Reduced motion replaces the artwork with static labels.
+Combat feedback atlas: `effects/combatAtlas` → `assets/images/effects/combat_atlas.png`. Image Generator produced a 1536×1024 RGBA atlas on 2026-10-20: top row slash/shield/fire, bottom row lightning/poison/healing. Alpha channel verified; source retained in the generated-images workspace. This original atlas is superseded in combat by the painted sequences below and retained as a source asset; it is no longer decoded during battles. Reduced motion replaces the artwork with static labels.
 
 `enemies/duelist` → `assets/images/enemies/duelist.png`: Ash Duelist, generated with Image Generator on 2026-10-20. Transparent full-body swordsman with bronze blade and buckler; displayed with contain-fit in reveals and combat, using the existing quick attack/block/status effects.
 
 `relics/lastEmber` → `assets/images/relics/last_ember.png`: Image Generator transparent bronze lantern pendant, burning coal and charred ribbon. Reviewed for silhouette and transparent background; shown in inventory and journal. Source: `exec-5ca6eacd-612b-483c-b135-87e577784410.png`.
+
+## Painted combat sequences
+
+Image Generator produced seven transparent RGBA 4×2 sheets, each with eight consecutive poses, referencing `cards/cinder_maul.png` and `cards/stormguard.png`. Imported originals without offline pixel edits. Reviewed sheet composition, transparency, distinct poses and rendered phone-size frames; this is implementation review, not user art approval. Runtime playback uses a fixed frame rectangle, cross-dissolves and a soft edge mask.
+
+| Logical ID | Runtime asset | Original Image Generator output |
+| --- | --- | --- |
+| `effects/slashSequence` | `assets/images/effects/slash_sequence.png` | `exec-a8590886-fae9-46a1-994c-4dd00e2fad75.png` |
+| `effects/shieldSequence` | `assets/images/effects/shield_sequence.png` | `exec-82529fec-6686-4c99-86d5-6fa1e32204a6.png` |
+| `effects/fireSequence` | `assets/images/effects/fire_sequence.png` | `exec-a23c581d-0c46-4371-8042-eb4a4e6070a2.png` |
+| `effects/poisonSequence` | `assets/images/effects/poison_sequence.png` | `exec-76abff87-ecee-435a-891d-08e302301d8c.png` |
+| `effects/lightningSequence` | `assets/images/effects/lightning_sequence.png` | `exec-359174ff-5517-45f1-92cb-46b3678bc0ed.png` |
+| `effects/healingSequence` | `assets/images/effects/healing_sequence.png` | `exec-e57af254-89f0-4277-9aad-9b5b5570d983.png` |
+| `effects/arcaneSequence` | `assets/images/effects/arcane_sequence.png` | `exec-f1001a5f-2c11-4237-9ea7-18dd14d1f4b7.png` |
+
+Source sizes: 1774×887 for all sheets except poison (1942×809). The renderer decodes to 768px wide and samples uniform 4×2 cells. Original sources remain in the generated-images workspace.

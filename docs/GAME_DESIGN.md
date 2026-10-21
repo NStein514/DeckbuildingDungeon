@@ -137,7 +137,7 @@ Each merchant visit offers one card upgrade for 50 gold, competing with healing,
 
 Last Ember grants one additional energy on the first turn when starting combat at half maximum health or less (rounded down). It stacks with other opening relics, never retriggers within an encounter, and remains owned between encounters. New maps use the five-relic treasure pool; maps through version 8 retain the original four.
 
-Combat effects use distinct motion: a traveling slash with sparks; a shield outline that forms facets and ripples; a fire projectile with rising embers; changing lightning branches; floating bubbles that burst into poison droplets; inward healing spirals and a rising cross; rotating support-card outlines and orbiting motes. Effects do not change combat timing or RNG.
+Combat effects use eight-pose painted sequences: a steel crescent disperses into sparks; bronze and crystal assemble into a defensive ward and scatter; fire travels, blooms and dissipates as smoke; lightning branches and leaves residual arcs; venom splashes into mist; golden healing leaves spiral and unfurl; violet arcane wisps coil and unravel. The material treatment references existing card illustrations. Frame cross-dissolves smooth playback without zooming a still image. Effects do not change combat timing or RNG.
 
 ### Tactical encounters
 

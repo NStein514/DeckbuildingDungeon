@@ -21,3 +21,7 @@ Backgrounds: 1440×2560 portrait, with quiet upper and lower zones for UI; provi
 ## Import and review
 
 Review silhouette at phone size, palette, consistency, anatomy, cropping, transparency, and absence of accidental text. Retain approved source images outside the runtime bundle. Export optimized PNG/WebP with no gameplay text. Record approval and path in ASSET_MANIFEST.md. Add the path to the Flutter asset declarations and `AssetRegistry.illustrations`; the content logical ID remains stable. Never mark placeholder assets approved.
+
+## Combat animation quality
+
+Combat feedback must match the painted card illustrations in material detail, texture and lighting. The user rejected both scaled static illustrations and thin procedural outlines/particles as the primary effect. Use genuinely changing painted poses or textured animation layers with distinct timing and silhouettes per effect. Preserve brief, nonblocking play and reduced-motion feedback. Review the actual phone-sized sequence as well as the source sheet; passing frame-change tests alone does not establish art quality or user approval.
