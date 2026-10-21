@@ -32,6 +32,7 @@ const fs=require('node:fs');
  await page.getByRole('button',{name:'Journey journal',exact:true}).click();await capture('journal');
  await page.getByRole('button',{name:'Back',exact:true}).click();
  await page.getByRole('button',{name:'Unexplored path 1 · floor 1',exact:true}).click();await capture('reveal');
+ await page.mouse.move(195,450);await page.mouse.wheel(0,400);
  await page.getByRole('button',{name:'Enter encounter',exact:true}).click();
  await page.getByText('TURN 1',{exact:true}).waitFor();await capture('battle');
  await page.setViewportSize({width:1280,height:900});await capture('desktop-battle');

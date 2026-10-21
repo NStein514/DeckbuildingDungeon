@@ -3,6 +3,7 @@
 This checks data contracts only. It does not execute Dart gameplay or widgets.
 """
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,4 +52,15 @@ for enemy in enemies:
     assert f'`enemies/{enemy["id"]}`' in manifest
 for document in ("GAME_DESIGN.md", "ARCHITECTURE.md", "ROADMAP.md", "VALIDATION.md"):
     assert (ROOT / "docs" / document).is_file()
+# The opening deck and entire enemy catalog must have real bundled art.
+registry = dict(re.findall(r"'([^']+)': '([^']+)'", (ROOT / "lib/assets/asset_registry.dart").read_text()))
+for card_id in set(balance["startingDeck"]):
+    card = next(card for card in cards if card["id"] == card_id)
+    assert card["art"] in registry, f"Missing starter art: {card_id}"
+for enemy in enemies:
+    assert f'enemies/{enemy["id"]}' in registry, f'Missing enemy art: {enemy["id"]}'
+for logical_id, path in registry.items():
+    asset = ROOT / path
+    assert asset.is_file(), f"Missing bundled illustration: {logical_id}"
+    assert asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), f"Invalid PNG: {logical_id}"
 print(f"Content checks passed: {len(cards)} cards, {len(enemies)} enemies, 12-card deck, art references, documentation files.")

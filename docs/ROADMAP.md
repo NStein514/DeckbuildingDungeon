@@ -177,7 +177,14 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 - Generated bronze-and-leather card face frame and common sun-emblem hidden-path back, preserving color-coded costs and live text.
 - Existing card illustrations, flips, tilts and automatic map focus remain in use.
 
-## Milestone 5E — remaining presentation and accessibility
+## Milestone 5E — implemented: illustrated starter deck and enemy catalog
+
+- Painted Guard, Quick Slash, Heavy Blow, Mend, Firebolt, Frost Ward, Spark and Preparation illustrations complete the standard starting deck.
+- Transparent Dungeon Rat, Skeleton Soldier, Cursed Mage and Dungeon Warden portraits complete the current seven-enemy catalog.
+- Logical art IDs replace placeholders across battle, reveal, rewards, shops and collection views without changing gameplay.
+- Bounded illustration decoding and content checks for starter/enemy coverage and bundled PNG files.
+
+## Milestone 5F — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 

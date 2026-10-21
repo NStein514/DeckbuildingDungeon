@@ -1,21 +1,21 @@
 # Internal asset manifest
 
-All final illustration production uses the approved illustration production workflow. The two new guardians, Strike, Stormguard, Cinder Maul, Ember Forge and Memory Well include Image Generator illustrations; other card/enemy logical IDs still resolve to labeled TEMP ART components. Sizes are production targets, not runtime layout sizes.
+All final illustration production uses Image Generator. Every standard starter card and all seven catalog enemies now have painted artwork. Some reward/fusion cards and relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | `cards/strike` | Card illustration | 1448×1086 | 4:3 | No | `assets/images/cards/strike.png` | Image Generator illustration |
-| `cards/guard` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/guard.webp` | Placeholder component |
-| `cards/quick_slash` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/quick_slash.webp` | Placeholder component |
-| `cards/heavy_blow` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/heavy_blow.webp` | Placeholder component |
-| `cards/mend` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/mend.webp` | Placeholder component |
-| `cards/firebolt` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/firebolt.webp` | Placeholder component |
-| `cards/frost_ward` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/frost_ward.webp` | Placeholder component |
-| `cards/spark` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/spark.webp` | Placeholder component |
+| `cards/guard` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/guard.png` | Image Generator illustration |
+| `cards/quick_slash` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/quick_slash.png` | Image Generator illustration |
+| `cards/heavy_blow` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/heavy_blow.png` | Image Generator illustration |
+| `cards/mend` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/mend.png` | Image Generator illustration |
+| `cards/firebolt` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/firebolt.png` | Image Generator illustration |
+| `cards/frost_ward` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/frost_ward.png` | Image Generator illustration |
+| `cards/spark` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/spark.png` | Image Generator illustration |
 | `cards/focus` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/focus.webp` | Placeholder component |
 | `cards/battle_cry` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/battle_cry.webp` | Placeholder component |
 | `cards/poison_edge` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/poison_edge.webp` | Placeholder component |
-| `cards/preparation` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/preparation.webp` | Placeholder component |
+| `cards/preparation` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/preparation.png` | Image Generator illustration |
 | `cards/brace` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/brace.png` | Image Generator illustration |
 | `cards/expose` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/expose.webp` | Placeholder component |
 | `cards/enfeeble` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/enfeeble.png` | Image Generator illustration |
@@ -24,10 +24,10 @@ All final illustration production uses the approved illustration production work
 | `cards/cinder_storm` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/cinder_storm.png` | Image Generator illustration |
 | `cards/static_lance` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/static_lance.webp` | Placeholder component |
 | `cards/bulwark` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/bulwark.webp` | Placeholder component |
-| `enemies/rat` | Enemy portrait | 1024×1024 | 1:1 | Yes | `assets/images/enemies/rat.png` | Placeholder component |
-| `enemies/skeleton` | Enemy portrait | 1024×1024 | 1:1 | Yes | `assets/images/enemies/skeleton.png` | Placeholder component |
-| `enemies/mage` | Enemy portrait | 1024×1024 | 1:1 | Yes | `assets/images/enemies/mage.png` | Placeholder component |
-| `enemies/warden` | Enemy portrait | 1024×1024 | 1:1 | Yes | `assets/images/enemies/warden.png` | Placeholder component |
+| `enemies/rat` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/rat.png` | Image Generator illustration |
+| `enemies/skeleton` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/skeleton.png` | Image Generator illustration |
+| `enemies/mage` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/mage.png` | Image Generator illustration |
+| `enemies/warden` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/warden.png` | Image Generator illustration |
 | `backgrounds/menu` | Menu background | 1440×2560 | 9:16 | No | `assets/images/backgrounds/menu.webp` | Planned; not implemented |
 | `backgrounds/crypt` | Combat background | 1440×2560 | 9:16 | No | `assets/images/backgrounds/crypt.webp` | Planned; not implemented |
 | `rooms/fusion` | Fusion shrine | 1024×768 | 4:3 | No | `assets/images/rooms/fusion.webp` | Planned; not implemented |
@@ -118,3 +118,22 @@ Eight Image Generator originals are retained in `/workspace/generated_images`. A
 | ui/card_frame.png | exec-a8b58abe-50e8-4343-9d9d-097e33a366cb.png |
 
 Paths are relative to `assets/images/`. Backgrounds are 1536×1024; card textures are 1024×1536. Runtime decode widths are bounded to 1024 and 384 respectively. Existing individual card illustrations remain in place; this update supplies their shared frame and the common hidden-path back.
+
+## Standard starter and enemy illustration pass
+
+All twelve illustrations were generated with Strike (cards) and Ash Duelist (enemies) as style references. Original files remain in `/workspace/generated_images`. Existing logical IDs, card frames and painted combat animations are retained.
+
+| Logical ID | Original source |
+| --- | --- |
+| `cards/firebolt` | `exec-70a4defb-8f07-48b8-b579-5bea2758a429.png` |
+| `cards/frost_ward` | `exec-ad92682c-d653-4e11-9274-1679f8c2a657.png` |
+| `cards/guard` | `exec-5fc91f12-fd99-448b-bbab-3120cb4d41ee.png` |
+| `cards/heavy_blow` | `exec-2397c5cc-1750-4ada-b399-c250659c2b8b.png` |
+| `cards/mend` | `exec-85560d87-2b5a-4040-a85a-dd993a3c9787.png` |
+| `cards/preparation` | `exec-4214d8a3-d3a6-41a6-b612-b2834513a6ce.png` |
+| `cards/quick_slash` | `exec-02b7a3c0-a323-4141-bcf0-856d7f651a0d.png` |
+| `cards/spark` | `exec-078f723c-5e80-4a62-a889-0396d60f4db4.png` |
+| `enemies/mage` | `exec-8e97f3df-90a2-4080-879b-513294fd4f5b.png` |
+| `enemies/rat` | `exec-fd09d106-2c58-4b47-9eef-36d685b732e7.png` |
+| `enemies/skeleton` | `exec-d8646060-83dd-452c-b870-4b2f9d1c2fa4.png` |
+| `enemies/warden` | `exec-937e3564-e45c-4fc4-a3e1-8b01a35c8ee8.png` |

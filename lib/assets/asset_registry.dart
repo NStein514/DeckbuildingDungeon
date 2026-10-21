@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 /// Logical identifiers remain stable when approved illustrations are imported.
 class AssetRegistry {
   static const Map<String, String> illustrations = {
+    'cards/guard': 'assets/images/cards/guard.png',
+    'cards/quick_slash': 'assets/images/cards/quick_slash.png',
+    'cards/heavy_blow': 'assets/images/cards/heavy_blow.png',
+    'cards/mend': 'assets/images/cards/mend.png',
+    'cards/firebolt': 'assets/images/cards/firebolt.png',
+    'cards/frost_ward': 'assets/images/cards/frost_ward.png',
+    'cards/spark': 'assets/images/cards/spark.png',
+    'cards/preparation': 'assets/images/cards/preparation.png',
+    'enemies/rat': 'assets/images/enemies/rat.png',
+    'enemies/skeleton': 'assets/images/enemies/skeleton.png',
+    'enemies/mage': 'assets/images/enemies/mage.png',
+    'enemies/warden': 'assets/images/enemies/warden.png',
     'relics/lastEmber': 'assets/images/relics/last_ember.png',
     'enemies/duelist': 'assets/images/enemies/duelist.png',
     'effects/slashSequence': 'assets/images/effects/slash_sequence.png',
@@ -48,6 +60,7 @@ class GameIllustration extends StatelessWidget {
       return Image.asset(
         path,
         height: height,
+        cacheWidth: id.startsWith('cards/') ? 512 : 768,
         fit: id.startsWith('enemies/') ? BoxFit.contain : BoxFit.cover,
         excludeFromSemantics: true,
         errorBuilder: (_, error, stack) => _placeholder(),

@@ -4,7 +4,7 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: sanctuary deck choices
+## Current build: illustrated starter deck and enemies
 
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
@@ -132,3 +132,5 @@ Sanctuaries now offer **Let go**: permanently remove one card instead of healing
 The dungeon path climbs upward: the entrance is at the bottom and the boss is at the top. New descents open at the bottom; completing a room automatically brings the next reachable floor into view. Continuing a saved journey focuses its current choices. Reduced motion makes this repositioning immediate.
 
 Each floor now has a painted atmosphere—threshold, cistern, archive, forge, rooted vault and guardian hall—with subdued gradients around the cards. Matching backgrounds extend through camp, encounters, deck inspection and reference screens. Cards share crafted bronze-and-leather frames and hidden dungeon paths use a painted sun-emblem back.
+
+The standard starting deck now has painted artwork for every card, and all seven enemy types have portraits. This art pass replaces eight starter-card placeholders and four enemy placeholders while keeping existing combat animations and gameplay rules.
