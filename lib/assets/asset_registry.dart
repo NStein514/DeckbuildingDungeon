@@ -61,7 +61,10 @@ class GameIllustration extends StatelessWidget {
         path,
         height: height,
         cacheWidth: id.startsWith('cards/') ? 512 : 768,
-        fit: id.startsWith('enemies/') ? BoxFit.contain : BoxFit.cover,
+        // Preserve the complete composition inside each card's artwork window.
+        fit: id.startsWith('cards/') || id.startsWith('enemies/')
+            ? BoxFit.contain
+            : BoxFit.cover,
         excludeFromSemantics: true,
         errorBuilder: (_, error, stack) => _placeholder(),
       );
