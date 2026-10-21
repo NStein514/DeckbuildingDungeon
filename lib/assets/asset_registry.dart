@@ -21,6 +21,7 @@ class AssetRegistry {
     'cards/stormguard': 'assets/images/cards/stormguard.png',
     'cards/cinder_maul': 'assets/images/cards/cinder_maul.png',
     'cards/strike': 'assets/images/cards/strike.png',
+    'events/sanctuary': 'assets/images/events/sanctuary.png',
     'events/emberForge': 'assets/images/events/ember_forge.png',
     'events/memoryWell': 'assets/images/events/memory_well.png',
     'enemies/broodmother': 'assets/images/enemies/broodmother.png',

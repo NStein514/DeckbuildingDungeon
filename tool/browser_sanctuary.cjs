@@ -1,0 +1,52 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader']});
+ const page=await browser.newPage({viewport:{width:390,height:844}});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const fixture=JSON.parse(fs.readFileSync(process.env.CHECKPOINTS,'utf8')).sanctuary;
+ const output='/tmp/deckbound-sanctuary';fs.mkdirSync(output,{recursive:true});
+ await page.goto(process.env.BASE_URL||'http://127.0.0.1:8080');
+ async function resume(checkpoint){
+  if(checkpoint)await page.evaluate(p=>{localStorage.clear();localStorage.setItem('deckbound.run.v1',JSON.stringify(p));},checkpoint);
+  await page.reload();await page.locator('flt-semantics-placeholder').waitFor({state:'attached'});
+  await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
+  await page.getByRole('button',{name:'Continue run',exact:true}).click();
+ }
+ const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
+ await resume(fixture);
+ await page.getByText('A moment by the embers',{exact:true}).waitFor();
+ await page.waitForTimeout(1500);
+ await page.screenshot({path:output+'/choices.png'});
+ await page.getByRole('button',{name:'Let go · remove a card',exact:true}).click();
+ assert(!(await page.locator('body').ariaSnapshot()).includes('40 gold'));
+ await page.getByRole('button',{name:/^Firebolt\. Cost/}).first().click();
+ await page.getByText('Remove this card and end the sanctuary visit?',{exact:true}).waitFor();
+ await page.screenshot({path:output+'/confirmation.png'});
+ await page.getByRole('button',{name:'Cancel',exact:true}).click();
+ assert.deepEqual(await saved(),fixture);
+ await page.getByRole('button',{name:'Back',exact:true}).click();
+ await page.getByText('A moment by the embers',{exact:true}).waitFor();
+ await page.getByRole('button',{name:'Let go · remove a card',exact:true}).click();
+ await page.getByRole('button',{name:/^Firebolt\. Cost/}).first().click();
+ await page.getByRole('button',{name:'Remove card',exact:true}).click();
+ await page.getByText('Choose your path',{exact:true}).waitFor();
+ const result=await saved();
+ assert.deepEqual(result.run.deck,fixture.run.deck.filter(c=>c.definitionId!=='firebolt'));
+ assert.equal(result.run.health,23);assert.equal(result.run.gold,17);
+ assert.equal(result.run.completed.length,fixture.run.completed.length+1);
+ await resume();await page.getByText('Choose your path',{exact:true}).waitFor();
+ assert.deepEqual(await saved(),result);
+ // The minimum deck still allows healing; a completed visit cannot be replayed.
+ const small=structuredClone(fixture);small.run.deck=small.run.deck.slice(0,5);
+ await resume(small);
+ await page.getByText('A moment by the embers',{exact:true}).waitFor();
+ assert(await page.getByRole('button',{name:'Let go · remove a card',exact:true}).isDisabled());
+ await page.getByRole('button',{name:'Rest · heal up to 15 HP',exact:true}).click();
+ await page.getByText('Choose your path',{exact:true}).waitFor();
+ assert.equal((await saved()).run.health,38);
+ assert.deepEqual(errors,[]);
+ console.log('PASS: sanctuary art, removal preview/cancel, exact saved removal, no recovery/spending, reload, five-card guard and healing.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

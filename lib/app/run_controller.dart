@@ -137,8 +137,9 @@ class RunController extends ChangeNotifier {
   Future<bool> finish(Outcome outcome, int hp) =>
       _commit(() => rules.finishCombat(_state!, outcome, hp));
   Future<bool> reward(String? id) => _commit(() => rules.reward(_state!, id));
-  Future<bool> rest({String? upgradeId}) =>
-      _commit(() => rules.rest(_state!, upgradeId: upgradeId));
+  Future<bool> rest({String? upgradeId, String? removeId}) => _commit(
+    () => rules.rest(_state!, upgradeId: upgradeId, removeId: removeId),
+  );
   Future<bool> fuse(String first, String second) =>
       _commit(() => rules.fuse(_state!, first, second));
   Future<bool> skipShrine() => _commit(() => rules.skipShrine(_state!));

@@ -60,6 +60,9 @@ class EconomyPanel extends StatelessWidget {
                           deck: run.deck,
                           chooseUpgrade: event == JourneyEvent.emberForge,
                           chooseRemoval: event == JourneyEvent.memoryWell,
+                          selectionHint: event == JourneyEvent.memoryWell
+                              ? 'Tap to preview removal. Cost: 25 gold.'
+                              : null,
                           confirmationTitle: event == JourneyEvent.emberForge
                               ? 'Upgrade this card for 6 HP?'
                               : 'Remove this card for 25 gold?',

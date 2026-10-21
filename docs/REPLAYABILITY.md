@@ -51,3 +51,5 @@ Rallying and Mending add behavioral risk modifiers alongside Hardy and Fierce. R
 Defensive fusion now supports poison attrition through Venom Ward and limited encounter recovery through Bloomguard. Both compete for Guard copies and remove those source cards from earlier combo sequences, preserving a tradeoff between compact draws and setup options.
 
 Gravewarden and Embercaller reward discovering defensive and fire fusions with alternative starting decks. The former trades offense for block/Weak; the latter trades some defense/direct damage for Burn consistency. Their decks contain ordinary base cards, so players still forge fusion results during each journey. The changes preserve resources and map seeds; an opening-fight simulation does not establish late-descent balance.
+
+Sanctuary removal adds a competing use for safe rooms: improve draw consistency at the cost of healing or upgrading. The five-card minimum matches existing removal services. Long-run playtesting should assess whether free sanctuary removal crowds out upgrades or paid removal; automated tests establish costs and persistence, not balance.

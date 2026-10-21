@@ -77,7 +77,7 @@ New Run creates six floors: an introductory rat, four shuffled interior floors (
 
 Winning regular combat grants 15–25 seeded gold and three distinct sampled card options. Choose one or skip. The next card instance ID, deck mutation, and room completion are committed once. Gold funds merchant purchases and event bargains. Modified encounters grant 10 additional gold.
 
-Rest restores 30% of maximum HP, capped at maximum, OR upgrades one unupgraded card. Upgrades preserve the instance ID, add 2 to damage/block/heal effects and 1 to status/draw effects, leave discard and energy cost unchanged, and retain keywords. Only one upgrade is permitted; previews use the same resolved definition as combat.
+Rest offers one choice: restore 30% of maximum HP (capped at maximum), upgrade one unupgraded card, or remove one card while keeping at least five. Upgrades preserve the instance ID, add 2 to damage/block/heal effects and 1 to status/draw effects, leave discard and energy cost unchanged, and retain keywords. Only one upgrade is permitted; previews use the same resolved definition as combat.
 
 Treasure grants 25 gold and one unowned relic. If all relics are owned, it grants gold only. Iron Sigil grants 4 opening block; Quickdraw Charm adds one opening draw; Ember Heart adds 2 Burn on the first Fire play per combat; Venom Fang adds 1 stack to player Poison applications. Passive effects are reset appropriately for each new encounter.
 
@@ -160,3 +160,7 @@ Gravewarden unlocks when the journal contains Glacial Barrier, Stormguard, Venom
 Embercaller unlocks after a Flaming Strike or Cinder Maul discovery. It replaces Heavy Blow with Cinder Storm and Frost Ward with another Firebolt, sacrificing a heavy direct hit and Chill/block for sustained Burn. Spark remains available for Overload, while future fusion competes for the Firebolt copies.
 
 Both start with twelve unupgraded, non-fusion cards, 50 HP, zero gold and Iron Sigil. Acquiring a qualifying fusion unlocks a starting option for future journeys; it does not change the active deck. Existing journal discoveries qualify automatically. Camp allows inspection while locked; actual new-run selection and replacement are validated by the controller. Continue keeps the saved deck regardless of the current camp selection.
+
+## Sanctuary: let go
+
+At a rest site, choose exactly one action: heal 30% of maximum health, upgrade one card, or permanently remove one card. Let go costs no gold and requires more than five cards before removal. Any card instance, including an upgraded or fused card, may be removed after a preview and confirmation. Canceling or returning from the picker preserves the visit. Removal gives neither healing nor an upgrade; it trades immediate recovery or card power for more consistent future draws. Existing paid removal remains available at merchants and memory wells without consuming a rest opportunity.

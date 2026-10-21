@@ -97,3 +97,7 @@ Both use Stormguard as a style reference, retain their original outputs, and wer
 - `cards/cinder_storm` → `assets/images/cards/cinder_storm.png`; Image Generator source `exec-36e4920a-7c9f-4149-89b3-8a4a515ec6af.png`.
 
 Generated using Stormguard and Cinder Maul as style references. Brace shows a planted bronze shield; Enfeeble shows a weakened sword arm bound by violet magic; Cinder Storm shows a fiery ash vortex. Reviewed for painted material detail, palette, silhouette and absence of UI text. Original outputs retained in the generated-images workspace. Existing combat animation sequences remain in use.
+
+## Sanctuary illustration
+
+`events/sanctuary` → `assets/images/events/sanctuary.png`: 1536×1024 opaque Image Generator illustration, source `exec-e6dc78c4-9315-4fd3-af2f-ea377a7dd80c.png`. Ember Forge provided the material/style reference. A bronze brazier, resting bench, forging tools and a card dissolving into golden ash represent the three choices. Original retained in the generated-images workspace.

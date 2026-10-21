@@ -225,3 +225,7 @@ Image Generator, Stormguard reference, opaque landscape card artwork: premium pa
 ## Specialist starter cards
 
 Image Generator direction, referencing Stormguard and Cinder Maul: landscape premium painterly dark fantasy, brush texture, ancient crypt, worn bronze/basalt, charcoal/slate shadows, restrained illumination, readable central silhouette and crop margin, no text/UI/borders. Brace: armored gauntlet behind a thick planted bronze/basalt shield with impact grit and sparks, no face. Enfeeble: skeletal armored warrior's heavy sword arm dropping toward the floor, bound in smoky violet threads, no gore. Cinder Storm: spiraling ember-red flame, charcoal ash and glowing cinders above crypt flagstones, no weapon or character.
+
+## Sanctuary respite
+
+Use Ember Forge as a painted-material reference. A sheltered Ashen Crypt alcove with a low bronze ember brazier, stone bench and travel blanket, worn hammer and whetstone, and one blank ornate card dissolving into golden ash. Textured charcoal stone, bronze and warm amber light against cool shadows. Landscape composition, main subjects centered for a wide mobile banner. No lettering, UI, borders or logos.

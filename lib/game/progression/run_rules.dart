@@ -132,10 +132,21 @@ class RunRules {
     return r;
   }
 
-  RunState rest(RunState old, {String? upgradeId}) {
+  RunState rest(RunState old, {String? upgradeId, String? removeId}) {
     if (old.phase != RunPhase.rest) throw StateError('No active rest site.');
+    if (upgradeId != null && removeId != null) {
+      throw StateError('Choose one sanctuary action.');
+    }
     final r = old.copy();
-    if (upgradeId == null) {
+    if (removeId != null) {
+      if (r.deck.length <= Merchant.minimumDeck ||
+          !r.deck.any((c) => c.id == removeId)) {
+        throw StateError(
+          'Choose a card to remove and keep at least five cards.',
+        );
+      }
+      r.deck.removeWhere((c) => c.id == removeId);
+    } else if (upgradeId == null) {
       r.health = math.min(
         catalog.rules.maxHealth,
         r.health + (catalog.rules.maxHealth * .3).ceil(),

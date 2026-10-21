@@ -12,11 +12,12 @@ class DeckScreen extends StatefulWidget {
     this.chooseUpgrade = false,
     this.chooseRemoval = false,
     this.confirmationTitle,
+    this.selectionHint,
   });
   final GameCatalog catalog;
   final List<CardInstance> deck;
   final bool chooseUpgrade, chooseRemoval;
-  final String? confirmationTitle;
+  final String? confirmationTitle, selectionHint;
   @override
   State<DeckScreen> createState() => _DeckScreenState();
 }
@@ -91,9 +92,10 @@ class _DeckScreenState extends State<DeckScreen> {
             Padding(
               padding: EdgeInsets.all(12),
               child: Text(
-                widget.chooseRemoval
-                    ? 'Tap to preview removal. Cost: 40 gold.'
-                    : 'Tap to preview. Each card can be upgraded once.',
+                widget.selectionHint ??
+                    (widget.chooseRemoval
+                        ? 'Tap to preview removal. Cost: 40 gold.'
+                        : 'Tap to preview. Each card can be upgraded once.'),
               ),
             ),
           Expanded(

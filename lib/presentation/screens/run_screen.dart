@@ -1,4 +1,5 @@
 import '../../assets/asset_registry.dart';
+import '../../game/economy/economy.dart';
 import '../widgets/guardian_plan.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
@@ -255,10 +256,9 @@ class RunScreen extends StatelessWidget {
                       ),
                     ],
                     RunPhase.rest => [
-                      const Icon(
-                        Icons.local_fire_department_outlined,
-                        size: 72,
-                        color: Color(0xffc8a96b),
+                      const GameIllustration(
+                        id: 'events/sanctuary',
+                        height: 160,
                       ),
                       const Text(
                         'A moment by the embers',
@@ -267,7 +267,7 @@ class RunScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Choose one: recover 30% of maximum health, or permanently upgrade one card.',
+                        'Choose one: recover 30% of maximum health, upgrade one card, or remove one card. Your choice ends this visit.',
                       ),
                       const SizedBox(height: 18),
                       FilledButton(
@@ -282,6 +282,16 @@ class RunScreen extends StatelessWidget {
                             ? null
                             : () => _upgrade(context, r),
                         child: const Text('Upgrade a card'),
+                      ),
+                      OutlinedButton(
+                        onPressed:
+                            runs.busy || r.deck.length <= Merchant.minimumDeck
+                            ? null
+                            : () => _removeAtSanctuary(context, r),
+                        child: const Text('Let go · remove a card'),
+                      ),
+                      const Text(
+                        'Removal costs no gold, but gives up healing and upgrading. Keep at least five cards.',
                       ),
                     ],
                     RunPhase.merchant || RunPhase.event => [
@@ -482,7 +492,7 @@ class RunScreen extends StatelessWidget {
   String _roomDescription(RoomType type) => switch (type) {
     RoomType.combat => 'Defeat the encounter to earn gold and a card choice.',
     RoomType.boss => 'Defeat the guardian to open the next descent.',
-    RoomType.rest => 'Recover health or upgrade one card.',
+    RoomType.rest => 'Choose healing, an upgrade or card removal.',
     RoomType.treasure => 'Claim gold and an unowned relic.',
     RoomType.shrine => 'Combine two compatible cards, or leave safely.',
     RoomType.merchant =>
@@ -536,5 +546,22 @@ class RunScreen extends StatelessWidget {
       ),
     );
     if (id != null) await runs.rest(upgradeId: id);
+  }
+
+  Future<void> _removeAtSanctuary(BuildContext context, RunState r) async {
+    final id = await Navigator.push<String>(
+      context,
+      MaterialPageRoute<String>(
+        builder: (_) => DeckScreen(
+          catalog: catalog,
+          deck: r.deck,
+          chooseRemoval: true,
+          selectionHint:
+              'Remove one card for no gold. Forgo healing and upgrading this visit.',
+          confirmationTitle: 'Remove this card and end the sanctuary visit?',
+        ),
+      ),
+    );
+    if (id != null) await runs.rest(removeId: id);
   }
 }

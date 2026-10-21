@@ -132,7 +132,14 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Locked inspection, journal-derived availability, atomic replacement and exact-deck continuation use existing camp/save flows.
 - Image Generator artwork replaces Brace, Enfeeble and Cinder Storm placeholders.
 
-## Milestone 4O — remaining replayability and survival choices
+## Milestone 4O — implemented: sanctuary deck choices
+
+- Let go removes one exact card instance instead of healing or upgrading, with no gold cost and a five-card minimum.
+- Preview/cancel before committing; the confirmed choice ends the visit and persists across encounters and descents.
+- Painted Image Generator sanctuary art replaces the rest-room icon; revealed rest plans describe all three options.
+- Removal previews display the correct sanctuary and memory-well costs.
+
+## Milestone 4P — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

@@ -4,7 +4,7 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: specialist starting decks
+## Current build: sanctuary deck choices
 
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
@@ -36,7 +36,7 @@ For a headless machine:
 flutter run -d web-server --web-hostname=0.0.0.0 --web-port=8080
 ```
 
-Choose **New run**, then a highlighted room. In combat, tap a card and an enemy, or use **Play card** for self-targeted cards. Preparation requires choosing a discard. After victory, continue to your reward and select one card or skip. Rest sites offer healing or an upgrade. The deck icon opens your full deck; long-press a relic for its effect.
+Choose **New run**, then a highlighted room. In combat, tap a card and an enemy, or use **Play card** for self-targeted cards. Preparation requires choosing a discard. After victory, continue to your reward and select one card or skip. Rest sites offer healing, an upgrade, or card removal. The deck icon opens your full deck; long-press a relic for its effect.
 
 Leave the seed blank for a fresh run, or enter a seed to replay the same decisions. After the boss, **Descend deeper** keeps your current health and build; returning to camp preserves the option to continue later. Each descent adds 20% of base enemy HP and 10% of base damage/block, rounded up. This is a repeatable-loop foundation, not yet a balanced endless content pool.
 
@@ -126,3 +126,5 @@ New dungeons also feature **Rallying** enemies that gain Strength after acting a
 Two defensive shrine fusions are available: **Guard + Poison Edge → Venom Ward** (7 block, 3 Poison), and **Guard + Mend → Bloomguard** (7 block, heal 4, Exhaust). Both cost 1 energy and include new painted artwork, upgrades and journal discovery.
 
 New starting choices: **Gravewarden** trades Quick Slash and Firebolt for Brace and Enfeeble after discovering any defensive fusion (Glacial Barrier, Stormguard, Venom Ward or Bloomguard). **Embercaller** trades Heavy Blow and Frost Ward for Cinder Storm and a second Firebolt after discovering Flaming Strike or Cinder Maul. Select them in camp under Starting build; existing discoveries count immediately.
+
+Sanctuaries now offer **Let go**: permanently remove one card instead of healing or upgrading. Removal costs no gold, keeps at least five cards, and ends the visit after confirmation. New painted sanctuary artwork accompanies all three choices.

@@ -55,6 +55,17 @@ Future<void> main(List<String> args) async {
     ..add(const CardInstance('starter-0', 'strike'));
   await repo.save(effects);
   checkpoints['effects'] = jsonDecode(store.contents!);
+  final rest = beforeType(rules, RoomType.rest);
+  await repo.save(
+    enterRoom(
+        rules,
+        rest,
+        rest.rooms.firstWhere((room) => room.type == RoomType.rest).id,
+      )
+      ..health = 23
+      ..gold = 17,
+  );
+  checkpoints['sanctuary'] = jsonDecode(store.contents!);
   var r = beforeType(rules, RoomType.shrine);
   await repo.save(
     enterRoom(
