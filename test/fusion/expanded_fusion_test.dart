@@ -86,7 +86,12 @@ void main() {
         Outcome.victory,
         40,
       );
-      for (final id in ['stormguard', 'cinder_maul']) {
+      for (final id in [
+        'stormguard',
+        'cinder_maul',
+        'venom_ward',
+        'bloomguard',
+      ]) {
         expect(reward.rewards, isNot(contains(id)));
         expect(Merchant.stock(catalog, seed), isNot(contains(id)));
       }
@@ -114,14 +119,19 @@ void main() {
         expect(await c.fuse(pair[0], pair[1]), true);
         expect((await c.repository.load())!.deck.last.definitionId, pair[2]);
         expect((await profile.load()).cards, contains(pair[2]));
-        expect(jsonDecode(store.contents!)['contentVersion'], 12);
+        expect(jsonDecode(store.contents!)['contentVersion'], 13);
         await c.start(12);
         expect(c.profile!.cards, contains(pair[2]));
         c.dispose();
       }
     },
   );
-  for (final name in ['Stormguard', 'Cinder Maul']) {
+  for (final name in [
+    'Stormguard',
+    'Cinder Maul',
+    'Venom Ward',
+    'Bloomguard',
+  ]) {
     testWidgets('$name shortcut previews exact sources and confirms once', (
       t,
     ) async {
@@ -132,6 +142,9 @@ void main() {
       final store = MemorySaveStore(),
           repo = RunRepository(MemorySaveStore(), catalog);
       final r = shrine(rules);
+      if (name == 'Venom Ward') {
+        r.deck[0] = const CardInstance('starter-0', 'poison_edge');
+      }
       r.deck[3] = const CardInstance('starter-3', 'guard', upgrade: 1);
       await repo.save(r);
       store.contents = (repo.store as MemorySaveStore).contents;
@@ -165,7 +178,12 @@ void main() {
       expect(saved.deck, hasLength(11));
       expect(
         saved.deck.last.definitionId,
-        name == 'Stormguard' ? 'stormguard' : 'cinder_maul',
+        {
+          'Stormguard': 'stormguard',
+          'Cinder Maul': 'cinder_maul',
+          'Venom Ward': 'venom_ward',
+          'Bloomguard': 'bloomguard',
+        }[name],
       );
       expect(saved.deck.firstWhere((c) => c.id == 'starter-3').upgrade, 1);
       expect(t.takeException(), isNull);

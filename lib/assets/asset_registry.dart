@@ -13,6 +13,8 @@ class AssetRegistry {
     'effects/healingSequence': 'assets/images/effects/healing_sequence.png',
     'effects/arcaneSequence': 'assets/images/effects/arcane_sequence.png',
     'effects/combatAtlas': 'assets/images/effects/combat_atlas.png',
+    'cards/venom_ward': 'assets/images/cards/venom_ward.png',
+    'cards/bloomguard': 'assets/images/cards/bloomguard.png',
     'cards/stormguard': 'assets/images/cards/stormguard.png',
     'cards/cinder_maul': 'assets/images/cards/cinder_maul.png',
     'cards/strike': 'assets/images/cards/strike.png',

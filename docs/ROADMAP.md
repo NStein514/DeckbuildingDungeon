@@ -117,7 +117,14 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - Revealed plans and live intents describe self effects; the existing +10 gold victory bonus applies.
 - Earlier maps preserve their exact contents and RNG until the next descent.
 
-## Milestone 4M — remaining replayability and survival choices
+## Milestone 4M — implemented: defensive fusion choices
+
+- Guard + Poison Edge → Venom Ward: 1 energy, 7 block and 3 Poison on a chosen enemy.
+- Guard + Mend → Bloomguard: 1 energy, 7 block and 4 healing; exhausts for the encounter.
+- New painted card artwork, exact-instance shrine previews, upgrade support and persistent journal discovery.
+- Seven recipes; fusion results remain excluded from ordinary rewards and merchant stock. Map generation stays version 10.
+
+## Milestone 4N — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

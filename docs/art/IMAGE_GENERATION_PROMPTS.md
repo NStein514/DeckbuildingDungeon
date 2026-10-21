@@ -217,3 +217,7 @@ These seven sheets were generated with Image Generator using the Cinder Maul and
 - Poison: descending drop → elongating drop → crown splash → bursting crown → separated tendrils → olive mist → droplets/mist → vapor.
 - Healing: perimeter motes → inward leafy wisps → coiling wisps → luminous seed bloom → unfurling petals → spiraling leaves → dust → gold motes; no medical cross.
 - Arcane: bronze flecks/vapor → gathering smoke → inward parchment wisps → smoky violet knot → unraveling ribbons → separated wisps → haze → last motes; no vector card outlines.
+
+## Defensive fusion illustrations
+
+Image Generator, Stormguard reference, opaque landscape card artwork: premium painterly dark fantasy, visible brushwork, cinematic lighting, weathered bronze and charcoal/slate crypt, central silhouette with crop margin, no text/UI/frame. Venom Ward: battered bronze shield with overlapping dark steel scales and coiled serpent relief, thick olive venom at the rim and restrained green vapor; no lightning. Bloomguard: ancient bronze shield with cracked stone face, sage leaves and ivory blossoms growing through cracks, a warm luminous seed in the central boss with restorative golden threads; no lightning/neon.

@@ -529,5 +529,58 @@
     ],
     "rarity": "rare",
     "art": "cards/cinder_maul"
+  },
+  {
+    "id": "venom_ward",
+    "name": "Venom Ward",
+    "type": "defense",
+    "cost": 1,
+    "description": "Gain 7 block. Apply 3 Poison.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 7,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "tags": [
+      "poison",
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/venom_ward"
+  },
+  {
+    "id": "bloomguard",
+    "name": "Bloomguard",
+    "type": "defense",
+    "cost": 1,
+    "description": "Gain 7 block. Restore 4 health. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 7,
+        "target": "self"
+      },
+      {
+        "kind": "heal",
+        "amount": 4,
+        "target": "self"
+      }
+    ],
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion"
+    ],
+    "rarity": "rare",
+    "art": "cards/bloomguard"
   }
 ]

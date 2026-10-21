@@ -82,3 +82,10 @@ Image Generator produced seven transparent RGBA 4×2 sheets, each with eight con
 | `effects/arcaneSequence` | `assets/images/effects/arcane_sequence.png` | `exec-f1001a5f-2c11-4237-9ea7-18dd14d1f4b7.png` |
 
 Source sizes: 1774×887 for all sheets except poison (1942×809). The renderer decodes to 768px wide and samples uniform 4×2 cells. Original sources remain in the generated-images workspace.
+
+## Defensive fusion cards
+
+- `cards/venom_ward` → `assets/images/cards/venom_ward.png`: bronze serpent shield, dark steel scales and olive venom. Image Generator source `exec-64ce91c1-01dc-4e25-af5d-fae9c675e36d.png`.
+- `cards/bloomguard` → `assets/images/cards/bloomguard.png`: weathered bronze shield, living leaves, ivory blossoms and restorative golden cracks. Image Generator source `exec-882463fb-3126-4acd-9000-46b398e8ca7b.png`.
+
+Both use Stormguard as a style reference, retain their original outputs, and were reviewed for silhouette, palette, lack of UI text and composition. Existing painted shield/poison/healing sequences provide combat motion.

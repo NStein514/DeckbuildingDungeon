@@ -159,7 +159,7 @@ void main() {
       r = rules.descend(rules.finishCombat(r, Outcome.victory, 30));
       expect(r.mapVersion, 10);
       await repo.save(r);
-      expect(jsonDecode(store.contents!)['contentVersion'], 12);
+      expect(jsonDecode(store.contents!)['contentVersion'], 13);
       expect((await repo.load())!.toJson(), r.toJson());
     },
   );

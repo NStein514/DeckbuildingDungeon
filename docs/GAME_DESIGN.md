@@ -97,7 +97,7 @@ Prices and modifier balance are provisional. No passive hunger or ember depletio
 
 ## Journey journal (Milestone 4B)
 
-Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the five fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
+Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the seven fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
 
 Personal records are the deepest floor actually entered, most rooms cleared in a single journey, and most bosses defeated in a single journey. Descending after a boss does not count the next floor until its first room is entered. Reloading cannot inflate these values. A separate journal save lets the active run be replaced while preserving discoveries and records. No lifetime win/defeat totals, character-stat increases, or unlocked starting builds are claimed in this milestone.
 
@@ -144,3 +144,11 @@ Combat effects use eight-pose painted sequences: a steel crescent disperses into
 New dungeons can reveal Rallying or Mending enemies in the same risk slots used by Hardy and Fierce. Rallying adds 1 Strength after each completed action, including defensive actions; each point increases subsequent damage effects. It applies once per action, including multi-hit actions, and resets with the encounter. Mending restores 3 HP after each action, never above maximum and never reviving a defeated enemy. Both bonuses remain fixed across descents; authored HP and damage/block still scale normally. Their victory reward includes the existing 10 bonus gold.
 
 Rallying encourages ending or controlling fights before pressure accumulates. Mending rewards focused damage instead of spreading damage across targets. The opening encounter and guardians remain unmodified. Hidden cards conceal the modifier until path commitment; revealed battle plans and live intents show the added effects. Combat entry reloads reset temporary Strength and enemy health like other encounter state.
+
+### Defensive fusion choices
+
+Guard + Poison Edge produces Venom Ward (1 energy): gain 7 block and apply 3 Poison to one enemy. The card requires an enemy target, works with Venom Fang, and upgrades to 9 block/4 Poison. It trades direct attack damage and the Poison Edge combo setup for repeatable protection and poison pressure.
+
+Guard + Mend produces Bloomguard (1 energy): gain 7 block and restore 4 HP, then Exhaust. The upgrade grants 9 block/6 HP; healing caps at maximum. It remains usable at full health for block. Exhaust removes it only for this encounter, so it returns in the next encounter's fresh deck. Fusing away Guard sacrifices that copy's repeatable defense and Shield Bash setup for a compact recovery play.
+
+Both recipes consume two exact instances and their upgrades, create one base card, and follow the existing once-per-shrine saved confirmation. They are fusion-only and enter the persistent discovery journal when acquired. Balance values are provisional pending playtesting.

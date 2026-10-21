@@ -4,16 +4,16 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: journey journal and personal records
+## Current build: defensive fusion choices
 
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
-- Twenty-three cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
+- Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
-- Three consecutive-play combos and five permanent fusion recipes with previews and saved discoveries.
+- Three consecutive-play combos and seven permanent fusion recipes with previews and saved discoveries.
 - After each boss, descend again with your build intact and stronger enemies; floor numbers keep advancing.
-- Seeded encounter variations with visible Hardy/Fierce modifiers and bonus gold.
-- Merchants sell cards, healing, and permanent card removal; optional events trade health against gold.
-- Four passive relics; every run starts with Iron Sigil.
+- Seeded encounter variations with revealed Hardy, Fierce, Rallying and Mending modifiers and bonus gold.
+- Merchants sell cards, healing, upgrades, and permanent card removal; optional events trade health against gold.
+- Five passive relics; every run starts with Iron Sigil.
 - New Run, Continue Run, deck inspection with type filtering and cost/rarity sorting, and victory/defeat results.
 - A persistent journey journal tracks discovered cards, fusion recipes, relics, and personal bests across new runs.
 - Versioned local run saves and persistent settings. An interrupted battle restarts from its entry checkpoint with the same health, deck, and seed.
@@ -109,7 +109,7 @@ New-map events now include the Ember Forge (trade 6 HP for a chosen upgrade) and
 
 Unplayed cards now stay in hand between turns (up to ten cards); played cards still cycle through discard or exhaust. Each encounter draws a fresh hand from your persistent journey deck. New maps shuffle the interior floor order as well as card positions, and dungeon cards have a small stable tilt. Opening encounters and final bosses remain at the ends; use a new run or the next descent to see the new layouts.
 
-Fusion shrines now offer five recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
+Fusion shrines now offer seven recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
 
 Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all three decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
 
@@ -122,3 +122,5 @@ Merchants now offer one card upgrade per visit for 50 gold. Preview the upgraded
 Last Ember is a new treasure relic: enter combat at half health or less for +1 energy on the opening turn. Earlier saved maps retain their original treasure pool.
 
 New dungeons also feature **Rallying** enemies that gain Strength after acting and **Mending** enemies that heal after acting. Check the revealed battle plan and current intent; defeating either earns the usual 10 extra gold for a risky encounter. Existing saved maps remain unchanged until the next descent.
+
+Two defensive shrine fusions are available: **Guard + Poison Edge → Venom Ward** (7 block, 3 Poison), and **Guard + Mend → Bloomguard** (7 block, heal 4, Exhaust). Both cost 1 energy and include new painted artwork, upgrades and journal discovery.

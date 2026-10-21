@@ -217,7 +217,7 @@ fs.mkdirSync(output,{recursive:true});
   await page.evaluate(()=>document.querySelector('flt-semantics-placeholder')?.click());
   await page.getByRole('button',{name:'Journey journal',exact:true}).click();
   await page.getByText('Personal records',{exact:true}).waitFor();
-  await page.getByText('Fusion discoveries · 3 / 5',{exact:true}).waitFor();
+  await page.getByText('Fusion discoveries · 3 / 7',{exact:true}).waitFor();
   await page.screenshot({path:path.join(output,'journal.png')});
   console.log('PASS: persistent journal records and fusion discoveries survive new journey and page reload.');
   console.log('PASS: fusion preview, cancellation, atomic confirmation/discovery, deeper descent, build carryover and scaled enemy.');

@@ -17,7 +17,7 @@ A proposed future resource is **embers**: opportunities to shape the deck compet
 - Fresh run seeds by default, with explicit seeds for reproducible routes and challenges.
 - Six-floor segments with a boss and a choice to descend again, keeping the current build and health.
 - Deterministic next-map generation, rising enemy HP/damage/block, continuous floor numbering, bounded active-map storage.
-- Three tactical combos, five permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
+- Three tactical combos, seven permanent fusion recipes, shrine preview and confirmation, saved run discoveries.
 - Continue/reload at stable checkpoints, including after a boss and on later descents.
 - Seeded regular encounters and ambush variants, with visible Hardy/Fierce risk modifiers and bonus gold.
 - A merchant with cards, recovery, removal and upgrades competing for gold; four optional resource/deck events.
@@ -47,3 +47,5 @@ New maps conceal each unexplored path behind a face-down card. Choosing commits 
 The Ash Duelist adds a guarded/weakening/heavy-attack cycle to regular and ambush pools. Its lunge exposes itself to a stronger counterattack on the next player turn, rewarding defense followed by saved burst damage. Revealed regular enemies now expose expandable battle plans alongside guardians. Existing version-7 maps remain intact until descent.
 
 Rallying and Mending add behavioral risk modifiers alongside Hardy and Fierce. Rallying creates accumulating attack pressure; Mending punishes damage that fails to finish a target. They use existing risk slots and rewards, with clear post-reveal plans. Their fixed bonuses are provisional balance values; human playtests should compare fast damage, defensive and status-focused builds over repeated descents.
+
+Defensive fusion now supports poison attrition through Venom Ward and limited encounter recovery through Bloomguard. Both compete for Guard copies and remove those source cards from earlier combo sequences, preserving a tradeoff between compact draws and setup options.
