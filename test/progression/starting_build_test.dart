@@ -17,7 +17,7 @@ void main() {
     deepestFloor: 6,
     bestRooms: 6,
     bestBosses: 1,
-    cards: ['stormguard'],
+    cards: ['stormguard', 'flaming_strike'],
   );
   test(
     'unlock conditions use fusion discoveries and guardian records only',

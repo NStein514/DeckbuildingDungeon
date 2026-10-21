@@ -221,3 +221,7 @@ These seven sheets were generated with Image Generator using the Cinder Maul and
 ## Defensive fusion illustrations
 
 Image Generator, Stormguard reference, opaque landscape card artwork: premium painterly dark fantasy, visible brushwork, cinematic lighting, weathered bronze and charcoal/slate crypt, central silhouette with crop margin, no text/UI/frame. Venom Ward: battered bronze shield with overlapping dark steel scales and coiled serpent relief, thick olive venom at the rim and restrained green vapor; no lightning. Bloomguard: ancient bronze shield with cracked stone face, sage leaves and ivory blossoms growing through cracks, a warm luminous seed in the central boss with restorative golden threads; no lightning/neon.
+
+## Specialist starter cards
+
+Image Generator direction, referencing Stormguard and Cinder Maul: landscape premium painterly dark fantasy, brush texture, ancient crypt, worn bronze/basalt, charcoal/slate shadows, restrained illumination, readable central silhouette and crop margin, no text/UI/borders. Brace: armored gauntlet behind a thick planted bronze/basalt shield with impact grit and sparks, no face. Enfeeble: skeletal armored warrior's heavy sword arm dropping toward the floor, bound in smoky violet threads, no gore. Cinder Storm: spiraling ember-red flame, charcoal ash and glowing cinders above crypt flagstones, no weapon or character.

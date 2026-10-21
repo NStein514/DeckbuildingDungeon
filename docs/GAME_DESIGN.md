@@ -152,3 +152,11 @@ Guard + Poison Edge produces Venom Ward (1 energy): gain 7 block and apply 3 Poi
 Guard + Mend produces Bloomguard (1 energy): gain 7 block and restore 4 HP, then Exhaust. The upgrade grants 9 block/6 HP; healing caps at maximum. It remains usable at full health for block. Exhaust removes it only for this encounter, so it returns in the next encounter's fresh deck. Fusing away Guard sacrifices that copy's repeatable defense and Shield Bash setup for a compact recovery play.
 
 Both recipes consume two exact instances and their upgrades, create one base card, and follow the existing once-per-shrine saved confirmation. They are fusion-only and enter the persistent discovery journal when acquired. Balance values are provisional pending playtesting.
+
+### Specialist starting builds
+
+Gravewarden unlocks when the journal contains Glacial Barrier, Stormguard, Venom Ward or Bloomguard. It replaces Quick Slash with Brace and Firebolt with Enfeeble, sacrificing free damage and Burn/Overload setup for reliable block and Weak. Heavy Blow and the original Guard copies remain available for Shield Bash.
+
+Embercaller unlocks after a Flaming Strike or Cinder Maul discovery. It replaces Heavy Blow with Cinder Storm and Frost Ward with another Firebolt, sacrificing a heavy direct hit and Chill/block for sustained Burn. Spark remains available for Overload, while future fusion competes for the Firebolt copies.
+
+Both start with twelve unupgraded, non-fusion cards, 50 HP, zero gold and Iron Sigil. Acquiring a qualifying fusion unlocks a starting option for future journeys; it does not change the active deck. Existing journal discoveries qualify automatically. Camp allows inspection while locked; actual new-run selection and replacement are validated by the controller. Continue keeps the saved deck regardless of the current camp selection.

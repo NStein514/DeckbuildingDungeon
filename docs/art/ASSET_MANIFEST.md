@@ -16,12 +16,12 @@ All final illustration production uses the approved illustration production work
 | `cards/battle_cry` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/battle_cry.webp` | Placeholder component |
 | `cards/poison_edge` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/poison_edge.webp` | Placeholder component |
 | `cards/preparation` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/preparation.webp` | Placeholder component |
-| `cards/brace` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/brace.webp` | Placeholder component |
+| `cards/brace` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/brace.png` | Image Generator illustration |
 | `cards/expose` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/expose.webp` | Placeholder component |
-| `cards/enfeeble` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/enfeeble.webp` | Placeholder component |
+| `cards/enfeeble` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/enfeeble.png` | Image Generator illustration |
 | `cards/renewal` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/renewal.webp` | Placeholder component |
 | `cards/double_cut` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/double_cut.webp` | Placeholder component |
-| `cards/cinder_storm` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/cinder_storm.webp` | Placeholder component |
+| `cards/cinder_storm` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/cinder_storm.png` | Image Generator illustration |
 | `cards/static_lance` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/static_lance.webp` | Placeholder component |
 | `cards/bulwark` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/bulwark.webp` | Placeholder component |
 | `enemies/rat` | Enemy portrait | 1024×1024 | 1:1 | Yes | `assets/images/enemies/rat.png` | Placeholder component |
@@ -89,3 +89,11 @@ Source sizes: 1774×887 for all sheets except poison (1942×809). The renderer d
 - `cards/bloomguard` → `assets/images/cards/bloomguard.png`: weathered bronze shield, living leaves, ivory blossoms and restorative golden cracks. Image Generator source `exec-882463fb-3126-4acd-9000-46b398e8ca7b.png`.
 
 Both use Stormguard as a style reference, retain their original outputs, and were reviewed for silhouette, palette, lack of UI text and composition. Existing painted shield/poison/healing sequences provide combat motion.
+
+## Specialist starter card illustrations
+
+- `cards/brace` → `assets/images/cards/brace.png`; Image Generator source `exec-10c085e5-6633-4661-aa1e-930ba628c300.png`.
+- `cards/enfeeble` → `assets/images/cards/enfeeble.png`; Image Generator source `exec-cd3695c4-e578-4753-b940-fe6004c32714.png`.
+- `cards/cinder_storm` → `assets/images/cards/cinder_storm.png`; Image Generator source `exec-36e4920a-7c9f-4149-89b3-8a4a515ec6af.png`.
+
+Generated using Stormguard and Cinder Maul as style references. Brace shows a planted bronze shield; Enfeeble shows a weakened sword arm bound by violet magic; Cinder Storm shows a fiery ash vortex. Reviewed for painted material detail, palette, silhouette and absence of UI text. Original outputs retained in the generated-images workspace. Existing combat animation sequences remain in use.

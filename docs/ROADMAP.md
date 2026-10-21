@@ -124,7 +124,15 @@ See VALIDATION.md for current checks and platform limits. An interrupted encount
 - New painted card artwork, exact-instance shrine previews, upgrade support and persistent journal discovery.
 - Seven recipes; fusion results remain excluded from ordinary rewards and merchant stock. Map generation stays version 10.
 
-## Milestone 4N — remaining replayability and survival choices
+## Milestone 4N — implemented: specialist starting builds
+
+- Gravewarden unlocks after discovering Glacial Barrier, Stormguard, Venom Ward or Bloomguard; exchanges Quick Slash/Firebolt for Brace/Enfeeble.
+- Embercaller unlocks after discovering Flaming Strike or Cinder Maul; exchanges Heavy Blow/Frost Ward for Cinder Storm/a second Firebolt.
+- Both preserve twelve base cards, starting resources and the seeded map; unlocks are choices without permanent stat bonuses.
+- Locked inspection, journal-derived availability, atomic replacement and exact-deck continuation use existing camp/save flows.
+- Image Generator artwork replaces Brace, Enfeeble and Cinder Storm placeholders.
+
+## Milestone 4O — remaining replayability and survival choices
 
 The goal is many distinct runs and a dungeon that can keep generating floors, not a finite campaign expanded only by adding acts. See REPLAYABILITY.md.
 

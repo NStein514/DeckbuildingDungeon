@@ -7,12 +7,16 @@ import '../profile/player_profile.dart';
 enum StartingBuild {
   wanderer,
   stormweaver,
-  venomblade;
+  venomblade,
+  gravewarden,
+  embercaller;
 
   String get title => switch (this) {
     wanderer => 'Wanderer',
     stormweaver => 'Stormweaver',
     venomblade => 'Venomblade',
+    gravewarden => 'Gravewarden',
+    embercaller => 'Embercaller',
   };
 
   String get description => switch (this) {
@@ -21,6 +25,10 @@ enum StartingBuild {
       'Trade Heavy Blow and one Strike for Static Lance and Spark. Discover any fusion to unlock.',
     venomblade =>
       'Trade Heavy Blow and Firebolt for Poison Edge and Quick Slash. Defeat a guardian to unlock.',
+    gravewarden =>
+      'Trade Quick Slash and Firebolt for Brace and Enfeeble. Discover Glacial Barrier, Stormguard, Venom Ward or Bloomguard to unlock.',
+    embercaller =>
+      'Trade Heavy Blow and Frost Ward for Cinder Storm and a second Firebolt. Discover Flaming Strike or Cinder Maul to unlock.',
   };
 
   bool unlocked(PlayerProfile? profile) => switch (this) {
@@ -29,6 +37,17 @@ enum StartingBuild {
       profile != null &&
           fusionRecipes.any((recipe) => profile.cards.contains(recipe.result)),
     venomblade => profile != null && profile.bestBosses >= 1,
+    gravewarden =>
+      profile != null &&
+          const [
+            'glacial_barrier',
+            'stormguard',
+            'venom_ward',
+            'bloomguard',
+          ].any(profile.cards.contains),
+    embercaller =>
+      profile != null &&
+          const ['flaming_strike', 'cinder_maul'].any(profile.cards.contains),
   };
 
   List<CardInstance> deck(GameCatalog catalog) {
@@ -43,6 +62,12 @@ enum StartingBuild {
       case venomblade:
         replace('heavy_blow', 'poison_edge');
         replace('firebolt', 'quick_slash');
+      case gravewarden:
+        replace('quick_slash', 'brace');
+        replace('firebolt', 'enfeeble');
+      case embercaller:
+        replace('heavy_blow', 'cinder_storm');
+        replace('frost_ward', 'firebolt');
     }
     return [
       for (var i = 0; i < ids.length; i++) CardInstance('starter-$i', ids[i]),

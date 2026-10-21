@@ -4,7 +4,7 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: defensive fusion choices
+## Current build: specialist starting decks
 
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
@@ -111,7 +111,7 @@ Unplayed cards now stay in hand between turns (up to ten cards); played cards st
 
 Fusion shrines now offer seven recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
 
-Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all three decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
+Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all five decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
 
 Combat now has brief generated-art effects for attacks, shields, elemental magic, healing and support plays. Each effect plays eight distinct Image Generator painted poses, matched to the card artwork, with smooth transitions between them. Effects last 0.48 seconds (0.24 seconds in fast mode), allow immediate input, and switch to static labels with reduced motion.
 
@@ -124,3 +124,5 @@ Last Ember is a new treasure relic: enter combat at half health or less for +1 e
 New dungeons also feature **Rallying** enemies that gain Strength after acting and **Mending** enemies that heal after acting. Check the revealed battle plan and current intent; defeating either earns the usual 10 extra gold for a risky encounter. Existing saved maps remain unchanged until the next descent.
 
 Two defensive shrine fusions are available: **Guard + Poison Edge → Venom Ward** (7 block, 3 Poison), and **Guard + Mend → Bloomguard** (7 block, heal 4, Exhaust). Both cost 1 energy and include new painted artwork, upgrades and journal discovery.
+
+New starting choices: **Gravewarden** trades Quick Slash and Firebolt for Brace and Enfeeble after discovering any defensive fusion (Glacial Barrier, Stormguard, Venom Ward or Bloomguard). **Embercaller** trades Heavy Blow and Frost Ward for Cinder Storm and a second Firebolt after discovering Flaming Strike or Cinder Maul. Select them in camp under Starting build; existing discoveries count immediately.
