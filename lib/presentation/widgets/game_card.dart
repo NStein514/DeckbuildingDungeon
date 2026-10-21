@@ -45,7 +45,14 @@ class GameCard extends StatelessWidget {
           bottom: selected ? 7 : 0,
         ),
         decoration: BoxDecoration(
-          color: const Color(0xff1b232e),
+          color: const Color(0xff181c21),
+          image: const DecorationImage(
+            image: ResizeImage(
+              AssetImage('assets/images/ui/card_frame.png'),
+              width: 384,
+            ),
+            fit: BoxFit.fill,
+          ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: selected
@@ -68,66 +75,71 @@ class GameCard extends StatelessWidget {
             onTap: onTap,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(11),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(9, 7, 9, 4),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 23,
-                          height: 23,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: affordable ? color : const Color(0xff746168),
-                          ),
-                          child: Text(
-                            '${card.cost}',
-                            style: const TextStyle(
-                              color: Color(0xff10151c),
-                              fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(9, 7, 9, 4),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 23,
+                            height: 23,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: affordable
+                                  ? color
+                                  : const Color(0xff746168),
+                            ),
+                            child: Text(
+                              '${card.cost}',
+                              style: const TextStyle(
+                                color: Color(0xff10151c),
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            card.name,
-                            maxLines: 2,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              card.name,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GameIllustration(
-                    id: card.art,
-                    icon: cardIcon(card.type),
-                    color: color,
-                    height: 66,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),
-                    child: Text(
-                      '${card.type.name.toUpperCase()} · ${card.rarity.name}',
-                      style: TextStyle(color: color, fontSize: 9),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(9),
-                      child: Text(
-                        card.description,
-                        style: const TextStyle(fontSize: 11, height: 1.35),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    GameIllustration(
+                      id: card.art,
+                      icon: cardIcon(card.type),
+                      color: color,
+                      height: 66,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),
+                      child: Text(
+                        '${card.type.name.toUpperCase()} · ${card.rarity.name}',
+                        style: TextStyle(color: color, fontSize: 9),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(9),
+                        child: Text(
+                          card.description,
+                          style: const TextStyle(fontSize: 11, height: 1.35),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

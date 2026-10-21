@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import '../../assets/asset_registry.dart';
 import '../../game/economy/economy.dart';
 import '../widgets/guardian_plan.dart';
@@ -89,7 +90,8 @@ class _RunScreenState extends State<RunScreen> {
     builder: (context, child) {
       final r = runs.state!;
       _focusPath(r);
-      return Scaffold(
+      return AtmosphericScaffold(
+        depth: r.room?.depth ?? 0,
         appBar: AppBar(
           title: const Text('The Ashen Crypt'),
           actions: [
@@ -447,115 +449,125 @@ class _RunScreenState extends State<RunScreen> {
     ),
     const SizedBox(height: 20),
     for (var depth = 5; depth >= 0; depth--)
-      Column(
+      FloorSurface(
         key: _floors[depth],
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            depth == 5
-                ? 'FLOOR ${r.descent * 6} · BOSS'
-                : 'FLOOR ${(r.descent - 1) * 6 + depth + 1}',
-            style: const TextStyle(letterSpacing: 2, fontSize: 10),
-          ),
-          const SizedBox(height: 8),
-          for (
-            var start = 0;
-            start < r.rooms.where((x) => x.depth == depth).length;
-            start += 2
-          )
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final room
-                    in r.rooms
-                        .where((x) => x.depth == depth)
-                        .skip(start)
-                        .take(2))
-                  Expanded(
-                    child: Transform.rotate(
-                      angle: dungeonCardTilt(r.mapSeed, room.id),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child:
-                            r.mapVersion >= 4 && !r.completed.contains(room.id)
-                            ? DungeonCard(
-                                label:
-                                    'Unexplored path ${room.lane + 1} · floor ${(r.descent - 1) * 6 + room.depth + 1}',
-                                onTap:
-                                    !runs.busy &&
-                                        r.availableRooms.contains(room.id)
-                                    ? () => _enter(context, room.id)
-                                    : null,
-                              )
-                            : OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 18,
-                                    horizontal: 8,
+        depth: depth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              depth == 5
+                  ? 'FLOOR ${r.descent * 6} · BOSS'
+                  : 'FLOOR ${(r.descent - 1) * 6 + depth + 1}',
+              style: const TextStyle(letterSpacing: 2, fontSize: 10),
+            ),
+            const SizedBox(height: 8),
+            for (
+              var start = 0;
+              start < r.rooms.where((x) => x.depth == depth).length;
+              start += 2
+            )
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final room
+                      in r.rooms
+                          .where((x) => x.depth == depth)
+                          .skip(start)
+                          .take(2))
+                    Expanded(
+                      child: Transform.rotate(
+                        angle: dungeonCardTilt(r.mapSeed, room.id),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4),
+                          child:
+                              r.mapVersion >= 4 &&
+                                  !r.completed.contains(room.id)
+                              ? DungeonCard(
+                                  label:
+                                      'Unexplored path ${room.lane + 1} · floor ${(r.descent - 1) * 6 + room.depth + 1}',
+                                  onTap:
+                                      !runs.busy &&
+                                          r.availableRooms.contains(room.id)
+                                      ? () => _enter(context, room.id)
+                                      : null,
+                                )
+                              : OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 18,
+                                      horizontal: 8,
+                                    ),
+                                  ),
+                                  onPressed:
+                                      !runs.busy &&
+                                          r.availableRooms.contains(room.id)
+                                      ? () => _enter(context, room.id)
+                                      : null,
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        r.completed.contains(room.id)
+                                            ? Icons.check_circle_outline
+                                            : switch (room.type) {
+                                                RoomType.combat => Icons.bolt,
+                                                RoomType.rest =>
+                                                  Icons
+                                                      .local_fire_department_outlined,
+                                                RoomType.treasure =>
+                                                  Icons.auto_awesome,
+                                                RoomType.shrine =>
+                                                  Icons.auto_fix_high,
+                                                RoomType.merchant =>
+                                                  Icons.storefront_outlined,
+                                                RoomType.event =>
+                                                  Icons.explore_outlined,
+                                                RoomType.boss =>
+                                                  Icons.shield_outlined,
+                                              },
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(room.type.name.toUpperCase()),
+                                      if (room.modifier !=
+                                          EncounterModifier.none)
+                                        Text(
+                                          room.modifier.description,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.orangeAccent,
+                                          ),
+                                        ),
+                                      if (room.enemies.isNotEmpty)
+                                        Text(
+                                          room.enemies
+                                              .map(
+                                                (id) =>
+                                                    catalog.enemies[id]!.name,
+                                              )
+                                              .join(' + '),
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(fontSize: 10),
+                                        ),
+                                    ],
                                   ),
                                 ),
-                                onPressed:
-                                    !runs.busy &&
-                                        r.availableRooms.contains(room.id)
-                                    ? () => _enter(context, room.id)
-                                    : null,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      r.completed.contains(room.id)
-                                          ? Icons.check_circle_outline
-                                          : switch (room.type) {
-                                              RoomType.combat => Icons.bolt,
-                                              RoomType.rest =>
-                                                Icons
-                                                    .local_fire_department_outlined,
-                                              RoomType.treasure =>
-                                                Icons.auto_awesome,
-                                              RoomType.shrine =>
-                                                Icons.auto_fix_high,
-                                              RoomType.merchant =>
-                                                Icons.storefront_outlined,
-                                              RoomType.event =>
-                                                Icons.explore_outlined,
-                                              RoomType.boss =>
-                                                Icons.shield_outlined,
-                                            },
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(room.type.name.toUpperCase()),
-                                    if (room.modifier != EncounterModifier.none)
-                                      Text(
-                                        room.modifier.description,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.orangeAccent,
-                                        ),
-                                      ),
-                                    if (room.enemies.isNotEmpty)
-                                      Text(
-                                        room.enemies
-                                            .map(
-                                              (id) => catalog.enemies[id]!.name,
-                                            )
-                                            .join(' + '),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(fontSize: 10),
-                                      ),
-                                  ],
-                                ),
-                              ),
+                        ),
                       ),
                     ),
-                  ),
-              ],
-            ),
-          if (depth > 0)
-            const Padding(
-              padding: EdgeInsets.all(6),
-              child: Icon(Icons.call_split, size: 22, color: Color(0xff7c8b98)),
-            ),
-        ],
+                ],
+              ),
+            if (depth > 0)
+              const Padding(
+                padding: EdgeInsets.all(6),
+                child: Icon(
+                  Icons.call_split,
+                  size: 22,
+                  color: Color(0xff7c8b98),
+                ),
+              ),
+          ],
+        ),
       ),
   ];
   String _roomDescription(RoomType type) => switch (type) {
@@ -596,6 +608,7 @@ class _RunScreenState extends State<RunScreen> {
             settings: settings,
             seed: r.battleSeed,
             descent: r.descent,
+            floorDepth: r.room!.depth,
             modifier: r.room!.modifier,
             discovered: r.discovered,
             deck: r.deck,

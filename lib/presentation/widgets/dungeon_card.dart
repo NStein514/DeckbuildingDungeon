@@ -22,8 +22,14 @@ class DungeonCard extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 150),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xff293440), Color(0xff111a23)],
+        color: const Color(0xff16191e),
+        image: const DecorationImage(
+          image: ResizeImage(
+            AssetImage('assets/images/ui/card_back.png'),
+            width: 384,
+          ),
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
         ),
         border: Border.all(color: const Color(0xffb69b68), width: 2),
         borderRadius: BorderRadius.circular(16),
@@ -31,9 +37,16 @@ class DungeonCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.style_outlined, size: 44, color: Color(0xffd5b87a)),
+          const SizedBox(height: 44),
           const SizedBox(height: 12),
-          Text(label, textAlign: TextAlign.center),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xe616191e),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(label, textAlign: TextAlign.center),
+          ),
           const SizedBox(height: 8),
           Text(
             onTap == null

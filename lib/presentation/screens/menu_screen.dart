@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../../app/settings.dart';
@@ -40,13 +41,14 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) => ListenableBuilder(
     listenable: widget.runs,
-    builder: (context, child) => Scaffold(
+    builder: (context, child) => AtmosphericScaffold(
+      depth: 0,
       body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: RadialGradient(
             center: Alignment(0, -.5),
             radius: 1.1,
-            colors: [Color(0xff283239), Color(0xff10151c)],
+            colors: [Color(0x30283239), Color(0x6010151c)],
           ),
         ),
         child: SafeArea(
@@ -338,7 +340,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   void _collection() => Navigator.of(context).push(
     MaterialPageRoute<void>(
-      builder: (context) => Scaffold(
+      builder: (context) => AtmosphericScaffold(
         appBar: AppBar(title: const Text('The card archive')),
         body: GridView.builder(
           padding: const EdgeInsets.all(20),

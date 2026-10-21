@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import 'package:flutter/material.dart';
 import '../../game/combos/combo.dart';
 import '../../game/data/game_catalog.dart';
@@ -13,7 +14,7 @@ class CollectionScreen extends StatelessWidget {
   final GameCatalog catalog;
   final List<String> discovered;
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => AtmosphericScaffold(
     appBar: AppBar(title: const Text('Combos & fusions')),
     body: Center(
       child: ConstrainedBox(

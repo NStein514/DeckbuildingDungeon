@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import 'package:flutter/material.dart';
 import '../../game/cards/upgrades.dart';
 import '../../game/data/game_catalog.dart';
@@ -44,7 +45,7 @@ class _DeckScreenState extends State<DeckScreen> {
         _ => x.name.compareTo(y.name),
       };
     });
-    return Scaffold(
+    return AtmosphericScaffold(
       appBar: AppBar(
         title: Text(
           widget.chooseUpgrade

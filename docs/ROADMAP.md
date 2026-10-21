@@ -170,7 +170,14 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 - Fixed-size, registered frame playback with short cross-dissolves, soft cell edges and bounded shared texture decoding.
 - Existing duration, immediate input, result persistence and reduced-motion behavior remain intact.
 
-## Milestone 5D — remaining presentation and accessibility
+## Milestone 5D — implemented: floor atmospheres and crafted cards
+
+- Six painted floor backgrounds, repeated by floor position on later descents, with quiet dark gradients beneath cards.
+- Matching camp, encounter/result, deck, journal and collection backgrounds; combat uses its room's floor theme.
+- Generated bronze-and-leather card face frame and common sun-emblem hidden-path back, preserving color-coded costs and live text.
+- Existing card illustrations, flips, tilts and automatic map focus remain in use.
+
+## Milestone 5E — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 

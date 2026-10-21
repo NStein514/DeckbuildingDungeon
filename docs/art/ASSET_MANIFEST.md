@@ -101,3 +101,20 @@ Generated using Stormguard and Cinder Maul as style references. Brace shows a pl
 ## Sanctuary illustration
 
 `events/sanctuary` → `assets/images/events/sanctuary.png`: 1536×1024 opaque Image Generator illustration, source `exec-e6dc78c4-9315-4fd3-af2f-ea377a7dd80c.png`. Ember Forge provided the material/style reference. A bronze brazier, resting bench, forging tools and a card dissolving into golden ash represent the three choices. Original retained in the generated-images workspace.
+
+## Floor atmospheres and crafted cards
+
+Eight Image Generator originals are retained in `/workspace/generated_images`. All reference the existing sanctuary's bronze, charcoal stone and painted lighting. Background details stay near the edges; runtime gradients keep card areas quiet. These are visual floor themes, not new encounter biomes.
+
+| Bundled file | Original source |
+| --- | --- |
+| backgrounds/threshold.png | exec-1b9fd83f-b9cd-4908-95f4-122a09eda402.png |
+| backgrounds/cistern.png | exec-fb2f0a21-e1ff-47ca-b878-e8a65636840b.png |
+| backgrounds/archive.png | exec-502af5e1-438f-4ff0-be5a-acb850ee3d17.png |
+| backgrounds/forge.png | exec-7756580e-8115-43a2-875f-c5ee33aa1d23.png |
+| backgrounds/roots.png | exec-37d40aa1-ca0e-4fc7-a453-d0ea7dcc1a3b.png |
+| backgrounds/guardian.png | exec-5f703aa4-8a26-4e80-8f64-bf1a967db90f.png |
+| ui/card_back.png | exec-721606a8-419b-4871-aaba-9108251edf86.png |
+| ui/card_frame.png | exec-a8b58abe-50e8-4343-9d9d-097e33a366cb.png |
+
+Paths are relative to `assets/images/`. Backgrounds are 1536×1024; card textures are 1024×1536. Runtime decode widths are bounded to 1024 and 384 respectively. Existing individual card illustrations remain in place; this update supplies their shared frame and the common hidden-path back.

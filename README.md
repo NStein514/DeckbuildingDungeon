@@ -130,3 +130,5 @@ New starting choices: **Gravewarden** trades Quick Slash and Firebolt for Brace 
 Sanctuaries now offer **Let go**: permanently remove one card instead of healing or upgrading. Removal costs no gold, keeps at least five cards, and ends the visit after confirmation. New painted sanctuary artwork accompanies all three choices.
 
 The dungeon path climbs upward: the entrance is at the bottom and the boss is at the top. New descents open at the bottom; completing a room automatically brings the next reachable floor into view. Continuing a saved journey focuses its current choices. Reduced motion makes this repositioning immediate.
+
+Each floor now has a painted atmosphere—threshold, cistern, archive, forge, rooted vault and guardian hall—with subdued gradients around the cards. Matching backgrounds extend through camp, encounters, deck inspection and reference screens. Cards share crafted bronze-and-leather frames and hidden dungeon paths use a painted sun-emblem back.

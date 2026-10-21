@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
 import '../../game/data/game_catalog.dart';
@@ -30,7 +31,7 @@ class _JournalScreenState extends State<JournalScreen> {
               )
               .toList()
             ..sort((a, b) => a.name.compareTo(b.name));
-      return Scaffold(
+      return AtmosphericScaffold(
         appBar: AppBar(title: const Text('Journey journal')),
         body: Center(
           child: ConstrainedBox(

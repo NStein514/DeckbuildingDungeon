@@ -1,3 +1,4 @@
+import '../widgets/atmosphere.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'collection_screen.dart';
@@ -25,6 +26,7 @@ class BattleScreen extends StatefulWidget {
     required this.seed,
     this.deck,
     this.descent = 1,
+    this.floorDepth = 0,
     this.modifier = EncounterModifier.none,
     this.discovered = const [],
     this.initialHealth,
@@ -34,7 +36,7 @@ class BattleScreen extends StatefulWidget {
   final GameCatalog catalog;
   final List<String> enemyIds;
   final GameSettings settings;
-  final int seed, descent;
+  final int seed, descent, floorDepth;
   final EncounterModifier modifier;
   final List<String> discovered;
   final List<CardInstance>? deck;
@@ -196,7 +198,8 @@ class _BattleScreenState extends State<BattleScreen> {
     if (state.outcome != Outcome.active && !holdResult) return _result(state);
     final selection = state.hand.where((c) => c.id == selected).firstOrNull;
     final definition = selection == null ? null : definitionFor(selection);
-    return Scaffold(
+    return AtmosphericScaffold(
+      depth: widget.floorDepth,
       appBar: AppBar(
         title: const Text(
           'THE ASHEN CRYPT',
@@ -612,7 +615,8 @@ class _BattleScreenState extends State<BattleScreen> {
 
   Widget _result(CombatSnapshot state) => PopScope(
     canPop: widget.onComplete == null || resultSaved,
-    child: Scaffold(
+    child: AtmosphericScaffold(
+      depth: widget.floorDepth,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(

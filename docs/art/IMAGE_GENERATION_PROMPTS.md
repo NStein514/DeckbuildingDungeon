@@ -229,3 +229,9 @@ Image Generator direction, referencing Stormguard and Cinder Maul: landscape pre
 ## Sanctuary respite
 
 Use Ember Forge as a painted-material reference. A sheltered Ashen Crypt alcove with a low bronze ember brazier, stone bench and travel blanket, worn hammer and whetstone, and one blank ornate card dissolving into golden ash. Textured charcoal stone, bronze and warm amber light against cool shadows. Landscape composition, main subjects centered for a wide mobile banner. No lettering, UI, borders or logos.
+
+## Floor atmospheres and card materials
+
+Use the sanctuary as a painterly realism/material reference. Produce six landscape backgrounds: bronze crypt threshold, teal cistern, violet archive, ember forge, root-choked vault, and monumental guardian hall. Keep detailed stonework, lanterns, books, roots and braziers at the far left/right edges; central 70% nearly solid charcoal mist; bottom fades to charcoal. No people, cards, lettering, UI or border.
+
+Produce a portrait card back with weathered charcoal leather, engraved bronze edging and an eight-point sun in the upper third. Produce a matching portrait face foundation with a narrow bronze frame and quiet blank charcoal interior for runtime artwork and text. Both front-on, edge-to-edge, without a tabletop, perspective, lettering or baked-in game values.

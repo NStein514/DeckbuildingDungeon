@@ -23,3 +23,5 @@ flutter:
     - assets/images/events/
     - assets/images/effects/
     - assets/images/relics/
+    - assets/images/backgrounds/
+    - assets/images/ui/
