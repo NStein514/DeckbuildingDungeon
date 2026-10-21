@@ -128,3 +128,5 @@ Two defensive shrine fusions are available: **Guard + Poison Edge → Venom Ward
 New starting choices: **Gravewarden** trades Quick Slash and Firebolt for Brace and Enfeeble after discovering any defensive fusion (Glacial Barrier, Stormguard, Venom Ward or Bloomguard). **Embercaller** trades Heavy Blow and Frost Ward for Cinder Storm and a second Firebolt after discovering Flaming Strike or Cinder Maul. Select them in camp under Starting build; existing discoveries count immediately.
 
 Sanctuaries now offer **Let go**: permanently remove one card instead of healing or upgrading. Removal costs no gold, keeps at least five cards, and ends the visit after confirmation. New painted sanctuary artwork accompanies all three choices.
+
+The dungeon path climbs upward: the entrance is at the bottom and the boss is at the top. New descents open at the bottom; completing a room automatically brings the next reachable floor into view. Continuing a saved journey focuses its current choices. Reduced motion makes this repositioning immediate.
