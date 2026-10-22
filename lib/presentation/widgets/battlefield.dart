@@ -20,7 +20,6 @@ class Battlefield extends StatelessWidget {
       builder: (context, constraints) {
         final wide = constraints.maxWidth >= 760;
         final largeText = MediaQuery.textScalerOf(context).scale(1) > 1.3;
-        final playerWidth = wide ? constraints.maxWidth * .38 : 320.0;
         final opponentWidth = wide
             ? constraints.maxWidth * .58
             : constraints.maxWidth;
@@ -50,7 +49,11 @@ class Battlefield extends StatelessWidget {
             ),
           ),
         );
-        final hero = SizedBox(width: playerWidth, child: player);
+        final hero = SizedBox(
+          width: cardWidth,
+          height: enemyHeight,
+          child: player,
+        );
         if (wide) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.end,

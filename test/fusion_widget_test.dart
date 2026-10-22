@@ -24,7 +24,11 @@ void main() {
         ? find.text(label).first
         : find.text(label).last;
     if (find.text(label).evaluate().isEmpty) {
-      await t.scrollUntilVisible(find.text(label), 250);
+      await t.scrollUntilVisible(
+        find.text(label),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
     }
     await t.ensureVisible(target);
     await t.pumpAndSettle();

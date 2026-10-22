@@ -234,3 +234,11 @@ All 209 Flutter tests pass, along with formatting, analysis, and content checks.
 The combat battlefield now follows the supplied concept layouts: enemies align at the upper right, the hero panel sits lower left, and cards form the move area below. Wide layouts keep both sides in separate columns with a vertical offset. Phones retain the opposing alignment in stacked rows; two enemies fit beside each other at normal text size, while enlarged text uses wider scrollable enemy cards. Four additional widget tests cover the single/double opponent geometry and phone layouts at 1× and 1.6× text scale.
 
 Final verification: all 213 tests passed and static analysis was clean. The release web build succeeded. `tool/browser_battlefield.cjs` verified single-boss and double-enemy encounters at 1280×900 and 390×900, including visible turn controls and advancing to turn 2, with no browser or asset errors. Screenshots were inspected for spacing and clipping.
+
+## Matching combat and reveal card sizes — October 22, 2026
+
+The hero now receives the same width and height as each enemy card in the current encounter, with a vertical portrait, health, and energy layout. This applies to both single and multiple opponents and follows the same accessibility sizing rules. Revealed paths use a fixed 150:217 portrait ratio and maximum width of 320, preserving the card-back shape through the existing flip-and-grow transition. Longer contents scroll within the frame instead of changing its size.
+
+Regression coverage compares hero/enemy dimensions and checks all seven room types at phone and desktop widths. Reveal navigation tests explicitly scroll the outer screen now that card contents can also scroll.
+
+Validation: all 215 tests passed, along with formatting, analysis, and content checks. The final hero-frame inset also passed seven focused layout/interaction tests. Browser checks passed for single/double enemies on phone and desktop, path flipping and saved reveal reload, and all five hero portraits without browser or asset errors.

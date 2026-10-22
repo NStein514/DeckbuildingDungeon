@@ -30,6 +30,7 @@ void main() {
       );
       final hero = t.getRect(find.byKey(const ValueKey('hero')));
       final enemy = t.getRect(find.byKey(const ValueKey('enemy0')));
+      expect(hero.size, enemy.size);
       expect(hero.right, lessThan(enemy.left));
       expect(hero.bottom, greaterThan(enemy.bottom));
       expect(hero.top, greaterThan(enemy.top));

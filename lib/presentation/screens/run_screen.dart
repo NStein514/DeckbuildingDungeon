@@ -219,86 +219,90 @@ class _RunScreenState extends State<RunScreen> {
                       const SizedBox(height: 16),
                       Center(
                         child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 360),
-                          child: PathReveal(
-                            key: ValueKey(
-                              'reveal-${r.descent}-${r.currentRoom}',
-                            ),
-                            origin: _revealOrigin,
-                            prepare: () async {
-                              await Future.wait([
-                                for (final id in r.room!.enemies)
-                                  if (AssetRegistry.illustrations.containsKey(
-                                    'enemies/$id',
-                                  ))
-                                    precacheImage(
-                                      ResizeImage(
-                                        AssetImage(
-                                          AssetRegistry
-                                              .illustrations['enemies/$id']!,
-                                        ),
-                                        width: 768,
-                                      ),
-                                      context,
-                                    ),
-                              ]);
-                            },
-                            reducedMotion: settings.reducedMotion,
-                            fast: settings.fastAnimations,
-                            child: Container(
-                              padding: const EdgeInsets.all(24),
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: ResizeImage(
-                                    AssetImage(
-                                      'assets/images/ui/enemy_frame.png',
-                                    ),
-                                    width: 768,
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: const Color(0xffd5b87a),
-                                ),
+                          constraints: const BoxConstraints(maxWidth: 320),
+                          child: AspectRatio(
+                            aspectRatio: 150 / 217,
+                            child: PathReveal(
+                              key: ValueKey(
+                                'reveal-${r.descent}-${r.currentRoom}',
                               ),
-                              child: Column(
-                                children: [
-                                  const Icon(
-                                    Icons.auto_awesome,
-                                    size: 48,
-                                    color: Color(0xffd5b87a),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    r.room!.type.name.toUpperCase(),
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  for (final id in r.room!.enemies) ...[
+                              origin: _revealOrigin,
+                              prepare: () async {
+                                await Future.wait([
+                                  for (final id in r.room!.enemies)
                                     if (AssetRegistry.illustrations.containsKey(
                                       'enemies/$id',
                                     ))
-                                      GameIllustration(
-                                        id: 'enemies/$id',
-                                        height: 150,
+                                      precacheImage(
+                                        ResizeImage(
+                                          AssetImage(
+                                            AssetRegistry
+                                                .illustrations['enemies/$id']!,
+                                          ),
+                                          width: 768,
+                                        ),
+                                        context,
                                       ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                                ]);
+                              },
+                              reducedMotion: settings.reducedMotion,
+                              fast: settings.fastAnimations,
+                              child: Container(
+                                padding: const EdgeInsets.all(24),
+                                decoration: BoxDecoration(
+                                  image: const DecorationImage(
+                                    image: ResizeImage(
+                                      AssetImage(
+                                        'assets/images/ui/enemy_frame.png',
+                                      ),
+                                      width: 768,
                                     ),
-                                  ],
-                                  if (r.room!.modifier !=
-                                      EncounterModifier.none)
-                                    Text(
-                                      r.room!.modifier.description,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    _roomDescription(r.room!.type),
-                                    textAlign: TextAlign.center,
+                                    fit: BoxFit.fill,
                                   ),
-                                ],
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: const Color(0xffd5b87a),
+                                  ),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      const Icon(
+                                        Icons.auto_awesome,
+                                        size: 48,
+                                        color: Color(0xffd5b87a),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        r.room!.type.name.toUpperCase(),
+                                        style: const TextStyle(fontSize: 24),
+                                      ),
+                                      for (final id in r.room!.enemies) ...[
+                                        if (AssetRegistry.illustrations
+                                            .containsKey('enemies/$id'))
+                                          GameIllustration(
+                                            id: 'enemies/$id',
+                                            height: 150,
+                                          ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                                        ),
+                                      ],
+                                      if (r.room!.modifier !=
+                                          EncounterModifier.none)
+                                        Text(
+                                          r.room!.modifier.description,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        _roomDescription(r.room!.type),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),

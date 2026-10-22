@@ -560,7 +560,7 @@ class _BattleScreenState extends State<BattleScreen> {
   Widget _player(CombatSnapshot state) => _feedback(
     'player',
     Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       decoration: BoxDecoration(
         image: const DecorationImage(
           image: ResizeImage(
@@ -573,64 +573,54 @@ class _BattleScreenState extends State<BattleScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xff36434e)),
       ),
-      child: Row(
+      child: Column(
         children: [
-          SizedBox(
-            width: 64,
-            height: 96,
+          const Text(
+            'THE WAYFARER',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11, letterSpacing: 1.2),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
             child: Image.asset(
               'assets/images/heroes/${widget.startingBuild.name}.png',
               fit: BoxFit.contain,
-              cacheWidth: 256,
+              cacheWidth: 512,
               semanticLabel: '${widget.startingBuild.title} hero',
             ),
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'THE WAYFARER',
-                  style: TextStyle(fontSize: 10, letterSpacing: 1.2),
-                ),
-                const SizedBox(height: 8),
-                _health(state.player),
-                if (state.player.statuses.isNotEmpty) ...[
-                  const SizedBox(height: 6),
-                  _statuses(state.player),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          Column(
+          const SizedBox(height: 8),
+          _health(state.player),
+          if (state.player.statuses.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            _statuses(state.player),
+          ],
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '${state.energy}',
-                style: const TextStyle(
-                  fontFamily: 'serif',
-                  fontSize: 30,
-                  color: Color(0xfff0cb81),
-                ),
+                style: const TextStyle(fontSize: 22, color: Color(0xfff0cb81)),
               ),
-              if (state.turn == 1 &&
-                  widget.relics.any(
-                    (r) => r.grantsOpeningEnergy(
-                      widget.initialHealth ?? widget.catalog.rules.maxHealth,
-                      widget.catalog.rules.maxHealth,
-                    ),
-                  ))
-                const Text(
-                  '+1 Last Ember',
-                  style: TextStyle(fontSize: 9, color: Color(0xfff0cb81)),
-                ),
+              const SizedBox(width: 6),
               const Text(
                 'ENERGY',
                 style: TextStyle(fontSize: 9, letterSpacing: 1.4),
               ),
             ],
           ),
+          if (state.turn == 1 &&
+              widget.relics.any(
+                (r) => r.grantsOpeningEnergy(
+                  widget.initialHealth ?? widget.catalog.rules.maxHealth,
+                  widget.catalog.rules.maxHealth,
+                ),
+              ))
+            const Text(
+              '+1 Last Ember',
+              style: TextStyle(fontSize: 9, color: Color(0xfff0cb81)),
+            ),
         ],
       ),
     ),

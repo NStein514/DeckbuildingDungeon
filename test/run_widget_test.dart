@@ -21,7 +21,11 @@ void main() {
 
   Future<void> tap(WidgetTester t, String label) async {
     if (find.text(label).evaluate().isEmpty) {
-      await t.scrollUntilVisible(find.text(label), 250);
+      await t.scrollUntilVisible(
+        find.text(label),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
     }
     await t.ensureVisible(find.text(label).first);
     await t.tap(find.text(label).first);
