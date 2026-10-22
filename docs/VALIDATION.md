@@ -196,3 +196,9 @@ The release web build and full Chromium regression suite pass. `tool/browser_sta
 Card artwork now uses `BoxFit.contain` in the shared illustration renderer, preserving the entire source composition and aspect ratio in hand, deck, reward, shop and fusion cards. Unused space reveals the existing card material instead of cropping the top and bottom of the illustration. Both the older 4:3 paintings and newer 3:2 starter images follow this rule; card dimensions and text space are unchanged.
 
 All 202 tests, formatting, static analysis, content checks and the release web build pass. The starter-art Chromium check passes, including asset decoding and four practice battles advancing to turn two. Updated 390×844 deck and hand screenshots were reviewed to confirm that illustrations show their complete compositions with readable labels. Flutter tests and Chromium required execution outside the filesystem sandbox because their local sockets were restricted.
+
+## Artwork-led trading card layout
+
+Game cards now size their illustrations to the available width using each image's natural aspect ratio. Artwork starts at the top inside the thin gold frame, without side gutters or cropped edges. A compact dark nameplate overlays the upper artwork, with an 11-point name and 20-pixel energy badge; rules and rarity remain below the image. The shared layout applies to hand, collection, deck, reward and fusion cards. Fixed-height illustration callers retain their existing sizing, and missing art keeps its placeholder.
+
+All 202 tests, formatting, static analysis, content checks and the release web build pass. The starter-art Chromium check passes with all twelve images decoding and all four practice encounters advancing to turn two. Phone screenshots at 390×844 were reviewed in the deck and battle hand: paintings fill the frame width, the backed labels remain legible, and rules fit below the illustrations.

@@ -80,47 +80,71 @@ class GameCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(9, 7, 9, 4),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 23,
-                            height: 23,
-                            alignment: Alignment.center,
+                    Stack(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: GameIllustration(
+                            id: card.art,
+                            icon: cardIcon(card.type),
+                            color: color,
+                            height: null,
+                          ),
+                        ),
+                        Positioned(
+                          top: 3,
+                          left: 3,
+                          right: 3,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: affordable
-                                  ? color
-                                  : const Color(0xff746168),
-                            ),
-                            child: Text(
-                              '${card.cost}',
-                              style: const TextStyle(
-                                color: Color(0xff10151c),
-                                fontWeight: FontWeight.bold,
+                              color: const Color(0xe610151c),
+                              borderRadius: BorderRadius.circular(7),
+                              border: Border.all(
+                                color: color.withValues(alpha: .45),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              card.name,
-                              maxLines: 2,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 20,
+                                  height: 20,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: affordable
+                                        ? color
+                                        : const Color(0xff746168),
+                                  ),
+                                  child: Text(
+                                    '${card.cost}',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff10151c),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  child: Text(
+                                    card.name,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    GameIllustration(
-                      id: card.art,
-                      icon: cardIcon(card.type),
-                      color: color,
-                      height: 66,
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),

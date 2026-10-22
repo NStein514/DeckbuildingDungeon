@@ -52,7 +52,9 @@ class GameIllustration extends StatelessWidget {
   final String id;
   final IconData icon;
   final Color color;
-  final double height;
+
+  /// Null lets the artwork use its natural aspect ratio at the available width.
+  final double? height;
   @override
   Widget build(BuildContext context) {
     final path = AssetRegistry.illustrations[id];
@@ -73,7 +75,7 @@ class GameIllustration extends StatelessWidget {
   }
 
   Widget _placeholder() => Container(
-    height: height,
+    height: height ?? 80,
     width: double.infinity,
     decoration: BoxDecoration(
       gradient: RadialGradient(
@@ -83,7 +85,7 @@ class GameIllustration extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: color, size: height * .42),
+        Icon(icon, color: color, size: (height ?? 80) * .42),
         const SizedBox(height: 5),
         Text(
           'TEMP ART',
