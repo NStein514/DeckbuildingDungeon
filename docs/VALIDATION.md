@@ -242,3 +242,12 @@ The hero now receives the same width and height as each enemy card in the curren
 Regression coverage compares hero/enemy dimensions and checks all seven room types at phone and desktop widths. Reveal navigation tests explicitly scroll the outer screen now that card contents can also scroll.
 
 Validation: all 215 tests passed, along with formatting, analysis, and content checks. The final hero-frame inset also passed seven focused layout/interaction tests. Browser checks passed for single/double enemies on phone and desktop, path flipping and saved reveal reload, and all five hero portraits without browser or asset errors.
+
+## Combat impact and defeat feedback — October 22, 2026
+
+Playing an attack no longer creates a generic caster burst. Effect visuals follow their actual recipients; draw/discard/combo notices use text without an extra character effect. HP loss produces a brief red tint and a decaying three-pixel horizontal shake; fully blocked damage does not trigger the hit reaction. Reduced motion disables shaking.
+
+Defeated enemies desaturate, fade, and descend 24 pixels over 420 ms (210 ms with fast animations), then leave the battlefield. They stop accepting input immediately, and surviving enemies retain their original target IDs. Reduced motion uses a short fade without travel. Tests cover cue routing, damage reactions, departure timing, and defeating one opponent before attacking the survivor.
+
+Validation: all 221 tests passed. Formatting, static analysis, content validation, and the release web build also passed.
+The release-browser combat check also passed: repeated attacks defeated the rat in a two-enemy encounter, its card disappeared, and combat continued with the skeleton without page errors.

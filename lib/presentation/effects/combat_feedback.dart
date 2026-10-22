@@ -67,13 +67,38 @@ class _CombatFeedbackState extends State<CombatFeedback>
     final cues = widget.cues.length > 3
         ? widget.cues.sublist(widget.cues.length - 3)
         : widget.cues;
-    final visuals = cues.map((c) => c.visual).toSet();
+    final visuals = cues.where((c) => c.animate).map((c) => c.visual).toSet();
+    final hurt = widget.cues.any((c) => c.damage);
     if (visuals.length > 1) visuals.remove(CombatVisual.arcane);
     return RepaintBoundary(
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
-          widget.child,
+          AnimatedBuilder(
+            animation: controller,
+            child: widget.child,
+            builder: (_, child) {
+              final t = controller.value;
+              final strength = hurt && !controller.isCompleted ? 1 - t : 0.0;
+              return Transform.translate(
+                key: const ValueKey('damage-shake'),
+                offset: Offset(
+                  widget.reducedMotion
+                      ? 0
+                      : math.sin(t * math.pi * 6) * 3 * strength,
+                  0,
+                ),
+                child: ColorFiltered(
+                  key: const ValueKey('damage-tint'),
+                  colorFilter: ColorFilter.mode(
+                    Colors.red.withValues(alpha: .45 * strength),
+                    BlendMode.srcATop,
+                  ),
+                  child: child,
+                ),
+              );
+            },
+          ),
           if (cues.isNotEmpty)
             Positioned.fill(
               child: IgnorePointer(

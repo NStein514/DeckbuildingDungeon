@@ -92,6 +92,46 @@ void main() {
       );
     },
   );
+  test(
+    'attacking does not animate the caster and only HP loss triggers a hit',
+    () {
+      final cues = combatCues([
+        const CombatEvent(
+          0,
+          EventKind.play,
+          '',
+          cardId: 'strike',
+          actorId: 'player',
+        ),
+        const CombatEvent(
+          1,
+          EventKind.damage,
+          '',
+          actorId: 'enemy-0',
+          amount: 6,
+        ),
+        const CombatEvent(
+          2,
+          EventKind.damage,
+          '',
+          actorId: 'player',
+          amount: 0,
+          blocked: 5,
+        ),
+        const CombatEvent(3, EventKind.draw, '', actorId: 'player'),
+      ], catalog.cards);
+      expect(
+        cues.where(
+          (c) =>
+              c.actorId == 'player' &&
+              c.visual == CombatVisual.arcane &&
+              c.animate,
+        ),
+        isEmpty,
+      );
+      expect(cues.where((c) => c.damage).single.actorId, 'enemy-0');
+    },
+  );
   test('every playable card emits feedback and invalid commands emit none', () {
     for (final card in catalog.cards.values.where(
       (c) => c.type != CardType.curse,
@@ -217,6 +257,65 @@ void main() {
       await t.pumpAndSettle();
       expect(find.text('VICTORY'), findsOneWidget);
       expect(saves, 1);
+      expect(t.takeException(), isNull);
+    },
+  );
+  testWidgets(
+    'defeated enemy disappears while surviving opponent remains targetable',
+    (t) async {
+      var saves = 0;
+      await t.pumpWidget(
+        MaterialApp(
+          home: BattleScreen(
+            catalog: catalog,
+            enemyIds: const ['rat', 'skeleton'],
+            settings: GameSettings(),
+            seed: 1,
+            deck: const [
+              CardInstance('hit', 'cinder_maul', upgrade: 1),
+              CardInstance('first', 'strike', upgrade: 1),
+            ],
+            onComplete: (_) async {
+              saves++;
+              return true;
+            },
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Strike +'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('Strike +'));
+      await t.pump();
+      await t.ensureVisible(find.text('Dungeon Rat'));
+      await t.pump();
+      await t.tap(find.text('Dungeon Rat'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Cinder Maul +'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('Cinder Maul +'));
+      await t.pump();
+      await t.ensureVisible(find.text('Dungeon Rat'));
+      await t.pump();
+      await t.tap(find.text('Dungeon Rat'));
+      await t.pump(const Duration(milliseconds: 80));
+      expect(saves, 0);
+      expect(find.byKey(const ValueKey('combat-feedback-label')), findsWidgets);
+      expect(find.text('VICTORY'), findsNothing);
+      await t.pumpAndSettle();
+      expect(find.text('VICTORY'), findsNothing);
+      expect(find.text('Dungeon Rat'), findsNothing);
+      expect(find.text('Skeleton Soldier'), findsOneWidget);
+      await t.tap(find.text('End turn'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Strike +'));
+      await t.tap(find.text('Strike +'));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Skeleton Soldier'));
+      await t.tap(find.text('Skeleton Soldier'));
+      await t.pumpAndSettle();
+      expect(find.text('28 / 36 HP  ·  0 block'), findsOneWidget);
+      expect(saves, 0);
       expect(t.takeException(), isNull);
     },
   );

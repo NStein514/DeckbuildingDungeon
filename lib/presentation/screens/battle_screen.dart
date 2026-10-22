@@ -1,3 +1,4 @@
+import '../effects/enemy_departure.dart';
 import '../widgets/battlefield.dart';
 import '../../game/progression/starting_build.dart';
 import '../widgets/centered_card_row.dart';
@@ -61,6 +62,7 @@ class _BattleScreenState extends State<BattleScreen> {
   bool savingResult = false, resultSaved = false;
   String? saveError;
   List<CombatCue> cues = const [];
+  final departedEnemies = <String>{};
   Timer? resultTimer;
   bool holdResult = false, effectsPrecached = false;
   bool get reducedEffects =>
@@ -285,7 +287,19 @@ class _BattleScreenState extends State<BattleScreen> {
                                 : 280),
                       enemies: [
                         for (final enemy in state.enemies)
-                          _enemy(enemy, definition),
+                          if (!departedEnemies.contains(enemy.id))
+                            EnemyDeparture(
+                              key: ValueKey('departure-${enemy.id}'),
+                              defeated: !enemy.alive,
+                              reducedMotion: reducedEffects,
+                              fast: widget.settings.fastAnimations,
+                              onDeparted: () {
+                                if (mounted) {
+                                  setState(() => departedEnemies.add(enemy.id));
+                                }
+                              },
+                              child: _enemy(enemy, definition),
+                            ),
                       ],
                     ),
                     Padding(

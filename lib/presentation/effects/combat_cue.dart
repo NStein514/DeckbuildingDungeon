@@ -4,7 +4,15 @@ import '../../game/models/models.dart';
 enum CombatVisual { slash, shield, fire, lightning, poison, healing, arcane }
 
 class CombatCue {
-  const CombatCue(this.sequence, this.actorId, this.visual, this.label);
+  const CombatCue(
+    this.sequence,
+    this.actorId,
+    this.visual,
+    this.label, {
+    this.damage = false,
+    this.animate = true,
+  });
+  final bool damage, animate;
   final int sequence;
   final String actorId, label;
   final CombatVisual visual;
@@ -38,12 +46,21 @@ List<CombatCue> combatCues(
   final draws = events.where((e) => e.kind == EventKind.draw).length;
   for (final e in events) {
     final actor = e.actorId ?? 'player';
-    void add(CombatVisual visual, String label) =>
-        result.add(CombatCue(e.sequence, actor, visual, label));
+    void add(CombatVisual visual, String label, {bool animate = true}) =>
+        result.add(
+          CombatCue(
+            e.sequence,
+            actor,
+            visual,
+            label,
+            damage: e.kind == EventKind.damage && e.amount > 0,
+            animate: animate,
+          ),
+        );
     switch (e.kind) {
       case EventKind.play:
         played = cards[e.cardId];
-        add(CombatVisual.arcane, played?.name ?? 'Played');
+
       case EventKind.damage:
         add(
           e.amount == 0 && e.blocked > 0
@@ -64,19 +81,31 @@ List<CombatCue> combatCues(
           add(_statusVisual(e.status), '+${e.amount} ${e.status!.name}');
         }
       case EventKind.combo:
-        add(CombatVisual.lightning, 'COMBO!');
+        add(CombatVisual.lightning, 'COMBO!', animate: false);
       case EventKind.draw:
         if (e == events.lastWhere((x) => x.kind == EventKind.draw)) {
-          add(CombatVisual.arcane, 'Draw $draws');
+          add(CombatVisual.arcane, 'Draw $draws', animate: false);
         }
       case EventKind.discard:
-        add(CombatVisual.arcane, 'Discard');
+        add(CombatVisual.arcane, 'Discard', animate: false);
       case EventKind.turn:
         played = null;
       case EventKind.defeat:
       case EventKind.result:
         break;
     }
+  }
+  if (result.isEmpty && played != null) {
+    final play = events.lastWhere((e) => e.kind == EventKind.play);
+    result.add(
+      CombatCue(
+        play.sequence,
+        play.actorId ?? 'player',
+        CombatVisual.arcane,
+        played.name,
+        animate: false,
+      ),
+    );
   }
   // Bound feedback per command; rapid actions replace rather than backlog.
   return result.length <= 24 ? result : result.sublist(result.length - 24);
