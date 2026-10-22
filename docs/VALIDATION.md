@@ -251,3 +251,13 @@ Defeated enemies desaturate, fade, and descend 24 pixels over 420 ms (210 ms wit
 
 Validation: all 221 tests passed. Formatting, static analysis, content validation, and the release web build also passed.
 The release-browser combat check also passed: repeated attacks defeated the rat in a two-enemy encounter, its card disappeared, and combat continued with the skeleton without page errors.
+
+## Responsive battles and individual path reveals — October 22, 2026
+
+Reproduced vertical enemy-card overflow at 320- and 360-pixel battle widths. Normal enemy cards now have a 200-pixel minimum width (245 with enlarged text); the opponent row scrolls instead of squeezing text into narrow cards. Hero and opponent dimensions still match. Tests cover 320, 360, 600, 792, 820, and 1024 pixels at normal and 1.6× text size.
+
+Reveal content centers vertically and horizontally inside the fixed portrait frame while retaining internal scrolling for long content. Multi-opponent encounters start with a concealed card behind the first. Revealing it flips a separate card into the row and scrolls it into view on narrow screens. Each card contains one opponent, and hidden opponents' names and battle plans are excluded until revealed. Additional card flips are presentation state; reloading preserves the selected encounter but conceals its extra cards again.
+
+All 231 tests passed, including both two-opponent and two-boss reveal coverage and centered treasure/merchant content. The final automatic-scroll adjustment passed the two path sizing/visibility tests.
+Final analysis and release build passed. The release-browser reveal checks passed at phone and desktop sizes, including concealment of the second opponent before its flip and automatic scrolling afterward; screenshots were inspected.
+Battle browser checks also passed at 320, 360, 390, 820, and 1280 pixels for single and double opponents, including visible turn controls and advancing combat without browser/asset errors. The 320-pixel screenshot was inspected for clipping and readable card content.

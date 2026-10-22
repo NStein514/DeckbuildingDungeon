@@ -7,7 +7,7 @@ const fs=require('node:fs');
  page.on('pageerror',e=>errors.push(e.message));
  page.on('response',r=>{if(r.status()>=400&&r.url().includes('/assets/'))errors.push(r.url());});
  const out='/tmp/deckbound-battlefield';fs.mkdirSync(out,{recursive:true});
- for(const width of [1280,390]){
+ for(const width of [1280,820,390,360,320]){
   await page.setViewportSize({width,height:900});
   for(const enemies of [['Dungeon Warden'],['Dungeon Rat','Skeleton Soldier']]){
    await page.goto(process.env.BASE_URL||'http://127.0.0.1:8110');

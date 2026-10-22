@@ -49,6 +49,27 @@ Future<void> main(List<String> args) async {
     }
   }
 
+  for (final kind in ['Ambush', 'Treasure', 'Merchant']) {
+    for (var seed = 0; seed < 1000; seed++) {
+      var run = rules.start(seed);
+      final room = run.rooms
+          .where(
+            (room) => switch (kind) {
+              'Ambush' => room.enemies.length > 1,
+              'Treasure' => room.type == RoomType.treasure,
+              _ => room.type == RoomType.merchant,
+            },
+          )
+          .firstOrNull;
+      if (room == null) continue;
+      run = advanceToDepth(rules, run, room.depth);
+      run = rules.enter(run, room.id);
+      await repo.save(run);
+      checkpoints['reveal$kind'] = jsonDecode(store.contents!);
+      break;
+    }
+  }
+
   final effects = enterRoom(rules, rules.start(514), 'room-0-0')..health = 35;
   effects.deck
     ..clear()

@@ -1,3 +1,4 @@
+import '../widgets/path_card_stack.dart';
 import '../widgets/path_reveal.dart';
 import '../widgets/centered_card_row.dart';
 import '../widgets/atmosphere.dart';
@@ -44,6 +45,7 @@ class _RunScreenState extends State<RunScreen> {
   String? _focus;
   final _roomKeys = <String, GlobalKey>{};
   Rect? _revealOrigin;
+  int _revealedOpponents = 1;
   int? _descent;
   double? _mapOffset;
 
@@ -107,6 +109,56 @@ class _RunScreenState extends State<RunScreen> {
       }
     });
   }
+
+  Widget _revealedCard(RunState r, String? enemyId) => Container(
+    padding: const EdgeInsets.all(24),
+    decoration: BoxDecoration(
+      image: const DecorationImage(
+        image: ResizeImage(
+          AssetImage('assets/images/ui/enemy_frame.png'),
+          width: 768,
+        ),
+        fit: BoxFit.fill,
+      ),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: const Color(0xffd5b87a)),
+    ),
+    child: LayoutBuilder(
+      builder: (context, bounds) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: bounds.maxHeight),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.auto_awesome,
+                size: 48,
+                color: Color(0xffd5b87a),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                r.room!.type.name.toUpperCase(),
+                style: const TextStyle(fontSize: 24),
+              ),
+              for (final id in [?enemyId]) ...[
+                if (AssetRegistry.illustrations.containsKey('enemies/$id'))
+                  GameIllustration(id: 'enemies/$id', height: 150),
+                const SizedBox(height: 8),
+                Text(
+                  '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              if (r.room!.modifier != EncounterModifier.none)
+                Text(r.room!.modifier.description, textAlign: TextAlign.center),
+              const SizedBox(height: 16),
+              Text(_roomDescription(r.room!.type), textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) => ListenableBuilder(
@@ -217,100 +269,47 @@ class _RunScreenState extends State<RunScreen> {
                         style: TextStyle(fontSize: 28, fontFamily: 'serif'),
                       ),
                       const SizedBox(height: 16),
-                      Center(
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 320),
-                          child: AspectRatio(
-                            aspectRatio: 150 / 217,
-                            child: PathReveal(
-                              key: ValueKey(
-                                'reveal-${r.descent}-${r.currentRoom}',
-                              ),
-                              origin: _revealOrigin,
-                              prepare: () async {
-                                await Future.wait([
-                                  for (final id in r.room!.enemies)
-                                    if (AssetRegistry.illustrations.containsKey(
-                                      'enemies/$id',
-                                    ))
-                                      precacheImage(
-                                        ResizeImage(
-                                          AssetImage(
-                                            AssetRegistry
-                                                .illustrations['enemies/$id']!,
-                                          ),
-                                          width: 768,
-                                        ),
-                                        context,
-                                      ),
-                                ]);
-                              },
-                              reducedMotion: settings.reducedMotion,
-                              fast: settings.fastAnimations,
-                              child: Container(
-                                padding: const EdgeInsets.all(24),
-                                decoration: BoxDecoration(
-                                  image: const DecorationImage(
-                                    image: ResizeImage(
-                                      AssetImage(
-                                        'assets/images/ui/enemy_frame.png',
-                                      ),
-                                      width: 768,
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: const Color(0xffd5b87a),
-                                  ),
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      const Icon(
-                                        Icons.auto_awesome,
-                                        size: 48,
-                                        color: Color(0xffd5b87a),
-                                      ),
-                                      const SizedBox(height: 12),
-                                      Text(
-                                        r.room!.type.name.toUpperCase(),
-                                        style: const TextStyle(fontSize: 24),
-                                      ),
-                                      for (final id in r.room!.enemies) ...[
-                                        if (AssetRegistry.illustrations
-                                            .containsKey('enemies/$id'))
-                                          GameIllustration(
-                                            id: 'enemies/$id',
-                                            height: 150,
-                                          ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
-                                        ),
-                                      ],
-                                      if (r.room!.modifier !=
-                                          EncounterModifier.none)
-                                        Text(
-                                          r.room!.modifier.description,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      const SizedBox(height: 16),
-                                      Text(
-                                        _roomDescription(r.room!.type),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                      PathCardStack(
+                        key: ValueKey('cards-${r.descent}-${r.currentRoom}'),
+                        count: r.room!.enemies.isEmpty
+                            ? 1
+                            : r.room!.enemies.length,
+                        reducedMotion:
+                            settings.reducedMotion ||
+                            MediaQuery.disableAnimationsOf(context),
+                        onRevealed: (count) => setState(() {
+                          _revealedOpponents = count;
+                          _revealOrigin = null;
+                        }),
+                        cardBuilder: (index) => PathReveal(
+                          origin: index == 0 ? _revealOrigin : null,
+                          reducedMotion: settings.reducedMotion,
+                          fast: settings.fastAnimations,
+                          prepare: () async {
+                            for (final id in r.room!.enemies) {
+                              final asset =
+                                  AssetRegistry.illustrations['enemies/$id'];
+                              if (asset != null && mounted) {
+                                await precacheImage(
+                                  ResizeImage(AssetImage(asset), width: 768),
+                                  context,
+                                );
+                              }
+                            }
+                          },
+                          child: _revealedCard(
+                            r,
+                            r.room!.enemies.isEmpty
+                                ? null
+                                : r.room!.enemies[index],
                           ),
                         ),
                       ),
                       const SizedBox(height: 16),
                       if (r.room!.enemies.isNotEmpty)
-                        for (final id in r.room!.enemies)
+                        for (final id in r.room!.enemies.take(
+                          _revealedOpponents,
+                        ))
                           GuardianPlan(
                             enemy: scaleEnemy(
                               catalog.enemies[id]!,
@@ -642,6 +641,7 @@ class _RunScreenState extends State<RunScreen> {
   }
 
   Future<void> _enter(BuildContext context, String id) async {
+    _revealedOpponents = 1;
     if (runs.busy) return;
     final box = _roomKeys[id]?.currentContext?.findRenderObject() as RenderBox?;
     _revealOrigin = box == null

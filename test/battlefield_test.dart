@@ -43,35 +43,39 @@ void main() {
     });
   }
 
-  for (final scale in [1.0, 1.6]) {
-    testWidgets('two enemies fit a phone at text scale $scale', (t) async {
-      t.view.physicalSize = const Size(390, 844);
-      t.view.devicePixelRatio = 1;
-      addTearDown(t.view.resetPhysicalSize);
-      addTearDown(t.view.resetDevicePixelRatio);
-      final settings = GameSettings()..reducedMotion = true;
-      addTearDown(settings.dispose);
-      await t.pumpWidget(
-        MaterialApp(
-          builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(
-              context,
-            ).copyWith(textScaler: TextScaler.linear(scale)),
-            child: child!,
+  for (final width in [320.0, 360.0, 600.0, 792.0, 820.0, 1024.0]) {
+    for (final scale in [1.0, 1.6]) {
+      testWidgets('two enemies fit width $width at text scale $scale', (
+        t,
+      ) async {
+        t.view.physicalSize = Size(width, 844);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.resetPhysicalSize);
+        addTearDown(t.view.resetDevicePixelRatio);
+        final settings = GameSettings()..reducedMotion = true;
+        addTearDown(settings.dispose);
+        await t.pumpWidget(
+          MaterialApp(
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(scale)),
+              child: child!,
+            ),
+            home: BattleScreen(
+              catalog: loadCatalog(),
+              settings: settings,
+              enemyIds: const ['skeleton', 'mage'],
+              seed: 5,
+            ),
           ),
-          home: BattleScreen(
-            catalog: loadCatalog(),
-            settings: settings,
-            enemyIds: const ['skeleton', 'mage'],
-            seed: 5,
-          ),
-        ),
-      );
-      await t.pumpAndSettle();
-      expect(find.text('End turn').hitTestable(), findsOneWidget);
-      expect(find.text('Skeleton Soldier'), findsOneWidget);
-      expect(find.text('Cursed Mage'), findsOneWidget);
-      expect(t.takeException(), isNull);
-    });
+        );
+        await t.pumpAndSettle();
+        expect(find.text('End turn').hitTestable(), findsOneWidget);
+        expect(find.text('Skeleton Soldier'), findsOneWidget);
+        expect(find.text('Cursed Mage'), findsOneWidget);
+        expect(t.takeException(), isNull);
+      });
+    }
   }
 }

@@ -26,7 +26,7 @@ class Battlefield extends StatelessWidget {
         final cardWidth = enemies.length == 1
             ? (opponentWidth * (wide ? 1 : .82)).clamp(220.0, 320.0)
             : ((opponentWidth - 12) / 2).clamp(
-                largeText ? 245.0 : 150.0,
+                largeText ? 245.0 : 200.0,
                 265.0,
               );
         final opponents = SizedBox(

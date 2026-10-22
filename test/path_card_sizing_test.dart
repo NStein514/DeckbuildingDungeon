@@ -42,7 +42,7 @@ void main() {
           type == RoomType.combat
               ? ['rat', 'skeleton']
               : type == RoomType.boss
-              ? ['warden']
+              ? ['warden', 'sentinel']
               : [],
         );
         run.currentRoom = original.id;
@@ -68,6 +68,43 @@ void main() {
           firstSize,
           reason: '${type.name} must not resize the card',
         );
+        if (type == RoomType.treasure || type == RoomType.merchant) {
+          final face = find.byType(PathReveal);
+          final icon = find
+              .descendant(of: face, matching: find.byType(Icon))
+              .first;
+          final description = find
+              .descendant(of: face, matching: find.byType(Text))
+              .last;
+          final center = t.getCenter(face);
+          expect(
+            (t.getTopLeft(icon).dy + t.getBottomLeft(description).dy) / 2,
+            closeTo(center.dy, 1),
+          );
+          expect(t.getCenter(icon).dx, closeTo(center.dx, 1));
+        }
+        if (type == RoomType.combat || type == RoomType.boss) {
+          final secretName = type == RoomType.boss
+              ? 'Ember Sentinel'
+              : 'Skeleton Soldier';
+          expect(find.textContaining(secretName), findsNothing);
+          final next = find.text('Reveal next opponent');
+          await t.ensureVisible(next);
+          await t.tap(next);
+          await t.pumpAndSettle();
+          expect(find.textContaining(secretName), findsWidgets);
+          expect(find.byType(PathReveal), findsNWidgets(2));
+          final cards = find.byType(PathReveal);
+          expect(t.getSize(cards.first), size);
+          expect(t.getSize(cards.last), size);
+          expect(t.getTopLeft(cards.last).dx, greaterThanOrEqualTo(0));
+          expect(t.getTopRight(cards.last).dx, lessThanOrEqualTo(width));
+          expect(t.getTopLeft(cards.first).dy, t.getTopLeft(cards.last).dy);
+          expect(
+            t.getTopLeft(cards.last).dx,
+            greaterThan(t.getTopRight(cards.first).dx),
+          );
+        }
         expect(t.takeException(), isNull);
         await t.pumpWidget(const SizedBox());
         controller.dispose();
