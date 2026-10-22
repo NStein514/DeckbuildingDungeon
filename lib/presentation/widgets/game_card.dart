@@ -151,11 +151,14 @@ class GameCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GameIllustration(
-                          id: card.art,
-                          icon: cardIcon(card.type),
-                          color: color,
-                          height: null,
+                        AspectRatio(
+                          aspectRatio: 3 / 2,
+                          child: GameIllustration(
+                            id: card.art,
+                            icon: cardIcon(card.type),
+                            color: color,
+                            height: null,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),

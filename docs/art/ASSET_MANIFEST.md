@@ -141,3 +141,29 @@ All twelve illustrations were generated with Strike (cards) and Ash Duelist (ene
 ### Enemy encounter frame
 
 `assets/images/ui/enemy_frame.png` — Image Generator, 1254×1254, opaque. Blackened iron, aged silver, bone corners and garnet accents around a dark burgundy interior. Separate from the player's gold frame; used for combat enemy and boss panels. Original: `/workspace/generated_images/exec-2c1a1bde-0047-4366-9d29-382381e1af2c.png`.
+
+### Unified card canvases and masked Wayfarers
+
+All 16 delivered card paintings are now 1536×1024 (3:2). Eight older 4:3 images were recomposed with Image Generator, adding dungeon scenery around the complete subjects rather than cropping or stretching. This supersedes older delivered dimensions above.
+
+| Updated card | Generated source |
+| --- | --- |
+| `strike` | `/workspace/generated_images/exec-25d070c3-89af-4d8e-b40c-a5560689b55b.png` |
+| `brace` | `/workspace/generated_images/exec-acc1728e-2711-4c0d-bbdb-cfa7060972e8.png` |
+| `enfeeble` | `/workspace/generated_images/exec-081b3d64-cd94-472c-be56-85ded937df8e.png` |
+| `cinder_storm` | `/workspace/generated_images/exec-a29af30b-641b-42c9-a9ec-0d2e3d7a8a81.png` |
+| `venom_ward` | `/workspace/generated_images/exec-d5bcdbf9-b8e7-4564-8d59-2a82198103f7.png` |
+| `bloomguard` | `/workspace/generated_images/exec-1a7673e7-e080-44a1-bc59-e07d14672baa.png` |
+| `stormguard` | `/workspace/generated_images/exec-71953197-8084-48d3-9ab0-b67f0e975f1e.png` |
+| `cinder_maul` | `/workspace/generated_images/exec-81c8412c-dbd2-4587-9114-14d28cc05422.png` |
+
+Five masked/helmeted Wayfarers use 1024×1536 RGBA portraits. All faces and hair are obscured; class identity comes from equipment, silhouette and color. Hero-frame artwork is 1254×1254, silver/gold/sapphire over dark teal, paired with the enemy frame.
+
+| Asset | Generated source |
+| --- | --- |
+| `assets/images/heroes/wanderer.png` | `/workspace/generated_images/exec-aaf9b21b-8416-4716-a7aa-d717216dbd38.png` |
+| `assets/images/heroes/venomblade.png` | `/workspace/generated_images/exec-03add923-23c5-4199-a618-07143ee11757.png` |
+| `assets/images/heroes/stormweaver.png` | `/workspace/generated_images/exec-6f4e249e-4987-4fae-a6f4-f9453fc299c7.png` |
+| `assets/images/heroes/gravewarden.png` | `/workspace/generated_images/exec-560c8894-9747-49e1-ba01-5ab13fbba4a8.png` |
+| `assets/images/heroes/embercaller.png` | `/workspace/generated_images/exec-3081bf29-8f85-4d8d-94e0-d68c082c6ef7.png` |
+| `assets/images/ui/hero_frame.png` | `/workspace/generated_images/exec-4403252b-3d37-4053-9a1b-156126df25d8.png` |

@@ -1,3 +1,4 @@
+import 'starting_build.dart';
 import '../models/models.dart';
 import '../dungeon/dungeon.dart';
 import '../relics/relic.dart';
@@ -25,6 +26,7 @@ class RunState {
     required this.deck,
     required this.health,
     this.gold = 0,
+    this.startingBuild = StartingBuild.wanderer,
     this.mapVersion = 10,
     this.descent = 1,
     int? mapSeed,
@@ -45,6 +47,7 @@ class RunState {
        discovered =
            discovered ?? deck.map((c) => c.definitionId).toSet().toList();
   final int seed, mapVersion, descent, mapSeed;
+  final StartingBuild startingBuild;
   int get clearedRooms => (descent - 1) * 6 + completed.length;
   int rngState, health, gold, battleSeed, nextCardId;
   RunPhase phase;
@@ -60,6 +63,7 @@ class RunState {
   RunState copy() => RunState.fromJson(toJson());
   Map<String, dynamic> toJson() => {
     'seed': seed,
+    'startingBuild': startingBuild.name,
     'mapVersion': mapVersion,
     'mapSeed': mapSeed,
     'descent': descent,
@@ -88,6 +92,9 @@ class RunState {
   };
   factory RunState.fromJson(Map<String, dynamic> j) => RunState(
     seed: j['seed'] as int,
+    startingBuild: StartingBuild.values.byName(
+      j['startingBuild'] as String? ?? 'wanderer',
+    ),
     mapVersion: j['mapVersion'] as int? ?? 1,
     mapSeed: j['mapSeed'] as int? ?? j['seed'] as int,
     descent: j['descent'] as int? ?? 1,

@@ -184,7 +184,15 @@ The goal is many distinct runs and a dungeon that can keep generating floors, no
 - Logical art IDs replace placeholders across battle, reveal, rewards, shops and collection views without changing gameplay.
 - Bounded illustration decoding and content checks for starter/enemy coverage and bundled PNG files.
 
-## Milestone 5F — remaining presentation and accessibility
+## Milestone 5F — implemented: path reveals and masked Wayfarers
+
+- Saved path choices flip from their map position and expand into the enemy-style frame; reduced motion and resumed reveals skip the flight.
+- One app atmosphere behind the map, without repeated floor image panels.
+- Sixteen card paintings share a 1536×1024 canvas; older images were extended/recomposed rather than cropped.
+- Taller boss portrait panels and a heroic silver/gold player frame with five masked starter-build portraits.
+- Durable hero identity persists independently of upgrades, removals, reloads and descents.
+
+## Milestone 5G — remaining presentation and accessibility
 
 Approved illustrations and icons, licensed audio, richer event-driven animation, screen-reader and large-text review, physical-device profiling, crash-recovery testing, and native release packaging.
 

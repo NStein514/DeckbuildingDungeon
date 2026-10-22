@@ -1,3 +1,4 @@
+import '../../game/progression/starting_build.dart';
 import '../widgets/centered_card_row.dart';
 import '../widgets/atmosphere.dart';
 import 'dart:async';
@@ -26,6 +27,7 @@ class BattleScreen extends StatefulWidget {
     required this.settings,
     required this.seed,
     this.deck,
+    this.startingBuild = StartingBuild.wanderer,
     this.descent = 1,
     this.floorDepth = 0,
     this.modifier = EncounterModifier.none,
@@ -35,6 +37,7 @@ class BattleScreen extends StatefulWidget {
     this.onComplete,
   });
   final GameCatalog catalog;
+  final StartingBuild startingBuild;
   final List<String> enemyIds;
   final GameSettings settings;
   final int seed, descent, floorDepth;
@@ -270,7 +273,14 @@ class _BattleScreenState extends State<BattleScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: largeText ? 340 : 244,
+                      height: largeText
+                          ? 380
+                          : (widget.floorDepth == 5 ||
+                                    widget.enemyIds.any(
+                                      (id) => widget.catalog.enemies[id]!.boss,
+                                    )
+                                ? 320
+                                : 244),
                       child: CenteredCardRow(
                         gap: 12,
                         children: [
@@ -289,7 +299,12 @@ class _BattleScreenState extends State<BattleScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: _player(state),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 480),
+                          child: _player(state),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -553,12 +568,30 @@ class _BattleScreenState extends State<BattleScreen> {
     Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xff1b2630),
+        image: const DecorationImage(
+          image: ResizeImage(
+            AssetImage('assets/images/ui/hero_frame.png'),
+            width: 768,
+          ),
+          centerSlice: Rect.fromLTWH(32, 32, 704, 704),
+          fit: BoxFit.fill,
+        ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xff36434e)),
       ),
       child: Row(
         children: [
+          SizedBox(
+            width: 64,
+            height: 96,
+            child: Image.asset(
+              'assets/images/heroes/${widget.startingBuild.name}.png',
+              fit: BoxFit.contain,
+              cacheWidth: 256,
+              semanticLabel: '${widget.startingBuild.title} hero',
+            ),
+          ),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -573,7 +606,7 @@ class _BattleScreenState extends State<BattleScreen> {
               ],
             ),
           ),
-          const SizedBox(width: 18),
+          const SizedBox(width: 8),
           Column(
             children: [
               Text(

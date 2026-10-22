@@ -1,3 +1,4 @@
+import '../widgets/path_reveal.dart';
 import '../widgets/centered_card_row.dart';
 import '../widgets/atmosphere.dart';
 import '../../assets/asset_registry.dart';
@@ -41,8 +42,30 @@ class _RunScreenState extends State<RunScreen> {
   final _mapScroll = ScrollController(keepScrollOffset: false);
   final _floors = List.generate(6, (_) => GlobalKey());
   String? _focus;
+  final _roomKeys = <String, GlobalKey>{};
+  Rect? _revealOrigin;
   int? _descent;
   double? _mapOffset;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // The reveal overlay must have both faces ready before its first paint.
+    precacheImage(
+      const ResizeImage(
+        AssetImage('assets/images/ui/enemy_frame.png'),
+        width: 768,
+      ),
+      context,
+    );
+    precacheImage(
+      const ResizeImage(
+        AssetImage('assets/images/ui/card_back.png'),
+        width: 384,
+      ),
+      context,
+    );
+  }
 
   @override
   void dispose() {
@@ -194,55 +217,90 @@ class _RunScreenState extends State<RunScreen> {
                         style: TextStyle(fontSize: 28, fontFamily: 'serif'),
                       ),
                       const SizedBox(height: 16),
-                      DungeonCard(
-                        key: ValueKey('reveal-${r.descent}-${r.currentRoom}'),
-                        label: 'Chosen path',
-                        flip: true,
-                        reducedMotion: settings.reducedMotion,
-                        fast: settings.fastAnimations,
-                        front: Container(
-                          padding: const EdgeInsets.all(24),
-                          decoration: BoxDecoration(
-                            color: const Color(0xff1b2630),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xffd5b87a)),
-                          ),
-                          child: Column(
-                            children: [
-                              const Icon(
-                                Icons.auto_awesome,
-                                size: 48,
-                                color: Color(0xffd5b87a),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                r.room!.type.name.toUpperCase(),
-                                style: const TextStyle(fontSize: 24),
-                              ),
-                              for (final id in r.room!.enemies) ...[
-                                if (AssetRegistry.illustrations.containsKey(
-                                  'enemies/$id',
-                                ))
-                                  GameIllustration(
-                                    id: 'enemies/$id',
-                                    height: 150,
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 360),
+                          child: PathReveal(
+                            key: ValueKey(
+                              'reveal-${r.descent}-${r.currentRoom}',
+                            ),
+                            origin: _revealOrigin,
+                            prepare: () async {
+                              await Future.wait([
+                                for (final id in r.room!.enemies)
+                                  if (AssetRegistry.illustrations.containsKey(
+                                    'enemies/$id',
+                                  ))
+                                    precacheImage(
+                                      ResizeImage(
+                                        AssetImage(
+                                          AssetRegistry
+                                              .illustrations['enemies/$id']!,
+                                        ),
+                                        width: 768,
+                                      ),
+                                      context,
+                                    ),
+                              ]);
+                            },
+                            reducedMotion: settings.reducedMotion,
+                            fast: settings.fastAnimations,
+                            child: Container(
+                              padding: const EdgeInsets.all(24),
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: ResizeImage(
+                                    AssetImage(
+                                      'assets/images/ui/enemy_frame.png',
+                                    ),
+                                    width: 768,
                                   ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                                  fit: BoxFit.fill,
                                 ),
-                              ],
-                              if (r.room!.modifier != EncounterModifier.none)
-                                Text(
-                                  r.room!.modifier.description,
-                                  textAlign: TextAlign.center,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: const Color(0xffd5b87a),
                                 ),
-                              const SizedBox(height: 16),
-                              Text(
-                                _roomDescription(r.room!.type),
-                                textAlign: TextAlign.center,
                               ),
-                            ],
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    Icons.auto_awesome,
+                                    size: 48,
+                                    color: Color(0xffd5b87a),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    r.room!.type.name.toUpperCase(),
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  for (final id in r.room!.enemies) ...[
+                                    if (AssetRegistry.illustrations.containsKey(
+                                      'enemies/$id',
+                                    ))
+                                      GameIllustration(
+                                        id: 'enemies/$id',
+                                        height: 150,
+                                      ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '${catalog.enemies[id]!.name} · ${scaleEnemy(catalog.enemies[id]!, r.descent, modifier: r.room!.modifier).health} HP',
+                                    ),
+                                  ],
+                                  if (r.room!.modifier !=
+                                      EncounterModifier.none)
+                                    Text(
+                                      r.room!.modifier.description,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  const SizedBox(height: 16),
+                                  Text(
+                                    _roomDescription(r.room!.type),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -469,6 +527,7 @@ class _RunScreenState extends State<RunScreen> {
                   Transform.rotate(
                     angle: dungeonCardTilt(r.mapSeed, room.id),
                     child: SizedBox(
+                      key: _roomKeys.putIfAbsent(room.id, () => GlobalKey()),
                       width: 150,
                       height: MediaQuery.textScalerOf(context).scale(1) > 1.3
                           ? 283
@@ -579,6 +638,11 @@ class _RunScreenState extends State<RunScreen> {
   }
 
   Future<void> _enter(BuildContext context, String id) async {
+    if (runs.busy) return;
+    final box = _roomKeys[id]?.currentContext?.findRenderObject() as RenderBox?;
+    _revealOrigin = box == null
+        ? null
+        : box.localToGlobal(Offset.zero) & box.size;
     if (await runs.enter(id) &&
         context.mounted &&
         runs.state!.phase == RunPhase.combat) {
@@ -600,6 +664,7 @@ class _RunScreenState extends State<RunScreen> {
             modifier: r.room!.modifier,
             discovered: r.discovered,
             deck: r.deck,
+            startingBuild: r.startingBuild,
             initialHealth: r.health,
             relics: r.relics.toSet(),
             onComplete: (result) =>

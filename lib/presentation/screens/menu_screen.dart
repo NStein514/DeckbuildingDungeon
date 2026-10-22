@@ -332,6 +332,8 @@ class _MenuScreenState extends State<MenuScreen> {
           catalog: widget.catalog,
           settings: widget.settings,
           seed: value,
+          startingBuild: startingBuild,
+          deck: startingBuild.deck(widget.catalog),
           enemyIds: encounter == 'ambush' ? ['rat', 'skeleton'] : [encounter],
         ),
       ),

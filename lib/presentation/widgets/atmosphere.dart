@@ -109,38 +109,24 @@ class FloorSurface extends StatelessWidget {
   final int depth;
   final Widget child;
   @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(14),
-    child: Atmosphere(
-      depth: depth,
-      floorPanel: true,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 64,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Text(
-                    FloorAtmosphere.names[depth % 6],
-                    style: const TextStyle(
-                      fontFamily: 'serif',
-                      fontSize: 19,
-                      color: Color(0xffebdfc5),
-                      shadows: [Shadow(color: Colors.black, blurRadius: 8)],
-                    ),
-                  ),
-                ),
-              ),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 28, bottom: 12),
+          child: Text(
+            FloorAtmosphere.names[depth % 6],
+            style: const TextStyle(
+              fontFamily: 'serif',
+              fontSize: 19,
+              color: Color(0xffebdfc5),
             ),
-            child,
-          ],
+          ),
         ),
-      ),
+        child,
+      ],
     ),
   );
 }

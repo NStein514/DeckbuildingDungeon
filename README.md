@@ -4,8 +4,10 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: illustrated starter deck and enemies
+## Current build: masked heroes and animated path reveals
 
+- Five masked hero portraits follow the selected starting deck; saved identity survives deck changes and deeper descents.
+- Chosen paths flip in place, then expand into a framed reveal; all delivered card paintings share a complete 3:2 canvas.
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
 - Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.

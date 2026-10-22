@@ -18,6 +18,7 @@ class RunRules {
     final rooms = DungeonGenerator.generate(rng);
     return RunState(
       seed: seed,
+      startingBuild: build,
       rngState: rng.state,
       rooms: rooms,
       deck: build.deck(catalog),
@@ -36,6 +37,7 @@ class RunRules {
     final r = old.copy();
     return RunState(
       seed: r.seed,
+      startingBuild: r.startingBuild,
       mapSeed: mapSeed,
       descent: r.descent + 1,
       rooms: DungeonGenerator.generate(mapRng),

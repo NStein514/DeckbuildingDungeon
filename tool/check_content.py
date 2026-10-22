@@ -4,6 +4,7 @@ This checks data contracts only. It does not execute Dart gameplay or widgets.
 """
 import json
 import re
+import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,3 +65,9 @@ for logical_id, path in registry.items():
     assert asset.is_file(), f"Missing bundled illustration: {logical_id}"
     assert asset.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), f"Invalid PNG: {logical_id}"
 print(f"Content checks passed: {len(cards)} cards, {len(enemies)} enemies, 12-card deck, art references, documentation files.")
+
+# Source artwork itself shares a canvas; no runtime cropping is needed.
+for asset in (ROOT / "assets/images/cards").glob("*.png"):
+    assert struct.unpack(">II", asset.read_bytes()[16:24]) == (1536, 1024), f"Inconsistent card canvas: {asset.name}"
+for build in ("wanderer", "stormweaver", "venomblade", "gravewarden", "embercaller"):
+    assert (ROOT / f"assets/images/heroes/{build}.png").is_file(), f"Missing hero: {build}"
