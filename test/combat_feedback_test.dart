@@ -195,11 +195,19 @@ void main() {
         ),
       );
       await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Strike +'));
+      await t.pumpAndSettle();
       await t.tap(find.text('Strike +'));
+      await t.pump();
+      await t.ensureVisible(find.text('Dungeon Rat'));
       await t.pump();
       await t.tap(find.text('Dungeon Rat'));
       await t.pumpAndSettle();
+      await t.ensureVisible(find.text('Cinder Maul +'));
+      await t.pumpAndSettle();
       await t.tap(find.text('Cinder Maul +'));
+      await t.pump();
+      await t.ensureVisible(find.text('Dungeon Rat'));
       await t.pump();
       await t.tap(find.text('Dungeon Rat'));
       await t.pump(const Duration(milliseconds: 80));

@@ -224,3 +224,13 @@ The redundant per-floor image layers are removed, retaining the app atmosphere. 
 The full Chromium gameplay regression and `tool/browser_hero_reveal.cjs` pass. The dedicated browser check exercises map selection, reveal/save/reload, all five saved hero identities, and phone/desktop boss views without page or asset-request errors. Visual review checks masked faces, the single map atmosphere, larger boss portraits and the heroic player frame. The player frame uses a center slice to preserve ornate corners on wider panels; card image slots keep a 3:2 layout even while decoding.
 
 Follow-up focused tests cover portrait readiness: the selected back remains visible until the portrait is decoded, then the flight begins. The existing reveal/guardian/run tests and the four dedicated animation tests pass after this refinement. Frame textures are warmed from the map screen. This adds one readiness test to the 208-test full-suite baseline. Production-device frame pacing and subjective art approval still need playtesting.
+
+## Combat layout cleanup — October 22, 2026
+
+Combat turn controls now sit outside the scrolling battle content, keeping End turn and Play card reachable on phones. Short hands center on wide screens; long hands still scroll horizontally. Hero stats have more inset from the illustrated frame, and empty player afflictions no longer occupy a line. Hidden path labels sit below the emblem with shorter helper text.
+
+All 209 Flutter tests pass, along with formatting, analysis, and content checks. The phone widget test checks End turn is hit-testable before scrolling. Reveal integration tests explicitly decode enemy portraits outside the fake clock before starting the animation; combat feedback coverage scrolls cards and enemies into view before tapping.
+
+The combat battlefield now follows the supplied concept layouts: enemies align at the upper right, the hero panel sits lower left, and cards form the move area below. Wide layouts keep both sides in separate columns with a vertical offset. Phones retain the opposing alignment in stacked rows; two enemies fit beside each other at normal text size, while enlarged text uses wider scrollable enemy cards. Four additional widget tests cover the single/double opponent geometry and phone layouts at 1× and 1.6× text scale.
+
+Final verification: all 213 tests passed and static analysis was clean. The release web build succeeded. `tool/browser_battlefield.cjs` verified single-boss and double-enemy encounters at 1280×900 and 390×900, including visible turn controls and advancing to turn 2, with no browser or asset errors. Screenshots were inspected for spacing and clipping.

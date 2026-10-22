@@ -1,3 +1,4 @@
+import 'package:deckbound/assets/asset_registry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:deckbound/app/app.dart';
@@ -105,6 +106,18 @@ void main() {
       await tap(t, 'Descend deeper');
       expect(find.text('FLOOR 7'), findsOneWidget);
       expect((await repo.load())!.descent, 2);
+      // Image decoding uses real asynchronous work, outside the fake test clock.
+      await t.runAsync(() async {
+        final context = t.element(find.byType(Scaffold).first);
+        for (final entry in AssetRegistry.illustrations.entries) {
+          if (entry.key.startsWith('enemies/')) {
+            await precacheImage(
+              ResizeImage(AssetImage(entry.value), width: 768),
+              context,
+            );
+          }
+        }
+      });
       await tap(t, 'Unexplored path 1 · floor 7');
       await tap(t, 'Enter encounter');
       expect(find.text('27 / 27 HP  ·  0 block'), findsOneWidget);

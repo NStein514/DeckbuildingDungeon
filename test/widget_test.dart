@@ -18,7 +18,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('TURN 1'), findsOneWidget);
     expect(find.byType(GameCard), findsWidgets);
-    await tester.ensureVisible(find.text('End turn'));
+    // Turn controls remain reachable before scrolling the battle content.
+    expect(find.text('End turn').hitTestable(), findsOneWidget);
     await tester.tap(find.text('End turn'));
     await tester.pumpAndSettle();
     expect(find.text('TURN 2'), findsOneWidget);

@@ -1,3 +1,4 @@
+import '../widgets/battlefield.dart';
 import '../../game/progression/starting_build.dart';
 import '../widgets/centered_card_row.dart';
 import '../widgets/atmosphere.dart';
@@ -233,7 +234,7 @@ class _BattleScreenState extends State<BattleScreen> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 920),
+            constraints: const BoxConstraints(maxWidth: 1180),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final largeText =
@@ -272,39 +273,20 @@ class _BattleScreenState extends State<BattleScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: largeText
-                          ? 380
+                    Battlefield(
+                      player: _player(state),
+                      enemyHeight: largeText
+                          ? 400
                           : (widget.floorDepth == 5 ||
                                     widget.enemyIds.any(
                                       (id) => widget.catalog.enemies[id]!.boss,
                                     )
                                 ? 320
-                                : 244),
-                      child: CenteredCardRow(
-                        gap: 12,
-                        children: [
-                          for (final enemy in state.enemies)
-                            SizedBox(
-                              width: state.enemies.length == 1
-                                  ? (constraints.maxWidth - 40).clamp(
-                                      220.0,
-                                      320.0,
-                                    )
-                                  : 245,
-                              child: _enemy(enemy, definition),
-                            ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 480),
-                          child: _player(state),
-                        ),
-                      ),
+                                : 280),
+                      enemies: [
+                        for (final enemy in state.enemies)
+                          _enemy(enemy, definition),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -354,68 +336,80 @@ class _BattleScreenState extends State<BattleScreen> {
                                 'Your hand is empty. End your turn to draw.',
                               ),
                             )
-                          : ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
-                              itemCount: state.hand.length,
-                              separatorBuilder: (_, index) =>
-                                  const SizedBox(width: 9),
-                              itemBuilder: (_, i) {
-                                final card = state.hand[i];
-                                return GameCard(
-                                  key: ValueKey(card.id),
-                                  card: definitionFor(card),
-                                  selected: selected == card.id,
-                                  affordable:
-                                      definitionFor(card).cost <= state.energy,
-                                  reducedMotion: widget.settings.reducedMotion,
-                                  onTap: () => select(card),
-                                );
-                              },
+                          : CenteredCardRow(
+                              gap: 9,
+                              children: [
+                                for (final card in state.hand)
+                                  GameCard(
+                                    key: ValueKey(card.id),
+                                    card: definitionFor(card),
+                                    selected: selected == card.id,
+                                    affordable:
+                                        definitionFor(card).cost <=
+                                        state.energy,
+                                    reducedMotion:
+                                        widget.settings.reducedMotion,
+                                    onTap: () => select(card),
+                                  ),
+                              ],
                             ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-                      child: Row(
-                        children: [
-                          if (definition != null && !definition.needsTarget)
-                            Expanded(
-                              child: FilledButton(
-                                onPressed: state.energy >= definition.cost
-                                    ? () =>
-                                          command(() => engine.play(selected!))
-                                    : null,
-                                child: const Text('Play card'),
+                  ],
+                );
+                return Column(
+                  children: [
+                    Expanded(child: SingleChildScrollView(child: content)),
+                    DecoratedBox(
+                      decoration: const BoxDecoration(
+                        color: Color(0xf510151c),
+                        border: Border(
+                          top: BorderSide(color: Color(0xff554b38)),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        child: Row(
+                          children: [
+                            if (definition != null && !definition.needsTarget)
+                              Expanded(
+                                child: FilledButton(
+                                  onPressed: state.energy >= definition.cost
+                                      ? () => command(
+                                          () => engine.play(selected!),
+                                        )
+                                      : null,
+                                  child: const Text('Play card'),
+                                ),
+                              )
+                            else
+                              Expanded(
+                                child: Text(
+                                  state.pendingDiscard > 0
+                                      ? 'Choose a discard'
+                                      : definition != null
+                                      ? 'Tap an enemy'
+                                      : 'Plan your next move',
+                                  style: const TextStyle(fontSize: 12),
+                                ),
                               ),
-                            )
-                          else
-                            Expanded(
-                              child: Text(
-                                state.pendingDiscard > 0
-                                    ? 'Choose a discard'
-                                    : definition != null
-                                    ? 'Tap an enemy'
-                                    : 'Plan your next move',
-                                style: const TextStyle(fontSize: 12),
-                              ),
+                            const SizedBox(width: 12),
+                            OutlinedButton(
+                              onPressed:
+                                  state.pendingDiscard == 0 &&
+                                      state.outcome == Outcome.active
+                                  ? () => command(engine.endTurn)
+                                  : null,
+                              child: const Text('End turn'),
                             ),
-                          const SizedBox(width: 12),
-                          OutlinedButton(
-                            onPressed:
-                                state.pendingDiscard == 0 &&
-                                    state.outcome == Outcome.active
-                                ? () => command(engine.endTurn)
-                                : null,
-                            child: const Text('End turn'),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 );
-                return SingleChildScrollView(child: content);
               },
             ),
           ),
@@ -566,7 +560,7 @@ class _BattleScreenState extends State<BattleScreen> {
   Widget _player(CombatSnapshot state) => _feedback(
     'player',
     Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
       decoration: BoxDecoration(
         image: const DecorationImage(
           image: ResizeImage(
@@ -598,11 +592,14 @@ class _BattleScreenState extends State<BattleScreen> {
               children: [
                 const Text(
                   'THE WAYFARER',
-                  style: TextStyle(fontSize: 11, letterSpacing: 2),
+                  style: TextStyle(fontSize: 10, letterSpacing: 1.2),
                 ),
                 const SizedBox(height: 8),
                 _health(state.player),
-                _statuses(state.player),
+                if (state.player.statuses.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  _statuses(state.player),
+                ],
               ],
             ),
           ),

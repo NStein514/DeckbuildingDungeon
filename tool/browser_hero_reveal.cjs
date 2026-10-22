@@ -35,7 +35,15 @@ const fs=require('node:fs');
   await page.getByRole('button',{name:'Enter encounter',exact:true}).click();
   await page.getByText('TURN 1',{exact:true}).waitFor();await page.waitForTimeout(900);
   await page.getByRole('img',{name:name[0].toUpperCase()+name.slice(1)+' hero',exact:true}).waitFor();
+  const endTurn = page.getByRole('button',{name:'End turn',exact:true});
+  const before = await endTurn.boundingBox();
+  assert(before && before.y >= 0 && before.y + before.height <= 844, 'Turn controls must fit on the phone');
   await capture(name);
+  await page.mouse.move(195,600);await page.mouse.wheel(0,500);await page.waitForTimeout(350);
+  const after = await endTurn.boundingBox();
+  assert(Math.abs(before.y - after.y) < 1, 'Turn controls must stay fixed while scrolling');
+  if(name === 'wanderer') await capture('hand-controls');
+
   assert.equal((await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')))).run.startingBuild,name);
  }
  await page.setViewportSize({width:1280,height:900});await page.waitForTimeout(700);await capture('boss-desktop');

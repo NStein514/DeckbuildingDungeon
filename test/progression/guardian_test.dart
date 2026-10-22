@@ -1,3 +1,4 @@
+import 'package:deckbound/assets/asset_registry.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -135,6 +136,18 @@ void main() {
       400,
       scrollable: find.byType(Scrollable).first,
     );
+    // Image decoding uses real asynchronous work, outside the fake test clock.
+    await t.runAsync(() async {
+      final context = t.element(find.byType(Scaffold).first);
+      for (final entry in AssetRegistry.illustrations.entries) {
+        if (entry.key.startsWith('enemies/')) {
+          await precacheImage(
+            ResizeImage(AssetImage(entry.value), width: 768),
+            context,
+          );
+        }
+      }
+    });
     await tap('Unexplored path 1 · floor 6');
     await tap('${boss.name} · battle plan');
     expect(find.text('1. ${boss.pattern.first.name}'), findsOneWidget);

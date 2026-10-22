@@ -35,9 +35,8 @@ class DungeonCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
@@ -52,9 +51,7 @@ class DungeonCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            onTap == null
-                ? 'Beyond the lantern light'
-                : 'Flip to choose this path',
+            onTap == null ? 'Unexplored' : 'Tap to reveal',
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 11, color: Color(0xffb8c5ce)),
           ),
