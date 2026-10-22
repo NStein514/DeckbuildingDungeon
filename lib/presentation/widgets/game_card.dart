@@ -75,95 +75,124 @@ class GameCard extends StatelessWidget {
             onTap: onTap,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(11),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Stack(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: GameIllustration(
-                            id: card.art,
-                            icon: cardIcon(card.type),
-                            color: color,
-                            height: null,
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(6, 4, 6, 5),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0x995c4225), Color(0xbb201810)],
+                            ),
+                            border: Border(
+                              bottom: BorderSide(color: Color(0xffb59454)),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: affordable
+                                        ? const [
+                                            Color(0xffefd59a),
+                                            Color(0xff98703b),
+                                          ]
+                                        : const [
+                                            Color(0xffa18c77),
+                                            Color(0xff594a40),
+                                          ],
+                                  ),
+                                  border: Border.all(
+                                    color: const Color(0xffe3c583),
+                                  ),
+                                ),
+                                child: Text(
+                                  '${card.cost}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xff201810),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 5),
+                              Expanded(
+                                child: Text(
+                                  card.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: Color(0xfff3e1b9),
+                                    fontWeight: FontWeight.w700,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 2,
+                                        offset: Offset(0, 1),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Positioned(
-                          top: 3,
-                          left: 3,
-                          right: 3,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xe610151c),
-                              borderRadius: BorderRadius.circular(7),
-                              border: Border.all(
-                                color: color.withValues(alpha: .45),
+                        GameIllustration(
+                          id: card.art,
+                          icon: cardIcon(card.type),
+                          color: color,
+                          height: null,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),
+                          child: Text(
+                            '${card.type.name.toUpperCase()} · ${card.rarity.name}',
+                            style: TextStyle(color: color, fontSize: 9),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: Text(
+                              card.description,
+                              style: const TextStyle(
+                                fontSize: 11,
+                                height: 1.35,
                               ),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: affordable
-                                        ? color
-                                        : const Color(0xff746168),
-                                  ),
-                                  child: Text(
-                                    '${card.cost}',
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xff10151c),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                Expanded(
-                                  child: Text(
-                                    card.name,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(9, 7, 9, 0),
-                      child: Text(
-                        '${card.type.name.toUpperCase()} · ${card.rarity.name}',
-                        style: TextStyle(color: color, fontSize: 9),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(9),
-                        child: Text(
-                          card.description,
-                          style: const TextStyle(fontSize: 11, height: 1.35),
+                  ),
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: ClipPath(
+                        clipper: const _CardRimClipper(),
+                        child: Image.asset(
+                          'assets/images/ui/card_frame.png',
+                          cacheWidth: 384,
+                          fit: BoxFit.fill,
+                          excludeFromSemantics: true,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -171,4 +200,23 @@ class GameCard extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Only the ornamental rim paints over the illustration; the center stays clear.
+class _CardRimClipper extends CustomClipper<Path> {
+  const _CardRimClipper();
+
+  @override
+  Path getClip(Size size) => Path()
+    ..fillType = PathFillType.evenOdd
+    ..addRect(Offset.zero & size)
+    ..addRRect(
+      RRect.fromRectAndRadius(
+        (Offset.zero & size).deflate(7),
+        const Radius.circular(5),
+      ),
+    );
+
+  @override
+  bool shouldReclip(_CardRimClipper oldClipper) => false;
 }

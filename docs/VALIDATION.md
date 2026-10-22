@@ -202,3 +202,9 @@ All 202 tests, formatting, static analysis, content checks and the release web b
 Game cards now size their illustrations to the available width using each image's natural aspect ratio. Artwork starts at the top inside the thin gold frame, without side gutters or cropped edges. A compact dark nameplate overlays the upper artwork, with an 11-point name and 20-pixel energy badge; rules and rarity remain below the image. The shared layout applies to hand, collection, deck, reward and fusion cards. Fixed-height illustration callers retain their existing sizing, and missing art keeps its placeholder.
 
 All 202 tests, formatting, static analysis, content checks and the release web build pass. The starter-art Chromium check passes with all twelve images decoding and all four practice encounters advancing to turn two. Phone screenshots at 390×844 were reviewed in the deck and battle hand: paintings fill the frame width, the backed labels remain legible, and rules fit below the illustrations.
+
+## Integrated card header and foreground rim
+
+The card name and energy value now live in a full-width bronze header that shares the card's textured frame, with gold lettering and an inset gold medallion. A gold divider separates this header from the illustration below; no label covers the painting. Illustrations retain their natural aspect ratio. A clipped copy of the existing ornamental frame paints only its outer rim above the content, keeping the gold border visibly in front of the illustration without intercepting taps or duplicating accessibility labels.
+
+All 202 tests, formatting, static analysis, content checks and the release web build pass. The starter-art browser check passes without page or asset errors. Deck and combat screenshots at 390×844 were reviewed for header/illustration separation, visible ornamental foreground edges, complete artwork proportions and readable rules.
