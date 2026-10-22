@@ -115,7 +115,11 @@ void main() {
     await t.pumpAndSettle();
     Future<void> tap(String label) async {
       if (find.text(label).evaluate().isEmpty) {
-        await t.scrollUntilVisible(find.text(label), 250);
+        await t.scrollUntilVisible(
+          find.text(label),
+          250,
+          scrollable: find.byType(Scrollable).first,
+        );
       }
       await t.ensureVisible(find.text(label).first);
       await t.pumpAndSettle();
@@ -126,7 +130,11 @@ void main() {
     await tap('Continue run');
     expect(find.byType(GuardianPlan), findsNothing);
     expect(find.textContaining(boss.name), findsNothing);
-    await t.scrollUntilVisible(find.text('Unexplored path 1 · floor 6'), 400);
+    await t.scrollUntilVisible(
+      find.text('Unexplored path 1 · floor 6'),
+      400,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tap('Unexplored path 1 · floor 6');
     await tap('${boss.name} · battle plan');
     expect(find.text('1. ${boss.pattern.first.name}'), findsOneWidget);

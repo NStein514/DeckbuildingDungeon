@@ -20,7 +20,7 @@ class DungeonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final back = Container(
       constraints: const BoxConstraints(minHeight: 150),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: const Color(0xff16191e),
         image: const DecorationImage(
@@ -37,15 +37,18 @@ class DungeonCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 44),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
               color: const Color(0xe616191e),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: Text(label, textAlign: TextAlign.center),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+            ),
           ),
           const SizedBox(height: 8),
           Text(

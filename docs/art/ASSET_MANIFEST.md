@@ -137,3 +137,7 @@ All twelve illustrations were generated with Strike (cards) and Ash Duelist (ene
 | `enemies/rat` | `exec-fd09d106-2c58-4b47-9eef-36d685b732e7.png` |
 | `enemies/skeleton` | `exec-d8646060-83dd-452c-b870-4b2f9d1c2fa4.png` |
 | `enemies/warden` | `exec-937e3564-e45c-4fc4-a3e1-8b01a35c8ee8.png` |
+
+### Enemy encounter frame
+
+`assets/images/ui/enemy_frame.png` — Image Generator, 1254×1254, opaque. Blackened iron, aged silver, bone corners and garnet accents around a dark burgundy interior. Separate from the player's gold frame; used for combat enemy and boss panels. Original: `/workspace/generated_images/exec-2c1a1bde-0047-4366-9d29-382381e1af2c.png`.

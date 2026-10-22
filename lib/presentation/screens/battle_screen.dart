@@ -1,3 +1,4 @@
+import '../widgets/centered_card_row.dart';
 import '../widgets/atmosphere.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -270,18 +271,20 @@ class _BattleScreenState extends State<BattleScreen> {
                     ),
                     SizedBox(
                       height: largeText ? 340 : 244,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: state.enemies.length,
-                        separatorBuilder: (_, index) =>
-                            const SizedBox(width: 12),
-                        itemBuilder: (context, i) => SizedBox(
-                          width: state.enemies.length == 1
-                              ? (constraints.maxWidth - 40).clamp(220.0, 480.0)
-                              : 245,
-                          child: _enemy(state.enemies[i], definition),
-                        ),
+                      child: CenteredCardRow(
+                        gap: 12,
+                        children: [
+                          for (final enemy in state.enemies)
+                            SizedBox(
+                              width: state.enemies.length == 1
+                                  ? (constraints.maxWidth - 40).clamp(
+                                      220.0,
+                                      320.0,
+                                    )
+                                  : 245,
+                              child: _enemy(enemy, definition),
+                            ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -448,7 +451,15 @@ class _BattleScreenState extends State<BattleScreen> {
                       command(() => engine.play(selected!, targetId: enemy.id))
                 : null,
             child: Container(
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: ResizeImage(
+                    AssetImage('assets/images/ui/enemy_frame.png'),
+                    width: 768,
+                  ),
+                  fit: BoxFit.fill,
+                ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: targetable

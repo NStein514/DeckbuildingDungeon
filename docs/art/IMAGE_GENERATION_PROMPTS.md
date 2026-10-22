@@ -243,3 +243,5 @@ Reference Strike for painterly realism, worn bronze/steel, charcoal crypt stone 
 ## Remaining enemy portraits
 
 Reference Ash Duelist for painted materials and ember/cool rim lighting, while keeping each silhouette distinct. Square transparent cutouts with the full creature and equipment visible, no scene, UI or lettering. Dungeon Rat is a scarred charcoal rat with a curling tail and amber eyes. Skeleton Soldier has an exposed skull/ribs, rusty sword and bone-and-wood shield. Cursed Mage carries a crooked bronze staff and violet-green magic, without sword or shield. Dungeon Warden is a heavy armored jailer with a closed faceplate, massive mace and tower shield.
+
+Enemy encounter frame: reference the existing player frame for painted material quality only. Create a square, front-facing opaque UI background with blackened iron and aged silver bevels, bone-carved corners, small garnet insets, and an empty dark charcoal-to-burgundy center. Keep ornament at the outer edges, with no text or character. Preserve the source original; use the generated output directly as `ui/enemy_frame.png`.

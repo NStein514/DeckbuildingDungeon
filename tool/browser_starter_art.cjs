@@ -29,6 +29,8 @@ const fs=require('node:fs');
   await page.getByRole('button',{name:'End turn',exact:true}).click();
   await page.getByText('TURN 2',{exact:true}).waitFor();
  }
+ await page.setViewportSize({width:1280,height:900});
+ await capture('warden-desktop');
  // Fetch and decode every new asset independently of lazy list visibility.
  const paths=[...['guard','quick_slash','heavy_blow','mend','firebolt','frost_ward','spark','preparation'].map(n=>'cards/'+n),...['rat','skeleton','mage','warden'].map(n=>'enemies/'+n)];
  for(const path of paths){
