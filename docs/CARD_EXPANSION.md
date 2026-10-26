@@ -1,6 +1,6 @@
 # Archetype support cards
 
-Twenty collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
+Twenty-five collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
 
 | Build | Card | Energy | Rarity | Effect |
 | --- | --- | --- | --- | --- |
@@ -44,3 +44,17 @@ Available in new runs started with this update. Earlier runs preserve their orig
 | Embercaller | Cinder Insight | 1 | uncommon | Apply 2 Burn. Draw 1 card. |
 
 Trail Rations exhausts to limit repeat healing. Winter Circuit prepares a lightning hit while Chill reduces the enemy’s next attack turn. Nightshade Mantle combines immediate protection with delayed poison damage. Graven Resolve grants encounter-long Strength but exhausts; its two-energy cost limits the attacks that can follow immediately. Cinder Insight applies Burn while drawing another option. Normal upgrades increase healing/block by 2 and status/draw amounts by 1.
+
+## Initiative additions
+
+Available in runs started with this update, across all builds. Earlier adventures preserve their saved card pools.
+
+| Build | Card | Energy | Rarity | Effect |
+| --- | --- | --- | --- | --- |
+| Wanderer | Opening Gambit | 0 | rare | Deal 2 damage. Apply 1 Vulnerable. Exhaust. |
+| Stormweaver | Thunderhead | 2 | uncommon | Deal 9 damage. Apply 2 Shock. |
+| Venomblade | Bitter Bloom | 2 | uncommon | Apply 4 Poison and 2 Weak. Exhaust. |
+| Gravewarden | Ossuary Ward | 1 | uncommon | Gain 7 block. Retain. Exhaust. |
+| Embercaller | Flashfire | 0 | rare | Deal 3 damage. Apply 1 Burn. Exhaust. |
+
+Opening Gambit applies Vulnerable after its own hit, setting up subsequent attacks. Thunderhead consumes existing Shock before applying fresh stacks. Bitter Bloom delays damage while weakening incoming attacks. Ossuary Ward can wait in hand but exhausts when used. Flashfire is a zero-energy burst that also exhausts, preventing repeated free plays from a single copy. Normal upgrades add 2 damage/block and 1 to status amounts without changing cost or keywords.

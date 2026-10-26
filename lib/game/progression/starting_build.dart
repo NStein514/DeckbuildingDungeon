@@ -38,30 +38,35 @@ enum StartingBuild {
       'lantern_watch',
       'measured_strike',
       'trail_rations',
+      'opening_gambit',
     ],
     stormweaver => [
       'charged_aegis',
       'forked_current',
       'stormglass_focus',
       'winter_circuit',
+      'thunderhead',
     ],
     venomblade => [
       'wasting_venom',
       'serpent_step',
       'patient_fang',
       'nightshade_mantle',
+      'bitter_bloom',
     ],
     gravewarden => [
       'grave_oath',
       'tomb_seal',
       'crypt_reprisal',
       'graven_resolve',
+      'ossuary_ward',
     ],
     embercaller => [
       'ember_veil',
       'ash_surge',
       'phoenix_brand',
       'cinder_insight',
+      'flashfire',
     ],
   };
 

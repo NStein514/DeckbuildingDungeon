@@ -96,7 +96,7 @@ void main() {
       final run = (await repo.load())!;
       run.relics.add(Relic.lastEmber);
       await repo.save(run);
-      expect(jsonDecode(store.contents!)['contentVersion'], 16);
+      expect(jsonDecode(store.contents!)['contentVersion'], 17);
       expect((await repo.load())!.relics, contains(Relic.lastEmber));
       final journal = MemorySaveStore()
         ..contents = jsonEncode({
@@ -106,7 +106,7 @@ void main() {
         });
       final profiles = ProfileRepository(journal, catalog);
       await profiles.save((await profiles.load()).include(run));
-      expect(jsonDecode(journal.contents!)['contentVersion'], 6);
+      expect(jsonDecode(journal.contents!)['contentVersion'], 7);
       expect((await profiles.load()).relics, contains('lastEmber'));
     },
   );

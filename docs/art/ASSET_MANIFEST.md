@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 47 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 52 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -227,3 +227,15 @@ Five original opaque 1536×1024 Image Generator paintings, inspected and importe
 | Nightshade Mantle | `cards/nightshade_mantle` → `assets/images/cards/nightshade_mantle.png` | `exec-6118f27a-6084-41db-a615-4fc43b16c071.png` |
 | Graven Resolve | `cards/graven_resolve` → `assets/images/cards/graven_resolve.png` | `exec-1ae52586-c8aa-420c-a109-d4931cbed68a.png` |
 | Cinder Insight | `cards/cinder_insight` → `assets/images/cards/cinder_insight.png` | `exec-0fbecc61-efe1-429b-92c5-4547ef3c60cf.png` |
+
+## Initiative card illustrations — October 26, 2026
+
+Five original opaque 1536×1024 Image Generator paintings, inspected and imported directly without resizing or cropping. The existing contained artwork window displays the complete canvas.
+
+| Card | Logical ID and runtime image | Original source |
+| --- | --- | --- |
+| Opening Gambit | `cards/opening_gambit` → `assets/images/cards/opening_gambit.png` | `exec-d9134930-046e-4db2-822b-20a303e761c5.png` |
+| Thunderhead | `cards/thunderhead` → `assets/images/cards/thunderhead.png` | `exec-6edf1b8e-6746-4d66-993f-caa4a2a6a5ce.png` |
+| Bitter Bloom | `cards/bitter_bloom` → `assets/images/cards/bitter_bloom.png` | `exec-3273f3d0-c1d3-4ea8-bcc1-d374833c9f70.png` |
+| Ossuary Ward | `cards/ossuary_ward` → `assets/images/cards/ossuary_ward.png` | `exec-a1a74db1-60d6-446e-8bfe-e04e1058f8b0.png` |
+| Flashfire | `cards/flashfire` → `assets/images/cards/flashfire.png` | `exec-43d78ff7-1f71-4fce-8fcd-7a5b6eed30bc.png` |

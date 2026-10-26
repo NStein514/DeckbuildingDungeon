@@ -15,7 +15,7 @@ class Merchant {
   static List<String> stock(
     GameCatalog catalog,
     int seed, {
-    int poolVersion = 4,
+    int poolVersion = 5,
   }) {
     final pool =
         catalog.cards.values
@@ -27,7 +27,10 @@ class Merchant {
                       !c.tags.contains('archetype_expansion')) &&
                   (poolVersion >= 3 ||
                       !c.tags.contains('tactical_expansion')) &&
-                  (poolVersion >= 4 || !c.tags.contains('endurance_expansion')),
+                  (poolVersion >= 4 ||
+                      !c.tags.contains('endurance_expansion')) &&
+                  (poolVersion >= 5 ||
+                      !c.tags.contains('initiative_expansion')),
             )
             .map((c) => c.id)
             .toList()

@@ -302,3 +302,13 @@ Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt
 - `nightshade_mantle`: Nightshade Mantle: a complete empty dark green hooded cloak suspended above the crypt floor, its folds edged in ornate bronze serpent clasps, luminous emerald poisonous mist curls protectively around it. No person, no face, complete fabric silhouette entirely in frame.
 - `graven_resolve`: Graven Resolve: a complete pair of ornate weathered bronze armored gauntlets clenched together before an ancient carved oath stone, soft spectral ivory light radiates between the fists, grounded heroic resolve, a small worn shield rests against the stone. No person or face.
 - `cinder_insight`: Cinder Insight: a complete antique bronze bowl holding glowing embers on a stone lectern, a luminous orange magical eye formed from fine threads of flame hovering above the bowl, subtle ash spirals and illuminated parchment with only abstract marks, no readable writing.
+
+## Initiative card expansion — October 26, 2026
+
+Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt, worn bronze and steel, amber torchlight, charcoal stone, strong small-card silhouette, safe subject margins, no text/frame/UI, opaque.
+
+- `opening_gambit`: Opening Gambit: a complete ornate bronze compass lying open beside a short polished steel dueling blade on a dark stone chessboard with one ivory pawn knocked aside, a thin warm golden arc suggesting a clever first strike. No readable markings.
+- `thunderhead`: Thunderhead: a compact ominous storm cloud trapped above a complete heavy bronze lightning rod with three prongs, a single thick electric-blue thunderbolt crashing into the rod, scattered sparks, dramatic vertical energy entirely within the landscape canvas.
+- `bitter_bloom`: Bitter Bloom: one complete poisonous nightshade plant with richly textured dark purple flowers and emerald leaves growing from an antique bronze chalice; luminous green droplets and subtle poisonous vapor. Beautiful but ominous botanical silhouette.
+- `ossuary_ward`: Ossuary Ward: a complete broad shield constructed of weathered ivory bone plates and bronze ribs with a dark central gemstone, pale spectral protective light forming a subtle ring behind it; no gore, grounded ancient guardian craftsmanship.
+- `flashfire`: Flashfire: a complete ornate bronze fire striker and flint suspended over a small black stone pedestal, their contact releasing a compact swirling burst of brilliant orange flame shaped like a fast curved slash. Both tools and entire flame comfortably inside frame.

@@ -108,3 +108,7 @@ New runs now use card pool 3. Cards tagged `tactical_expansion` are excluded fro
 ## Endurance expansion compatibility
 
 New runs use card pool 4. Cards tagged `endurance_expansion` are excluded from pools 1–3; these cards also carry prior expansion tags so every previous pool remains stable. Saved pool versions survive descents and control both rewards and shop inventories. Run content version 16 reads versions 1–16; profile content version 6 reads versions 1–6. Starting deck recipes and combat rules are unchanged.
+
+## Initiative expansion compatibility
+
+New runs use card pool 5. The `initiative_expansion` tag excludes new cards from pools 1–4; cards also carry earlier expansion tags. Saved pools continue controlling rewards, merchant stock and purchase validation through descents. Run content version 17 reads versions 1–17; profile content version 7 reads versions 1–7. Combat engine rules and starting deck recipes are unchanged.

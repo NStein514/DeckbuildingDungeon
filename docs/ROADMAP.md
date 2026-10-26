@@ -215,3 +215,7 @@ Five more illustrated collectibles bring the catalog to 42 cards: Measured Strik
 ## Milestone 6C — endurance deck additions (implemented)
 
 Five new illustrated collectibles bring the catalog to 47: Trail Rations, Winter Circuit, Nightshade Mantle, Graven Resolve, and Cinder Insight. Each build recommends four themed collectibles. Pool 4 supplies fresh runs while prior adventures keep their saved pools.
+
+## Milestone 6D — initiative deck additions (implemented)
+
+Five new illustrated collectibles bring the catalog to 52: Opening Gambit, Thunderhead, Bitter Bloom, Ossuary Ward, and Flashfire. Each build recommends five themed collectibles. Pool 5 supplies new adventures while existing runs keep their original offers.

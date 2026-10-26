@@ -13,8 +13,8 @@ const fs=require('node:fs');
  await page.getByRole('button',{name:'Unexplored path 1 · floor 1',exact:true}).click();
  await page.getByText('The path is revealed',{exact:true}).waitFor();await page.waitForTimeout(1200);
  const checkpoint=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
- assert.equal(checkpoint.run.cardPoolVersion,4);
- const pairs=[["wanderer", ["trail_rations"]], ["stormweaver", ["winter_circuit"]], ["venomblade", ["nightshade_mantle"]], ["gravewarden", ["graven_resolve"]], ["embercaller", ["cinder_insight"]]];
+ assert.equal(checkpoint.run.cardPoolVersion,5);
+ const pairs=[["wanderer", ["opening_gambit"]], ["stormweaver", ["thunderhead"]], ["venomblade", ["bitter_bloom"]], ["gravewarden", ["ossuary_ward"]], ["embercaller", ["flashfire"]]];
  const cards=JSON.parse(fs.readFileSync('assets/data/cards.json','utf8'));
  for(const [build,ids] of pairs){
   const fixture=structuredClone(checkpoint);fixture.run.startingBuild=build;
@@ -34,5 +34,5 @@ const fs=require('node:fs');
   await page.getByRole('button',{name:'End turn',exact:true}).click();await page.getByText('TURN 2',{exact:true}).waitFor();
  }
  assert.deepEqual(errors,[]);await browser.close();
- console.log('PASS: all five endurance cards render and play in five build-themed encounters, with saved pool version 4 and working turn advancement.');
+ console.log('PASS: all five initiative cards render and play in five build-themed encounters, with saved pool version 5 and working turn advancement.');
 })().catch(e=>{console.error(e);process.exit(1)});

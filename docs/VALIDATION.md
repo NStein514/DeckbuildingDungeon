@@ -294,3 +294,11 @@ Added Trail Rations, Winter Circuit, Nightshade Mantle, Graven Resolve, and Cind
 All 254 tests passed, along with formatting, static analysis, content checks, and the release web build. New tests cover healing caps and exhaust, replacement draws, Chill reducing an enemy attack turn, Shock consumed by a later lightning hit, poison and Burn ticks, and encounter-long Strength with immediate defense. Pool-3 stock and reward compatibility was compared across 150 seeds, and an existing merchant purchase and descent were reloaded. Earlier pool-1 and pool-2 checks, upgrade checks, and run/journal round-trips also passed.
 
 Release-browser checks decoded all 47 paintings at their shared dimensions and browsed the full archive at phone and desktop widths without page or asset errors. All five new cards rendered and played in build-themed encounters, each advancing to turn 2 without page errors. Phone archive and desktop combat screenshots were inspected. New adventures use card pool 4; existing adventures retain their original pools through later descents. Starting deck recipes and combat-engine behavior remain unchanged.
+
+## Initiative card additions — October 26, 2026
+
+Added five illustrated collectibles: Opening Gambit, Thunderhead, Bitter Bloom, Ossuary Ward, and Flashfire. All 52 catalog cards have original artwork; the five new opaque 1536×1024 paintings were imported without cropping or resizing.
+
+All 261 tests, formatting, analysis, content checks, and release build passed. Tests cover Vulnerable ordering, consuming and reapplying Shock, Poison/Weak turns, Retain/Exhaust, free fire damage, upgrades, and pool-4 compatibility across 150 seeds and saved purchases. Existing pool-1 through pool-3 checks also passed.
+
+The release browser decoded all 52 images and browsed the archive at phone and desktop widths without page or asset errors. All five new cards played and advanced turns. Visual inspection caught Thunderhead's long description clipping in the hand; it was shortened, content checks and the release build passed again, and all five combat browser checks passed on the final build. The corrected hand screenshot was inspected. New runs use pool 5; older runs preserve their offers.

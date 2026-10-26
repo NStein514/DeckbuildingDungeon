@@ -39,7 +39,7 @@ void main() {
   }
 
   test('five builds recommend distinct collectible support sets', () {
-    expect(expanded, hasLength(20));
+    expect(expanded, hasLength(25));
     for (final build in StartingBuild.values) {
       expect(build.deck(catalog), hasLength(12));
       for (final id in build.supportCards) {
@@ -209,7 +209,7 @@ void main() {
         stock,
       );
       await repo.save(loaded);
-      expect(jsonDecode(store.contents!)['contentVersion'], 16);
+      expect(jsonDecode(store.contents!)['contentVersion'], 17);
       expect((await repo.load())!.toJson(), loaded.toJson());
       final invalid = loaded.toJson()..['cardPoolVersion'] = 99;
       expect(
@@ -222,7 +222,7 @@ void main() {
     'card pools survive deeper descents and new card saves round-trip',
     () async {
       final victory = won(rules);
-      expect(rules.descend(victory).cardPoolVersion, 4);
+      expect(rules.descend(victory).cardPoolVersion, 5);
       final legacy = RunState.fromJson(
         victory.toJson()..remove('cardPoolVersion'),
       );
