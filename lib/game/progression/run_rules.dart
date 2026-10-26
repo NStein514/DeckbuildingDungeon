@@ -18,6 +18,7 @@ class RunRules {
     final rooms = DungeonGenerator.generate(rng);
     return RunState(
       seed: seed,
+      cardPoolVersion: 2,
       startingBuild: build,
       rngState: rng.state,
       rooms: rooms,
@@ -37,6 +38,7 @@ class RunRules {
     final r = old.copy();
     return RunState(
       seed: r.seed,
+      cardPoolVersion: r.cardPoolVersion,
       startingBuild: r.startingBuild,
       mapSeed: mapSeed,
       descent: r.descent + 1,
@@ -107,7 +109,11 @@ class RunRules {
     final pool =
         catalog.cards.values
             .where(
-              (c) => c.type != CardType.curse && !c.tags.contains('fusion'),
+              (c) =>
+                  c.type != CardType.curse &&
+                  !c.tags.contains('fusion') &&
+                  (r.cardPoolVersion >= 2 ||
+                      !c.tags.contains('archetype_expansion')),
             )
             .map((c) => c.id)
             .toList()
@@ -203,7 +209,11 @@ class RunRules {
 
   RunState buyCard(RunState old, String id) {
     if (old.phase != RunPhase.merchant ||
-        !Merchant.stock(catalog, old.battleSeed).contains(id) ||
+        !Merchant.stock(
+          catalog,
+          old.battleSeed,
+          poolVersion: old.cardPoolVersion,
+        ).contains(id) ||
         old.deck.length >= 1000) {
       throw StateError('Card unavailable.');
     }

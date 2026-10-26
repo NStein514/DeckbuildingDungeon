@@ -28,6 +28,7 @@ class RunState {
     this.gold = 0,
     this.startingBuild = StartingBuild.wanderer,
     this.mapVersion = 10,
+    this.cardPoolVersion = 1,
     this.descent = 1,
     int? mapSeed,
     this.phase = RunPhase.map,
@@ -46,7 +47,7 @@ class RunState {
        relics = relics ?? [],
        discovered =
            discovered ?? deck.map((c) => c.definitionId).toSet().toList();
-  final int seed, mapVersion, descent, mapSeed;
+  final int seed, mapVersion, descent, mapSeed, cardPoolVersion;
   final StartingBuild startingBuild;
   int get clearedRooms => (descent - 1) * 6 + completed.length;
   int rngState, health, gold, battleSeed, nextCardId;
@@ -63,6 +64,7 @@ class RunState {
   RunState copy() => RunState.fromJson(toJson());
   Map<String, dynamic> toJson() => {
     'seed': seed,
+    'cardPoolVersion': cardPoolVersion,
     'startingBuild': startingBuild.name,
     'mapVersion': mapVersion,
     'mapSeed': mapSeed,
@@ -92,6 +94,7 @@ class RunState {
   };
   factory RunState.fromJson(Map<String, dynamic> j) => RunState(
     seed: j['seed'] as int,
+    cardPoolVersion: j['cardPoolVersion'] as int? ?? 1,
     startingBuild: StartingBuild.values.byName(
       j['startingBuild'] as String? ?? 'wanderer',
     ),

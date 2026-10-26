@@ -265,3 +265,18 @@ Generate each as a separate opaque 1536×1024 landscape painting. Premium dark f
 - Flaming Strike: complete longsword enveloped in amber flame with a sweeping fire trail.
 - Glacial Barrier: jagged translucent ice wall protecting a bronze shield, cold ground mist.
 - Venom Flurry: two hooked daggers spinning through interwoven emerald venom ribbons.
+
+## Archetype support expansion — October 26, 2026
+
+Each original: opaque 1536×1024 landscape PNG, premium painted dark fantasy, worn bronze and steel, amber torch rimlight, charcoal Gothic crypt, strong silhouette at card size, complete equipment with generous margins; no text, numbers, frames, UI or collages. Imported directly without cropping or resizing.
+
+- Trailblazer Cut: bronze-hilt sword parting mist to reveal a lantern-lit passage.
+- Lantern Watch: bronze lantern beside a compact round steel shield, protective golden light.
+- Charged Aegis: bronze kite shield with converging blue-white lightning and a sapphire boss.
+- Forked Current: two-pronged bronze conductor wand sending two distinct lightning branches.
+- Wasting Venom: green glass poison vial and emerald vapor around a cracked ivory mask.
+- Serpent Step: dark armored boots stepping over a blade through serpentine emerald mist.
+- Grave Oath: ornate silver/bronze gauntlet on an ivory seal, mint-gold restorative light.
+- Tomb Seal: chained bronze crypt door with an ivory shield medallion, violet mist held behind it.
+- Ember Veil: floating crimson cloak and bronze clasp inside a protective amber ember curtain.
+- Ash Surge: bronze brazier projecting a spiral of flame and ash toward a cracked armor silhouette.

@@ -31,6 +31,15 @@ enum StartingBuild {
       'Trade Heavy Blow and Frost Ward for Cinder Storm and a second Firebolt. Discover Flaming Strike or Cinder Maul to unlock.',
   };
 
+  /// Collectible support cards; they do not replace the balanced starting deck.
+  List<String> get supportCards => switch (this) {
+    wanderer => ['trailblazer_cut', 'lantern_watch'],
+    stormweaver => ['charged_aegis', 'forked_current'],
+    venomblade => ['wasting_venom', 'serpent_step'],
+    gravewarden => ['grave_oath', 'tomb_seal'],
+    embercaller => ['ember_veil', 'ash_surge'],
+  };
+
   bool unlocked(PlayerProfile? profile) => switch (this) {
     wanderer => true,
     stormweaver =>

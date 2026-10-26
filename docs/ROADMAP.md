@@ -199,3 +199,11 @@ Approved illustrations and icons, licensed audio, richer event-driven animation,
 ## Milestone 6 — expansion
 
 Additional acts and archetypes, challenge modifiers, legendary recipes and deeper meta-progression once the first act is stable.
+
+
+## Milestone 6A — implemented: archetype support expansion
+
+- Ten fully illustrated collectible cards, two recommendations per starting build.
+- Wanderer draw support; Stormweaver Shock setup and paired lightning; Venomblade poison/Weak and retained evasion; Gravewarden limited regeneration and suppression; Embercaller defensive Burn and Vulnerable setup.
+- New-run rewards and merchant pools include the additions; existing checkpoints keep their original deterministic pools through further descents.
+- Shared upgrades, targeting, exhaust, journal discovery and existing combat effects.

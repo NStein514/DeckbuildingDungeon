@@ -100,10 +100,18 @@ class EconomyPanel extends StatelessWidget {
           height: 330,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: Merchant.stock(catalog, run.battleSeed).length,
+            itemCount: Merchant.stock(
+              catalog,
+              run.battleSeed,
+              poolVersion: run.cardPoolVersion,
+            ).length,
             separatorBuilder: (_, i) => const SizedBox(width: 12),
             itemBuilder: (_, i) {
-              final id = Merchant.stock(catalog, run.battleSeed)[i];
+              final id = Merchant.stock(
+                catalog,
+                run.battleSeed,
+                poolVersion: run.cardPoolVersion,
+              )[i];
               final card = catalog.cards[id]!,
                   sold = run.purchases.contains('card:$id');
               return SizedBox(

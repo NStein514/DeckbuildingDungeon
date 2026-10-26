@@ -12,11 +12,18 @@ class Merchant {
     Rarity.rare => 90,
     Rarity.legendary => 120,
   };
-  static List<String> stock(GameCatalog catalog, int seed) {
+  static List<String> stock(
+    GameCatalog catalog,
+    int seed, {
+    int poolVersion = 2,
+  }) {
     final pool =
         catalog.cards.values
             .where(
-              (c) => c.type != CardType.curse && !c.tags.contains('fusion'),
+              (c) =>
+                  c.type != CardType.curse &&
+                  !c.tags.contains('fusion') &&
+                  (poolVersion >= 2 || !c.tags.contains('archetype_expansion')),
             )
             .map((c) => c.id)
             .toList()

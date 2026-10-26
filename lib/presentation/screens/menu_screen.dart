@@ -134,7 +134,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               '${build.title}${build == startingBuild ? " · selected" : ""}',
                             ),
                             subtitle: Text(
-                              '${build.unlocked(widget.runs.profile) ? "" : "Locked · "}${build.description}',
+                              '${build.unlocked(widget.runs.profile) ? "" : "Locked · "}${build.description}\nCollect during new runs: ${build.supportCards.map((id) => widget.catalog.cards[id]!.name).join(' · ')}',
                             ),
                             leading: Icon(
                               build == startingBuild

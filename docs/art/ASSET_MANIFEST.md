@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 27 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 37 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -185,3 +185,21 @@ Eleven new opaque 1536×1024 originals were imported directly, without cropping,
 | `cards/flaming_strike` | `exec-e89aaa08-5431-40fc-96ef-ee60519ca7f0.png` |
 | `cards/glacial_barrier` | `exec-64b44281-9bbd-44fc-8803-3d173b229bcc.png` |
 | `cards/venom_flurry` | `exec-ac641c20-40f2-424e-a503-de40ea6bc527.png` |
+
+
+## Archetype expansion — October 26, 2026
+
+Ten Image Generator originals imported without cropping or resizing; 1536×1024 opaque PNG.
+
+| Logical ID | Asset | Original |
+| --- | --- | --- |
+| `cards/trailblazer_cut` | `assets/images/cards/trailblazer_cut.png` | `exec-83ae4611-bf67-4452-a64c-bc32cb5df91d.png` |
+| `cards/lantern_watch` | `assets/images/cards/lantern_watch.png` | `exec-2cbdca11-be4c-4b34-beec-04e50aa8e6d2.png` |
+| `cards/charged_aegis` | `assets/images/cards/charged_aegis.png` | `exec-5ea39811-cc41-41f5-8d6a-d722f5f9256a.png` |
+| `cards/forked_current` | `assets/images/cards/forked_current.png` | `exec-22876883-6210-41a3-81e6-4ed6f7172804.png` |
+| `cards/wasting_venom` | `assets/images/cards/wasting_venom.png` | `exec-aeead392-3161-48ab-9ae6-05926100e4bc.png` |
+| `cards/serpent_step` | `assets/images/cards/serpent_step.png` | `exec-0f04e855-a31d-4845-9119-ff62c2d3f212.png` |
+| `cards/grave_oath` | `assets/images/cards/grave_oath.png` | `exec-bc09f8c3-5e8b-48fb-b531-b78964c5b539.png` |
+| `cards/tomb_seal` | `assets/images/cards/tomb_seal.png` | `exec-05f9eb2d-0a61-4858-9c38-e092393970c8.png` |
+| `cards/ember_veil` | `assets/images/cards/ember_veil.png` | `exec-c557de50-ef7e-4ce8-9ef6-5cd926b8f5fe.png` |
+| `cards/ash_surge` | `assets/images/cards/ash_surge.png` | `exec-2d83aeef-fecc-4890-a4fd-c50974c7188b.png` |

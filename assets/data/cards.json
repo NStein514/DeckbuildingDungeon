@@ -582,5 +582,281 @@
     ],
     "rarity": "rare",
     "art": "cards/bloomguard"
+  },
+  {
+    "id": "trailblazer_cut",
+    "name": "Trailblazer Cut",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 4 damage. Draw 1 card.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "wanderer"
+    ],
+    "art": "cards/trailblazer_cut"
+  },
+  {
+    "id": "lantern_watch",
+    "name": "Lantern Watch",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 4 block. Draw 1 card. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 4,
+        "target": "self"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "wanderer"
+    ],
+    "art": "cards/lantern_watch"
+  },
+  {
+    "id": "charged_aegis",
+    "name": "Charged Aegis",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 5 block. Apply 2 Shock.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 5,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "shock"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "stormweaver",
+      "lightning"
+    ],
+    "art": "cards/charged_aegis"
+  },
+  {
+    "id": "forked_current",
+    "name": "Forked Current",
+    "cost": 1,
+    "type": "spell",
+    "description": "Deal 3 damage twice. Lightning consumes Shock for bonus damage.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 3,
+        "target": "enemy"
+      },
+      {
+        "kind": "damage",
+        "amount": 3,
+        "target": "enemy"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "stormweaver",
+      "lightning"
+    ],
+    "art": "cards/forked_current"
+  },
+  {
+    "id": "wasting_venom",
+    "name": "Wasting Venom",
+    "cost": 1,
+    "type": "skill",
+    "description": "Apply 3 Poison and 1 Weak.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "poison"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "weak"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "venomblade"
+    ],
+    "art": "cards/wasting_venom"
+  },
+  {
+    "id": "serpent_step",
+    "name": "Serpent Step",
+    "cost": 0,
+    "type": "defense",
+    "description": "Gain 3 block. Retain. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 3,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "retain",
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "venomblade"
+    ],
+    "art": "cards/serpent_step"
+  },
+  {
+    "id": "grave_oath",
+    "name": "Grave Oath",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 5 block and 1 Regeneration. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 5,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "self",
+        "status": "regeneration"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "gravewarden"
+    ],
+    "art": "cards/grave_oath"
+  },
+  {
+    "id": "tomb_seal",
+    "name": "Tomb Seal",
+    "cost": 2,
+    "type": "defense",
+    "description": "Gain 8 block. Apply 2 Weak.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 8,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "weak"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "gravewarden"
+    ],
+    "art": "cards/tomb_seal"
+  },
+  {
+    "id": "ember_veil",
+    "name": "Ember Veil",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 5 block. Apply 2 Burn.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 5,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "embercaller",
+      "fire"
+    ],
+    "art": "cards/ember_veil"
+  },
+  {
+    "id": "ash_surge",
+    "name": "Ash Surge",
+    "cost": 1,
+    "type": "spell",
+    "description": "Apply 4 Burn and 1 Vulnerable. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "enemy",
+        "status": "burn"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "vulnerable"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "embercaller",
+      "fire"
+    ],
+    "art": "cards/ash_surge"
   }
 ]

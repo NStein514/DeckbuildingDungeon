@@ -268,3 +268,13 @@ Image Generator supplied eleven new opaque 1536×1024 paintings for Focus, Battl
 
 All 231 tests passed, along with formatting, static analysis, and content checks.
 The release web build passed. The browser archive check decoded all 27 illustrations at 1536×1024 and browsed every card at phone and desktop widths without page or asset errors. Phone archive screenshots were inspected for readable silhouettes and full artwork visibility. After resuming the workspace, content checks and diff whitespace checks passed again before publication.
+
+## Illustrated archetype support expansion — October 26, 2026
+
+Added ten collectible support cards, two recommended for each of the five starting builds, with ten original Image Generator paintings imported at 1536×1024 without cropping or resizing. All 37 catalog cards have illustrations. Starting decks and unlock conditions are unchanged; all builds may collect the new cards.
+
+New runs use card pool 2. Existing saves default to pool 1, preserving seeded reward rolls and merchant stock through later descents. Run content version 14 and journal content version 4 round-trip the expanded catalog while retaining older-save support. Compatibility tests compare original and expanded catalogs across 150 seeds and reload an existing merchant purchase.
+
+All 241 tests passed, along with formatting, static analysis, content checks, and the release web build. The focused ten-test expansion suite also passed after adding journal discovery round-trip coverage. Tests cover every new effect, upgrades, targeting, exhaust limits, card draws, saved pools, and continued descents.
+
+Release-browser checks decoded all 37 images and browsed the complete archive at 390- and 1280-pixel widths without page or asset errors. A separate browser check loaded five build-themed encounters, played all ten new cards, and advanced each encounter to turn 2 without page errors. Phone archive and desktop combat screenshots were inspected for complete artwork and readable card text.
