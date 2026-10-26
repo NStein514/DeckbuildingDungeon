@@ -261,3 +261,10 @@ Reveal content centers vertically and horizontally inside the fixed portrait fra
 All 231 tests passed, including both two-opponent and two-boss reveal coverage and centered treasure/merchant content. The final automatic-scroll adjustment passed the two path sizing/visibility tests.
 Final analysis and release build passed. The release-browser reveal checks passed at phone and desktop sizes, including concealment of the second opponent before its flip and automatic scrolling afterward; screenshots were inspected.
 Battle browser checks also passed at 320, 360, 390, 820, and 1280 pixels for single and double opponents, including visible turn controls and advancing combat without browser/asset errors. The 320-pixel screenshot was inspected for clipping and readable card content.
+
+## Complete card illustration coverage — October 22, 2026
+
+Image Generator supplied eleven new opaque 1536×1024 paintings for Focus, Battle Cry, Poison Edge, Expose, Renewal, Double Cut, Static Lance, Bulwark, Flaming Strike, Glacial Barrier, and Venom Flurry. Each original was inspected and copied directly into the existing card asset bundle without cropping or resizing. The registry now covers all 27 catalog cards, and the content check requires illustration coverage for the full catalog. Existing card framing, image containment, mechanics, and saves are unchanged.
+
+All 231 tests passed, along with formatting, static analysis, and content checks.
+The release web build passed. The browser archive check decoded all 27 illustrations at 1536×1024 and browsed every card at phone and desktop widths without page or asset errors. Phone archive screenshots were inspected for readable silhouettes and full artwork visibility. After resuming the workspace, content checks and diff whitespace checks passed again before publication.

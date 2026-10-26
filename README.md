@@ -9,7 +9,7 @@ A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Cry
 - Five masked hero portraits follow the selected starting deck; saved identity survives deck changes and deeper descents.
 - Chosen paths flip in place, then expand into a framed reveal; all delivered card paintings share a complete 3:2 canvas.
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
-- Twenty-seven cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
+- Twenty-seven fully illustrated cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
 - Three consecutive-play combos and seven permanent fusion recipes with previews and saved discoveries.
 - After each boss, descend again with your build intact and stronger enemies; floor numbers keep advancing.

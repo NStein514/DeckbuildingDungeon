@@ -53,11 +53,11 @@ for enemy in enemies:
     assert f'`enemies/{enemy["id"]}`' in manifest
 for document in ("GAME_DESIGN.md", "ARCHITECTURE.md", "ROADMAP.md", "VALIDATION.md"):
     assert (ROOT / "docs" / document).is_file()
-# The opening deck and entire enemy catalog must have real bundled art.
+# The entire card and enemy catalogs must have real bundled art.
 registry = dict(re.findall(r"'([^']+)': '([^']+)'", (ROOT / "lib/assets/asset_registry.dart").read_text()))
-for card_id in set(balance["startingDeck"]):
+for card_id in ids:
     card = next(card for card in cards if card["id"] == card_id)
-    assert card["art"] in registry, f"Missing starter art: {card_id}"
+    assert card["art"] in registry, f"Missing card art: {card_id}"
 for enemy in enemies:
     assert f'enemies/{enemy["id"]}' in registry, f'Missing enemy art: {enemy["id"]}'
 for logical_id, path in registry.items():

@@ -1,10 +1,10 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. Every standard starter card and all seven catalog enemies now have painted artwork. Some reward/fusion cards and relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 27 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `cards/strike` | Card illustration | 1448×1086 | 4:3 | No | `assets/images/cards/strike.png` | Image Generator illustration |
+| `cards/strike` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/strike.png` | Image Generator illustration |
 | `cards/guard` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/guard.png` | Image Generator illustration |
 | `cards/quick_slash` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/quick_slash.png` | Image Generator illustration |
 | `cards/heavy_blow` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/heavy_blow.png` | Image Generator illustration |
@@ -12,18 +12,18 @@ All final illustration production uses Image Generator. Every standard starter c
 | `cards/firebolt` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/firebolt.png` | Image Generator illustration |
 | `cards/frost_ward` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/frost_ward.png` | Image Generator illustration |
 | `cards/spark` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/spark.png` | Image Generator illustration |
-| `cards/focus` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/focus.webp` | Placeholder component |
-| `cards/battle_cry` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/battle_cry.webp` | Placeholder component |
-| `cards/poison_edge` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/poison_edge.webp` | Placeholder component |
+| `cards/focus` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/focus.png` | Image Generator illustration |
+| `cards/battle_cry` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/battle_cry.png` | Image Generator illustration |
+| `cards/poison_edge` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/poison_edge.png` | Image Generator illustration |
 | `cards/preparation` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/preparation.png` | Image Generator illustration |
-| `cards/brace` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/brace.png` | Image Generator illustration |
-| `cards/expose` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/expose.webp` | Placeholder component |
-| `cards/enfeeble` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/enfeeble.png` | Image Generator illustration |
-| `cards/renewal` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/renewal.webp` | Placeholder component |
-| `cards/double_cut` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/double_cut.webp` | Placeholder component |
-| `cards/cinder_storm` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/cinder_storm.png` | Image Generator illustration |
-| `cards/static_lance` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/static_lance.webp` | Placeholder component |
-| `cards/bulwark` | Card illustration | 1024×768 | 4:3 | No | `assets/images/cards/bulwark.webp` | Placeholder component |
+| `cards/brace` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/brace.png` | Image Generator illustration |
+| `cards/expose` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/expose.png` | Image Generator illustration |
+| `cards/enfeeble` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/enfeeble.png` | Image Generator illustration |
+| `cards/renewal` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/renewal.png` | Image Generator illustration |
+| `cards/double_cut` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/double_cut.png` | Image Generator illustration |
+| `cards/cinder_storm` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/cinder_storm.png` | Image Generator illustration |
+| `cards/static_lance` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/static_lance.png` | Image Generator illustration |
+| `cards/bulwark` | Card illustration | 1536×1024 | 3:2 | No | `assets/images/cards/bulwark.png` | Image Generator illustration |
 | `enemies/rat` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/rat.png` | Image Generator illustration |
 | `enemies/skeleton` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/skeleton.png` | Image Generator illustration |
 | `enemies/mage` | Enemy portrait | 1254×1254 | 1:1 | Yes | `assets/images/enemies/mage.png` | Image Generator illustration |
@@ -39,9 +39,9 @@ All final illustration production uses Image Generator. Every standard starter c
 | `relics/iron_sigil` | Relic | 768×768 | 1:1 | Yes | `assets/images/relics/iron_sigil.png` | Planned; not implemented |
 | `relics/quickdraw_charm` | Relic | 768×768 | 1:1 | Yes | `assets/images/relics/quickdraw_charm.png` | Planned; not implemented |
 | `relics/venom_fang` | Relic | 768×768 | 1:1 | Yes | `assets/images/relics/venom_fang.png` | Planned; not implemented |
-| `cards/flaming_strike` | Fusion card | 1024×768 | 4:3 | No | `assets/images/cards/flaming_strike.webp` | Planned; not implemented |
-| `cards/glacial_barrier` | Fusion card | 1024×768 | 4:3 | No | `assets/images/cards/glacial_barrier.webp` | Planned; not implemented |
-| `cards/venom_flurry` | Fusion card | 1024×768 | 4:3 | No | `assets/images/cards/venom_flurry.webp` | Planned; not implemented |
+| `cards/flaming_strike` | Fusion card | 1536×1024 | 3:2 | No | `assets/images/cards/flaming_strike.png` | Image Generator illustration |
+| `cards/glacial_barrier` | Fusion card | 1536×1024 | 3:2 | No | `assets/images/cards/glacial_barrier.png` | Image Generator illustration |
+| `cards/venom_flurry` | Fusion card | 1536×1024 | 3:2 | No | `assets/images/cards/venom_flurry.png` | Image Generator illustration |
 | `ui/logo` | Title ornament | 1024×512 | 2:1 | Yes | `assets/images/ui/logo.png` | Planned; not implemented |
 | `ui/loading` | Loading ornament | 768×768 | 1:1 | Yes | `assets/images/ui/loading.png` | Planned; not implemented |
 | `ui/room_icons` | Room icon sheet | 2048×1024 | 2:1 | Yes | `assets/images/ui/room_icons.png` | Planned; not implemented |
@@ -49,7 +49,7 @@ All final illustration production uses Image Generator. Every standard starter c
 
 Before each content expansion, add exact enemy, room, event, relic, and card variants here. No future asset is assumed to exist. UI text, costs, descriptions, card frames, and status numbers are rendered by Flutter.
 
-## Fusion placeholders
+## Original fusion illustrations
 
 - `cards/flaming_strike`: sword wreathed in fire.
 - `cards/glacial_barrier`: shield of layered ice.
@@ -167,3 +167,21 @@ Five masked/helmeted Wayfarers use 1024×1536 RGBA portraits. All faces and hair
 | `assets/images/heroes/gravewarden.png` | `/workspace/generated_images/exec-560c8894-9747-49e1-ba01-5ab13fbba4a8.png` |
 | `assets/images/heroes/embercaller.png` | `/workspace/generated_images/exec-3081bf29-8f85-4d8d-94e0-d68c082c6ef7.png` |
 | `assets/images/ui/hero_frame.png` | `/workspace/generated_images/exec-4403252b-3d37-4053-9a1b-156126df25d8.png` |
+
+## Remaining card paintings — October 22, 2026
+
+Eleven new opaque 1536×1024 originals were imported directly, without cropping, stretching, or resizing. All are registered under their existing card IDs. Original outputs remain in `/workspace/generated_images/`.
+
+| Card | Original output |
+| --- | --- |
+| `cards/focus` | `exec-675c85b2-fe75-47b3-92fb-e79d20f89d39.png` |
+| `cards/battle_cry` | `exec-bff5f141-b239-4ca6-8069-847e04618177.png` |
+| `cards/poison_edge` | `exec-5978777d-9b3e-4b7e-ad30-23c06b508397.png` |
+| `cards/expose` | `exec-c21f944a-a7af-479b-8f04-563440aec548.png` |
+| `cards/renewal` | `exec-49a94dd0-4a16-4dbf-ab03-ba55fa0a92c5.png` |
+| `cards/double_cut` | `exec-212fe2ad-2b44-4808-83de-7d7e2aad3a7c.png` |
+| `cards/static_lance` | `exec-31d7e764-5447-49fc-81d6-97f26d53af15.png` |
+| `cards/bulwark` | `exec-187754e2-0eb3-44db-acae-e664fdf3e9b2.png` |
+| `cards/flaming_strike` | `exec-e89aaa08-5431-40fc-96ef-ee60519ca7f0.png` |
+| `cards/glacial_barrier` | `exec-64b44281-9bbd-44fc-8803-3d173b229bcc.png` |
+| `cards/venom_flurry` | `exec-ac641c20-40f2-424e-a503-de40ea6bc527.png` |

@@ -249,3 +249,19 @@ Enemy encounter frame: reference the existing player frame for painted material 
 Unified card canvases: edit each older 4:3 source to exactly 1536×1024, preserve whole weapons/shields/magic, zoom out slightly and paint additional dungeon surroundings. No cropping, stretching, bars, text or frames. Existing 3:2 paintings remain unchanged.
 
 Wayfarer variants: preserve painterly material quality and heroic silhouettes. Wanderer has bronze armor, teal cloak, sword and lantern; Stormweaver silver/indigo with lightning staff; Venomblade olive leather with emerald daggers; Gravewarden silver plate, ivory tabard, rune shield and mace; Embercaller crimson/bronze robes and controlled amber flame. Final edits cover faces and hair with full closed helmets/masks and hoods, with gloves and armor at exposed areas. Request transparent alpha and retain all equipment inside the canvas. Hero frame uses the enemy frame as a material reference, replacing bones/garnets with silver/gold wings, sun motifs and sapphire accents around an empty dark teal center.
+
+## Remaining card catalog — October 22, 2026
+
+Generate each as a separate opaque 1536×1024 landscape painting. Premium dark fantasy painterly realism; worn bronze and steel, amber torch rimlight, cool charcoal crypt arches, one strong central silhouette readable at card size, complete equipment with safety margins. No text, numbers, UI, frames, watermarks, or collages. Import original PNGs without resizing or cropping.
+
+- Focus: violet crystal suspended above a bronze gauntlet, wisps converging on its point.
+- Battle Cry: bronze war horn, leather grip, sun engraving and golden pressure ripples.
+- Poison Edge: complete curved dagger with emerald venom along its cutting edge and a hanging drop.
+- Expose: cracked breastplate on a stone plinth, golden light revealing its weak seam.
+- Renewal: living green sapling emerging from a broken bronze healing chalice.
+- Double Cut: crossed short steel swords with bronze guards and twin silver motion crescents.
+- Static Lance: complete diagonal spear wrapped in blue-white lightning.
+- Bulwark: massive bronze-and-steel tower shield braced against crypt flagstones.
+- Flaming Strike: complete longsword enveloped in amber flame with a sweeping fire trail.
+- Glacial Barrier: jagged translucent ice wall protecting a bronze shield, cold ground mist.
+- Venom Flurry: two hooked daggers spinning through interwoven emerald venom ribbons.
