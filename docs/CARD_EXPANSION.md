@@ -1,6 +1,6 @@
 # Archetype support cards
 
-Ten collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
+Fifteen collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
 
 | Build | Card | Energy | Rarity | Effect |
 | --- | --- | --- | --- | --- |
@@ -16,3 +16,17 @@ Ten collectible cards expand the five build themes. All builds can use them; the
 | Embercaller | Ash Surge | 1 | rare | Apply 4 Burn and 1 Vulnerable. Exhaust. |
 
 Healing support and zero-cost retained evasion exhaust to limit repeated use. Lightning consumes existing Shock on the first damaging hit; Forked Current then resolves its second hit normally. All cards use shared upgrade rules: +2 to damage/block/heal and +1 to status/draw amounts, with costs and keywords preserved.
+
+## Tactical additions
+
+These five cards are available in runs started with this update. Earlier runs keep their existing pool, including runs started with the first ten-card expansion.
+
+| Build | Card | Energy | Rarity | Effect |
+| --- | --- | --- | --- | --- |
+| Wanderer | Measured Strike | 1 | uncommon | Deal 5 damage. Gain 3 block. |
+| Stormweaver | Stormglass Focus | 0 | rare | Apply 3 Shock. Draw 1 card. Exhaust. |
+| Venomblade | Patient Fang | 1 | uncommon | Deal 4 damage. Apply 2 Poison. Retain. |
+| Gravewarden | Crypt Reprisal | 2 | uncommon | Deal 8 damage. Gain 6 block. |
+| Embercaller | Phoenix Brand | 2 | rare | Deal 7 damage. Apply 4 Burn. Exhaust. |
+
+Stormglass Focus is a one-use setup spell that replaces itself when cards remain to draw. Patient Fang can wait in hand for a useful opening. The two guarded attacks trade energy for offense and protection together; Phoenix Brand spends two energy on immediate and delayed damage but exhausts. These use the same upgrade rules described above.

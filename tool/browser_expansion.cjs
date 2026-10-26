@@ -13,8 +13,8 @@ const fs=require('node:fs');
  await page.getByRole('button',{name:'Unexplored path 1 · floor 1',exact:true}).click();
  await page.getByText('The path is revealed',{exact:true}).waitFor();await page.waitForTimeout(1200);
  const checkpoint=await page.evaluate(()=>JSON.parse(localStorage.getItem('deckbound.run.v1')));
- assert.equal(checkpoint.run.cardPoolVersion,2);
- const pairs=[['wanderer',['trailblazer_cut','lantern_watch']],['stormweaver',['charged_aegis','forked_current']],['venomblade',['wasting_venom','serpent_step']],['gravewarden',['grave_oath','tomb_seal']],['embercaller',['ember_veil','ash_surge']]];
+ assert.equal(checkpoint.run.cardPoolVersion,3);
+ const pairs=[["wanderer", ["measured_strike"]], ["stormweaver", ["stormglass_focus"]], ["venomblade", ["patient_fang"]], ["gravewarden", ["crypt_reprisal"]], ["embercaller", ["phoenix_brand"]]];
  const cards=JSON.parse(fs.readFileSync('assets/data/cards.json','utf8'));
  for(const [build,ids] of pairs){
   const fixture=structuredClone(checkpoint);fixture.run.startingBuild=build;
@@ -34,5 +34,5 @@ const fs=require('node:fs');
   await page.getByRole('button',{name:'End turn',exact:true}).click();await page.getByText('TURN 2',{exact:true}).waitFor();
  }
  assert.deepEqual(errors,[]);await browser.close();
- console.log('PASS: all ten new cards render and play in five build-themed encounters, with saved pool version 2 and working turn advancement.');
+ console.log('PASS: all five tactical cards render and play in five build-themed encounters, with saved pool version 3 and working turn advancement.');
 })().catch(e=>{console.error(e);process.exit(1)});

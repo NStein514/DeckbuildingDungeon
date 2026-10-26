@@ -278,3 +278,11 @@ New runs use card pool 2. Existing saves default to pool 1, preserving seeded re
 All 241 tests passed, along with formatting, static analysis, content checks, and the release web build. The focused ten-test expansion suite also passed after adding journal discovery round-trip coverage. Tests cover every new effect, upgrades, targeting, exhaust limits, card draws, saved pools, and continued descents.
 
 Release-browser checks decoded all 37 images and browsed the complete archive at 390- and 1280-pixel widths without page or asset errors. A separate browser check loaded five build-themed encounters, played all ten new cards, and advanced each encounter to turn 2 without page errors. Phone archive and desktop combat screenshots were inspected for complete artwork and readable card text.
+
+## Five tactical card additions — October 26, 2026
+
+Measured Strike, Stormglass Focus, Patient Fang, Crypt Reprisal, and Phoenix Brand add one collectible per build, with five new opaque 1536×1024 Image Generator paintings. Phoenix Brand was recomposed with Image Generator to keep its wings inside the canvas. Original images were imported without cropping or resizing; all 42 cards have registered artwork.
+
+All 247 tests passed. New tests cover damage plus block, zero-cost Shock setup and its draw/exhaust behavior, retained poison attacks, immediate damage plus Burn, and pool-2 compatibility across 150 seeds and saved merchant purchases. Existing tests also cover pool-1 compatibility, new-card availability in rewards/shops, upgrades, and run/journal round-trips. Static analysis and formatting passed. The content check caught missing logical IDs in the new manifest entries; those were corrected and the check then passed. The release web build passed.
+
+Browser checks decoded all 42 illustrations and browsed the complete archive at phone and desktop widths without page or asset errors. Each of the five new cards rendered and played in a build-themed encounter; each encounter advanced to turn 2 without page errors. Phone archive and desktop combat screenshots were inspected. New runs use pool 3; previous runs keep pools 1 or 2 through subsequent descents.

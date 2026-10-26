@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 37 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 42 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -203,3 +203,15 @@ Ten Image Generator originals imported without cropping or resizing; 1536×1024 
 | `cards/tomb_seal` | `assets/images/cards/tomb_seal.png` | `exec-05f9eb2d-0a61-4858-9c38-e092393970c8.png` |
 | `cards/ember_veil` | `assets/images/cards/ember_veil.png` | `exec-c557de50-ef7e-4ce8-9ef6-5cd926b8f5fe.png` |
 | `cards/ash_surge` | `assets/images/cards/ash_surge.png` | `exec-2d83aeef-fecc-4890-a4fd-c50974c7188b.png` |
+
+## Tactical card illustrations — October 26, 2026
+
+Original opaque 1536×1024 PNG paintings, imported without resizing or cropping. Phoenix Brand was recomposed with Image Generator to keep both wings visible. All use the existing contained card-art window.
+
+| Card | Runtime image | Original source |
+| --- | --- | --- |
+| Measured Strike | `cards/measured_strike` → `assets/images/cards/measured_strike.png` | `exec-28249b43-7dac-49b0-b247-1561ba0fa841.png` |
+| Stormglass Focus | `cards/stormglass_focus` → `assets/images/cards/stormglass_focus.png` | `exec-c33078da-793a-47ad-a018-56440504c1fe.png` |
+| Patient Fang | `cards/patient_fang` → `assets/images/cards/patient_fang.png` | `exec-77741ef1-1a38-44e4-91b4-d824fb6ff402.png` |
+| Crypt Reprisal | `cards/crypt_reprisal` → `assets/images/cards/crypt_reprisal.png` | `exec-df048b92-617e-4c18-b976-b455faab6873.png` |
+| Phoenix Brand | `cards/phoenix_brand` → `assets/images/cards/phoenix_brand.png` | `exec-44dded71-d49e-4f44-a074-04948ff97355.png` |

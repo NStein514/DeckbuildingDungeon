@@ -31,6 +31,7 @@ class RunRepository {
             12,
             13,
             14,
+            15,
           ].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported save version; save preserved.',
@@ -49,7 +50,7 @@ class RunRepository {
   Future<void> save(RunState r) async {
     validate(r);
     await store.write(
-      jsonEncode({'version': 1, 'contentVersion': 14, 'run': r.toJson()}),
+      jsonEncode({'version': 1, 'contentVersion': 15, 'run': r.toJson()}),
     );
   }
 
@@ -94,7 +95,7 @@ class RunRepository {
                 : parts[0] == 'card' && id >= 12 && id < r.nextCardId),
       );
     }
-    check([1, 2].contains(r.cardPoolVersion));
+    check([1, 2, 3].contains(r.cardPoolVersion));
     check([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].contains(r.mapVersion));
     check(r.descent >= 1 && r.mapSeed >= 0 && r.mapSeed <= 0xffffffff);
     check(r.descent != 1 || r.mapSeed == r.seed);

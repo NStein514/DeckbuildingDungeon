@@ -16,7 +16,7 @@ const fs=require('node:fs');
   await page.getByRole('button',{name:'Collection',exact:true}).click();
   await page.getByText('The card archive',{exact:true}).waitFor();
   const seen=new Set();
-  for(let i=0;i<(width===390?11:5);i++){
+  for(let i=0;i<(width===390?Math.ceil(cards.length/3)+1:Math.ceil(cards.length/10)+1);i++){
    await page.waitForTimeout(650);
    const snapshot=await page.locator('body').ariaSnapshot();
    for(const card of cards) if(snapshot.includes(card.name+'. Cost'))seen.add(card.id);
@@ -34,5 +34,5 @@ const fs=require('node:fs');
   assert.deepEqual(size,[1536,1024],card.id);
  }
  assert.deepEqual(errors,[]);await browser.close();
- console.log('PASS: all 37 card illustrations decode at 1536x1024; full phone and desktop archive browsing has no page or asset errors.');
+ console.log('PASS: all '+cards.length+' card illustrations decode at 1536x1024; full phone and desktop archive browsing has no page or asset errors.');
 })().catch(e=>{console.error(e);process.exit(1)});

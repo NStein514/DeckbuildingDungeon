@@ -18,7 +18,7 @@ class RunRules {
     final rooms = DungeonGenerator.generate(rng);
     return RunState(
       seed: seed,
-      cardPoolVersion: 2,
+      cardPoolVersion: 3,
       startingBuild: build,
       rngState: rng.state,
       rooms: rooms,
@@ -113,7 +113,9 @@ class RunRules {
                   c.type != CardType.curse &&
                   !c.tags.contains('fusion') &&
                   (r.cardPoolVersion >= 2 ||
-                      !c.tags.contains('archetype_expansion')),
+                      !c.tags.contains('archetype_expansion')) &&
+                  (r.cardPoolVersion >= 3 ||
+                      !c.tags.contains('tactical_expansion')),
             )
             .map((c) => c.id)
             .toList()

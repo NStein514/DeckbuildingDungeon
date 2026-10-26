@@ -207,3 +207,7 @@ Additional acts and archetypes, challenge modifiers, legendary recipes and deepe
 - Wanderer draw support; Stormweaver Shock setup and paired lightning; Venomblade poison/Weak and retained evasion; Gravewarden limited regeneration and suppression; Embercaller defensive Burn and Vulnerable setup.
 - New-run rewards and merchant pools include the additions; existing checkpoints keep their original deterministic pools through further descents.
 - Shared upgrades, targeting, exhaust, journal discovery and existing combat effects.
+
+## Milestone 6B — tactical deck additions (implemented)
+
+Five more illustrated collectibles bring the catalog to 42 cards: Measured Strike, Stormglass Focus, Patient Fang, Crypt Reprisal, and Phoenix Brand. Each starting build now recommends three themed collectibles. Pool 3 supplies the new cards to fresh runs, preserving pools 1 and 2 for existing adventures.

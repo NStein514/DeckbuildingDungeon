@@ -38,8 +38,8 @@ void main() {
     expect(e.play(card.id, targetId: 'enemy-0'), isNull);
   }
 
-  test('five builds recommend distinct collectible support pairs', () {
-    expect(expanded, hasLength(10));
+  test('five builds recommend distinct collectible support sets', () {
+    expect(expanded, hasLength(15));
     for (final build in StartingBuild.values) {
       expect(build.deck(catalog), hasLength(12));
       for (final id in build.supportCards) {
@@ -209,7 +209,7 @@ void main() {
         stock,
       );
       await repo.save(loaded);
-      expect(jsonDecode(store.contents!)['contentVersion'], 14);
+      expect(jsonDecode(store.contents!)['contentVersion'], 15);
       expect((await repo.load())!.toJson(), loaded.toJson());
       final invalid = loaded.toJson()..['cardPoolVersion'] = 99;
       expect(
@@ -219,10 +219,10 @@ void main() {
     },
   );
   test(
-    'both card pools survive deeper descents and new card saves round-trip',
+    'card pools survive deeper descents and new card saves round-trip',
     () async {
       final victory = won(rules);
-      expect(rules.descend(victory).cardPoolVersion, 2);
+      expect(rules.descend(victory).cardPoolVersion, 3);
       final legacy = RunState.fromJson(
         victory.toJson()..remove('cardPoolVersion'),
       );

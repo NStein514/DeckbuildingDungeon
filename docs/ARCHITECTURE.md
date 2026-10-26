@@ -100,3 +100,7 @@ The standard starter deck and all catalog enemies now resolve to registered PNG 
 Run content version 14 adds ten cards and `cardPoolVersion`. New runs use pool 2; an absent field loads as pool 1. Both rewards and merchant stock exclude the `archetype_expansion` tag for pool 1, preserving sorted candidate order and seeded RNG consumption. The merchant view, purchase command, and save validator all use the saved pool version, so old purchased stock remains valid. Descents retain the pool version; only a new run opts into the new pool. Existing offered rewards and decks are preserved. Starting decks and unlock requirements are unchanged; `StartingBuild.supportCards` lists collectible recommendations shown in camp. Tags associate cards with a build without restricting cross-build use.
 
 Profile content version 4 accepts discoveries of the new cards; versions 1–3 remain readable. The new cards use existing typed effects and upgrade rules, with Exhaust on regenerative and zero-cost defensive support to limit reuse. No new combat timers, map generation, or fusion recipes are introduced.
+
+## Tactical expansion compatibility
+
+New runs now use card pool 3. Cards tagged `tactical_expansion` are excluded from pools 1 and 2; the broader `archetype_expansion` tag continues excluding both batches from pool 1. Every stock lookup and reward roll uses the saved pool, and descents preserve it. Run content version 15 reads versions 1–15; profile content version 5 reads versions 1–5. Starting deck recipes remain unchanged.

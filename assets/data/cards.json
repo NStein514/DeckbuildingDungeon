@@ -858,5 +858,151 @@
       "fire"
     ],
     "art": "cards/ash_surge"
+  },
+  {
+    "id": "measured_strike",
+    "name": "Measured Strike",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 5 damage. Gain 3 block.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 5,
+        "target": "enemy"
+      },
+      {
+        "kind": "block",
+        "amount": 3,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "wanderer"
+    ],
+    "art": "cards/measured_strike"
+  },
+  {
+    "id": "stormglass_focus",
+    "name": "Stormglass Focus",
+    "cost": 0,
+    "type": "skill",
+    "description": "Apply 3 Shock. Draw 1 card. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "shock"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "stormweaver",
+      "lightning"
+    ],
+    "art": "cards/stormglass_focus"
+  },
+  {
+    "id": "patient_fang",
+    "name": "Patient Fang",
+    "cost": 1,
+    "type": "attack",
+    "description": "Deal 4 damage. Apply 2 Poison. Retain.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "retain"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "venomblade"
+    ],
+    "art": "cards/patient_fang"
+  },
+  {
+    "id": "crypt_reprisal",
+    "name": "Crypt Reprisal",
+    "cost": 2,
+    "type": "attack",
+    "description": "Deal 8 damage. Gain 6 block.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 8,
+        "target": "enemy"
+      },
+      {
+        "kind": "block",
+        "amount": 6,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "gravewarden"
+    ],
+    "art": "cards/crypt_reprisal"
+  },
+  {
+    "id": "phoenix_brand",
+    "name": "Phoenix Brand",
+    "cost": 2,
+    "type": "spell",
+    "description": "Deal 7 damage. Apply 4 Burn. Exhaust.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 7,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "enemy",
+        "status": "burn"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "embercaller",
+      "fire"
+    ],
+    "art": "cards/phoenix_brand"
   }
 ]

@@ -280,3 +280,15 @@ Each original: opaque 1536×1024 landscape PNG, premium painted dark fantasy, wo
 - Tomb Seal: chained bronze crypt door with an ivory shield medallion, violet mist held behind it.
 - Ember Veil: floating crimson cloak and bronze clasp inside a protective amber ember curtain.
 - Ash Surge: bronze brazier projecting a spiral of flame and ash toward a cracked armor silhouette.
+
+## Tactical card expansion — October 26, 2026
+
+Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt, worn bronze and steel, amber torchlight, charcoal stone, complete subject with safe margins, no text/frame/UI, opaque.
+
+- `measured_strike`: Measured Strike: a complete ornate steel longsword crossing a small weathered bronze buckler, poised together above a crypt flagstone, subtle silver arc suggesting a precise defensive counterstrike. Both weapons fully visible.
+- `stormglass_focus`: Stormglass Focus: a complete faceted blue crystal suspended between the curved bronze prongs of a small arcane stand, fine branching lightning gathering inward into its brilliant core, electric blue reflections.
+- `patient_fang`: Patient Fang: a complete curved assassin dagger of blackened steel and antique bronze resting diagonally beside a coiled spectral emerald serpent, a single luminous green venom droplet on the blade, tense patient ambush mood.
+- `crypt_reprisal`: Crypt Reprisal: a massive complete weathered iron warhammer crossing a broad engraved bronze shield, a burst of pale spectral dust rising from the cracked crypt stone below, imposing grounded guardian strength.
+- `phoenix_brand`: Phoenix Brand: a complete ancient bronze branding scepter with a phoenix-shaped head, a vivid orange-gold fiery phoenix unfurling above it, sparks and cinders, strong elegant silhouette.
+
+Phoenix Brand correction: zoom out/recompose the original to show the whole phoenix and scepter, with dark margins above both wing tips. Preserve materials, lighting and landscape dimensions.
