@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 42 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 47 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -215,3 +215,15 @@ Original opaque 1536×1024 PNG paintings, imported without resizing or cropping.
 | Patient Fang | `cards/patient_fang` → `assets/images/cards/patient_fang.png` | `exec-77741ef1-1a38-44e4-91b4-d824fb6ff402.png` |
 | Crypt Reprisal | `cards/crypt_reprisal` → `assets/images/cards/crypt_reprisal.png` | `exec-df048b92-617e-4c18-b976-b455faab6873.png` |
 | Phoenix Brand | `cards/phoenix_brand` → `assets/images/cards/phoenix_brand.png` | `exec-44dded71-d49e-4f44-a074-04948ff97355.png` |
+
+## Endurance card illustrations — October 26, 2026
+
+Five original opaque 1536×1024 Image Generator paintings, inspected and imported without resizing or cropping, displayed through the existing contained artwork window.
+
+| Card | Logical ID and runtime image | Original source |
+| --- | --- | --- |
+| Trail Rations | `cards/trail_rations` → `assets/images/cards/trail_rations.png` | `exec-a3155db3-e708-4345-915b-3c3b5af85b7c.png` |
+| Winter Circuit | `cards/winter_circuit` → `assets/images/cards/winter_circuit.png` | `exec-9275387c-3f6e-4f77-a505-df859daab145.png` |
+| Nightshade Mantle | `cards/nightshade_mantle` → `assets/images/cards/nightshade_mantle.png` | `exec-6118f27a-6084-41db-a615-4fc43b16c071.png` |
+| Graven Resolve | `cards/graven_resolve` → `assets/images/cards/graven_resolve.png` | `exec-1ae52586-c8aa-420c-a109-d4931cbed68a.png` |
+| Cinder Insight | `cards/cinder_insight` → `assets/images/cards/cinder_insight.png` | `exec-0fbecc61-efe1-429b-92c5-4547ef3c60cf.png` |

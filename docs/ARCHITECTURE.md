@@ -104,3 +104,7 @@ Profile content version 4 accepts discoveries of the new cards; versions 1–3 r
 ## Tactical expansion compatibility
 
 New runs now use card pool 3. Cards tagged `tactical_expansion` are excluded from pools 1 and 2; the broader `archetype_expansion` tag continues excluding both batches from pool 1. Every stock lookup and reward roll uses the saved pool, and descents preserve it. Run content version 15 reads versions 1–15; profile content version 5 reads versions 1–5. Starting deck recipes remain unchanged.
+
+## Endurance expansion compatibility
+
+New runs use card pool 4. Cards tagged `endurance_expansion` are excluded from pools 1–3; these cards also carry prior expansion tags so every previous pool remains stable. Saved pool versions survive descents and control both rewards and shop inventories. Run content version 16 reads versions 1–16; profile content version 6 reads versions 1–6. Starting deck recipes and combat rules are unchanged.

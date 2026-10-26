@@ -292,3 +292,13 @@ Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt
 - `phoenix_brand`: Phoenix Brand: a complete ancient bronze branding scepter with a phoenix-shaped head, a vivid orange-gold fiery phoenix unfurling above it, sparks and cinders, strong elegant silhouette.
 
 Phoenix Brand correction: zoom out/recompose the original to show the whole phoenix and scepter, with dark margins above both wing tips. Preserve materials, lighting and landscape dimensions.
+
+## Endurance card expansion — October 26, 2026
+
+Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt, worn bronze, amber torchlight, charcoal stone, complete subject with safe margins, no text/frame/UI, opaque.
+
+- `trail_rations`: Trail Rations: an open worn leather adventurer's satchel containing a small crusty loaf, ruby-red healing berries, and a corked bronze-bound water flask, arranged neatly on a stone ledge beside a warm lantern. Rich realistic food and leather texture, warm hopeful amber glow.
+- `winter_circuit`: Winter Circuit: a complete circular bronze arcane armillary ring floating over its stone pedestal, encircling a jagged ice crystal; branching electric-blue lightning bridges the ring while delicate frost spreads over the bronze. Distinct icy white and blue silhouette.
+- `nightshade_mantle`: Nightshade Mantle: a complete empty dark green hooded cloak suspended above the crypt floor, its folds edged in ornate bronze serpent clasps, luminous emerald poisonous mist curls protectively around it. No person, no face, complete fabric silhouette entirely in frame.
+- `graven_resolve`: Graven Resolve: a complete pair of ornate weathered bronze armored gauntlets clenched together before an ancient carved oath stone, soft spectral ivory light radiates between the fists, grounded heroic resolve, a small worn shield rests against the stone. No person or face.
+- `cinder_insight`: Cinder Insight: a complete antique bronze bowl holding glowing embers on a stone lectern, a luminous orange magical eye formed from fine threads of flame hovering above the bowl, subtle ash spirals and illuminated parchment with only abstract marks, no readable writing.

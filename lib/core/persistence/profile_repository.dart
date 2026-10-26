@@ -13,7 +13,8 @@ class ProfileRepository {
     if (text == null) return PlayerProfile();
     try {
       final j = jsonDecode(text) as Map<String, dynamic>;
-      if (j['version'] != 1 || ![1, 2, 3, 4, 5].contains(j['contentVersion'])) {
+      if (j['version'] != 1 ||
+          ![1, 2, 3, 4, 5, 6].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported journal version; original preserved.',
         );
@@ -46,7 +47,7 @@ class ProfileRepository {
     await store.write(
       jsonEncode({
         'version': 1,
-        'contentVersion': 5,
+        'contentVersion': 6,
         'profile': profile.toJson(),
       }),
     );

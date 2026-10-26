@@ -211,3 +211,7 @@ Additional acts and archetypes, challenge modifiers, legendary recipes and deepe
 ## Milestone 6B — tactical deck additions (implemented)
 
 Five more illustrated collectibles bring the catalog to 42 cards: Measured Strike, Stormglass Focus, Patient Fang, Crypt Reprisal, and Phoenix Brand. Each starting build now recommends three themed collectibles. Pool 3 supplies the new cards to fresh runs, preserving pools 1 and 2 for existing adventures.
+
+## Milestone 6C — endurance deck additions (implemented)
+
+Five new illustrated collectibles bring the catalog to 47: Trail Rations, Winter Circuit, Nightshade Mantle, Graven Resolve, and Cinder Insight. Each build recommends four themed collectibles. Pool 4 supplies fresh runs while prior adventures keep their saved pools.

@@ -1,6 +1,6 @@
 # Archetype support cards
 
-Fifteen collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
+Twenty collectible cards expand the five build themes. All builds can use them; the camp recommendations describe synergies, not restrictions. Starting decks and unlocks remain unchanged. New runs find these cards in rewards and merchant stock. Existing runs keep their previous pool through later descents to preserve seeded offers and sold stock.
 
 | Build | Card | Energy | Rarity | Effect |
 | --- | --- | --- | --- | --- |
@@ -30,3 +30,17 @@ These five cards are available in runs started with this update. Earlier runs ke
 | Embercaller | Phoenix Brand | 2 | rare | Deal 7 damage. Apply 4 Burn. Exhaust. |
 
 Stormglass Focus is a one-use setup spell that replaces itself when cards remain to draw. Patient Fang can wait in hand for a useful opening. The two guarded attacks trade energy for offense and protection together; Phoenix Brand spends two energy on immediate and delayed damage but exhausts. These use the same upgrade rules described above.
+
+## Endurance additions
+
+Available in new runs started with this update. Earlier runs preserve their original pool. All builds can collect these cards.
+
+| Build | Card | Energy | Rarity | Effect |
+| --- | --- | --- | --- | --- |
+| Wanderer | Trail Rations | 1 | uncommon | Restore 3 health. Draw 1 card. Exhaust. |
+| Stormweaver | Winter Circuit | 1 | uncommon | Apply 2 Shock and 1 Chill. |
+| Venomblade | Nightshade Mantle | 1 | uncommon | Gain 4 block. Apply 2 Poison. |
+| Gravewarden | Graven Resolve | 2 | uncommon | Gain 6 block and 1 Strength. Exhaust. |
+| Embercaller | Cinder Insight | 1 | uncommon | Apply 2 Burn. Draw 1 card. |
+
+Trail Rations exhausts to limit repeat healing. Winter Circuit prepares a lightning hit while Chill reduces the enemy’s next attack turn. Nightshade Mantle combines immediate protection with delayed poison damage. Graven Resolve grants encounter-long Strength but exhausts; its two-energy cost limits the attacks that can follow immediately. Cinder Insight applies Burn while drawing another option. Normal upgrades increase healing/block by 2 and status/draw amounts by 1.

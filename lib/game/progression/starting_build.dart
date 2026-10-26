@@ -33,11 +33,36 @@ enum StartingBuild {
 
   /// Collectible support cards; they do not replace the balanced starting deck.
   List<String> get supportCards => switch (this) {
-    wanderer => ['trailblazer_cut', 'lantern_watch', 'measured_strike'],
-    stormweaver => ['charged_aegis', 'forked_current', 'stormglass_focus'],
-    venomblade => ['wasting_venom', 'serpent_step', 'patient_fang'],
-    gravewarden => ['grave_oath', 'tomb_seal', 'crypt_reprisal'],
-    embercaller => ['ember_veil', 'ash_surge', 'phoenix_brand'],
+    wanderer => [
+      'trailblazer_cut',
+      'lantern_watch',
+      'measured_strike',
+      'trail_rations',
+    ],
+    stormweaver => [
+      'charged_aegis',
+      'forked_current',
+      'stormglass_focus',
+      'winter_circuit',
+    ],
+    venomblade => [
+      'wasting_venom',
+      'serpent_step',
+      'patient_fang',
+      'nightshade_mantle',
+    ],
+    gravewarden => [
+      'grave_oath',
+      'tomb_seal',
+      'crypt_reprisal',
+      'graven_resolve',
+    ],
+    embercaller => [
+      'ember_veil',
+      'ash_surge',
+      'phoenix_brand',
+      'cinder_insight',
+    ],
   };
 
   bool unlocked(PlayerProfile? profile) => switch (this) {

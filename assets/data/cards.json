@@ -1004,5 +1004,157 @@
       "fire"
     ],
     "art": "cards/phoenix_brand"
+  },
+  {
+    "id": "trail_rations",
+    "name": "Trail Rations",
+    "cost": 1,
+    "type": "skill",
+    "description": "Restore 3 health. Draw 1 card. Exhaust.",
+    "effects": [
+      {
+        "kind": "heal",
+        "amount": 3,
+        "target": "self"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "endurance_expansion",
+      "wanderer"
+    ],
+    "art": "cards/trail_rations"
+  },
+  {
+    "id": "winter_circuit",
+    "name": "Winter Circuit",
+    "cost": 1,
+    "type": "spell",
+    "description": "Apply 2 Shock and 1 Chill.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "shock"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "chill"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "endurance_expansion",
+      "stormweaver",
+      "lightning",
+      "ice"
+    ],
+    "art": "cards/winter_circuit"
+  },
+  {
+    "id": "nightshade_mantle",
+    "name": "Nightshade Mantle",
+    "cost": 1,
+    "type": "defense",
+    "description": "Gain 4 block. Apply 2 Poison.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 4,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "endurance_expansion",
+      "venomblade"
+    ],
+    "art": "cards/nightshade_mantle"
+  },
+  {
+    "id": "graven_resolve",
+    "name": "Graven Resolve",
+    "cost": 2,
+    "type": "defense",
+    "description": "Gain 6 block and 1 Strength. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 6,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "self",
+        "status": "strength"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "endurance_expansion",
+      "gravewarden"
+    ],
+    "art": "cards/graven_resolve"
+  },
+  {
+    "id": "cinder_insight",
+    "name": "Cinder Insight",
+    "cost": 1,
+    "type": "spell",
+    "description": "Apply 2 Burn. Draw 1 card.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "burn"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "uncommon",
+    "keywords": [],
+    "tags": [
+      "archetype_expansion",
+      "tactical_expansion",
+      "endurance_expansion",
+      "embercaller",
+      "fire"
+    ],
+    "art": "cards/cinder_insight"
   }
 ]

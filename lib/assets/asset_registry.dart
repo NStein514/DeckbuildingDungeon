@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 /// Logical identifiers remain stable when approved illustrations are imported.
 class AssetRegistry {
   static const Map<String, String> illustrations = {
+    'cards/trail_rations': 'assets/images/cards/trail_rations.png',
+    'cards/winter_circuit': 'assets/images/cards/winter_circuit.png',
+    'cards/nightshade_mantle': 'assets/images/cards/nightshade_mantle.png',
+    'cards/graven_resolve': 'assets/images/cards/graven_resolve.png',
+    'cards/cinder_insight': 'assets/images/cards/cinder_insight.png',
+
     'cards/measured_strike': 'assets/images/cards/measured_strike.png',
     'cards/stormglass_focus': 'assets/images/cards/stormglass_focus.png',
     'cards/patient_fang': 'assets/images/cards/patient_fang.png',
