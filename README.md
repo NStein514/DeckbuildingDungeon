@@ -4,15 +4,17 @@
 
 A mobile-first, offline single-player roguelike deckbuilder set in the Ashen Crypt. Your cards are your attacks, wards, spells, and tactical choices.
 
-## Current build: illustrated archetype card expansion
+## Current build: illustrated fusions and room cards
 
+- Eight illustrated noncombat rooms and events share the deck-card frame, with full artwork inside both reveals and room screens.
+- Five new [fusion recipes](docs/FUSION_EXPANSION.md) combine recent deck collectibles into illustrated rare cards.
 - Five masked hero portraits follow the selected starting deck; saved identity survives deck changes and deeper descents.
 - Chosen paths flip in place, then expand into a framed reveal; all delivered card paintings share a complete 3:2 canvas.
 - Repeatable six-floor seeded descents with combat, rest, treasure, fusion shrines, merchants, optional events, and bosses.
-- Fifty-two fully illustrated cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
+- Fifty-seven fully illustrated cards and a twelve-card starting deck; real targeting, energy, statuses, enemy intents, and multiple enemies.
 - [Five collectible support cards per starting build](docs/CARD_EXPANSION.md), available in new-run rewards and shops; existing runs retain their original card pools.
 - Three-card battle rewards, gold, persistent deck growth, and one-time card upgrades with previews.
-- Three consecutive-play combos and seven permanent fusion recipes with previews and saved discoveries.
+- Three consecutive-play combos and twelve permanent fusion recipes with previews and saved discoveries.
 - After each boss, descend again with your build intact and stronger enemies; floor numbers keep advancing.
 - Seeded encounter variations with revealed Hardy, Fierce, Rallying and Mending modifiers and bonus gold.
 - Merchants sell cards, healing, upgrades, and permanent card removal; optional events trade health against gold.
@@ -112,7 +114,7 @@ New-map events now include the Ember Forge (trade 6 HP for a chosen upgrade) and
 
 Unplayed cards now stay in hand between turns (up to ten cards); played cards still cycle through discard or exhaust. Each encounter draws a fresh hand from your persistent journey deck. New maps shuffle the interior floor order as well as card positions, and dungeon cards have a small stable tilt. Opening encounters and final bosses remain at the ends; use a new run or the next descent to see the new layouts.
 
-Fusion shrines now offer seven recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
+Fusion shrines now offer twelve recipes, including **Guard + Spark → Stormguard** and **Heavy Blow + Firebolt → Cinder Maul**. Tap an available recipe to preview it; unupgraded copies are selected first and confirmation is required. Both new results have generated card artwork and persistent journal discovery.
 
 Camp now offers journal-unlocked starting builds: Stormweaver after any fusion discovery, and Venomblade after a guardian victory. Expand Starting build to inspect all five decks and select an unlocked option. All start with 12 unupgraded cards, the same resources and Iron Sigil; Continue run keeps its saved deck.
 

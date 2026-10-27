@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 /// Logical identifiers remain stable when approved illustrations are imported.
 class AssetRegistry {
   static const Map<String, String> illustrations = {
+    'events/wanderingHealer': 'assets/images/events/wandering_healer.png',
+    'events/bloodAltar': 'assets/images/events/blood_altar.png',
+    'rooms/shrine': 'assets/images/rooms/shrine.png',
+    'rooms/treasure': 'assets/images/rooms/treasure.png',
+    'rooms/merchant': 'assets/images/rooms/merchant.png',
+    'cards/solar_script': 'assets/images/cards/solar_script.png',
+    'cards/ancient_bastion': 'assets/images/cards/ancient_bastion.png',
+    'cards/widows_promise': 'assets/images/cards/widows_promise.png',
+    'cards/storm_prism': 'assets/images/cards/storm_prism.png',
+    'cards/dawnward': 'assets/images/cards/dawnward.png',
     'cards/opening_gambit': 'assets/images/cards/opening_gambit.png',
     'cards/thunderhead': 'assets/images/cards/thunderhead.png',
     'cards/bitter_bloom': 'assets/images/cards/bitter_bloom.png',
@@ -103,7 +113,11 @@ class GameIllustration extends StatelessWidget {
         height: height,
         cacheWidth: id.startsWith('cards/') ? 512 : 768,
         // Preserve the complete composition inside each card's artwork window.
-        fit: id.startsWith('cards/') || id.startsWith('enemies/')
+        fit:
+            id.startsWith('cards/') ||
+                id.startsWith('enemies/') ||
+                id.startsWith('rooms/') ||
+                id.startsWith('events/')
             ? BoxFit.contain
             : BoxFit.cover,
         excludeFromSemantics: true,

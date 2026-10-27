@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 52 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 57 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -239,3 +239,23 @@ Five original opaque 1536×1024 Image Generator paintings, inspected and importe
 | Bitter Bloom | `cards/bitter_bloom` → `assets/images/cards/bitter_bloom.png` | `exec-3273f3d0-c1d3-4ea8-bcc1-d374833c9f70.png` |
 | Ossuary Ward | `cards/ossuary_ward` → `assets/images/cards/ossuary_ward.png` | `exec-a1a74db1-60d6-446e-8bfe-e04e1058f8b0.png` |
 | Flashfire | `cards/flashfire` → `assets/images/cards/flashfire.png` | `exec-43d78ff7-1f71-4fce-8fcd-7a5b6eed30bc.png` |
+
+## Archetype fusions and illustrated rooms — October 26, 2026
+
+Thirteen opaque 1536×1024 Image Generator paintings. Five illustrate fusion results; eight cover merchant, treasure, shrine, sanctuary, forge, well, altar and healer. These sanctuary/forge/well paintings replace their earlier runtime images. Dawnward, Storm Prism and Solar Script were recomposed with Image Generator to keep their topmost subject details inside the canvas. Originals were inspected and copied directly without cropping or resizing.
+
+| Logical ID | Runtime path | Source |
+| --- | --- | --- |
+| `cards/dawnward` | `assets/images/cards/dawnward.png` | `exec-3ba595ab-454b-42db-9846-2b7ae4f0ec25.png` |
+| `cards/storm_prism` | `assets/images/cards/storm_prism.png` | `exec-00d4667f-fd77-4ed2-9a32-d6826da0dbb2.png` |
+| `cards/widows_promise` | `assets/images/cards/widows_promise.png` | `exec-65c5570e-df95-4257-9ca9-c062670b9315.png` |
+| `cards/ancient_bastion` | `assets/images/cards/ancient_bastion.png` | `exec-fa9a6eaf-4e22-4229-acc1-891c65c5075b.png` |
+| `cards/solar_script` | `assets/images/cards/solar_script.png` | `exec-955f68a9-32d1-4619-b50e-7e3fa7455497.png` |
+| `rooms/merchant` | `assets/images/rooms/merchant.png` | `exec-11a19008-6625-4d50-bae5-d10f453db367.png` |
+| `rooms/treasure` | `assets/images/rooms/treasure.png` | `exec-0828c873-3b71-455d-8c8d-ffc8f8581017.png` |
+| `rooms/shrine` | `assets/images/rooms/shrine.png` | `exec-f128baae-c596-450f-b5f1-2b84f6eea0ac.png` |
+| `events/sanctuary` | `assets/images/events/sanctuary.png` | `exec-4ddb89c1-2a95-4f0d-9cc4-b484a7788c45.png` |
+| `events/emberForge` | `assets/images/events/ember_forge.png` | `exec-8681a921-1edf-4ca0-8113-df21dcd2fbe0.png` |
+| `events/memoryWell` | `assets/images/events/memory_well.png` | `exec-9b5aa67a-7f62-4c56-bc46-351c233605ba.png` |
+| `events/bloodAltar` | `assets/images/events/blood_altar.png` | `exec-b3d59cab-89b7-4d3d-a52e-483b0aa16a1a.png` |
+| `events/wanderingHealer` | `assets/images/events/wandering_healer.png` | `exec-602bd071-96c3-4578-b23e-4bc65dd61546.png` |

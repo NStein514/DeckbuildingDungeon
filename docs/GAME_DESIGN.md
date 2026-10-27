@@ -97,7 +97,7 @@ Prices and modifier balance are provisional. No passive hunger or ember depletio
 
 ## Journey journal (Milestone 4B)
 
-Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the seven fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
+Saved journeys contribute card and relic discoveries to a persistent journal; fusion discoveries derive from the fusion-result card IDs. Seeing a card in a reward offer or archive does not discover it: acquiring it through the starting deck, a reward, merchant, or fusion does. Removal never erases discovery. Starting a new run keeps the journal; practice encounters do not contribute.
 
 Personal records are the deepest floor actually entered, most rooms cleared in a single journey, and most bosses defeated in a single journey. Descending after a boss does not count the next floor until its first room is entered. Reloading cannot inflate these values. A separate journal save lets the active run be replaced while preserving discoveries and records. No lifetime win/defeat totals, character-stat increases, or unlocked starting builds are claimed in this milestone.
 

@@ -1,3 +1,4 @@
+import '../widgets/room_card.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
 import '../../game/cards/upgrades.dart';
@@ -64,14 +65,11 @@ class _FusionPanelState extends State<FusionPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Icon(Icons.auto_fix_high, size: 64, color: Color(0xffc8a96b)),
-        const Text(
-          'The fusion shrine',
-          style: TextStyle(fontSize: 28, fontFamily: 'serif'),
-        ),
-        const SizedBox(height: 12),
-        const Text(
-          'Combine two cards permanently. One fusion per shrine. Source upgrades are consumed; the result starts unupgraded.',
+        const RoomCardPanel(
+          title: 'The fusion shrine',
+          art: 'rooms/shrine',
+          description:
+              'Fuse two cards into one unupgraded card. Source upgrades are consumed. One fusion per visit.',
         ),
         const SizedBox(height: 16),
         const Text('Available recipes'),

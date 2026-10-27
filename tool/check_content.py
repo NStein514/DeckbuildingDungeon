@@ -71,3 +71,8 @@ for asset in (ROOT / "assets/images/cards").glob("*.png"):
     assert struct.unpack(">II", asset.read_bytes()[16:24]) == (1536, 1024), f"Inconsistent card canvas: {asset.name}"
 for build in ("wanderer", "stormweaver", "venomblade", "gravewarden", "embercaller"):
     assert (ROOT / f"assets/images/heroes/{build}.png").is_file(), f"Missing hero: {build}"
+
+# Every noncombat reveal has a complete scene on the same canvas as card art.
+for logical_id in ['rooms/merchant', 'rooms/treasure', 'rooms/shrine', 'events/sanctuary', 'events/emberForge', 'events/memoryWell', 'events/bloodAltar', 'events/wanderingHealer']:
+    assert logical_id in registry, f"Missing room scene: {logical_id}"
+    assert struct.unpack(">II", (ROOT / registry[logical_id]).read_bytes()[16:24]) == (1536, 1024)

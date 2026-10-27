@@ -1,3 +1,4 @@
+import 'card_rim.dart';
 import 'package:flutter/material.dart';
 import '../../assets/asset_registry.dart';
 import '../../game/models/models.dart';
@@ -185,7 +186,7 @@ class GameCard extends StatelessWidget {
                   Positioned.fill(
                     child: IgnorePointer(
                       child: ClipPath(
-                        clipper: const _CardRimClipper(),
+                        clipper: const CardRimClipper(),
                         child: Image.asset(
                           'assets/images/ui/card_frame.png',
                           cacheWidth: 384,
@@ -203,23 +204,4 @@ class GameCard extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Only the ornamental rim paints over the illustration; the center stays clear.
-class _CardRimClipper extends CustomClipper<Path> {
-  const _CardRimClipper();
-
-  @override
-  Path getClip(Size size) => Path()
-    ..fillType = PathFillType.evenOdd
-    ..addRect(Offset.zero & size)
-    ..addRRect(
-      RRect.fromRectAndRadius(
-        (Offset.zero & size).deflate(7),
-        const Radius.circular(5),
-      ),
-    );
-
-  @override
-  bool shouldReclip(_CardRimClipper oldClipper) => false;
 }

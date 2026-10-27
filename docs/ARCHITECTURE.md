@@ -112,3 +112,9 @@ New runs use card pool 4. Cards tagged `endurance_expansion` are excluded from p
 ## Initiative expansion compatibility
 
 New runs use card pool 5. The `initiative_expansion` tag excludes new cards from pools 1–4; cards also carry earlier expansion tags. Saved pools continue controlling rewards, merchant stock and purchase validation through descents. Run content version 17 reads versions 1–17; profile content version 7 reads versions 1–7. Combat engine rules and starting deck recipes are unchanged.
+
+## Framed room art and archetype fusions
+
+`RoomCard` places a full 3:2 scene below a title plate, with a centered description and the shared `CardRimClipper` overlay. Its 150:217 portrait dimensions match path reveals; action screens use `RoomCardPanel`. Only content that exceeds the fixed height gets an internal scroll view. Events select their exact seeded art after the path is revealed. Precache covers room art before flip/grow animation. Combat opponent cards and hidden secondary opponents are unchanged.
+
+Five fusion-only cards bring recipes to twelve. Run saves write content version 18 and read 1–18; journals write 8 and read 1–8. Pool version remains 5: fusion results are excluded from every shop and reward pool, preserving previous seeded offers.

@@ -41,7 +41,11 @@ void main() {
       await t.tap(find.byTooltip('Journey journal'));
       await t.pumpAndSettle();
       expect(find.text('Deepest floor entered'), findsOneWidget);
-      expect(find.text('Fusion discoveries · 1 / 7'), findsOneWidget);
+      expect(find.text('Fusion discoveries · 1 / 12'), findsOneWidget);
+      await t.scrollUntilVisible(
+        find.textContaining('Discovered across your journeys'),
+        250,
+      );
       expect(
         find.textContaining('Discovered across your journeys'),
         findsOneWidget,
@@ -56,7 +60,7 @@ void main() {
       );
       await t.pumpAndSettle();
       await tap(t, 'Journey journal');
-      expect(find.text('Fusion discoveries · 1 / 7'), findsOneWidget);
+      expect(find.text('Fusion discoveries · 1 / 12'), findsOneWidget);
       expect((await ProfileRepository(profile, catalog).load()).bestBosses, 1);
       expect(t.takeException(), isNull);
     },

@@ -119,7 +119,7 @@ void main() {
         expect(await c.fuse(pair[0], pair[1]), true);
         expect((await c.repository.load())!.deck.last.definitionId, pair[2]);
         expect((await profile.load()).cards, contains(pair[2]));
-        expect(jsonDecode(store.contents!)['contentVersion'], 17);
+        expect(jsonDecode(store.contents!)['contentVersion'], 18);
         await c.start(12);
         expect(c.profile!.cards, contains(pair[2]));
         c.dispose();
@@ -162,7 +162,11 @@ void main() {
 
       await tap('Continue run');
       final chip = find.widgetWithText(ActionChip, name);
-      await t.scrollUntilVisible(chip.hitTestable(), 250);
+      await t.scrollUntilVisible(
+        chip.hitTestable(),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
       await t.pumpAndSettle();
       await t.tap(chip);
       await t.pumpAndSettle();

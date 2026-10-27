@@ -57,7 +57,7 @@ void main() {
       final c = RunController(RunRepository(store, catalog));
       await c.load();
       expect(await c.merchantUpgrade('starter-0'), true);
-      expect(jsonDecode(store.contents!)['contentVersion'], 17);
+      expect(jsonDecode(store.contents!)['contentVersion'], 18);
       await c.load();
       expect(c.state!.gold, 50);
       expect(c.state!.purchases, contains('upgrade'));

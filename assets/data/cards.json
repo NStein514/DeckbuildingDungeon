@@ -1312,5 +1312,167 @@
       "fire"
     ],
     "art": "cards/flashfire"
+  },
+  {
+    "id": "dawnward",
+    "name": "Dawnward",
+    "cost": 1,
+    "type": "attack",
+    "description": "6 damage. 5 block. Draw 1.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 6,
+        "target": "enemy"
+      },
+      {
+        "kind": "block",
+        "amount": 5,
+        "target": "self"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [],
+    "tags": [
+      "fusion",
+      "archetype_fusion"
+    ],
+    "art": "cards/dawnward"
+  },
+  {
+    "id": "storm_prism",
+    "name": "Storm Prism",
+    "cost": 1,
+    "type": "spell",
+    "description": "4 Shock, 2 Chill. Draw 1. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "enemy",
+        "status": "shock"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "chill"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "archetype_fusion",
+      "lightning",
+      "ice"
+    ],
+    "art": "cards/storm_prism"
+  },
+  {
+    "id": "widows_promise",
+    "name": "Widow's Promise",
+    "cost": 1,
+    "type": "attack",
+    "description": "6 damage. 5 Poison. Retain.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 6,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 5,
+        "target": "enemy",
+        "status": "poison"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "retain"
+    ],
+    "tags": [
+      "fusion",
+      "archetype_fusion"
+    ],
+    "art": "cards/widows_promise"
+  },
+  {
+    "id": "ancient_bastion",
+    "name": "Ancient Bastion",
+    "cost": 2,
+    "type": "defense",
+    "description": "12 block. 2 Strength. Retain. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 12,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "self",
+        "status": "strength"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "retain",
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "archetype_fusion"
+    ],
+    "art": "cards/ancient_bastion"
+  },
+  {
+    "id": "solar_script",
+    "name": "Solar Script",
+    "cost": 2,
+    "type": "spell",
+    "description": "9 damage. 5 Burn. Draw 1. Exhaust.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 9,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 5,
+        "target": "enemy",
+        "status": "burn"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "rarity": "rare",
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "archetype_fusion",
+      "fire"
+    ],
+    "art": "cards/solar_script"
   }
 ]

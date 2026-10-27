@@ -21,6 +21,7 @@ flutter:
     - assets/images/heroes/
     - assets/images/enemies/
     - assets/images/cards/
+    - assets/images/rooms/
     - assets/images/events/
     - assets/images/effects/
     - assets/images/relics/

@@ -34,6 +34,7 @@ class RunRepository {
             15,
             16,
             17,
+            18,
           ].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported save version; save preserved.',
@@ -52,7 +53,7 @@ class RunRepository {
   Future<void> save(RunState r) async {
     validate(r);
     await store.write(
-      jsonEncode({'version': 1, 'contentVersion': 17, 'run': r.toJson()}),
+      jsonEncode({'version': 1, 'contentVersion': 18, 'run': r.toJson()}),
     );
   }
 

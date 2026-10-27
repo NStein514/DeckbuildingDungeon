@@ -1,3 +1,5 @@
+import 'package:deckbound/assets/asset_registry.dart';
+import 'package:deckbound/presentation/widgets/room_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:deckbound/app/run_controller.dart';
@@ -70,18 +72,25 @@ void main() {
         );
         if (type == RoomType.treasure || type == RoomType.merchant) {
           final face = find.byType(PathReveal);
-          final icon = find
-              .descendant(of: face, matching: find.byType(Icon))
-              .first;
-          final description = find
-              .descendant(of: face, matching: find.byType(Text))
-              .last;
-          final center = t.getCenter(face);
-          expect(
-            (t.getTopLeft(icon).dy + t.getBottomLeft(description).dy) / 2,
-            closeTo(center.dy, 1),
+          final card = find.descendant(
+            of: face,
+            matching: find.byType(RoomCard),
           );
-          expect(t.getCenter(icon).dx, closeTo(center.dx, 1));
+          final art = find.descendant(
+            of: card,
+            matching: find.byType(GameIllustration),
+          );
+          expect(card, findsOneWidget);
+          expect(art, findsOneWidget);
+          expect(t.getCenter(art).dx, closeTo(t.getCenter(face).dx, 1));
+          final artRect = t.getRect(art), faceRect = t.getRect(face);
+          expect(artRect.width / artRect.height, closeTo(1.5, .001));
+          expect(faceRect.contains(artRect.topLeft), isTrue);
+          expect(faceRect.contains(artRect.bottomRight), isTrue);
+          expect(
+            find.descendant(of: card, matching: find.byType(Icon)),
+            findsNothing,
+          );
         }
         if (type == RoomType.combat || type == RoomType.boss) {
           final secretName = type == RoomType.boss

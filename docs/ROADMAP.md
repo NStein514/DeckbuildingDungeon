@@ -219,3 +219,7 @@ Five new illustrated collectibles bring the catalog to 47: Trail Rations, Winter
 ## Milestone 6D — initiative deck additions (implemented)
 
 Five new illustrated collectibles bring the catalog to 52: Opening Gambit, Thunderhead, Bitter Bloom, Ossuary Ward, and Flashfire. Each build recommends five themed collectibles. Pool 5 supplies new adventures while existing runs keep their original offers.
+
+## Milestone 6E — archetype fusions and room illustrations (implemented)
+
+Five rare fusion results with original art: Dawnward, Storm Prism, Widow’s Promise, Ancient Bastion, Solar Script. Eight noncombat room/event paintings now appear inside matching gold-rimmed cards in reveals and action screens. The collection has 57 illustrated cards and twelve fusion recipes.

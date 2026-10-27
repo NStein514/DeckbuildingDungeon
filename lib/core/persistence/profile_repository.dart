@@ -14,7 +14,7 @@ class ProfileRepository {
     try {
       final j = jsonDecode(text) as Map<String, dynamic>;
       if (j['version'] != 1 ||
-          ![1, 2, 3, 4, 5, 6, 7].contains(j['contentVersion'])) {
+          ![1, 2, 3, 4, 5, 6, 7, 8].contains(j['contentVersion'])) {
         throw const FormatException(
           'Unsupported journal version; original preserved.',
         );
@@ -47,7 +47,7 @@ class ProfileRepository {
     await store.write(
       jsonEncode({
         'version': 1,
-        'contentVersion': 7,
+        'contentVersion': 8,
         'profile': profile.toJson(),
       }),
     );

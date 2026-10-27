@@ -302,3 +302,13 @@ Added five illustrated collectibles: Opening Gambit, Thunderhead, Bitter Bloom, 
 All 261 tests, formatting, analysis, content checks, and release build passed. Tests cover Vulnerable ordering, consuming and reapplying Shock, Poison/Weak turns, Retain/Exhaust, free fire damage, upgrades, and pool-4 compatibility across 150 seeds and saved purchases. Existing pool-1 through pool-3 checks also passed.
 
 The release browser decoded all 52 images and browsed the archive at phone and desktop widths without page or asset errors. All five new cards played and advanced turns. Visual inspection caught Thunderhead's long description clipping in the hand; it was shortened, content checks and the release build passed again, and all five combat browser checks passed on the final build. The corrected hand screenshot was inspected. New runs use pool 5; older runs preserve their offers.
+
+## Illustrated fusions and room cards — October 27, 2026
+
+Added Dawnward, Storm Prism, Widow's Promise, Ancient Bastion, and Solar Script: five fusion-only results with original 1536×1024 artwork, bringing the catalog to 57 cards and the shrine to twelve recipes. Eight matching paintings now appear inside portrait card frames for merchant, treasure, shrine, sanctuary, forge, well, altar, and healer reveals and their room screens. Images were imported without cropping or resizing; three fusion compositions were regenerated to preserve their complete silhouettes.
+
+All 272 tests, formatting, static analysis, content checks, and the release web build passed. Coverage includes fusion source consumption, upgrades, saved results and discoveries, combat effects, unchanged reward/shop pools 1–5, portrait reveal sizing, and complete room artwork at text scales 1.0, 1.6, and 2.0. Existing saves remain readable; new saves use run content version 18 and profile content version 8.
+
+Release-browser checks decoded all 57 card illustrations at 1536×1024 and browsed the complete archive at phone and desktop widths without page or asset errors. All eight room reveals and room actions completed at 390px and 1280px. Each new fusion was previewed, cancelled without changing the deck, confirmed with its result persisted, and played in combat through the next turn. Browser selectors were adjusted for Flutter's combined text labels and controls below the viewport. Merchant, treasure, forge, shrine, and new-card archive screenshots were visually inspected.
+
+A final combat screenshot pass scrolled each fusion card fully into view, then played it and advanced the turn. All five hand screenshots were inspected: names, full illustrations, and complete two-line rules text remain visible, including Ancient Bastion's Retain/Exhaust text. No page or asset errors occurred.

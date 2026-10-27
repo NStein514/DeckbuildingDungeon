@@ -10,6 +10,12 @@ class FusionRecipe {
 }
 
 const fusionRecipes = [
+  FusionRecipe('measured_strike', 'lantern_watch', 'dawnward'),
+  FusionRecipe('stormglass_focus', 'winter_circuit', 'storm_prism'),
+  FusionRecipe('patient_fang', 'wasting_venom', 'widows_promise'),
+  FusionRecipe('graven_resolve', 'ossuary_ward', 'ancient_bastion'),
+  FusionRecipe('phoenix_brand', 'cinder_insight', 'solar_script'),
+
   FusionRecipe('strike', 'firebolt', 'flaming_strike'),
   FusionRecipe('guard', 'frost_ward', 'glacial_barrier'),
   FusionRecipe('quick_slash', 'poison_edge', 'venom_flurry'),

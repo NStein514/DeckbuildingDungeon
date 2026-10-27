@@ -1,4 +1,4 @@
-import '../../assets/asset_registry.dart';
+import '../widgets/room_card.dart';
 import 'package:flutter/material.dart';
 import '../../app/run_controller.dart';
 import '../../game/data/game_catalog.dart';
@@ -33,16 +33,11 @@ class EconomyPanel extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (event.choosesCard)
-            GameIllustration(id: 'events/${event.name}', height: 160)
-          else
-            const Icon(Icons.explore_outlined, size: 64),
-          Text(
-            event.title,
-            style: const TextStyle(fontSize: 28, fontFamily: 'serif'),
+          RoomCardPanel(
+            title: event.title,
+            art: 'events/${event.name}',
+            description: event.description,
           ),
-          const SizedBox(height: 16),
-          Text(event.description),
           const SizedBox(height: 16),
           FilledButton(
             onPressed: runs.busy || !canAccept
@@ -87,13 +82,11 @@ class EconomyPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Icon(Icons.storefront_outlined, size: 64),
-        const Text(
-          'The crypt merchant',
-          style: TextStyle(fontSize: 28, fontFamily: 'serif'),
-        ),
-        const Text(
-          'Each card and service is available once this visit. Spend now or save for later descents.',
+        const RoomCardPanel(
+          title: 'The crypt merchant',
+          art: 'rooms/merchant',
+          description:
+              'Each card and service is available once this visit. Spend now or save for later descents.',
         ),
         const SizedBox(height: 16),
         SizedBox(

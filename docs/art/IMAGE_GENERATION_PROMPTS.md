@@ -312,3 +312,23 @@ Shared direction: landscape 1536×1024, premium realistic painterly Gothic crypt
 - `bitter_bloom`: Bitter Bloom: one complete poisonous nightshade plant with richly textured dark purple flowers and emerald leaves growing from an antique bronze chalice; luminous green droplets and subtle poisonous vapor. Beautiful but ominous botanical silhouette.
 - `ossuary_ward`: Ossuary Ward: a complete broad shield constructed of weathered ivory bone plates and bronze ribs with a dark central gemstone, pale spectral protective light forming a subtle ring behind it; no gore, grounded ancient guardian craftsmanship.
 - `flashfire`: Flashfire: a complete ornate bronze fire striker and flint suspended over a small black stone pedestal, their contact releasing a compact swirling burst of brilliant orange flame shaped like a fast curved slash. Both tools and entire flame comfortably inside frame.
+
+## Archetype fusions and room scenes — October 26, 2026
+
+Shared direction: one opaque landscape 1536×1024 premium realistic painterly Gothic crypt scene, detailed worn bronze and steel, charcoal stone, amber torchlight, readable central silhouette, complete subject with generous margins, no text/UI/borders.
+
+- `dawnward`: Dawnward fusion card: a complete ornate steel sword crossed over a bronze sun-emblem shield with a small amber lantern attached to the shield, rays of warm light cutting through crypt mist, strong heroic equipment silhouette.
+- `storm_prism`: Storm Prism fusion card: a large complete faceted blue-white prism in a bronze cage, a spiral of frost and forked lightning contained around its crystal, intense cool luminous core over a crypt plinth.
+- `widows_promise`: Widow's Promise fusion card: two complete elegant black-steel curved daggers bound by luminous emerald spider silk, drops of venom on the edges, a subtle spectral spider motif in the background, mysterious and beautiful.
+- `ancient_bastion`: Ancient Bastion fusion card: a complete immense ivory-and-bronze tower shield with two crossed armored gauntlets embossed at its center, spectral gold protective ring and white light, ancient heroic craftsmanship.
+- `solar_script`: Solar Script fusion card: a complete open bronze-bound spellbook floating over a lectern, its pages displaying abstract non-letter glyphs and a luminous orange phoenix emerging from them, entire phoenix wings within canvas, amber sparks.
+- `rooms/merchant`: The crypt merchant encounter: a mysterious masked hooded trader standing behind a small bronze-inlaid stall displaying potions, a closed leather card case, coins and rolled cloth. Merchant's face hidden by a polished bronze mask. Full central subject framed by a Gothic crypt alcove.
+- `rooms/treasure`: Treasure encounter: one complete open ornate bronze-bound chest overflowing with old gold coins, a blue jeweled relic and a rolled scroll, warm magical glow lighting the crypt stones, clear central silhouette.
+- `rooms/shrine`: Fusion shrine encounter: an ancient bronze and stone altar with two blank glowing card-shaped tablets hovering on either side of a central radiant golden crystal, fine arcs of light joining them above the altar, no text, no UI.
+- `events/sanctuary`: Sanctuary encounter: a cozy small brazier with amber coals beside a complete worn leather bedroll, a bronze kettle and a sheathed sword, sheltered in a quiet Gothic crypt alcove, warm refuge, no people.
+- `events/emberForge`: Ember forge encounter: a complete blackened steel anvil and heavy bronze-inlaid hammer beside a glowing forge furnace, sparks illuminate detailed tools and Gothic stone, clear warm amber central composition.
+- `events/memoryWell`: Memory well encounter: a complete ancient circular bronze-rimmed stone well, softly glowing blue water reflecting drifting ghostly blank card-shaped wisps, candles on stone steps, tranquil mysterious Gothic crypt.
+- `events/bloodAltar`: Hungry altar encounter: a complete dark stone offering altar with an ornate bronze chalice glowing deep ruby red, scattered gold coins and red crystal veins, candlelit crypt, symbolic bargain, no blood or gore.
+- `events/wanderingHealer`: Wandering healer encounter: a masked hooded healer with a bronze beaked mask seated beside a small table of healing herbs, amber potion bottles and bandages, warm pale golden restorative glow in a Gothic crypt alcove, face fully obscured.
+
+Dawnward, Storm Prism and Solar Script correction: zoom out/recompose to show the complete central subject with dark space above the sword pommel, crystal tip or phoenix wings; preserve all material and lighting quality.
