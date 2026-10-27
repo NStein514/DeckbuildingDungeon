@@ -29,9 +29,9 @@ void main() {
   }
 
   test(
-    'catalog contains 57 distinct cards and a 12-instance starting deck',
+    'catalog contains 62 distinct cards and a 12-instance starting deck',
     () {
-      expect(catalog.cards.length, 57);
+      expect(catalog.cards.length, 62);
       expect(catalog.createDeck(), hasLength(12));
       expect(catalog.createDeck().map((c) => c.id).toSet(), hasLength(12));
       expect(catalog.enemies.length, 7);

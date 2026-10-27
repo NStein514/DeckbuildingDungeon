@@ -133,8 +133,8 @@ void main() {
         expect(c.state!.deck.last.definitionId, id);
         expect(c.state!.deck, hasLength(11));
         expect(c.state!.mapVersion, 10);
-        expect(jsonDecode(store.contents!)['contentVersion'], 18);
-        expect(jsonDecode(journal.contents!)['contentVersion'], 8);
+        expect(jsonDecode(store.contents!)['contentVersion'], 19);
+        expect(jsonDecode(journal.contents!)['contentVersion'], 9);
         await c.start(514);
         expect(c.profile!.cards, contains(id));
         c.dispose();

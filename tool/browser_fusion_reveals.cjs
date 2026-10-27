@@ -23,7 +23,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
  }
  if(!process.env.ONLY_FUSIONS)console.log('PASS: all eight illustrated reveals and room actions at phone and desktop widths.');
  await page.setViewportSize({width:390,height:900});
- const cards=JSON.parse(fs.readFileSync('assets/data/cards.json','utf8')).filter(c=>(c.tags||[]).includes('archetype_fusion'));
+ const cards=JSON.parse(fs.readFileSync('assets/data/cards.json','utf8')).filter(c=>(c.tags||[]).includes(process.env.FUSION_TAG||'archetype_fusion'));
  for(const card of cards){
   await restore(fixtures['fusion_'+card.id]);
   await clickBelow('checkbox',card.name);

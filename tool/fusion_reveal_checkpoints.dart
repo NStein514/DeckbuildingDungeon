@@ -43,7 +43,7 @@ Future<void> main(List<String> args) async {
     }
   }
   for (final recipe in fusionRecipes.where(
-    (r) => catalog.cards[r.result]!.tags.contains('archetype_fusion'),
+    (r) => catalog.cards[r.result]!.tags.contains('fusion'),
   )) {
     store.contents = jsonEncode(out['shrine']);
     final run = rules.continueRoom((await repo.load())!);

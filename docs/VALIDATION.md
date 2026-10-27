@@ -312,3 +312,15 @@ All 272 tests, formatting, static analysis, content checks, and the release web 
 Release-browser checks decoded all 57 card illustrations at 1536×1024 and browsed the complete archive at phone and desktop widths without page or asset errors. All eight room reveals and room actions completed at 390px and 1280px. Each new fusion was previewed, cancelled without changing the deck, confirmed with its result persisted, and played in combat through the next turn. Browser selectors were adjusted for Flutter's combined text labels and controls below the viewport. Merchant, treasure, forge, shrine, and new-card archive screenshots were visually inspected.
 
 A final combat screenshot pass scrolled each fusion card fully into view, then played it and advanced the turn. All five hand screenshots were inspected: names, full illustrations, and complete two-line rules text remain visible, including Ancient Bastion's Retain/Exhaust text. No page or asset errors occurred.
+
+## Advanced fusion expansion — October 27, 2026
+
+Added Trailkeeper, Tempest Fork, Noxious Covenant, Gravebloom, and Cinderwake, each with an original Image Generator painting. All five opaque 1536×1024 compositions were inspected before being copied unchanged into the game. The catalog now has 62 cards and seventeen fusion recipes.
+
+Seven new gameplay tests cover persisted results and discoveries, merchant/reward exclusion, replacement draw from a reshuffled discard pile, healing caps, Shock consumption across two lightning hits, Retain and Weak, declining Regeneration, zero-cost Vulnerable setup, and upgrades. Existing recipe tests also check both source orders and exact instance consumption.
+
+All 279 tests, formatting, static analysis, content checks, and the release web build passed. Run content version 19 and profile content version 9 retain backward compatibility. Card pool version 5 remains unchanged because the new results are fusion-only.
+
+Release-browser checks confirmed all five new fusion previews, cancellations, persisted results, and combat plays through the next turn without page or asset errors. All five phone hand screenshots were inspected; their complete illustrations, names, and rules text fit inside the existing card frames.
+
+The full phone and desktop archive check also passed: all 62 illustrations decoded at 1536×1024, with no page or asset errors while browsing the collection.

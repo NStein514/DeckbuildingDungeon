@@ -30,7 +30,7 @@ void main() {
     'five unique new fusions persist their results and journal discoveries',
     () async {
       expect(recipes, hasLength(5));
-      expect(fusionRecipes.map((r) => r.result).toSet(), hasLength(12));
+      expect(fusionRecipes.map((r) => r.result).toSet(), hasLength(17));
       for (final recipe in recipes) {
         final run = shrine(rules);
         run.deck[0] = CardInstance('starter-0', recipe.first, upgrade: 1);

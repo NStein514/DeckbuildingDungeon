@@ -10,6 +10,12 @@ class FusionRecipe {
 }
 
 const fusionRecipes = [
+  FusionRecipe('trail_rations', 'lantern_watch', 'trailkeeper'),
+  FusionRecipe('forked_current', 'thunderhead', 'tempest_fork'),
+  FusionRecipe('bitter_bloom', 'serpent_step', 'noxious_covenant'),
+  FusionRecipe('grave_oath', 'renewal', 'gravebloom'),
+  FusionRecipe('flashfire', 'ash_surge', 'cinderwake'),
+
   FusionRecipe('measured_strike', 'lantern_watch', 'dawnward'),
   FusionRecipe('stormglass_focus', 'winter_circuit', 'storm_prism'),
   FusionRecipe('patient_fang', 'wasting_venom', 'widows_promise'),

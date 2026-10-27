@@ -209,7 +209,7 @@ void main() {
         stock,
       );
       await repo.save(loaded);
-      expect(jsonDecode(store.contents!)['contentVersion'], 18);
+      expect(jsonDecode(store.contents!)['contentVersion'], 19);
       expect((await repo.load())!.toJson(), loaded.toJson());
       final invalid = loaded.toJson()..['cardPoolVersion'] = 99;
       expect(

@@ -332,3 +332,13 @@ Shared direction: one opaque landscape 1536×1024 premium realistic painterly Go
 - `events/wanderingHealer`: Wandering healer encounter: a masked hooded healer with a bronze beaked mask seated beside a small table of healing herbs, amber potion bottles and bandages, warm pale golden restorative glow in a Gothic crypt alcove, face fully obscured.
 
 Dawnward, Storm Prism and Solar Script correction: zoom out/recompose to show the complete central subject with dark space above the sword pommel, crystal tip or phoenix wings; preserve all material and lighting quality.
+
+## Advanced fusion paintings
+
+Shared direction: 1536×1024 landscape, opaque, premium painterly realistic Gothic fantasy, weathered bronze/gold craftsmanship, detailed crypt arches, amber candlelight and distinct magical accents, complete central silhouette with breathing room. No text, frame, UI, or cropped subjects.
+
+- `trailkeeper`: Trailkeeper: a complete bronze lantern beside an open weathered leather satchel of healing herbs and a folded ivory cloak, warm protective golden light curling around the supplies. Recovery and vigilance.
+- `tempest_fork`: Tempest Fork: a complete ornate two-pronged bronze lightning staff hovering horizontally at a diagonal above a crypt plinth, two distinct branching blue lightning streams connecting its tines, intense storm-blue core. Entire staff, handle and both tips visible.
+- `noxious_covenant`: Noxious Covenant: a complete emerald glass poison vial bound by silver serpents beside a black thorn blossom, pale green vapor forming a protective curling serpent, mysterious poisonous pact.
+- `gravebloom`: Gravebloom: a complete ivory flower growing from a cracked bronze knight's breastplate on an ancient stone tomb, luminous pale gold roots weaving a protective circle around the armor, life emerging in the crypt.
+- `cinderwake`: Cinderwake: a complete curved obsidian dagger floating above an ash-covered bronze brazier, a vivid orange ribbon of fire sweeps around the blade in a swift spiral, an explosive precise opening strike.

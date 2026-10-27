@@ -223,3 +223,7 @@ Five new illustrated collectibles bring the catalog to 52: Opening Gambit, Thund
 ## Milestone 6E — archetype fusions and room illustrations (implemented)
 
 Five rare fusion results with original art: Dawnward, Storm Prism, Widow’s Promise, Ancient Bastion, Solar Script. Eight noncombat room/event paintings now appear inside matching gold-rimmed cards in reveals and action screens. The collection has 57 illustrated cards and twelve fusion recipes.
+
+### Advanced fusion expansion
+
+Completed five additional illustrated recipes: Trailkeeper, Tempest Fork, Noxious Covenant, Gravebloom, and Cinderwake. The shrine now offers seventeen recipes; each new result uses existing targeting, status, upgrade, and discovery systems. Ordinary card pools remain unchanged.

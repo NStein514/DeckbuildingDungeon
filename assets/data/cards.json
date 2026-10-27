@@ -1474,5 +1474,168 @@
       "fire"
     ],
     "art": "cards/solar_script"
+  },
+  {
+    "id": "trailkeeper",
+    "name": "Trailkeeper",
+    "cost": 1,
+    "type": "skill",
+    "rarity": "rare",
+    "description": "4 healing. 6 block. Draw 1. Exhaust.",
+    "effects": [
+      {
+        "kind": "heal",
+        "amount": 4,
+        "target": "self"
+      },
+      {
+        "kind": "block",
+        "amount": 6,
+        "target": "self"
+      },
+      {
+        "kind": "draw",
+        "amount": 1,
+        "target": "self"
+      }
+    ],
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "advanced_fusion"
+    ],
+    "art": "cards/trailkeeper"
+  },
+  {
+    "id": "tempest_fork",
+    "name": "Tempest Fork",
+    "cost": 2,
+    "type": "spell",
+    "rarity": "rare",
+    "description": "5 damage twice. 3 Shock.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 5,
+        "target": "enemy"
+      },
+      {
+        "kind": "damage",
+        "amount": 5,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "shock"
+      }
+    ],
+    "keywords": [],
+    "tags": [
+      "fusion",
+      "advanced_fusion",
+      "lightning"
+    ],
+    "art": "cards/tempest_fork"
+  },
+  {
+    "id": "noxious_covenant",
+    "name": "Noxious Covenant",
+    "cost": 1,
+    "type": "spell",
+    "rarity": "rare",
+    "description": "5 Poison. 2 Weak. Retain. Exhaust.",
+    "effects": [
+      {
+        "kind": "status",
+        "amount": 5,
+        "target": "enemy",
+        "status": "poison"
+      },
+      {
+        "kind": "status",
+        "amount": 2,
+        "target": "enemy",
+        "status": "weak"
+      }
+    ],
+    "keywords": [
+      "retain",
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "advanced_fusion",
+      "poison"
+    ],
+    "art": "cards/noxious_covenant"
+  },
+  {
+    "id": "gravebloom",
+    "name": "Gravebloom",
+    "cost": 1,
+    "type": "defense",
+    "rarity": "rare",
+    "description": "8 block. 4 Regeneration. Exhaust.",
+    "effects": [
+      {
+        "kind": "block",
+        "amount": 8,
+        "target": "self"
+      },
+      {
+        "kind": "status",
+        "amount": 4,
+        "target": "self",
+        "status": "regeneration"
+      }
+    ],
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "advanced_fusion"
+    ],
+    "art": "cards/gravebloom"
+  },
+  {
+    "id": "cinderwake",
+    "name": "Cinderwake",
+    "cost": 0,
+    "type": "attack",
+    "rarity": "rare",
+    "description": "4 damage. 3 Burn. 1 Vulnerable. Exhaust.",
+    "effects": [
+      {
+        "kind": "damage",
+        "amount": 4,
+        "target": "enemy"
+      },
+      {
+        "kind": "status",
+        "amount": 3,
+        "target": "enemy",
+        "status": "burn"
+      },
+      {
+        "kind": "status",
+        "amount": 1,
+        "target": "enemy",
+        "status": "vulnerable"
+      }
+    ],
+    "keywords": [
+      "exhaust"
+    ],
+    "tags": [
+      "fusion",
+      "advanced_fusion",
+      "fire"
+    ],
+    "art": "cards/cinderwake"
   }
 ]

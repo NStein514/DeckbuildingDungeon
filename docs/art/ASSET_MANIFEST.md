@@ -1,6 +1,6 @@
 # Internal asset manifest
 
-All final illustration production uses Image Generator. All 57 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
+All final illustration production uses Image Generator. All 62 catalog cards and all seven catalog enemies now have painted artwork. Some relics still use labeled placeholder components. Sizes in the main table are production targets unless updated to the delivered dimensions.
 
 | Logical ID | Use | Dimensions | Ratio | Transparent | Expected path | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -259,3 +259,15 @@ Thirteen opaque 1536×1024 Image Generator paintings. Five illustrate fusion res
 | `events/memoryWell` | `assets/images/events/memory_well.png` | `exec-9b5aa67a-7f62-4c56-bc46-351c233605ba.png` |
 | `events/bloodAltar` | `assets/images/events/blood_altar.png` | `exec-b3d59cab-89b7-4d3d-a52e-483b0aa16a1a.png` |
 | `events/wanderingHealer` | `assets/images/events/wandering_healer.png` | `exec-602bd071-96c3-4578-b23e-4bc65dd61546.png` |
+
+## Advanced fusion artwork
+
+Five original opaque 1536×1024 Image Generator paintings, visually inspected and imported without cropping or resizing.
+
+| Logical ID | Runtime asset | Original source |
+| --- | --- | --- |
+| `cards/trailkeeper` | `assets/images/cards/trailkeeper.png` | `exec-f5664cc7-64e8-4b26-869f-24d5f5daa474.png` |
+| `cards/tempest_fork` | `assets/images/cards/tempest_fork.png` | `exec-212964ed-94db-4b84-a2dc-e5a622d84cb4.png` |
+| `cards/noxious_covenant` | `assets/images/cards/noxious_covenant.png` | `exec-231b72af-f031-4b80-b1fe-b20e2a5e3af2.png` |
+| `cards/gravebloom` | `assets/images/cards/gravebloom.png` | `exec-da29cd14-c92d-4f14-8f1d-6d6b5db2b205.png` |
+| `cards/cinderwake` | `assets/images/cards/cinderwake.png` | `exec-18a70615-a8f6-4e63-bc46-c6b8fcb33840.png` |
